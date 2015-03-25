@@ -1,0 +1,16 @@
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\SPU.Lib.FraudDetection.Service.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\SPU.Lib.FraudDetection.Service.pdb
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\obj\Debug\SPU.Lib.FraudDetection.Service.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\obj\Debug\SPU.Lib.FraudDetection.Service.pdb
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\SPU.Lib.FraudDetection.Service.dll.config
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Fanex.Common.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Fanex.Data.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Fanex.NAP.Framework.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Microsoft.Practices.Unity.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\SPU.Lib.FraudDetection.DataAccess.dll
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\bin\Debug\SPU.Lib.FraudDetection.DataAccess.pdb
+D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Service\obj\Debug\SPU.Lib.FraudDetection.Service.csprojResolveAssemblyReference.cache

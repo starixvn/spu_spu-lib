@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Controller", "SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Controller.csproj", "{1B2147AC-1A2B-462A-BB70-73786617AD6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Criteria", "SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj", "{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.DTO", "SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj", "{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Service", "SPU.Lib.FraudDetection.Service\SPU.Lib.FraudDetection.Service.csproj", "{251D8C72-BC97-448B-924A-274DCDA7A2E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.DataAccess", "SPU.Lib.FraudDetection.DataAccess\SPU.Lib.FraudDetection.DataAccess.csproj", "{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B2147AC-1A2B-462A-BB70-73786617AD6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B2147AC-1A2B-462A-BB70-73786617AD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B2147AC-1A2B-462A-BB70-73786617AD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B2147AC-1A2B-462A-BB70-73786617AD6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251D8C72-BC97-448B-924A-274DCDA7A2E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251D8C72-BC97-448B-924A-274DCDA7A2E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251D8C72-BC97-448B-924A-274DCDA7A2E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251D8C72-BC97-448B-924A-274DCDA7A2E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
