@@ -96,6 +96,8 @@
     </violations>
   </sourcecode>
   <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
     <timestamps>
       <styleCop>2014/04/01 10:18:24.000</styleCop>
       <settingsFile>2014/08/12 17:22:41.879</settingsFile>
