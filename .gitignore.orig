@@ -30,7 +30,6 @@ SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.C
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.Controller.csprojResolveAssemblyReference.cache
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.dll
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.pdb
-<<<<<<< HEAD
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/bin/Debug/SPU.Lib.FraudDetection.Criteria.dll
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/bin/Debug/SPU.Lib.FraudDetection.Criteria.pdb
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/obj/Debug/SPU.Lib.FraudDetection.Criteria.dll
@@ -44,5 +43,37 @@ SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.C
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.dll
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.pdb
 SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/StyleCop.Cache
+<<<<<<< HEAD
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DataAccess/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DTO/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/bin/Debug/SPU.Lib.FraudDetection.Service.dll
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/bin/Debug/SPU.Lib.FraudDetection.Service.pdb
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/ResolveAssemblyReference.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/SPU.Lib.FraudDetection.Service.dll
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/SPU.Lib.FraudDetection.Service.pdb
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/ResolveAssemblyReference.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/StyleCop.Cache
 =======
->>>>>>> 65eea5727073757f5075b63a53915dee077cd833
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DataAccess/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DTO/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/bin/Debug/SPU.Lib.FraudDetection.Service.dll
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/bin/Debug/SPU.Lib.FraudDetection.Service.pdb
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/SPU.Lib.FraudDetection.Service.csprojResolveAssemblyReference.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/SPU.Lib.FraudDetection.Service.dll
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/SPU.Lib.FraudDetection.Service.pdb
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/SPU.Lib.FraudDetection.Controller.csprojResolveAssemblyReference.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DataAccess/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DTO/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/StyleCop.Cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DataAccess/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.DTO/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Service/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SPU.Lib.FraudDetection/SPU.Lib.FraudDetection/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+>>>>>>> b9d9e2c46f3e682bfc21d5168d5708eb68b8f95e
