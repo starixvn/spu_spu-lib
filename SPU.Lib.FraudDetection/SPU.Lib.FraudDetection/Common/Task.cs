@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SPU.Lib.FraudDetection.Criteria;
+﻿// --------------------------------------------------------------------------
+// <copyright file="Task.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.Controller
 {
+    using System.Collections.Generic;
+    using SPU.Lib.FraudDetection.Criteria;
+
+    /// <summary>
+    /// Task Class.
+    /// </summary>
     public class Task
     {
         #region Properties
@@ -26,7 +35,7 @@ namespace SPU.Lib.FraudDetection.Controller
 
         public int NextActionId { get; set; }
 
-        public int Timer { get; set; } //minutes //todo
+        public int Timer { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -34,37 +43,36 @@ namespace SPU.Lib.FraudDetection.Controller
 
         #region Methods
 
-        public bool runTask()
+        public bool RunTask()
         {
             return true;
         }
 
-        public bool checkPreconditions()
+        public bool CheckPreconditions()
         {
             return true;
         }
         
-        public string buildRules()
+        public string BuildRules()
         {
-            return "";
+            return string.Empty;
         }
 
-        public List<SuspiciousInfo> getSuspiciousInfo()
+        public List<SuspiciousInfo> GetSuspiciousInfo()
         {
             return null;
         }
 
-        public bool takeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
+        public bool TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
         {
             return true;
         }
 
-        public bool storeDatabase(List<SuspiciousInfo> listSuspiciousInfo)
+        public bool StoreDatabase(List<SuspiciousInfo> listSuspiciousInfo)
         {
             return true;
         }
 
         #endregion
-
     }
 }

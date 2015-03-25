@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------
+// <copyright file="Main.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.Controller
 {
+    /// <summary>
+    /// Main Class.
+    /// </summary>
     public class Main
     {
-        static void Start(string[] args)
+        public static void Start(string[] args)
         {
             BaseAction action = new ActionSendEmail();
-            action.takeAction();
+            action.TakeAction();
         }        
     }
 }
