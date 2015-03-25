@@ -2,7 +2,6 @@ D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\bin
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\bin\Debug\SPU.Lib.FraudDetection.Criteria.pdb
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\obj\Debug\SPU.Lib.FraudDetection.Criteria.dll
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\obj\Debug\SPU.Lib.FraudDetection.Criteria.pdb
-D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\obj\Debug\SPU.Lib.FraudDetection.Criteria.csprojResolveAssemblyReference.cache
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\bin\Debug\SPU.Lib.FraudDetection.Criteria.dll.config
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\bin\Debug\Fanex.Common.dll
 D:\GitLab\SPU\SPU.Lib\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Criteria\bin\Debug\Fanex.Data.dll
