@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Fanex.NAP.Framework.Data;
-using Fanex.Data;
+﻿// --------------------------------------------------------------------------
+// <copyright file="QueryService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.Service
 {
+    using System;
+    using System.Collections.Generic;
+    using Fanex.Data;
+    using Fanex.NAP.Framework.Data;
+
     public class QueryService
     {
         private readonly IDynamicRepository _repository;

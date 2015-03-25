@@ -68,7 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Imp\ConfigurationsDataAccess.cs" />
-    <Compile Include="Imp\ResultCriteria.cs" />
+    <Compile Include="Imp\ResultCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interface\BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
