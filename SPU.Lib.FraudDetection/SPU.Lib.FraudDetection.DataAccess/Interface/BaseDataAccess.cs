@@ -11,16 +11,20 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     using System;
     using System.Collections;
+    using System.Data;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess.Imp;
 
+    /// <summary>
+    /// Base Data Access.
+    /// </summary>
     public class BaseDataAccess
     {
-        public ICommandResult ExecuteDB(ICriteria criteria)
+        public ICommandResult ExecuteNonQuery(ICriteria criteria)
         {
-            // prepare SP parameters
+            // Prepare SP parameters
             Hashtable hash = criteria.GetSpParams();
 
             hash = (new ResultCriteria()).AddSpParams(hash);
@@ -30,8 +34,21 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
                 db.ExecuteNonQuery(hash);
 
                 return GetCommandResult(hash);
+            } 
+        }
+
+        public DataSet ExecuteReader(ICriteria criteria)
+        {
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var param = criteria.GetSpParams();
+                var ds = objectDb.ExecuteDataSet(param);
+
+                // var mainTable = ds.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
+                // var referenceTable = ds.Tables.Count > 1 ? ds.Tables[1] : new DataTable();
+                return ds;
             }
-        }  
+        }
         
         private CommandResult GetCommandResult(Hashtable hash)
         {

@@ -13,16 +13,19 @@ namespace SPU.Lib.FraudDetection.DataAccess.Imp
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess.Interface;
 
+    /// <summary>
+    /// Configurations Data Access.
+    /// </summary>
     public class ConfigurationsDataAccess : BaseDataAccess
     {
         public ICommandResult Insert(ICriteria criteria)
         {
-            return ExecuteDB(criteria);            
+            return ExecuteNonQuery(criteria);            
         }
 
         public ICommandResult Delete(ICriteria criteria)
         {
-            return ExecuteDB(criteria);            
+            return ExecuteNonQuery(criteria);            
         }
     }
 }

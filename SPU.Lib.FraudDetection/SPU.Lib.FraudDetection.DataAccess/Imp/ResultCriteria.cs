@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Imp
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Class ResultCriteria.
+    /// Result Criteria.
     /// </summary>
     public class ResultCriteria : CriteriaBase
     {

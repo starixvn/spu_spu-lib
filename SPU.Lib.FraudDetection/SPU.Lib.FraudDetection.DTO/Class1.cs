@@ -9,6 +9,9 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
+    /// <summary>
+    /// Should be a clearer name.
+    /// </summary>
     public class Class1
     {
     }

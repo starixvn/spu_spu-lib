@@ -14,6 +14,9 @@ namespace SPU.Lib.FraudDetection.Service
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Query Service.
+    /// </summary>
     public class QueryService
     {
         private readonly IDynamicRepository _repository;

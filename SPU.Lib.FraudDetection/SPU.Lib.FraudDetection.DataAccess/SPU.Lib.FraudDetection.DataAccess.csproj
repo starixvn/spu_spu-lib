@@ -67,10 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Imp\ActionDataAccess.cs" />
     <Compile Include="Imp\ConfigurationsDataAccess.cs" />
     <Compile Include="Imp\ResultCriteria.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Imp\TaskDataAccess.cs" />
     <Compile Include="Interface\BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -78,7 +80,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
+      <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
+      <Name>SPU.Lib.FraudDetection.Criteria</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

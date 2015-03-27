@@ -12,6 +12,9 @@ namespace SPU.Lib.FraudDetection.Service
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess.Imp;
 
+    /// <summary>
+    /// Configurations Service.
+    /// </summary>
     public class ConfigurationsService : QueryService
     {
         private ConfigurationsDataAccess _configDataAccess;
