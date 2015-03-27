@@ -68,16 +68,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bettype.cs" />
-    <Compile Include="CustomerGroup.cs" />
-    <Compile Include="Group.cs" />
+    <Compile Include="Bettype\BettypeInsertCriteria.cs" />
+    <Compile Include="Bettype\BettypeDeleteCriteria.cs" />
+    <Compile Include="Bettype\BettypeSelectAllCriteria.cs" />
+    <Compile Include="Config\ConfigInsertCriteria.cs" />
+    <Compile Include="Config\ConfigUpdateCriteria.cs" />
+    <Compile Include="Config\ConfigDeleteCriteria.cs" />
+    <Compile Include="Config\ConfigSelectAllCriteria.cs" />
+    <Compile Include="Group\GroupSelectAllCriteria.cs" />
+    <Compile Include="Group\GroupDeleteCriteria.cs" />
+    <Compile Include="Group\GroupUpdateCriteria.cs" />
+    <Compile Include="Group\CustomerGroupAssignCriteria.cs" />
+    <Compile Include="Group\GroupInsertCriteria.cs" />
+    <Compile Include="ScannedMatch\MatchSelectAllCriteria.cs" />
+    <Compile Include="ScannedMatch\MatchInsertCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SuspiciousCustomer.cs" />
-    <Compile Include="SuspiciousInfo.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
+    <Compile Include="Taks\TaskSelectAllByWorkflowIdCriteria.cs" />
+    <Compile Include="Taks\TaskDeleteCriteria.cs" />
+    <Compile Include="Taks\TaskUpdateCriteria.cs" />
+    <Compile Include="Taks\TaskInsertCriteria.cs" />
+    <Compile Include="Workflow\WorkflowSelectAllCriteria.cs" />
+    <Compile Include="Workflow\WorkflowDeleteCriteria.cs" />
+    <Compile Include="Workflow\WorkflowUpdateCriteria.cs" />
+    <Compile Include="Workflow\WorkflowInsertCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

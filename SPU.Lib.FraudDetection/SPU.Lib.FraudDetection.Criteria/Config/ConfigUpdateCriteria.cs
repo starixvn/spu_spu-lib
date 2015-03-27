@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousInfo.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConfigUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,19 +9,16 @@
 
 namespace SPU.Lib.FraudDetection.Criteria
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// SuspiciousInfo Class.
+    /// ConfigUpdateCriteria Class.
     /// </summary>
-    public class SuspiciousInfo : CriteriaBase
+    public class ConfigUpdateCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
-
-        public int MatchId { get; set; }
-
-        public int WorkflowId { get; set; }
-
-        public string ListTransId { get; set; }
     }
 }

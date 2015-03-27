@@ -7,9 +7,13 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Controller
+namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
+    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using System.Linq;
+using SPU.Lib.FraudDetection.Criteria.Workflow;
 
     /// <summary>
     /// Workflow Class.
@@ -26,6 +30,10 @@ namespace SPU.Lib.FraudDetection.Controller
 
         public bool IsActive { get; set; }
 
+        private List<Task> _tasks = new List<Task>();
+
+        private ConfigurationsService _workflowService = new ConfigurationsService();
+
         #endregion
 
         #region Methods
@@ -37,7 +45,23 @@ namespace SPU.Lib.FraudDetection.Controller
 
         public List<Task> GetTasks()
         {
-            return null;
+            if (_tasks.Count == 0)
+            {
+                IEnumerable<Task> tasks = _workflowService.GetData<Task>(new TaskSelectAllByWorkflowIdCriteria());
+                _tasks = tasks.ToList();
+            }
+
+            return _tasks;
+        }
+
+        public void InsertTask(Task task)
+        {
+            _tasks.Add(task);            
+        }
+
+        public void RemoveTask(Task task)
+        {
+            _tasks.Remove(task);
         }
 
         public bool AssignTaskToThreadPool(Task task)
@@ -45,6 +69,6 @@ namespace SPU.Lib.FraudDetection.Controller
             return true;
         }
 
-        #endregion
+        #endregion     
     }
 }

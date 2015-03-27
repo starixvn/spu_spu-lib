@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConfigInfo.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupDeleteCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,19 +7,18 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Controller
+namespace SPU.Lib.FraudDetection.Criteria
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Fanex.NAP.Framework.Data;
+
     /// <summary>
-    /// ConfigInfo Class.
+    /// GroupDeleteCriteria Class.
     /// </summary>
-    public class ConfigInfo
+    public class GroupDeleteCriteria : CriteriaBase
     {
-        public string ConfigName { get; set; }
-
-        public string ConfigValue { get; set; }
-
-        public string ConfigOperator { get; set; }
-
-        public bool IsUpdate { get; set; }
     }
 }

@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Fanex.NAP.Framework.Data;
+
+namespace SPU.Lib.FraudDetection.Criteria.Taks
+{
+    public class TaskUpdateCriteria : CriteriaBase
+    {
+    }
+}

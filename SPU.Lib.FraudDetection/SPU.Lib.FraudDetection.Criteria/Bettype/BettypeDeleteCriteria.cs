@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousCustomer.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BettypeDeleteCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,12 +12,15 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// SuspiciousCustomer Class.
+    /// The criteria to delete a supporting bet type.
     /// </summary>
-    public class SuspiciousCustomer : CriteriaBase
+    public class BettypeDeleteCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
+        public int BettypeId { get; set; }        
 
-        public string CustName { get; set; }
+        public override string GetSettingKey()
+        {
+            return string.Empty;
+        }
     }
 }

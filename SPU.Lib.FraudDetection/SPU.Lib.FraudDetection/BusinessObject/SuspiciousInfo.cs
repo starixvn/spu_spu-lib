@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Group.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousInfo.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,21 +7,19 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.BusinessObject
 {
-    using Fanex.NAP.Framework.Data;
-
     /// <summary>
-    /// Group Class.
+    /// SuspiciousInfo Class.
     /// </summary>
-    public class Group : CriteriaBase
+    public class SuspiciousInfo
     {
-        public int GroupId { get; set; }
+        public int CustId { get; set; }
 
-        public string GroupName { get; set; }
+        public int MatchId { get; set; }
 
-        public string GroupDesc { get; set; }
+        public int WorkflowId { get; set; }
 
-        public bool IsActive { get; set; }
+        public string ListTransId { get; set; }
     }
 }

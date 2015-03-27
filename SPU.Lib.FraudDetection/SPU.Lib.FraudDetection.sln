@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Controller", "SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.Controller.csproj", "{1B2147AC-1A2B-462A-BB70-73786617AD6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.BusinessManager", "SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.BusinessManager.csproj", "{1B2147AC-1A2B-462A-BB70-73786617AD6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Criteria", "SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj", "{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}"
 EndProject

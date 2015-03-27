@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CustomerGroup.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupInsertCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,15 +9,16 @@
 
 namespace SPU.Lib.FraudDetection.Criteria
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// CustomerGroup Class.
+    /// GroupInsertCriteria Class.
     /// </summary>
-    public class CustomerGroup : CriteriaBase
+    public class GroupInsertCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
-
-        public int GroupId { get; set; }        
     }
 }

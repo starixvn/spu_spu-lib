@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BaseAction.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomer.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,19 +7,17 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Controller
+namespace SPU.Lib.FraudDetection.Criteria
 {
+    using Fanex.NAP.Framework.Data;
+
     /// <summary>
-    /// BaseAction Class.
+    /// SuspiciousCustomer Class.
     /// </summary>
-    public abstract class BaseAction
+    public class SuspiciousCustomerInsertCriteria : CriteriaBase
     {
-        protected int ActionID { get; set; }
+        public int CustId { get; set; }
 
-        protected string ActionName { get; set; }
-
-        protected bool IsActive { get; set; }
-
-        public abstract bool TakeAction();
+        public string CustName { get; set; }
     }
 }
