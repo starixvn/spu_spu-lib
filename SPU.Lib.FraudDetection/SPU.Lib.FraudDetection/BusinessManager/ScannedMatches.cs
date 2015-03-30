@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Configurations.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ScannedMatches.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,10 +11,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.BusinessObject;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using SPU.Lib.FraudDetection.Service;
     using Fanex.NAP.Framework.Command;
+    using SPU.Lib.FraudDetection.Criteria.Match;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service;
 
     /// <summary>
     /// Configurations Class.

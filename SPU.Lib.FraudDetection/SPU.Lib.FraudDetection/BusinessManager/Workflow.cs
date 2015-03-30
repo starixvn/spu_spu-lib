@@ -10,16 +10,20 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.Service;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
     using System.Linq;
-using SPU.Lib.FraudDetection.Criteria.Workflow;
+    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service;
 
     /// <summary>
     /// Workflow Class.
     /// </summary>
     public class Workflow
     {
+        private List<Task> _tasks = new List<Task>();
+
+        private WorkflowService _workflowService = new WorkflowService();
+
         #region Properties
 
         public int WorkflowId { get; set; }
@@ -28,19 +32,34 @@ using SPU.Lib.FraudDetection.Criteria.Workflow;
 
         public string WorkflowDesc { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; }      
 
-        private List<Task> _tasks = new List<Task>();
+        #endregion        
 
-        private ConfigurationsService _workflowService = new ConfigurationsService();
+        #region Task Methods
 
-        #endregion
-
-        #region Methods
-
-        public bool RunWorkflow()
+        /// <summary>
+        /// Execute a workflow for a match.
+        /// </summary>
+        /// <param name="match">The match scanned.</param>
+        /// <returns>True if execute tasks in the workflow is success.</returns>
+        public bool Run(Match match)
         {
-            return true;
+            bool result = true;
+            
+            foreach (Task task in GetTasks())
+            {
+                if (task.IsRunMannually)
+                {
+                    result = result & task.Run(match);
+                }
+                else
+                {
+                    result = result & AssignTaskToThreadPool(task);
+                }
+            }
+
+            return result;
         }
 
         public List<Task> GetTasks()

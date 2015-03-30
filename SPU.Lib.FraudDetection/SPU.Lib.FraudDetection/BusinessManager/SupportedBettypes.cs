@@ -39,7 +39,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _supportedBettypes.Add(bettype);
             
             BettypeInsertCriteria criteria = new BettypeInsertCriteria();
-            //todo
+            ////todo
             _bettypeService.InsertBettype(criteria);
 
             return true;

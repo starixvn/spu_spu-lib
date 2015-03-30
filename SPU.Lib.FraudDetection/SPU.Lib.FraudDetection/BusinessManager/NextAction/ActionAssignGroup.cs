@@ -23,7 +23,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public override bool TakeAction()
         {
-            CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria(); //todo
+            CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria(); ////todo
 
             throw new NotImplementedException();
         }

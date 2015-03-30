@@ -67,15 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessManager\NextAction\ActionFactory.cs" />
     <Compile Include="BusinessManager\ScannedMatches.cs" />
-    <Compile Include="BusinessObject\Bettype.cs" />
-    <Compile Include="BusinessObject\Match.cs" />
-    <Compile Include="BusinessObject\SuspiciousInfo.cs" />
-    <Compile Include="BusinessObject\Group.cs" />
     <Compile Include="BusinessManager\NextAction\BaseAction.cs" />
     <Compile Include="BusinessManager\NextAction\ActionAssignGroup.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSendEmail.cs" />
-    <Compile Include="BusinessObject\Config.cs" />
     <Compile Include="BusinessManager\Configurations.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="BusinessManager\SupportedBettypes.cs" />

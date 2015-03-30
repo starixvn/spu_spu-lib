@@ -11,7 +11,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.BusinessObject;
+    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
 
     /// <summary>
@@ -39,7 +40,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool IsRunMannually { get; set; }
 
-        public int NextActionId { get; set; }
+        public string NextActionIdList { get; set; }
 
         public int Timer { get; set; }
 
@@ -90,7 +91,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         #region RunTask
 
         /// <summary>
-        /// Execute a taks.
+        /// Execute a task.
         /// </summary>
         /// <param name="match">The match for scanning.</param>
         /// <returns>True if success.</returns>
@@ -100,11 +101,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             
             if (CheckPreconditions(match))
             {
-                string rules = GetRules();
+                string rules = RetrieveRules(match);
 
-                List<SuspiciousInfo> suspiciousList = GetSuspiciousInfo(rules);
+                List<SuspiciousInfo> suspiciousList = CollectSuspiciousInfo(rules);
 
-                result = StoreDatabase(suspiciousList);
+                result = StoreSuspiciousInfo(suspiciousList);
                 result = result & TakeNextAction(suspiciousList);
             }
 
@@ -113,35 +114,69 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool CheckPreconditions(Match match)
         {
-            string sqlStr = string.Join("select * from matches where match.id = ", match.MatchId, " and ", TaskPreconditions);
+            string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskPreconditions);
 
-            QueryService queryService = new QueryService();            
-            IEnumerable<Match> list = queryService.GetData<Match>(null);
+            TaskService taskService = new TaskService();
+            IEnumerable<Match> list = taskService.GetData<Match>(null); ////todo
             return list.Count() > 0;            
         }
 
-        public string GetRules()
+        public string RetrieveRules(Match match)
         {
-            return "select * from bettrans where " + TaskRules;            
+            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskRules); ////todo
         }
 
-        public List<SuspiciousInfo> GetSuspiciousInfo(string rules)
-        {
-            QueryService queryService = new QueryService();
-            IEnumerable<SuspiciousInfo> list = queryService.GetData<SuspiciousInfo>(null);
+        public List<SuspiciousInfo> CollectSuspiciousInfo(string rules)
+        {                        
+            TaskService taskService = new TaskService();
+            IEnumerable<SuspiciousInfo> list = taskService.GetData<SuspiciousInfo>(null); ////todo
 
             return list.ToList();
+        }
+        
+        /// <summary>
+        /// Save suspicious info list.
+        /// </summary>
+        /// <param name="listSuspiciousInfo">The suspicious info list.</param>
+        /// <returns>True if success.</returns>
+        public bool StoreSuspiciousInfo(List<SuspiciousInfo> listSuspiciousInfo)
+        {            
+            SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
+            
+            SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
+
+            string custIdList = string.Empty;
+            string matchIdList = string.Empty;
+            string workflowIdList = string.Empty;
+            string groupTransIdList = string.Empty;
+            
+            foreach (var info in listSuspiciousInfo)
+            {                
+                custIdList = string.Join(";", custIdList, info.CustId);
+                matchIdList = string.Join(";", matchIdList, info.MatchId);
+                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
+                groupTransIdList = string.Join(";", groupTransIdList, info.ListTransId);
+            }
+
+            criteria.CustIdList = custIdList;
+            criteria.MatchIdList = matchIdList;
+            criteria.WorkflowIdList = workflowIdList;
+            criteria.GroupTransIdList = groupTransIdList;
+
+            return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
         }
 
         public bool TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
         {
+            foreach (var actionId in NextActionIdList.Split(','))
+            {
+                BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId));
+                nextAction.TakeAction();
+            }
+
             return true;
         }
 
-        public bool StoreDatabase(List<SuspiciousInfo> listSuspiciousInfo)
-        {
-            return true;
-        }     
         #endregion
     }
 }

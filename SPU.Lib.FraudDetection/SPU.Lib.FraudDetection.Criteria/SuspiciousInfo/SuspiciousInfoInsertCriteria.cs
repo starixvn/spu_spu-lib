@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousInfo.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousInfoInsertCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace SPU.Lib.FraudDetection.Criteria
     /// SuspiciousInfo Class.
     /// </summary>
     public class SuspiciousInfoInsertCriteria : CriteriaBase
-    {
-        public int CustId { get; set; }
-
-        public int MatchId { get; set; }
-
-        public int WorkflowId { get; set; }
-
-        public string ListTransId { get; set; }
+    {        
+        public string CustIdList { get; set; }  //// format: "1;2;3".
+        
+        public string MatchIdList { get; set; } //// format: "1;2;3".
+        
+        public string WorkflowIdList { get; set; } //// format: "1;2;3".
+        
+        public string GroupTransIdList { get; set; } ////format: "1,2,3;  2,3,4; ".
     }
 }

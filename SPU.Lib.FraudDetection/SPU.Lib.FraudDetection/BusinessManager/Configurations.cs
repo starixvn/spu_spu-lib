@@ -10,10 +10,10 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.DTO;
+    using Fanex.NAP.Framework.Command;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Service;
-    using Fanex.NAP.Framework.Command;    
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service;    
 
     /// <summary>
     /// Configurations Class.
@@ -69,39 +69,40 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>True if success.</returns>
         public bool UpdateConfigurations()
         {
-            string configNameList = string.Empty;
-            string configValueList = string.Empty;
-            string configOperatorList = string.Empty;
+            ////string configNameList = string.Empty;
+            ////string configValueList = string.Empty;
+            ////string configOperatorList = string.Empty;
 
-            bool result = true;
-            foreach (var config in _configs)
-            {
-                if (config.Value.IsUpdate)
-                {
-                    configNameList += config.Value.ConfigName + ",";
-                    configValueList += config.Value.ConfigValue + ",";
-                    configOperatorList += config.Value.ConfigOperator + ",";                    
-                }
-            }
-
-            if (!string.IsNullOrEmpty(configNameList))
-            {
-                //result = _configService.Update(
-            }
-            return result;
-
-            ////string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = @ConfigValue, ConfigOperator = @ConfigOperator Where ConfigName = @ConfigName ";
-            ////string query = string.Empty;
-
+            ////bool result = true;
             ////foreach (var config in _configs)
             ////{
             ////    if (config.Value.IsUpdate)
             ////    {
-            ////        query += tmpUpdate.Replace("@ConfigValue", config.Value.ConfigValue)
-            ////                                       .Replace("@ConfigOperator", config.Value.ConfigOperator)
-            ////                                       .Replace("@ConfigName", config.Value.ConfigName);
+            ////        configNameList += config.Value.ConfigName + ",";
+            ////        configValueList += config.Value.ConfigValue + ",";
+            ////        configOperatorList += config.Value.ConfigOperator + ",";                    
             ////    }
-            ////}            
+            ////}
+
+            ////if (!string.IsNullOrEmpty(configNameList))
+            ////{                                
+            ////}
+            ////return result;
+
+            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = @ConfigValue, ConfigOperator = @ConfigOperator Where ConfigName = @ConfigName ";
+            string query = string.Empty;
+
+            foreach (var config in _configs)
+            {
+                if (config.Value.IsUpdate)
+                {
+                    query += tmpUpdate.Replace("@ConfigValue", config.Value.ConfigValue)
+                                                   .Replace("@ConfigOperator", config.Value.ConfigOperator)
+                                                   .Replace("@ConfigName", config.Value.ConfigName);
+                }
+            }
+
+            return true;
         }
 
         public bool RemoveConfig(Config config)
