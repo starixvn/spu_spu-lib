@@ -9,8 +9,12 @@
 
 namespace SPU.Lib.FraudDetection.Service
 {
+    using System.Collections.Generic;
+    using System.Data;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Imp;
+    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Configurations Service.
@@ -24,11 +28,24 @@ namespace SPU.Lib.FraudDetection.Service
             _configDataAccess = new ConfigurationsDataAccess();
         }
 
-        public bool Insert(ICriteria criteria)
+        public ICommandResult InsertConfig(ICriteria criteria)
         {
-            _configDataAccess.Insert(criteria);
+            return _configDataAccess.InsertConfig(criteria);
+        }
 
-            return true;
+        public ICommandResult DeleteConfig(ICriteria criteria)
+        {
+            return _configDataAccess.DeleteConfig(criteria);
+        }
+
+        public IEnumerable<Config> GetConfigs(ICriteria criteria)
+        {
+            return GetData<Config>(criteria);
+        }
+
+        public ICommandResult UpdateConfigs(ICriteria criteria)
+        {
+            return _configDataAccess.UpdateConfigs(criteria);
         }
     }
 }

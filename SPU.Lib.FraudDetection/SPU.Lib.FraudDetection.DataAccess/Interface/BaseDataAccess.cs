@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess.Interface
+namespace SPU.Lib.FraudDetection.DataAccess
 {
     using System;
     using System.Collections;
@@ -15,7 +15,6 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Imp;
 
     /// <summary>
     /// Base Data Access.

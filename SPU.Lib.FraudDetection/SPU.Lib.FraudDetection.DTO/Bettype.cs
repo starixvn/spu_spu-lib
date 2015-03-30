@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Class1.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConfigurationsDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,10 +9,15 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
+    using Fanex.NAP.Framework.Data;
+
     /// <summary>
-    /// Should be a clearer name.
+    /// Bet type Class.
     /// </summary>
-    public class Class1
+    public class Bettype
     {
+        public int BettypeId { get; set; }
+
+        public string BettypeName { get; set; }
     }
 }

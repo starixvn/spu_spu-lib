@@ -21,13 +21,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private List<Bettype> _supportedBettypes = new List<Bettype>();
 
-        private ConfigurationsService _bettypeService = new ConfigurationsService();    //todo
+        private BettypeService _bettypeService = new BettypeService(); 
 
         public List<Bettype> GetSupportedBettypes()
         {
             if (_supportedBettypes.Count == 0)
             {
-                IEnumerable<Bettype> bettypes = _bettypeService.GetData<Bettype>(new BettypeSelectAllCriteria());
+                IEnumerable<Bettype> bettypes = _bettypeService.GetAllBettypes(new BettypeSelectAllCriteria());
                 _supportedBettypes = bettypes.ToList();
             }
 
@@ -40,17 +40,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             
             BettypeInsertCriteria criteria = new BettypeInsertCriteria();
             //todo
-            _bettypeService.Insert(criteria);
+            _bettypeService.InsertBettype(criteria);
 
             return true;
         }
 
         public bool RemoveSupportedBettypes(Bettype bettype)
         {
-            _supportedBettypes.Remove(bettype);
-
             BettypeDeleteCriteria criteria = new BettypeDeleteCriteria();
-            //todo
+            _bettypeService.DeleteBettype(criteria);
             
             return true;
         }

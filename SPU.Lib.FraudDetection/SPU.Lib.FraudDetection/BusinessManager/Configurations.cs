@@ -10,9 +10,10 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.BusinessObject;
+    using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Service;    
+    using SPU.Lib.FraudDetection.Service;
+    using Fanex.NAP.Framework.Command;    
 
     /// <summary>
     /// Configurations Class.
@@ -31,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_configs.Count == 0)
             {
-                IEnumerable<Config> configs = _configService.GetData<Config>(new ConfigSelectAllCriteria());
+                IEnumerable<Config> configs = _configService.GetConfigs(new ConfigSelectAllCriteria());
 
                 foreach (var config in configs)
                 {
@@ -50,7 +51,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return _configs;
         }
 
-        public bool InsertConfig(Config config)
+        public ICommandResult InsertConfig(Config config)
         {
             _configs.Add(config.ConfigName, config);
 
@@ -59,7 +60,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             criteria.ConfigValue = config.ConfigValue;
             criteria.ConfigOperator = config.ConfigOperator;
            
-            return _configService.Insert(criteria);
+            return _configService.InsertConfig(criteria);
         }        
 
         /// <summary>

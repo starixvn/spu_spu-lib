@@ -1,0 +1,50 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="WorkflowService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.Service
+{
+    using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DTO;
+
+    /// <summary>
+    /// Workflow Service.
+    /// </summary>
+    public class WorkflowService : QueryService
+    {
+        private WorkflowDataAccess _workflowDataAccess;
+
+        public WorkflowService()
+        {
+            _workflowDataAccess = new WorkflowDataAccess();
+        }
+
+        public ICommandResult InsertWorkflow(ICriteria criteria)
+        {
+            return _workflowDataAccess.InsertWorkflow(criteria);
+        }
+
+        public ICommandResult DeleteWorkflow(ICriteria criteria)
+        {
+            return _workflowDataAccess.DeleteWorkflow(criteria);
+        }
+
+        public IEnumerable<Config> GetConfigs(ICriteria criteria)
+        {
+            return GetData<Config>(criteria);
+        }
+
+        public ICommandResult UpdateWorkflow(ICriteria criteria)
+        {
+            return _workflowDataAccess.UpdateWorkflow(criteria);
+        }
+    }
+}

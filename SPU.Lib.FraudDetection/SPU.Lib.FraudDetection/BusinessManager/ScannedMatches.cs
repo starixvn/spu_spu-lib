@@ -14,6 +14,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.BusinessObject;
     using SPU.Lib.FraudDetection.Criteria.Match;
     using SPU.Lib.FraudDetection.Service;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Configurations Class.
@@ -39,13 +40,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return _scannedMatches;
         }
 
-        public bool InsertMatch(Match match)
+        public ICommandResult InsertMatch(Match match)
         {
             _scannedMatches.Add(match);
 
             MatchInsertCriteria criteria = new MatchInsertCriteria();            
 
-            return _matchService.Insert(criteria);
+            return _matchService.InsertConfig(criteria);
         }            
     }
 }

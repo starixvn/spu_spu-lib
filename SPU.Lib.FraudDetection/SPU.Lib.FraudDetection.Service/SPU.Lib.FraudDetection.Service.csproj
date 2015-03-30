@@ -67,18 +67,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BettypeService.cs" />
     <Compile Include="ConfigurationsService.cs" />
+    <Compile Include="WorkflowService.cs" />
+    <Compile Include="GroupService.cs" />
     <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScannedMatchesService.cs" />
+    <Compile Include="SuspiciousInfoService.cs" />
+    <Compile Include="TaskService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
+      <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
+      <Name>SPU.Lib.FraudDetection.Criteria</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.DataAccess\SPU.Lib.FraudDetection.DataAccess.csproj">
       <Project>{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}</Project>
       <Name>SPU.Lib.FraudDetection.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj">
+      <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
+      <Name>SPU.Lib.FraudDetection.DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
