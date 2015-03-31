@@ -12,6 +12,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using System;
     using System.Collections;
     using System.Data;
+    using System.Data.SqlClient;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
@@ -21,6 +22,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class BaseDataAccess
     {
+        /// <summary>
+        /// Execute non query.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult ExecuteNonQuery(ICriteria criteria)
         {
             // Prepare SP parameters
@@ -36,6 +42,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
             } 
         }
 
+        /// <summary>
+        /// Execute data reader.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <returns>Set of data.</returns>
         public DataSet ExecuteReader(ICriteria criteria)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
@@ -48,7 +59,50 @@ namespace SPU.Lib.FraudDetection.DataAccess
                 return ds;
             }
         }
+
+        /// <summary>
+        /// Execute Non Query Inline.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <param name="sqlQueryString">Query string.</param>
+        /// <returns>Command result.</returns>
+        public ICommandResult ExecuteNonQueryInline(ICriteria criteria, string connectionString, string sqlQueryString)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
+            var result = (int)sqlCommand.ExecuteScalar();
+
+            return new CommandResult
+            {
+                Code = result,
+                Message = string.Empty
+            };
+        }
+
+        /// <summary>
+        /// Execute Reader Query Inline.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <param name="sqlQueryString">Query string.</param>
+        /// <returns>Data table.</returns>
+        public DataTable ExecuteReaderQueryInline(ICriteria criteria, string connectionString, string sqlQueryString)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
+            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCommand);
+            DataTable sqlDt = new DataTable();
+            sqlDa.Fill(sqlDt);
+
+            return sqlDt;
+        }
         
+        /// <summary>
+        /// Get Command Result.
+        /// </summary>
+        /// <param name="hash">Input parameters.</param>
+        /// <returns>Command result.</returns>
         private CommandResult GetCommandResult(Hashtable hash)
         {
             var errCode = hash["errcode"];
