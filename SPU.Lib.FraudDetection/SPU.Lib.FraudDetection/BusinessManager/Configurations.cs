@@ -68,38 +68,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <returns>True if success.</returns>
         public bool UpdateConfigurations()
-        {
-            ////string configNameList = string.Empty;
-            ////string configValueList = string.Empty;
-            ////string configOperatorList = string.Empty;
-
-            ////bool result = true;
-            ////foreach (var config in _configs)
-            ////{
-            ////    if (config.Value.IsUpdate)
-            ////    {
-            ////        configNameList += config.Value.ConfigName + ",";
-            ////        configValueList += config.Value.ConfigValue + ",";
-            ////        configOperatorList += config.Value.ConfigOperator + ",";                    
-            ////    }
-            ////}
-
-            ////if (!string.IsNullOrEmpty(configNameList))
-            ////{                                
-            ////}
-            ////return result;
-
-            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = @ConfigValue, ConfigOperator = @ConfigOperator Where ConfigName = @ConfigName ";
-            string query = string.Empty;
+        {            
+            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = {0}, ConfigOperator = {1} Where ConfigName = {2} ";
+            string sqlStr = string.Empty;
 
             foreach (var config in _configs)
             {
                 if (config.Value.IsUpdate)
                 {
-                    query += tmpUpdate.Replace("@ConfigValue", config.Value.ConfigValue)
-                                                   .Replace("@ConfigOperator", config.Value.ConfigOperator)
-                                                   .Replace("@ConfigName", config.Value.ConfigName);
+                    sqlStr += string.Format(tmpUpdate, config.Value.ConfigValue, config.Value.ConfigOperator, config.Value.ConfigName);                    
                 }
+            }
+
+            if (!string.IsNullOrEmpty(sqlStr))
+            {
+                return _configService.ExecuteNonQueryInline(sqlStr).IsSuccessful;
             }
 
             return true;

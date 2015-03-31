@@ -36,32 +36,36 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         #endregion        
 
-        #region Task Methods
+        #region Execute Methods
 
         /// <summary>
         /// Execute a workflow for a match.
         /// </summary>
-        /// <param name="match">The match scanned.</param>
-        /// <returns>True if execute tasks in the workflow is success.</returns>
-        public bool Run(Match match)
+        /// <param name="match">The match scanned.</param>        
+        public void Run(Match match)
         {
-            bool result = true;
-            
             foreach (Task task in GetTasks())
             {
                 if (task.IsRunMannually)
                 {
-                    result = result & task.Run(match);
+                    task.Run(match);
                 }
                 else
                 {
-                    result = result & AssignTaskToThreadPool(task);
+                    AssignTaskToThreadPool(task, match);
                 }
             }
-
-            return result;
         }
 
+        public void AssignTaskToThreadPool(Task task, Match match)
+        {
+            ThreadPool.AddTask(task, delegate { task.Run(match); });
+        }
+     
+        #endregion
+
+        #region Task Methods
+       
         public List<Task> GetTasks()
         {
             if (_tasks.Count == 0)
@@ -81,12 +85,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         public void RemoveTask(Task task)
         {
             _tasks.Remove(task);
-        }
-
-        public bool AssignTaskToThreadPool(Task task)
-        {
-            return true;
-        }
+        }       
 
         #endregion     
     }

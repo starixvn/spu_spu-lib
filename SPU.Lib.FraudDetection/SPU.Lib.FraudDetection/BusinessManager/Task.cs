@@ -9,6 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using SPU.Lib.FraudDetection.Criteria;
@@ -93,23 +94,25 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <summary>
         /// Execute a task.
         /// </summary>
-        /// <param name="match">The match for scanning.</param>
-        /// <returns>True if success.</returns>
-        public bool Run(Match match)
+        /// <param name="match">The match for scanning.</param>        
+        public void Run(Match match)
         {
-            bool result = false;
-            
-            if (CheckPreconditions(match))
+            try
             {
-                string rules = RetrieveRules(match);
+                if (CheckPreconditions(match))
+                {
+                    string rules = RetrieveRules(match);
 
-                List<SuspiciousInfo> suspiciousList = CollectSuspiciousInfo(rules);
+                    List<SuspiciousInfo> suspiciousList = CollectSuspiciousInfo(rules);
 
-                result = StoreSuspiciousInfo(suspiciousList);
-                result = result & TakeNextAction(suspiciousList);
+                    StoreSuspiciousInfo(suspiciousList);
+                    TakeNextAction(suspiciousList);
+                }
             }
-
-            return result;
+            catch (Exception ex)
+            {
+                throw new Exception("Exception Task Run -- " + ex.Message);
+            }
         }
 
         public bool CheckPreconditions(Match match)
@@ -117,8 +120,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskPreconditions);
 
             TaskService taskService = new TaskService();
-            IEnumerable<Match> list = taskService.GetData<Match>(null); ////todo
-            return list.Count() > 0;            
+            return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;            
         }
 
         public string RetrieveRules(Match match)
@@ -129,6 +131,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         public List<SuspiciousInfo> CollectSuspiciousInfo(string rules)
         {                        
             TaskService taskService = new TaskService();
+            ////taskService.ExecuteReaderQueryInline(sqlStr);
             IEnumerable<SuspiciousInfo> list = taskService.GetData<SuspiciousInfo>(null); ////todo
 
             return list.ToList();

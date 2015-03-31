@@ -39,18 +39,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _supportedBettypes.Add(bettype);
             
             BettypeInsertCriteria criteria = new BettypeInsertCriteria();
-            ////todo
-            _bettypeService.InsertBettype(criteria);
-
-            return true;
+            return _bettypeService.InsertBettype(criteria).IsSuccessful;
         }
 
         public bool RemoveSupportedBettypes(Bettype bettype)
         {
+            _supportedBettypes.Remove(bettype);
+
             BettypeDeleteCriteria criteria = new BettypeDeleteCriteria();
-            _bettypeService.DeleteBettype(criteria);
-            
-            return true;
+            return _bettypeService.DeleteBettype(criteria).IsSuccessful;            
         }
     }
 }
