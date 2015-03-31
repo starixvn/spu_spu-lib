@@ -9,8 +9,8 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
-    using Fanex.NAP.Framework.Data;
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Bet type Class.
