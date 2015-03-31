@@ -11,8 +11,11 @@ namespace SPU.Lib.FraudDetection.Service
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using Fanex.Data;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.DataAccess;
 
     /// <summary>
     /// Query Service.
@@ -41,6 +44,30 @@ namespace SPU.Lib.FraudDetection.Service
 
                 return list;
             }
+        }
+
+        /// <summary>
+        /// Execute Non Query Inline.
+        /// </summary>
+        /// <param name="sqlQueryString">Query string.</param>
+        /// <returns>Command result.</returns>
+        public ICommandResult ExecuteNonQueryInline(string sqlQueryString)
+        {
+            var baseDataAccess = new BaseDataAccess();
+
+            return baseDataAccess.ExecuteNonQueryInline(sqlQueryString);
+        }
+
+        /// <summary>
+        /// Execute Reader Query Inline.
+        /// </summary>
+        /// <param name="sqlQueryString">Query string.</param>
+        /// <returns>Data table.</returns>
+        public DataTable ExecuteReaderQueryInline(string sqlQueryString)
+        {
+            var baseDataAccess = new BaseDataAccess();
+
+            return baseDataAccess.ExecuteReaderQueryInline(sqlQueryString);
         }
     }
 }

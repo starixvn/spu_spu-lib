@@ -17,6 +17,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class ScannedMatchesDataAccess : BaseDataAccess
     {
+        public ScannedMatchesDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertScannedMatch(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

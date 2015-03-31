@@ -17,6 +17,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class WorkflowDataAccess : BaseDataAccess
     {
+        public WorkflowDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertWorkflow(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);            

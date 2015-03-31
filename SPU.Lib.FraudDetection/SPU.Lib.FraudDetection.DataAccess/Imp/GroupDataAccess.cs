@@ -18,6 +18,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class GroupDataAccess : BaseDataAccess
     {
+        public GroupDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertGroup(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

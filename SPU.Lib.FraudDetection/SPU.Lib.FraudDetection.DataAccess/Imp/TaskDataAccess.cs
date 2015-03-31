@@ -17,6 +17,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class TaskDataAccess : BaseDataAccess
     {
+        public TaskDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertTask(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

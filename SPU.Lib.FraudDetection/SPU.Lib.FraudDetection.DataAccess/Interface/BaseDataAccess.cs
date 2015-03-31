@@ -16,12 +16,20 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.Criteria;
 
     /// <summary>
     /// Base Data Access.
     /// </summary>
     public class BaseDataAccess
     {
+        private string _sqlConnectionString;
+
+        public BaseDataAccess()
+        {
+            _sqlConnectionString = ""; // TODO: get from config
+        }
+
         /// <summary>
         /// Execute non query.
         /// </summary>
@@ -63,13 +71,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         /// <summary>
         /// Execute Non Query Inline.
         /// </summary>
-        /// <param name="criteria">Input criteria.</param>
-        /// <param name="connectionString">Connection string.</param>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Command result.</returns>
-        public ICommandResult ExecuteNonQueryInline(ICriteria criteria, string connectionString, string sqlQueryString)
+        public ICommandResult ExecuteNonQueryInline(string sqlQueryString)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlConnection sqlConnection = new SqlConnection(_sqlConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
             var result = (int)sqlCommand.ExecuteScalar();
 
@@ -83,13 +89,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         /// <summary>
         /// Execute Reader Query Inline.
         /// </summary>
-        /// <param name="criteria">Input criteria.</param>
-        /// <param name="connectionString">Connection string.</param>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Data table.</returns>
-        public DataTable ExecuteReaderQueryInline(ICriteria criteria, string connectionString, string sqlQueryString)
+        public DataTable ExecuteReaderQueryInline(string sqlQueryString)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            SqlConnection sqlConnection = new SqlConnection(_sqlConnectionString);
             SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
             SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCommand);
             DataTable sqlDt = new DataTable();
