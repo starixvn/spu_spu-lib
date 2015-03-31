@@ -17,6 +17,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class SuspiciousInfoDataAccess : BaseDataAccess
     {
+        public SuspiciousInfoDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertSuspiciousCustomer(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

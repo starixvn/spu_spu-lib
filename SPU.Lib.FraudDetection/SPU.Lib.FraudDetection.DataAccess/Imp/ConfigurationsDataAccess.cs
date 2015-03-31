@@ -17,6 +17,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class ConfigurationsDataAccess : BaseDataAccess
     {
+        public ConfigurationsDataAccess() : base()
+        {
+        }
+
         public ICommandResult InsertConfig(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);            

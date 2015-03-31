@@ -72,9 +72,6 @@
     <Compile Include="Imp\ConfigurationsDataAccess.cs" />
     <Compile Include="Imp\WorkflowDataAccess.cs" />
     <Compile Include="Imp\GroupDataAccess.cs" />
-    <Compile Include="Imp\ResultCriteria.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Imp\SuspiciousInfoDataAccess.cs" />
     <Compile Include="Imp\TaskDataAccess.cs" />
     <Compile Include="Interface\BaseDataAccess.cs" />

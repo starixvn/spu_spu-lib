@@ -18,6 +18,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class ActionDataAccess
     {
+        public ActionDataAccess() : base()
+        {
+        }
+        
         public List<Bettype> GetActions(ICriteria criteria)
         {
             return null;

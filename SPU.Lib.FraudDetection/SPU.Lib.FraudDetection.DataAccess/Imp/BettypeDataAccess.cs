@@ -20,6 +20,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// </summary>
     public class BettypeDataAccess
     {
+        public BettypeDataAccess() : base()
+        {
+        }
+
         public ICommandResult DeleteBettype(ICriteria criteria)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
