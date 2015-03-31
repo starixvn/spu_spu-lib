@@ -10,6 +10,7 @@
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
+    using System.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess;
@@ -45,6 +46,32 @@ namespace SPU.Lib.FraudDetection.Service
         public ICommandResult UpdateTask(ICriteria criteria)
         {
             return _taskDataAccess.UpdateTask(criteria);
+        }
+
+        /// <summary>
+        /// Collect Suspicious Info.
+        /// </summary>
+        /// <param name="sqlQueryString">Query string.</param>
+        /// <returns>List of suspicious information.</returns>
+        public IEnumerable<SuspiciousInfo> CollectSuspiciousInfo(string sqlQueryString)
+        {
+            var suspiciousInfoList = new List<SuspiciousInfo>();
+            var suspiciousInfoDataTable = ExecuteReaderQueryInline(sqlQueryString);
+
+            foreach (DataRow dataRow in suspiciousInfoDataTable.Rows)
+            {
+                suspiciousInfoList.Add(new SuspiciousInfo
+                {
+                    CustId = int.Parse(dataRow["custid"].ToString()),
+                    MatchId = int.Parse(dataRow["matchid"].ToString()),
+                    WorkflowId = string.IsNullOrEmpty(dataRow["workflowid"].ToString())
+                                    ? 0
+                                    : int.Parse(dataRow["workflowid"].ToString()),
+                    ListTransId = dataRow["listtransid"].ToString()
+                });
+            }
+
+            return suspiciousInfoList;
         }
     }
 }
