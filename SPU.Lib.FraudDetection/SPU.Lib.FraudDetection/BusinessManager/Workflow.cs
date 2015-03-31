@@ -64,10 +64,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 }
             }
         }
-
-        public void AssignTaskToThreadPool(Task task, Match match)
+     
+        public void AssignTaskToThreadPool(Task task, Match match)       
         {
-            ThreadPool.AddTask(task, delegate { task.Run(match); });
+            ThreadPool.AddTask(task, () => { task.Run(match); });
         }
      
         #endregion
@@ -88,7 +88,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         public void InsertTask(TaskInfo task)
         {
             _tasksInfo.Add(task);            
-        }
+        }       
 
         public void RemoveTask(TaskInfo task)
         {
