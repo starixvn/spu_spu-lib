@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.04.01">Modified: WorkflowInfo</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.BusinessManager
@@ -20,21 +21,24 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class Workflow
     {
-        private List<Task> _tasks = new List<Task>();
+        #region Properties
+
+        private List<TaskInfo> _tasksInfo = new List<TaskInfo>();
 
         private WorkflowService _workflowService = new WorkflowService();
 
-        #region Properties
-
-        public int WorkflowId { get; set; }
-
-        public string WorkflowName { get; set; }
-
-        public string WorkflowDesc { get; set; }
-
-        public bool IsActive { get; set; }      
+        private WorkflowInfo _workflowInfo;
 
         #endregion        
+        
+        #region Constructor
+
+        public Workflow(WorkflowInfo workflowInfo)
+        {
+            _workflowInfo = workflowInfo;
+        }
+
+        #endregion
 
         #region Execute Methods
 
@@ -44,15 +48,19 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="match">The match scanned.</param>        
         public void Run(Match match)
         {
-            foreach (Task task in GetTasks())
+            foreach (TaskInfo taskInfo in GetTasks())
             {
-                if (task.IsRunMannually)
+                if (taskInfo.IsActive)
                 {
-                    task.Run(match);
-                }
-                else
-                {
-                    AssignTaskToThreadPool(task, match);
+                    var task = new Task(taskInfo);
+                    if (task.TaskInfo.IsRunMannually)
+                    {
+                        task.Run(match);
+                    }
+                    else
+                    {
+                        AssignTaskToThreadPool(task, match);
+                    }
                 }
             }
         }
@@ -66,25 +74,25 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         #region Task Methods
        
-        public List<Task> GetTasks()
+        public List<TaskInfo> GetTasks()
         {
-            if (_tasks.Count == 0)
+            if (_tasksInfo.Count == 0)
             {
-                IEnumerable<Task> tasks = _workflowService.GetData<Task>(new TaskSelectAllByWorkflowIdCriteria());
-                _tasks = tasks.ToList();
+                IEnumerable<TaskInfo> tasks = _workflowService.GetTasks(new TaskSelectAllByWorkflowIdCriteria());
+                _tasksInfo = tasks.ToList();
             }
 
-            return _tasks;
+            return _tasksInfo;
         }
 
-        public void InsertTask(Task task)
+        public void InsertTask(TaskInfo task)
         {
-            _tasks.Add(task);            
+            _tasksInfo.Add(task);            
         }
 
-        public void RemoveTask(Task task)
+        public void RemoveTask(TaskInfo task)
         {
-            _tasks.Remove(task);
+            _tasksInfo.Remove(task);
         }       
 
         #endregion     

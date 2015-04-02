@@ -35,7 +35,7 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public bool IsRunMannually { get; set; }
 
-        public int NextActionId { get; set; }
+        public string NextActionIdList { get; set; }
 
         public int Timer { get; set; }
 

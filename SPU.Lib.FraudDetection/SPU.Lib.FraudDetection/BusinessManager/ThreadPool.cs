@@ -36,7 +36,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 });
 
                 Thread thread = new Thread(action);
-                thread.Name = string.Format(threadNameTemplate, task.TaskName);
+                thread.Name = string.Format(threadNameTemplate, task.TaskInfo.TaskName);
 
                 thread.Start();
 
@@ -46,7 +46,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     thread.Join();
                 }
 
-                Thread.Sleep(task.Timer);
+                Thread.Sleep(task.TaskInfo.Timer);
 
                 _threads.Add(thread);                
             }

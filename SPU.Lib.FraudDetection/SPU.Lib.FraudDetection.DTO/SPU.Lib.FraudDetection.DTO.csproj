@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Bettype.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="WorkflowInfo.cs" />
     <Compile Include="TaskInfo.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Match.cs" />

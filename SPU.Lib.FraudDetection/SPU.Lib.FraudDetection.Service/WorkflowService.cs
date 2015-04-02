@@ -37,9 +37,14 @@ namespace SPU.Lib.FraudDetection.Service
             return _workflowDataAccess.DeleteWorkflow(criteria);
         }
 
-        public IEnumerable<Config> GetConfigs(ICriteria criteria)
+        public IEnumerable<WorkflowInfo> GetWorkflows(ICriteria criteria)
         {
-            return GetData<Config>(criteria);
+            return GetData<WorkflowInfo>(criteria);
+        }
+
+        public IEnumerable<TaskInfo> GetTasks(ICriteria criteria)
+        {
+            return GetData<TaskInfo>(criteria);
         }
 
         public ICommandResult UpdateWorkflow(ICriteria criteria)

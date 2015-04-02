@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.BusinessManager
@@ -21,35 +22,22 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class Task
     {
-        #region Properties
+        #region Constructor
 
-        public int TaskId { get; set; }
-
-        public string TaskName { get; set; }
-
-        public string TaskDesc { get; set; }
-
-        public string TaskPreconditions { get; set; }
-
-        public List<Config> Preconditions { get; set; }
-
-        public string TaskRules { get; set; }
-
-        public List<Config> Rules { get; set; }
-
-        public int WorkflowId { get; set; }
-
-        public bool IsRunMannually { get; set; }
-
-        public string NextActionIdList { get; set; }
-
-        public int Timer { get; set; }
-
-        public bool IsActive { get; set; }
+        public Task(TaskInfo taskInfo)
+        {
+            this.TaskInfo = taskInfo;
+        }
 
         #endregion
 
-        #region BuildTask        
+        #region Properties
+
+        public TaskInfo TaskInfo { get; set; }
+
+        #endregion
+        
+        #region BuildTask
 
         /// <summary>
         /// Build the precondition for a task.
@@ -60,7 +48,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             string sqlStr = string.Empty;
             string strCond = string.Empty;
 
-            foreach (var preCond in Preconditions)
+            foreach (var preCond in TaskInfo.Preconditions)
             {
                 strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
                 sqlStr += string.Join(" AND ", strCond);
@@ -78,7 +66,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             string sqlStr = string.Empty;
             string strRule = string.Empty;
 
-            foreach (var rule in Rules)
+            foreach (var rule in TaskInfo.Rules)
             {
                 strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
                 sqlStr += string.Join(" AND ", strRule);
@@ -117,44 +105,44 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool CheckPreconditions(Match match)
         {
-            string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskPreconditions);
+            string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
 
             TaskService taskService = new TaskService();
-            return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;            
+            return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;
         }
 
         public string RetrieveRules(Match match)
         {
-            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskRules); ////todo
+            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
         }
 
         public List<SuspiciousInfo> CollectSuspiciousInfo(string rules)
-        {                        
+        {
             TaskService taskService = new TaskService();
             ////taskService.ExecuteReaderQueryInline(sqlStr);
             IEnumerable<SuspiciousInfo> list = taskService.GetData<SuspiciousInfo>(null); ////todo
 
             return list.ToList();
         }
-        
+
         /// <summary>
         /// Save suspicious info list.
         /// </summary>
         /// <param name="listSuspiciousInfo">The suspicious info list.</param>
         /// <returns>True if success.</returns>
         public bool StoreSuspiciousInfo(List<SuspiciousInfo> listSuspiciousInfo)
-        {            
+        {
             SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-            
+
             SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
 
             string custIdList = string.Empty;
             string matchIdList = string.Empty;
             string workflowIdList = string.Empty;
             string groupTransIdList = string.Empty;
-            
+
             foreach (var info in listSuspiciousInfo)
-            {                
+            {
                 custIdList = string.Join(";", custIdList, info.CustId);
                 matchIdList = string.Join(";", matchIdList, info.MatchId);
                 workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
@@ -171,7 +159,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
         {
-            foreach (var actionId in NextActionIdList.Split(','))
+            foreach (var actionId in TaskInfo.NextActionIdList.Split(','))
             {
                 BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId));
                 nextAction.TakeAction();
