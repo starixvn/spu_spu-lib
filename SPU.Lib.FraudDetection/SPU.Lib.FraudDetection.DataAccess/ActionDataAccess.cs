@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// <summary>
     /// Action Data Access.
     /// </summary>
-    public class ActionDataAccess
+    public class ActionDataAccess : BaseDataAccess
     {
         public ActionDataAccess() : base()
         {

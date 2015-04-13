@@ -90,7 +90,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _tasksInfo.Add(task);            
         }       
 
-        public void RemoveTask(TaskInfo task)
+        public void DeleteTask(TaskInfo task)
         {
             _tasksInfo.Remove(task);
         }       

@@ -18,21 +18,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
     /// <summary>
     /// Bet-type Data Access.
     /// </summary>
-    public class BettypeDataAccess
+    public class BettypeDataAccess : BaseDataAccess
     {
         public BettypeDataAccess() : base()
         {
-        }
-
-        public ICommandResult DeleteBettype(ICriteria criteria)
-        {
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var param = criteria.GetSpParams();
-                objectDb.ExecuteNonQuery(param);
-
-                return new CommandResult();
-            }
         }
 
         public ICommandResult InsertBettype(ICriteria criteria)
@@ -46,6 +35,17 @@ namespace SPU.Lib.FraudDetection.DataAccess
             }
         }
 
+        public ICommandResult DeleteBettype(ICriteria criteria)
+        {
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var param = criteria.GetSpParams();
+                objectDb.ExecuteNonQuery(param);
+
+                return new CommandResult();
+            }
+        }
+        
         // Get all bet-types should use GetData from QueryService
     }
 }

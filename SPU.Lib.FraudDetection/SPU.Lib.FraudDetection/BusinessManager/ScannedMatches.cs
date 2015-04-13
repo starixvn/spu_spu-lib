@@ -23,7 +23,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private List<Match> _scannedMatches = new List<Match>();
 
-        private ScannedMatchesService _matchService = new ScannedMatchesService();
+        private ScannedMatchesService _scannedMatchService = new ScannedMatchesService();
 
         /// <summary>
         /// Get configuration list.
@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_scannedMatches.Count == 0)
             {
-                IEnumerable<Match> matches = _matchService.GetData<Match>(new MatchSelectAllCriteria());
+                IEnumerable<Match> matches = _scannedMatchService.GetData<Match>(new MatchSelectAllCriteria());
                 _scannedMatches = matches.ToList();
             }
 
@@ -44,9 +44,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _scannedMatches.Add(match);
 
-            MatchInsertCriteria criteria = new MatchInsertCriteria();            
+            MatchInsertCriteria criteria = new MatchInsertCriteria();
 
-            return _matchService.InsertScannedMatch(criteria);
+            return _scannedMatchService.InsertScannedMatch(criteria);
         }            
     }
 }

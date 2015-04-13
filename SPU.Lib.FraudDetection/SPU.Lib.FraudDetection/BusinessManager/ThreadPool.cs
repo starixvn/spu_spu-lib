@@ -19,7 +19,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     public static class ThreadPool
     {
         private static List<Thread> _threads = new List<Thread>();        
-        private static string threadNameTemplate = "Task {0}";
+        private static string _threadNameTemplate = "Task {0}";
         
         /// <summary>
         /// Add and start a task in the thread pool.
@@ -36,7 +36,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 });
 
                 Thread thread = new Thread(action);
-                thread.Name = string.Format(threadNameTemplate, task.TaskInfo.TaskName);
+                thread.Name = string.Format(_threadNameTemplate, task.TaskInfo.TaskName);
 
                 thread.Start();
 
@@ -61,11 +61,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <param name="taskName">The task name.</param>
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
-        internal static bool RemoveTask(string taskName)
+        internal static bool DeleteTask(string taskName)
         {
             try
             {
-                Thread removedThread = _threads.Find(x => x.Name == string.Format(threadNameTemplate, taskName));
+                Thread removedThread = _threads.Find(x => x.Name == string.Format(_threadNameTemplate, taskName));
                 return _threads.Remove(removedThread);
             }
             catch (Exception ex)

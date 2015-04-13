@@ -74,7 +74,7 @@
     <Compile Include="BusinessManager\NextAction\ActionAssignGroup.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSendEmail.cs" />
     <Compile Include="BusinessManager\Configurations.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="FraudDetection.cs" />
     <Compile Include="BusinessManager\SupportedBettypes.cs" />
     <Compile Include="BusinessManager\Task.cs" />
     <Compile Include="BusinessManager\Workflow.cs" />

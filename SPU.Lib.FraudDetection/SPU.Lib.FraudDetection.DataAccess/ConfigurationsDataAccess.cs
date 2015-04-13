@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConfigurationsDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,27 +13,27 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Task Data Access.
+    /// Configurations Data Access.
     /// </summary>
-    public class TaskDataAccess : BaseDataAccess
+    public class ConfigurationsDataAccess : BaseDataAccess
     {
-        public TaskDataAccess() : base()
+        public ConfigurationsDataAccess() : base()
         {
         }
 
-        public ICommandResult InsertTask(ICriteria criteria)
+        public ICommandResult InsertConfig(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);            
+        }
+
+        public ICommandResult UpdateConfigs(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult DeleteTask(ICriteria criteria)
+        public ICommandResult DeleteConfig(ICriteria criteria)
         {
-            return ExecuteNonQuery(criteria);
-        }
-
-        public ICommandResult UpdateTask(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);
+            return ExecuteNonQuery(criteria);            
         }
     }
 }

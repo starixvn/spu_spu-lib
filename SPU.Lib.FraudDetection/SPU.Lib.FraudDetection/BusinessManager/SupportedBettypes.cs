@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return _supportedBettypes;
         }
 
-        public bool InsertSupportedBettypes(Bettype bettype)
+        public bool InsertSupportedBettype(Bettype bettype)
         {
             _supportedBettypes.Add(bettype);
             
@@ -42,7 +42,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return _bettypeService.InsertBettype(criteria).IsSuccessful;
         }
 
-        public bool RemoveSupportedBettypes(Bettype bettype)
+        public bool DeleteSupportedBettype(Bettype bettype)
         {
             _supportedBettypes.Remove(bettype);
 

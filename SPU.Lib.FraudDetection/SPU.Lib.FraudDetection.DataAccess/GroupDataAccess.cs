@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,37 +9,37 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess
 {
+    using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-using Fanex.NAP.SPU.Core;
 
     /// <summary>
-    /// Workflow Data Access.
+    /// TODO: Update summary.
     /// </summary>
-    public class WorkflowDataAccess : BaseDataAccess
+    public class GroupDataAccess : BaseDataAccess
     {
-        public WorkflowDataAccess() : base()
+        public GroupDataAccess() : base()
         {
         }
 
-        public ICommandResult InsertWorkflow(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);            
-        }
-
-        public ICommandResult DeleteWorkflow(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);            
-        }
-
-        public ICommandResult UpdateWorkflow(ICriteria criteria)
+        public ICommandResult InsertGroup(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetWorkflows(ICriteria criteria)
+        public ICommandResult UpdateGroup(ICriteria criteria)
         {
-            return ReturnDataCollection(criteria);
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult DeleteGroup(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult AssignCustToGroup(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
         }
     }
 }

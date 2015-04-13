@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConfigurationsDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="WorkflowDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,29 +11,35 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+using Fanex.NAP.SPU.Core;
 
     /// <summary>
-    /// Configurations Data Access.
+    /// Workflow Data Access.
     /// </summary>
-    public class ConfigurationsDataAccess : BaseDataAccess
+    public class WorkflowDataAccess : BaseDataAccess
     {
-        public ConfigurationsDataAccess() : base()
+        public WorkflowDataAccess() : base()
         {
         }
 
-        public ICommandResult InsertConfig(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);            
-        }
-
-        public ICommandResult DeleteConfig(ICriteria criteria)
+        public ICommandResult InsertWorkflow(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);            
         }
 
-        public ICommandResult UpdateConfigs(ICriteria criteria)
+        public ICommandResult UpdateWorkflow(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult DeleteWorkflow(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);            
+        }
+
+        public DataCollection GetWorkflows(ICriteria criteria)
+        {
+            return ReturnDataCollection(criteria);
         }
     }
 }

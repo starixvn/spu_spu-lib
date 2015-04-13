@@ -70,16 +70,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Imp\ActionDataAccess.cs" />
-    <Compile Include="Imp\BettypeDataAccess.cs" />
-    <Compile Include="Imp\ConfigurationsDataAccess.cs" />
-    <Compile Include="Imp\WorkflowDataAccess.cs" />
-    <Compile Include="Imp\GroupDataAccess.cs" />
-    <Compile Include="Imp\SuspiciousInfoDataAccess.cs" />
-    <Compile Include="Imp\TaskDataAccess.cs" />
-    <Compile Include="Interface\BaseDataAccess.cs" />
+    <Compile Include="ActionDataAccess.cs" />
+    <Compile Include="BettypeDataAccess.cs" />
+    <Compile Include="ConfigurationsDataAccess.cs" />
+    <Compile Include="WorkflowDataAccess.cs" />
+    <Compile Include="GroupDataAccess.cs" />
+    <Compile Include="SuspiciousInfoDataAccess.cs" />
+    <Compile Include="TaskDataAccess.cs" />
+    <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Imp\ScannedMatchesDataAccess.cs" />
+    <Compile Include="ScannedMatchesDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// Get configuration list.
         /// </summary>
         /// <returns>The list of configurations.</returns>
-        public Dictionary<string, Config> GetConfigurations()
+        public Dictionary<string, Config> GetConfigs()
         {
             if (_configs.Count == 0)
             {
@@ -67,7 +67,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// Update list of configurations.
         /// </summary>
         /// <returns>True if success.</returns>
-        public bool UpdateConfigurations()
+        public bool UpdateConfigs()
         {            
             string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = {0}, ConfigOperator = {1} Where ConfigName = {2} ";
             string sqlStr = string.Empty;
@@ -88,7 +88,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return true;
         }
 
-        public bool RemoveConfig(Config config)
+        public bool DeleteConfig(Config config)
         {
             _configs.Remove(config.ConfigName);
 

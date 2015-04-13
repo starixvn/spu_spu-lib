@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,35 +9,29 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess
 {
-    using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Task Data Access.
     /// </summary>
-    public class GroupDataAccess : BaseDataAccess
+    public class TaskDataAccess : BaseDataAccess
     {
-        public GroupDataAccess() : base()
+        public TaskDataAccess() : base()
         {
         }
 
-        public ICommandResult InsertGroup(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);
-        }
-
-        public ICommandResult DeleteGroup(ICriteria criteria)
+        public ICommandResult InsertTask(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult UpdateGroup(ICriteria criteria)
+        public ICommandResult UpdateTask(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult AssignCustToGroup(ICriteria criteria)
+        public ICommandResult DeleteTask(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
