@@ -40,7 +40,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         public void ScanMatch()
         {
-            var workflowInfos = _workflowService.GetWorkflows(new WorkflowSelectAllCriteria());
+            var workflowInfos = _workflowService.LoadWorkflows(new WorkflowSelectAllCriteria());
             foreach (var workflowInfo in workflowInfos)
             {
                 if (workflowInfo.IsActive)

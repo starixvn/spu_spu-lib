@@ -9,16 +9,33 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.Workflow
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
-
+    using SPU.Lib.FraudDetection.Criteria.Common;
+   
     /// <summary>
     /// WorkflowSelectAllCriteria Class.
     /// </summary>
     public class WorkflowSelectAllCriteria : CriteriaBase
     {
+        public WorkflowSelectAllCriteria()
+        {            
+        }        
+
+        /// <summary>
+        /// Get the reference SP's Name which is specified in Config file.
+        /// </summary>
+        /// <returns>The key of store procedure.</returns>
+        public override string GetSettingKey()
+        {
+            return "SPU_WorkflowSelectAll";
+        }
+
+        /// <summary>
+        /// Check data's constrains.
+        /// </summary>
+        /// <returns>True: valid; False: invalid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        }        
     }
 }

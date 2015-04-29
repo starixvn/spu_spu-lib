@@ -17,6 +17,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.Criteria;
+    using Fanex.NAP.SPU.Core;
 
     /// <summary>
     /// Base Data Access.
@@ -117,6 +118,31 @@ namespace SPU.Lib.FraudDetection.DataAccess
                 Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
                 Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
             };
-        }                 
+        }
+
+        /// <summary>
+        /// Returns the data collection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">The log criteria.</param>
+        /// <returns>Data Collection.</returns>
+        public DataCollection ReturnDataCollection(ICriteria criteria)
+        {
+            // prepare SP parameters
+            Hashtable hash = criteria.GetSpParams();
+            
+            //hash = (new ResultCriteria()).AddSpParams(hash);
+
+            var res = new DataCollection();
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.AssignParamValues(hash);
+                res.Data = db.ExecuteDataSet();
+                res.TotalItem = (int)db.GetOuputParams()["rowcount"];
+
+                return res;
+            }
+        }
     }
 }

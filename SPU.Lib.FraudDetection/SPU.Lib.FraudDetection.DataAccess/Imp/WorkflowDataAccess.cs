@@ -11,6 +11,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+using Fanex.NAP.SPU.Core;
 
     /// <summary>
     /// Workflow Data Access.
@@ -34,6 +35,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         public ICommandResult UpdateWorkflow(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
+        }
+
+        public DataCollection GetWorkflows(ICriteria criteria)
+        {
+            return ReturnDataCollection(criteria);
         }
     }
 }

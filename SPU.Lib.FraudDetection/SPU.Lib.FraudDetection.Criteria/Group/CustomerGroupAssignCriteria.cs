@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.Criteria.Common;
 
     /// <summary>
     /// CustomerGroupAssignCriteria Class.
