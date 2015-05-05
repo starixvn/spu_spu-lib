@@ -40,9 +40,6 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Nap.SPU.Core">
-      <HintPath>..\..\..\spu-frauddetection\Fanex.Nap.SPU.Core\bin\Debug\Fanex.Nap.SPU.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -86,6 +83,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Nap.SPU.Core\SPU.Lib.Core.csproj">
+      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Name>SPU.Lib.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
       <Name>SPU.Lib.FraudDetection.Criteria</Name>

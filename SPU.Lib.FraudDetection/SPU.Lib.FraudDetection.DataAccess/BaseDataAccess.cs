@@ -17,7 +17,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.Criteria;
-    using Fanex.NAP.SPU.Core;
+    using SPU.Lib.Core;    
 
     /// <summary>
     /// Base Data Access.
