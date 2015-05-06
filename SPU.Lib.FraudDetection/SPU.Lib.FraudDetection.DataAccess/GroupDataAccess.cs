@@ -9,9 +9,9 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess
 {
-    using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.SPU.Core;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,6 +25,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         public ICommandResult InsertGroup(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
+        }
+
+        public DataCollection GetGroups(ICriteria criteria)
+        {
+            return ReturnDataCollection(criteria);
         }
 
         public ICommandResult UpdateGroup(ICriteria criteria)

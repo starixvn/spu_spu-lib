@@ -16,9 +16,13 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
     /// </summary>
     public class WorkflowSelectAllCriteria : CriteriaBase
     {
-        public WorkflowSelectAllCriteria()
-        {            
-        }        
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
+
+        public int PageCount { get; set; }
+
+        public int RowCount { get; set; }        
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

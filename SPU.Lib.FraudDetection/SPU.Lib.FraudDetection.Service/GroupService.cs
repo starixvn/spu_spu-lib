@@ -9,9 +9,9 @@
 
 namespace SPU.Lib.FraudDetection.Service
 {
-    using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.SPU.Core;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;
 
@@ -37,9 +37,9 @@ namespace SPU.Lib.FraudDetection.Service
             return _groupDataAccess.DeleteGroup(criteria);
         }
 
-        public IEnumerable<Group> GetGroups(ICriteria criteria)
+        public DataCollection GetGroups(ICriteria criteria)
         {
-            return GetData<Group>(criteria);
+            return _groupDataAccess.GetGroups(criteria);
         }
 
         public ICommandResult UpdateGroup(ICriteria criteria)

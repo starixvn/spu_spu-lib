@@ -22,14 +22,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Common
     /// </summary>
     public abstract class CriteriaBase : ICriteria
     {
-        public int PageSize { get; set; }
-
-        public int PageIndex { get; set; }
-
-        public int PageCount { get; set; }
-
-        public int RowCount { get; set; }
-
         /// <summary>
         /// Gets store procedure parameters.
         /// </summary>

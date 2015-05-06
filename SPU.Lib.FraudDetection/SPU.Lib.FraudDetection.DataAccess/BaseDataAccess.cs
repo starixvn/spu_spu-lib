@@ -133,15 +133,15 @@ namespace SPU.Lib.FraudDetection.DataAccess
             
             //hash = (new ResultCriteria()).AddSpParams(hash);
 
-            var res = new DataCollection();
+            var results = new DataCollection();
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(hash);
-                res.Data = db.ExecuteDataSet();
-                res.TotalItem = (int)db.GetOuputParams()["rowcount"];
+                results.Data = db.ExecuteDataSet();
+                results.TotalItem = (int)db.GetOuputParams()["rowcount"];
 
-                return res;
+                return results;
             }
         }
     }
