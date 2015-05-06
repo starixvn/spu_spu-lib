@@ -27,12 +27,12 @@ namespace SPU.Lib.FraudDetection.DataAccess
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult UpdateGroup(ICriteria criteria)
+        public DataCollection GetGroups(ICriteria criteria)
         {
             return ReturnDataCollection(criteria);
         }
 
-        public ICommandResult DeleteGroup(ICriteria criteria)
+        public ICommandResult UpdateGroup(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
