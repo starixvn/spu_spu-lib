@@ -8,8 +8,8 @@
 // </history>
 
 namespace SPU.Lib.FraudDetection.Criteria.Workflow
-{
-    using SPU.Lib.FraudDetection.Criteria.Common;
+{    
+    using Fanex.NAP.Framework.Data;
    
     /// <summary>
     /// WorkflowSelectAllCriteria Class.

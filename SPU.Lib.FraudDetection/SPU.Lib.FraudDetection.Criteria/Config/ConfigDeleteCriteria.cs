@@ -8,7 +8,7 @@
 // </history>
 namespace SPU.Lib.FraudDetection.Criteria
 {
-    using SPU.Lib.FraudDetection.Criteria.Common;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// ConfigDeleteCriteria Class.

@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using SPU.Lib.FraudDetection.Criteria.Common;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// GroupDeleteCriteria Class.
