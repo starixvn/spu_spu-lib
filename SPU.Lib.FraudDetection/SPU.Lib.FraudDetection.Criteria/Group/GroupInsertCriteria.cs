@@ -26,12 +26,7 @@ namespace SPU.Lib.FraudDetection.Criteria
 
         public string GroupDesc { get; set; }
 
-        public bool IsActive { get; set; }
-
-        // Ouput parameters
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
+        public bool IsActive { get; set; }        
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

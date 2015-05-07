@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.FraudDetection.DataAccess", "SPU.Lib.FraudDetection.DataAccess\SPU.Lib.FraudDetection.DataAccess.csproj", "{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.Core", "Fanex.Nap.SPU.Core\SPU.Lib.Core.csproj", "{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPU.Lib.Core", "SPU.Lib.Core\SPU.Lib.Core.csproj", "{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

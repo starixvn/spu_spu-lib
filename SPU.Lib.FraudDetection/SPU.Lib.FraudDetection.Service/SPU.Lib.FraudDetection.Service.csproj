@@ -83,7 +83,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fanex.Nap.SPU.Core\SPU.Lib.Core.csproj">
+    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
       <Name>SPU.Lib.Core</Name>
     </ProjectReference>
