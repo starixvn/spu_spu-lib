@@ -11,6 +11,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
 
     /// <summary>
     /// Task Data Access.
@@ -34,6 +35,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         public ICommandResult DeleteTask(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
+        }
+
+        public DataCollection GetTasksByWorkflowId(ICriteria criteria)
+        {
+            return ReturnDataCollection(criteria);
         }
     }
 }

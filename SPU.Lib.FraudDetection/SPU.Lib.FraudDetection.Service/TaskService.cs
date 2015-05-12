@@ -15,6 +15,7 @@ namespace SPU.Lib.FraudDetection.Service
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.Core;
 
     /// <summary>
     /// Task Service.
@@ -38,9 +39,9 @@ namespace SPU.Lib.FraudDetection.Service
             return _taskDataAccess.DeleteTask(criteria);
         }
 
-        public IEnumerable<TaskInfo> GetTasksByWorkflow(ICriteria criteria)
+        public DataCollection GetTasksByWorkflowId(ICriteria criteria)
         {
-            return GetData<TaskInfo>(criteria);
+            return _taskDataAccess.GetTasksByWorkflowId(criteria);
         }
 
         public ICommandResult UpdateTask(ICriteria criteria)

@@ -78,7 +78,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_tasksInfo.Count == 0)
             {
-                IEnumerable<TaskInfo> tasks = _workflowService.GetTasks(new TaskSelectAllByWorkflowIdCriteria());
+                var criteria = new TaskSelectAllByWorkflowIdCriteria(){ WorkFlowId = _workflowInfo.WorkflowId};
+                IEnumerable<TaskInfo> tasks = _workflowService.GetTasks(criteria);
                 _tasksInfo = tasks.ToList();
             }
 
