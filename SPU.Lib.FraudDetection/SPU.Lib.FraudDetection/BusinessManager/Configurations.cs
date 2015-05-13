@@ -41,9 +41,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                                             new Config
                                             {
                                                 ConfigName = config.ConfigName,
-                                                ConfigValue = config.ConfigValue,
-                                                ConfigOperator = config.ConfigOperator,
-                                                IsUpdate = false
+                                                ConfigCategory = config.ConfigCategory,
+                                                ConfigControlType = config.ConfigControlType
                                             });
                 }
             }
@@ -57,8 +56,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
             ConfigInsertCriteria criteria = new ConfigInsertCriteria();
             criteria.ConfigName = config.ConfigName;
-            criteria.ConfigValue = config.ConfigValue;
-            criteria.ConfigOperator = config.ConfigOperator;
+            criteria.ConfigCategory = config.ConfigCategory;
+            criteria.ConfigControlType = config.ConfigControlType;
            
             return _configService.InsertConfig(criteria);
         }        
@@ -68,15 +67,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <returns>True if success.</returns>
         public bool UpdateConfigs()
-        {            
-            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigValue = {0}, ConfigOperator = {1} Where ConfigName = {2} ";
+        {
+            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigCategory = {0}, ConfigControlType = {1} Where ConfigName = {2} ";
             string sqlStr = string.Empty;
 
             foreach (var config in _configs)
             {
-                if (config.Value.IsUpdate)
+                if (true) // config.Value.IsUpdate)
                 {
-                    sqlStr += string.Format(tmpUpdate, config.Value.ConfigValue, config.Value.ConfigOperator, config.Value.ConfigName);                    
+                    sqlStr += string.Format(tmpUpdate, config.Value.ConfigCategory, config.Value.ConfigControlType, config.Value.ConfigName);                    
                 }
             }
 

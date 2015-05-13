@@ -19,5 +19,7 @@ namespace SPU.Lib.FraudDetection.DTO
         public int ActionId { get; set; }
 
         public string ActionName { get; set; }
+
+        public bool IsBackgroundProcess { get; set; }
     }
 }

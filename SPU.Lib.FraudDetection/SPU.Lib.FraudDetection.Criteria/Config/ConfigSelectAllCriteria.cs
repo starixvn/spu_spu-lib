@@ -4,14 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
+
 namespace SPU.Lib.FraudDetection.Criteria
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -21,7 +18,16 @@ namespace SPU.Lib.FraudDetection.Criteria
     {        
         public override string GetSettingKey()
         {
-            return string.Empty;
+            return "SPU_ConfigurationSelectAll";
         }
+
+        /// <summary>
+        /// Check data's constrains.
+        /// </summary>
+        /// <returns>True: valid; False: invalid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        } 
     }
 }

@@ -50,8 +50,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
             foreach (var preCond in TaskInfo.Preconditions)
             {
-                strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
-                sqlStr += string.Join(" AND ", strCond);
+                // TO DO
+                //strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
+                //sqlStr += string.Join(" AND ", strCond);
             }
 
             return sqlStr;
@@ -68,8 +69,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
             foreach (var rule in TaskInfo.Rules)
             {
-                strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
-                sqlStr += string.Join(" AND ", strRule);
+                // TO DO
+                //strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
+                //sqlStr += string.Join(" AND ", strRule);
             }
 
             return sqlStr;

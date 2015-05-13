@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.Criteria
@@ -22,9 +22,9 @@ namespace SPU.Lib.FraudDetection.Criteria
     {
         public string ConfigName { get; set; }
 
-        public string ConfigValue { get; set; }
+        public string ConfigCategory { get; set; }
 
-        public string ConfigOperator { get; set; }
+        public string ConfigControlType { get; set; }
 
         public override string GetSettingKey()
         {

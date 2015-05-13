@@ -16,10 +16,8 @@ namespace SPU.Lib.FraudDetection.DTO
     {        
         public string ConfigName { get; set; }
 
-        public string ConfigValue { get; set; }
+        public string ConfigCategory { get; set; }
 
-        public string ConfigOperator { get; set; }
-
-        public bool IsUpdate { get; set; }
+        public string ConfigControlType { get; set; }
     }
 }
