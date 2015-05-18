@@ -12,8 +12,8 @@ namespace SPU.Lib.FraudDetection.Service
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Bet-type Service.
@@ -37,9 +37,14 @@ namespace SPU.Lib.FraudDetection.Service
             return _bettypeDataAccess.DeleteBettype(criteria);
         }
 
-        public IEnumerable<Bettype> GetAllBettypes(ICriteria criteria)
+        public IEnumerable<Bettype> GetAllSBBettypes(ICriteria criteria)
         {
             return GetData<Bettype>(criteria);
+        }
+
+        public IEnumerable<Sport> GetAllSBSports(ICriteria criteria)
+        {
+            return GetData<Sport>(criteria);
         }
     }
 }

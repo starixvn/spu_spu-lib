@@ -11,8 +11,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Criteria;
 
     /// <summary>
     /// Supported Bet types Class.
@@ -27,7 +28,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_supportedBettypes.Count == 0)
             {
-                IEnumerable<Bettype> bettypes = _bettypeService.GetAllBettypes(new BettypeSelectAllCriteria());
+                IEnumerable<Bettype> bettypes = _bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
                 _supportedBettypes = bettypes.ToList();
             }
 

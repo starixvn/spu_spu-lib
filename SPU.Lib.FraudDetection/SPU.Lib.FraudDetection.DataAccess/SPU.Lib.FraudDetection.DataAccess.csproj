@@ -91,6 +91,10 @@
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
       <Name>SPU.Lib.FraudDetection.Criteria</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj">
+      <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
+      <Name>SPU.Lib.FraudDetection.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

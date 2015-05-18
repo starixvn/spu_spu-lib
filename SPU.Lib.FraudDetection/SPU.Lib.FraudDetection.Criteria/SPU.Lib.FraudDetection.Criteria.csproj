@@ -67,10 +67,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bettype.cs" />
     <Compile Include="Bettype\BettypeInsertCriteria.cs" />
     <Compile Include="Bettype\BettypeDeleteCriteria.cs" />
     <Compile Include="Bettype\BettypeSelectAllCriteria.cs" />
+    <Compile Include="Bettype\SportSelectAllCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
     <Compile Include="Config\ConfigInsertCriteria.cs" />
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
