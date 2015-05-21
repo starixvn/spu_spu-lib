@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
+//   <change who="Thai.Tran" date="2015.05.21">Updated fields for mapping a retrieved task.</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.DTO
@@ -13,7 +14,7 @@ namespace SPU.Lib.FraudDetection.DTO
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Bet type Class.
+    /// TaskInfo class.
     /// </summary>
     public class TaskInfo
     {
@@ -22,6 +23,8 @@ namespace SPU.Lib.FraudDetection.DTO
         public string TaskName { get; set; }
 
         public string TaskDesc { get; set; }
+
+        public string TaskQuery { get; set; }
 
         public string TaskPreconditions { get; set; }
 
@@ -33,11 +36,13 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public int WorkflowId { get; set; }
 
-        public bool IsRunMannually { get; set; }
+        public bool IsRunMannually { get; set; } //get from [IsBackgroundProcess] in Action table
 
         public string NextActionIdList { get; set; }
 
-        public int Timer { get; set; }
+        public int Interval { get; set; }
+
+        public int IntervalType { get; set; } // day, hour, min, second
 
         public bool IsActive { get; set; }
     }

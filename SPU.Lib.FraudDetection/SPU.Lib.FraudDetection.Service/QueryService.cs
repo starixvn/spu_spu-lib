@@ -34,6 +34,11 @@ namespace SPU.Lib.FraudDetection.Service
             return _repository.Fetch<T>(criteria);
         }
 
+        public virtual IEnumerable<T> GetData<T>(dynamic paramaters)
+        {
+            return _repository.Query<T>(paramaters);
+        }
+
         public IEnumerable<T> GetData<T>(ICriteria criteria, ref int totalPages)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))

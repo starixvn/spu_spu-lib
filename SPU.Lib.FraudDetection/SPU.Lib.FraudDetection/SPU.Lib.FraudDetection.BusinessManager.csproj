@@ -74,6 +74,7 @@
     <Compile Include="BusinessManager\NextAction\ActionAssignGroup.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSendEmail.cs" />
     <Compile Include="BusinessManager\Configurations.cs" />
+    <Compile Include="FraudAutoDetection.cs" />
     <Compile Include="FraudDetection.cs" />
     <Compile Include="BusinessManager\SupportedBettypes.cs" />
     <Compile Include="BusinessManager\Task.cs" />
@@ -81,6 +82,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Name>SPU.Lib.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
       <Name>SPU.Lib.FraudDetection.Criteria</Name>

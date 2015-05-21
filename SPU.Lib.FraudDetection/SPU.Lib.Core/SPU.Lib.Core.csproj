@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Attribute\CompressAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Extentions.cs" />
     <Compile Include="Utilities\DataCollection.cs" />
     <Compile Include="Utilities\FanexGridHelper.cs" />
   </ItemGroup>

@@ -46,7 +46,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     thread.Join();
                 }
 
-                Thread.Sleep(task.TaskInfo.Timer);
+                Thread.Sleep(task.TaskInfo.Interval);
 
                 _threads.Add(thread);                
             }

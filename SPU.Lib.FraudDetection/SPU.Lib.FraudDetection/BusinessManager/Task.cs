@@ -16,6 +16,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.Core;
+    using System.Threading;
 
     /// <summary>
     /// Task Class.
@@ -82,7 +84,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         #region RunTask
 
         /// <summary>
-        /// Execute a task.
+        /// Execute a task for a suspicious match.
         /// </summary>
         /// <param name="match">The match for scanning.</param>        
         public void Run(Match match)
@@ -93,7 +95,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     string rules = RetrieveRules(match);
 
-                    List<SuspiciousInfo> suspiciousList = CollectSuspiciousInfo(rules);
+                    List<SuspiciousInfo> suspiciousList = CollectSuspiciousTickets(rules);
 
                     StoreSuspiciousInfo(suspiciousList);
                     TakeNextAction(suspiciousList);
@@ -117,14 +119,61 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
         }
+       
+        #endregion
 
-        public List<SuspiciousInfo> CollectSuspiciousInfo(string rules)
+        #region Scan
+
+        static Barrier barrier = new Barrier(2, (b) => { });
+        
+
+        /// <summary>
+        /// Scan suspicious tickets.
+        /// </summary>        
+        public void Scan()
         {
-            TaskService taskService = new TaskService();
-            ////taskService.ExecuteReaderQueryInline(sqlStr);
-            IEnumerable<SuspiciousInfo> list = taskService.GetData<SuspiciousInfo>(null); ////todo
+            try
+            {                
+                if (TaskInfo.IsActive)
+                {
+                    IEnumerable<Match> suspiciousMatches = CollectSuspiciousMatches(TaskInfo.TaskPreconditions); //todo
 
-            return list.ToList();
+                    //split matches into groups of 5 matches then collect synchronouslly suspicious tickets of each group
+                    var suspiciousMatchGroups = suspiciousMatches.Chunk<Match>(5);
+                    
+                    string query = TaskInfo.TaskQuery.Replace("@Matches", "");//todo
+                    List<SuspiciousInfo> suspiciousTickets = CollectSuspiciousTickets(query); //todo
+                    StoreSuspiciousInfo(suspiciousTickets);
+                    TakeNextAction(suspiciousTickets);
+        
+                    //barrier.SignalAndWait(
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception Task Scanning -- " + ex.Message);
+            }
+        }
+
+        public IEnumerable<Match> CollectSuspiciousMatches(string query)
+        {
+            using (TaskService taskService = new TaskService())
+            {
+                return taskService.GetSuspiciousMatches(query);
+            }
+        }
+
+        /// <summary>
+        /// Collect suspicious tickets.
+        /// </summary>
+        /// <param name="query">The query string.</param>
+        /// <returns>List of suspicious tickets.</returns>
+        public List<SuspiciousInfo> CollectSuspiciousTickets(string query)
+        {
+            using (TaskService taskService = new TaskService())
+            {
+                return taskService.GetSuspiciousTickets(query).ToList();
+            }
         }
 
         /// <summary>
@@ -159,6 +208,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
         }
 
+        /// <summary>
+        /// Do next action for the task.
+        /// </summary>
+        /// <param name="listSuspiciousInfo">List of suspicious tickets.</param>
+        /// <returns>True if success.</returns>
         public bool TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
         {
             foreach (var actionId in TaskInfo.NextActionIdList.Split(','))

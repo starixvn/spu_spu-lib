@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
+//   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.Service
@@ -20,7 +21,7 @@ namespace SPU.Lib.FraudDetection.Service
     /// <summary>
     /// Task Service.
     /// </summary>
-    public class TaskService : QueryService
+    public class TaskService : QueryService, System.IDisposable
     {
         private TaskDataAccess _taskDataAccess;
 
@@ -49,6 +50,21 @@ namespace SPU.Lib.FraudDetection.Service
             return _taskDataAccess.UpdateTask(criteria);
         }
 
+        public IEnumerable<TaskInfo> LoadAllTasks(ICriteria criteria)
+        {
+            return GetData<TaskInfo>(criteria);
+        }
+
+        public IEnumerable<Match> GetSuspiciousMatches(string query)
+        {
+            return GetData<Match>(query);
+        }
+
+        public IEnumerable<SuspiciousInfo> GetSuspiciousTickets(string query)
+        {
+            return GetData<SuspiciousInfo>(query);            
+        }
+
         /// <summary>
         /// Collect Suspicious Info.
         /// </summary>
@@ -73,6 +89,11 @@ namespace SPU.Lib.FraudDetection.Service
             }
 
             return suspiciousInfoList;
+        }
+
+        void System.IDisposable.Dispose()
+        {
+
         }
     }
 }
