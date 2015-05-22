@@ -13,6 +13,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
+    using System;
 
     /// <summary>
     /// FraudAutoDetection Class.
@@ -39,8 +40,32 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             foreach (Task task in _allTasks)
             {
-                task.Scan();
+                if (task.TaskInfo.IsBackgroundProcess)
+                {
+                    AssignTaskToThreadPool(task);                    
+                }
+                else
+                {
+                    task.Scan();
+                }
             }
+        }
+
+        public void AssignTaskToThreadPool(Task task)
+        {
+            try
+            {
+                ThreadPool.AddTask(task, () => { task.Scan(); });
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Stop()
+        {
+            ThreadPool.RemoveAllTasks();
         }
 
         public List<Task> Tasks

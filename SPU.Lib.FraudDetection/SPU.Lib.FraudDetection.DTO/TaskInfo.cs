@@ -36,13 +36,13 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public int WorkflowId { get; set; }
 
-        public bool IsRunMannually { get; set; } //get from [IsBackgroundProcess] in Action table
+        public bool IsBackgroundProcess { get; set; } //get from [IsBackgroundProcess] in Action table
 
         public string NextActionIdList { get; set; }
 
         public int Interval { get; set; }
 
-        public int IntervalType { get; set; } // day, hour, min, second
+        public string IntervalType { get; set; } // day, hour, min, second
 
         public bool IsActive { get; set; }
     }

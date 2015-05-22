@@ -20,6 +20,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private static List<Thread> _threads = new List<Thread>();        
         private static string _threadNameTemplate = "Task {0}";
+
+        private static Boolean shouldrun = true;
         
         /// <summary>
         /// Add and start a task in the thread pool.
@@ -32,7 +34,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {                                
                 ThreadStart action = new ThreadStart(() =>
                 {
-                    threadAction();
+                    while (shouldrun)
+                    {
+                        threadAction();
+                    }
                 });
 
                 Thread thread = new Thread(action);
@@ -40,13 +45,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                 thread.Start();
 
-                if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
-                {
-                    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
-                    thread.Join();
-                }
-
-                Thread.Sleep(task.TaskInfo.Interval);
+                //if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
+                //{
+                //    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
+                //    thread.Join();
+                //}
 
                 _threads.Add(thread);                
             }
@@ -72,6 +75,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 throw new Exception("Exception Remove a task out the thread pool -- " + ex.Message);
             }
+        }
+
+        internal static void RemoveAllTasks()
+        {
+            shouldrun = false;
+            foreach (Thread thread in _threads)
+            {
+                thread.Abort();
+            }
+            _threads.Clear();            
         }
     }
 }

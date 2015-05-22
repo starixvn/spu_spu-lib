@@ -18,6 +18,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.Service;
     using SPU.Lib.Core;
     using System.Threading;
+    using System.Collections;
 
     /// <summary>
     /// Task Class.
@@ -136,22 +137,45 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {                
                 if (TaskInfo.IsActive)
                 {
-                    IEnumerable<Match> suspiciousMatches = CollectSuspiciousMatches(TaskInfo.TaskPreconditions); //todo
+                    //IEnumerable<Match> suspiciousMatches = CollectSuspiciousMatches(TaskInfo.TaskPreconditions); //todo
 
-                    //split matches into groups of 5 matches then collect synchronouslly suspicious tickets of each group
-                    var suspiciousMatchGroups = suspiciousMatches.Chunk<Match>(5);
+                    ////split matches into groups of 5 matches then collect synchronouslly suspicious tickets of each group
+                    //var suspiciousMatchGroups = suspiciousMatches.Chunk<Match>(5);
                     
-                    string query = TaskInfo.TaskQuery.Replace("@Matches", "");//todo
-                    List<SuspiciousInfo> suspiciousTickets = CollectSuspiciousTickets(query); //todo
-                    StoreSuspiciousInfo(suspiciousTickets);
-                    TakeNextAction(suspiciousTickets);
+                    //string query = TaskInfo.TaskQuery.Replace("@Matches", "");//todo
+                    //List<SuspiciousInfo> suspiciousTickets = CollectSuspiciousTickets(query); //todo
+                    //StoreSuspiciousInfo(suspiciousTickets);
+                    //TakeNextAction(suspiciousTickets);
         
-                    //barrier.SignalAndWait(
+                    ////barrier.SignalAndWait(
+
+                    //var t1 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));
+                    
+                    //t1.ContinueWith(task1 => {
+                    //        var t2 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));    
+                    //        t2.Start(); 
+                    //    });
+                    //t1.Start();
+
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\spu_" + TaskInfo.TaskName + ".txt", true))
+                    {
+                        file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString() );
+                    }                    
                 }
+
+                Thread.Sleep(TaskInfo.Interval);
             }
             catch (Exception ex)
             {
                 throw new Exception("Exception Task Scanning -- " + ex.Message);
+            }
+        }
+
+        private IEnumerable<dynamic> ExecutePreCondition(string query)
+        {
+            using (TaskService taskService = new TaskService())
+            {
+                return taskService.GetData<dynamic>(query);
             }
         }
 

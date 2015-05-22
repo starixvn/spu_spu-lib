@@ -53,14 +53,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 if (taskInfo.IsActive)
                 {
                     var task = new Task(taskInfo);
-                    if (task.TaskInfo.IsRunMannually)
-                    {
-                        task.Run(match);
-                    }
-                    else
+                    if (task.TaskInfo.IsBackgroundProcess)
                     {
                         AssignTaskToThreadPool(task, match);
                     }
+                    else
+                    {
+                        task.Run(match);
+                    }                    
                 }
             }
         }
