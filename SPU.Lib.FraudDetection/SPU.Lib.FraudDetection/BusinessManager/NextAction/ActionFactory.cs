@@ -7,6 +7,8 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
+using System.Collections.Generic;
+using SPU.Lib.FraudDetection.DTO;
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     /// <summary>
@@ -19,14 +21,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <param name="actionId">The actionId.</param>
         /// <returns>Action object.</returns>
-        public static BaseAction GetAction(short actionId)
+        public static BaseAction GetAction(short actionId, List<SuspiciousInfo> suspiciousList)
         {
             switch (actionId)
             {
                 case 1:
                     return new ActionSendEmail();
                 case 2:
-                    return new ActionAssignGroup();
+                    return new ActionAssignGroup(suspiciousList);
                 default:
                     return null;
             }

@@ -29,25 +29,39 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         public FraudAutoDetection()
         {
-            var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
-            foreach (TaskInfo taskinfo in taskInfoList)
+            try
             {
-                _allTasks.Add(new Task(taskinfo));
+                var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+                foreach (TaskInfo taskinfo in taskInfoList)
+                {
+                    _allTasks.Add(new Task(taskinfo));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
         public void ScanSuspiciousTickets()
         {
-            foreach (Task task in _allTasks)
+            try
             {
-                if (task.TaskInfo.IsBackgroundProcess)
+                foreach (Task task in _allTasks)
                 {
-                    AssignTaskToThreadPool(task);                    
+                    if (task.TaskInfo.IsBackgroundProcess)
+                    {
+                        AssignTaskToThreadPool(task);
+                    }
+                    else
+                    {
+                        task.Scan();
+                    }
                 }
-                else
-                {
-                    task.Scan();
-                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -57,7 +71,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 ThreadPool.AddTask(task, () => { task.Scan(); });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -65,7 +79,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public void Stop()
         {
-            ThreadPool.RemoveAllTasks();
+            try
+            {
+                ThreadPool.StopAllTasks();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Task> Tasks

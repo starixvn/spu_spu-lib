@@ -94,11 +94,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (CheckPreconditions(match))
                 {
+                    TaskService taskService = new TaskService();
+
                     string rules = RetrieveRules(match);
 
-                    List<SuspiciousInfo> suspiciousList = CollectSuspiciousTickets(rules);
-
-                    StoreSuspiciousInfo(suspiciousList);
+                    List<SuspiciousInfo> suspiciousList = taskService.GetData<SuspiciousInfo>(rules).ToList();
+                    
                     TakeNextAction(suspiciousList);
                 }
             }
@@ -124,10 +125,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         #endregion
 
         #region Scan
-
-        static Barrier barrier = new Barrier(2, (b) => { });
         
-
         /// <summary>
         /// Scan suspicious tickets.
         /// </summary>        
@@ -136,34 +134,29 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             try
             {                
                 if (TaskInfo.IsActive)
-                {
-                    //IEnumerable<Match> suspiciousMatches = CollectSuspiciousMatches(TaskInfo.TaskPreconditions); //todo
+                {                    
+                    IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
 
-                    ////split matches into groups of 5 matches then collect synchronouslly suspicious tickets of each group
-                    //var suspiciousMatchGroups = suspiciousMatches.Chunk<Match>(5);
-                    
-                    //string query = TaskInfo.TaskQuery.Replace("@Matches", "");//todo
-                    //List<SuspiciousInfo> suspiciousTickets = CollectSuspiciousTickets(query); //todo
-                    //StoreSuspiciousInfo(suspiciousTickets);
-                    //TakeNextAction(suspiciousTickets);
-        
-                    ////barrier.SignalAndWait(
+                    List<SuspiciousInfo> suspiciousTickets = ExecuteRule(preConGroups);
+
+                    TakeNextAction(suspiciousTickets);                 
 
                     //var t1 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));
-                    
-                    //t1.ContinueWith(task1 => {
-                    //        var t2 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));    
-                    //        t2.Start(); 
-                    //    });
+
+                    //t1.ContinueWith(task1 =>
+                    //{
+                    //    var t2 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));
+                    //    t2.Start();
+                    //});
                     //t1.Start();
 
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\spu_" + TaskInfo.TaskName + ".txt", true))
-                    {
-                        file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString() );
-                    }                    
+                    //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\spu_" + TaskInfo.TaskName + ".txt", true))
+                    //{
+                    //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString() );
+                    //}                    
                 }
 
-                Thread.Sleep(TaskInfo.Interval);
+                Thread.Sleep(TaskInfo.Interval);//todo convert into milisecond.
             }
             catch (Exception ex)
             {
@@ -171,81 +164,69 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        private IEnumerable<dynamic> ExecutePreCondition(string query)
-        {
-            using (TaskService taskService = new TaskService())
+        /// <summary>
+        /// Execute the precondition of task.
+        /// </summary>        
+        /// <returns>List of ids.</returns>
+        private IEnumerable<IEnumerable<string>> ExecutePrecondition()
+        {                         
+            IEnumerable<IEnumerable<string>> preConGroups = null;
+            if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
             {
-                return taskService.GetData<dynamic>(query);
+                using (TaskService taskService = new TaskService())
+                {
+                    IEnumerable<string> preConResult = taskService.GetData<string>(TaskInfo.TaskPreconditions);
+                    preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
+                }
             }
-        }
-
-        public IEnumerable<Match> CollectSuspiciousMatches(string query)
-        {
-            using (TaskService taskService = new TaskService())
-            {
-                return taskService.GetSuspiciousMatches(query);
-            }
+            return preConGroups;
         }
 
         /// <summary>
-        /// Collect suspicious tickets.
+        ///  Execute the rule of task.
         /// </summary>
-        /// <param name="query">The query string.</param>
-        /// <returns>List of suspicious tickets.</returns>
-        public List<SuspiciousInfo> CollectSuspiciousTickets(string query)
-        {
+        /// <param name="preConGroups">The retrieved list of ids from precondition.</param>
+        /// <returns>List of suspicious info.</returns>
+        private List<SuspiciousInfo> ExecuteRule(IEnumerable<IEnumerable<string>> preConGroups)
+        {            
+            string ruleQuery = string.Empty;
+            List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
+
             using (TaskService taskService = new TaskService())
             {
-                return taskService.GetSuspiciousTickets(query).ToList();
-            }
-        }
-
-        /// <summary>
-        /// Save suspicious info list.
-        /// </summary>
-        /// <param name="listSuspiciousInfo">The suspicious info list.</param>
-        /// <returns>True if success.</returns>
-        public bool StoreSuspiciousInfo(List<SuspiciousInfo> listSuspiciousInfo)
-        {
-            SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-
-            SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
-
-            string custIdList = string.Empty;
-            string matchIdList = string.Empty;
-            string workflowIdList = string.Empty;
-            string groupTransIdList = string.Empty;
-
-            foreach (var info in listSuspiciousInfo)
-            {
-                custIdList = string.Join(";", custIdList, info.CustId);
-                matchIdList = string.Join(";", matchIdList, info.MatchId);
-                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
-                groupTransIdList = string.Join(";", groupTransIdList, info.ListTransId);
+                if (preConGroups != null)
+                {
+                    foreach (IEnumerable<string> group in preConGroups)
+                    {
+                        ruleQuery = TaskInfo.TaskRules.Replace("@Params", string.Join(",", group));
+                        suspiciousTickets.AddRange(taskService.GetData<SuspiciousInfo>(ruleQuery));
+                    }
+                }
+                else
+                {
+                    ruleQuery = TaskInfo.TaskRules;
+                    suspiciousTickets.AddRange(taskService.GetData<SuspiciousInfo>(ruleQuery));
+                }
             }
 
-            criteria.CustIdList = custIdList;
-            criteria.MatchIdList = matchIdList;
-            criteria.WorkflowIdList = workflowIdList;
-            criteria.GroupTransIdList = groupTransIdList;
-
-            return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
+            return suspiciousTickets;
         }
-
+      
         /// <summary>
         /// Do next action for the task.
         /// </summary>
         /// <param name="listSuspiciousInfo">List of suspicious tickets.</param>
         /// <returns>True if success.</returns>
-        public bool TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
+        private void TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
         {
-            foreach (var actionId in TaskInfo.NextActionIdList.Split(','))
+            if (listSuspiciousInfo.Count > 0)
             {
-                BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId));
-                nextAction.TakeAction();
-            }
-
-            return true;
+                foreach (var actionId in TaskInfo.NextActionIdList.Split(','))
+                {
+                    BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId), listSuspiciousInfo);
+                    nextAction.TakeAction();
+                }
+            }            
         }
 
         #endregion

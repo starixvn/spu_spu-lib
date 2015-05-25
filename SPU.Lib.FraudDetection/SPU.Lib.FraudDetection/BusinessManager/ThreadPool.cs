@@ -31,27 +31,32 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         internal static void AddTask(Task task, Action threadAction)
         {
             try
-            {                                
-                ThreadStart action = new ThreadStart(() =>
+            {
+                string threadName = string.Format(_threadNameTemplate, task.TaskInfo.TaskName).ToLower();
+
+                if (_threads.Find(x => x.Name.ToLower().Equals(threadName)) ==null)
                 {
-                    while (shouldrun)
+                    ThreadStart action = new ThreadStart(() =>
                     {
-                        threadAction();
-                    }
-                });
+                        while (shouldrun)
+                        {
+                            threadAction();
+                        }
+                    });
 
-                Thread thread = new Thread(action);
-                thread.Name = string.Format(_threadNameTemplate, task.TaskInfo.TaskName);
+                    Thread thread = new Thread(action);
+                    thread.Name = threadName;                    
+                    thread.Start();
 
-                thread.Start();
+                    //Using Join if we want to execute the thread immediately (blocking calling other threads)
+                    //if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
+                    //{
+                    //    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
+                    //    thread.Join();
+                    //}
 
-                //if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
-                //{
-                //    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
-                //    thread.Join();
-                //}
-
-                _threads.Add(thread);                
+                    _threads.Add(thread);                    
+                }
             }
             catch (Exception ex)
             {
@@ -64,12 +69,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <param name="taskName">The task name.</param>
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
-        internal static bool DeleteTask(string taskName)
+        internal static void RemoveTask(string taskName)
         {
             try
             {
-                Thread removedThread = _threads.Find(x => x.Name == string.Format(_threadNameTemplate, taskName));
-                return _threads.Remove(removedThread);
+                string threadName = string.Format(_threadNameTemplate, taskName).ToLower();
+                Thread removedThread = _threads.Find(x => x.Name.ToLower().Equals(threadName));
+                if (removedThread != null)
+                {
+                    _threads.Remove(removedThread);
+                }
             }
             catch (Exception ex)
             {
@@ -77,14 +86,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        internal static void RemoveAllTasks()
+        internal static void StopAllTasks()
         {
-            shouldrun = false;
-            foreach (Thread thread in _threads)
+            try
             {
-                thread.Abort();
+                shouldrun = false;
+                foreach (Thread thread in _threads)
+                {
+                    thread.Abort();
+                }
+                _threads.Clear();
             }
-            _threads.Clear();            
-        }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception Stop and remove all tasks out the thread pool -- " + ex.Message);
+            }
+        }     
     }
 }
