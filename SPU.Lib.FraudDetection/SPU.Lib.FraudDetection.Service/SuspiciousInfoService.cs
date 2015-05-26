@@ -23,12 +23,7 @@ namespace SPU.Lib.FraudDetection.Service
         public SuspiciousInfoService()
         {
             _suspiciousDataAccess = new SuspiciousInfoDataAccess();
-        }
-
-        public ICommandResult InsertSuspiciousCustomer(ICriteria criteria)
-        {
-            return _suspiciousDataAccess.InsertSuspiciousCustomer(criteria);
-        }
+        }        
 
         public ICommandResult InsertSuspiciousInfo(ICriteria criteria)
         {

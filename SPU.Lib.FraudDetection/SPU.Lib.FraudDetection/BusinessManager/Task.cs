@@ -139,6 +139,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                     List<SuspiciousInfo> suspiciousTickets = ExecuteRule(preConGroups);
 
+                    if (TaskInfo.ActionId == 1)
+                    {
+                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousTickets);
+                        saveAction.TakeAction();
+                    }
+
                     TakeNextAction(suspiciousTickets);                 
 
                     //var t1 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));

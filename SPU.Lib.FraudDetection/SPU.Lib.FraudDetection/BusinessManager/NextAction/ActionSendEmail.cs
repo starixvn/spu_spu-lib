@@ -20,7 +20,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public override bool TakeAction()
         {
-            throw new NotImplementedException(); ////todo : ask third party Email system
+            return true;
+            //throw new NotImplementedException(); ////todo : ask third party Email system
         }
     }
 }

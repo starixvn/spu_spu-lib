@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessManager\NextAction\ActionSaveSuspiciousInfo.cs" />
     <Compile Include="BusinessManager\ThreadPool.cs" />
     <Compile Include="BusinessManager\NextAction\ActionFactory.cs" />
     <Compile Include="BusinessManager\ScannedMatches.cs" />

@@ -21,11 +21,6 @@ namespace SPU.Lib.FraudDetection.DataAccess
         {
         }
 
-        public ICommandResult InsertSuspiciousCustomer(ICriteria criteria)
-        {
-            return ExecuteNonQuery(criteria);
-        }
-
         public ICommandResult InsertSuspiciousInfo(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

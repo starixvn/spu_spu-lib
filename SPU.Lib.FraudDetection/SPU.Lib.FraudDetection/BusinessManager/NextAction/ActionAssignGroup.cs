@@ -14,6 +14,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Criteria.Match;
 
     /// <summary>
     ///  Assign a suspicious customer to a customer group.
@@ -21,6 +22,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     public class ActionAssignGroup : BaseAction
     {
         private List<SuspiciousInfo> _assignGroupList;
+        
         public ActionAssignGroup(List<SuspiciousInfo> assignGroupList)
         {
             _assignGroupList = assignGroupList;
@@ -34,10 +36,26 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public override bool TakeAction()
         {
-            //CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria(); ////todo
+            return true;// AssignCustomerGroup() && UpdateScannedMatch() && InsertSuspiciousInfo();
+        }
 
+        private bool AssignCustomerGroup()
+        {
+            GroupService groupService = new GroupService();
+            CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
+            return groupService.AssignCustToGroup(criteria).IsSuccessful;
+        }
+
+        private bool UpdateScannedMatch()
+        {
+            ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
+            MatchInsertCriteria criteria = new MatchInsertCriteria();
+            return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
+        }
+
+        private bool InsertSuspiciousInfo()
+        {            
             SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-
             SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
 
             string custIdList = string.Empty;
@@ -59,8 +77,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             criteria.GroupTransIdList = groupTransIdList;
 
             return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
-
-            throw new NotImplementedException();
         }
     }
 }

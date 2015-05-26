@@ -20,5 +20,26 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
     /// </summary>
     public class MatchInsertCriteria : CriteriaBase
     {
+        public int ScannedMatchId { get; set; }
+
+        public DateTime EventDate { get; set; }
+
+        /// <summary>
+        /// Get the reference SP's Name which is specified in Config file.
+        /// </summary>
+        /// <returns>The key of store procedure.</returns>
+        public override string GetSettingKey()
+        {
+            return "SPU_MatchInsert";
+        }
+
+        /// <summary>
+        /// Check data's constrains.
+        /// </summary>
+        /// <returns>True: valid; False: invalid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        }        
     }
 }
