@@ -67,7 +67,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
      
         public void AssignTaskToThreadPool(Task task, Match match)       
         {
-            ThreadPool.AddTask(task, () => { task.Run(match); });
+            ThreadPool.AddTask(task);//, () => { task.Run(match); });
         }
      
         #endregion

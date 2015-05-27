@@ -12,6 +12,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using System.Timers;
 
     /// <summary>
     /// Workflow Class.
@@ -20,42 +21,38 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private static List<Thread> _threads = new List<Thread>();        
         private static string _threadNameTemplate = "Task {0}";
-
-        private static Boolean shouldrun = true;
         
         /// <summary>
         /// Add and start a task in the thread pool.
         /// </summary>
-        /// <param name="task">The task to execute.</param>
-        /// <param name="threadAction">The action of the task.</param>        
-        internal static void AddTask(Task task, Action threadAction)
+        /// <param name="task">The task to execute.</param>        
+        internal static void AddTask(Task task)
         {
             try
             {
                 string threadName = string.Format(_threadNameTemplate, task.TaskInfo.TaskName).ToLower();
 
-                if (_threads.Find(x => x.Name.ToLower().Equals(threadName)) ==null)
+                if (_threads.Find(x => x.Name.ToLower().Equals(threadName)) == null)
                 {
                     ThreadStart action = new ThreadStart(() =>
                     {
-                        while (shouldrun)
-                        {
-                            threadAction();
-                        }
+                        System.Timers.Timer aTimer = new System.Timers.Timer(task.TaskInfo.Timer);
+                        aTimer.Elapsed += new ElapsedEventHandler(task.Scan);                        
+                        aTimer.Enabled = true;                        
                     });
 
                     Thread thread = new Thread(action);
-                    thread.Name = threadName;                    
+                    thread.Name = threadName;
                     thread.Start();
 
-                    //Using Join if we want to execute the thread immediately (blocking calling other threads)
+                    ////Using Join if we want to execute the thread immediately (blocking calling other threads)
                     //if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
                     //{
                     //    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
                     //    thread.Join();
                     //}
 
-                    _threads.Add(thread);                    
+                    _threads.Add(thread);
                 }
             }
             catch (Exception ex)
@@ -89,8 +86,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         internal static void StopAllTasks()
         {
             try
-            {
-                shouldrun = false;
+            {                
                 foreach (Thread thread in _threads)
                 {
                     thread.Abort();

@@ -21,17 +21,17 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class ActionSaveSuspiciousInfo : BaseAction
     {
-        private List<SuspiciousInfo> _assignGroupList;
+        private List<SuspiciousInfo> _suspiciousInfoList;
 
-        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> assignGroupList)
+        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList)
         {
-            _assignGroupList = assignGroupList;
+            _suspiciousInfoList = suspiciousInfoList;
         }
 
         public List<SuspiciousInfo> AssignGroupList
         {
-            get { return _assignGroupList; }
-            set { _assignGroupList = AssignGroupList; }
+            get { return _suspiciousInfoList; }
+            set { _suspiciousInfoList = AssignGroupList; }
         }        
 
         public override bool TakeAction()
@@ -50,6 +50,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
             MatchInsertCriteria criteria = new MatchInsertCriteria();
+            
+            string matchIdList = string.Empty;
+            string workflowIdList = string.Empty;            
+            string eventDateList = string.Empty;
+
+            foreach (var info in _suspiciousInfoList)
+            {                
+                matchIdList = string.Join(";", matchIdList, info.MatchId);
+                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);                                
+            }
+
+            criteria.MatchIdList = matchIdList;
+            criteria.WorkflowIdList = workflowIdList;
+            criteria.EventDate = new DateTime(); //todo
+
             return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
         }
 
@@ -63,7 +78,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             string workflowIdList = string.Empty;
             string groupTransIdList = string.Empty;
 
-            foreach (var info in _assignGroupList)
+            foreach (var info in _suspiciousInfoList)
             {
                 custIdList = string.Join(";", custIdList, info.CustId);
                 matchIdList = string.Join(";", matchIdList, info.MatchId);
