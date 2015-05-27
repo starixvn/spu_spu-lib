@@ -19,5 +19,9 @@ namespace SPU.Lib.FraudDetection.DTO
         public string ConfigCategory { get; set; }
 
         public string ConfigControlType { get; set; }
+
+        public string ConfigSQLTable { get; set; }
+
+        public string ConfigSQLField { get; set; }
     }
 }

@@ -11,7 +11,6 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TaskInfo class.

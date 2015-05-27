@@ -65,6 +65,11 @@ namespace SPU.Lib.FraudDetection.Service
             return GetData<SuspiciousInfo>(query);            
         }
 
+        public IEnumerable<TablesForeignKey> GetTablesForeignKey(ICriteria criteria)
+        {
+            return GetData<TablesForeignKey>(criteria);
+        }
+
         /// <summary>
         /// Collect Suspicious Info.
         /// </summary>

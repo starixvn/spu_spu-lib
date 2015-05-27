@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.05.26">Created</change>
 // </history>
 
 namespace SPU.Lib.FraudDetection.Criteria.Taks
@@ -32,12 +32,32 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
 
         public int WorkflowId { get; set; }
 
-        public bool IsRunMannually { get; set; }
+        public int Interval { get; set; }
 
-        public int NextActionId { get; set; }
-
-        public int Timer { get; set; }
+        public string IntervalType { get; set; }
 
         public bool IsActive { get; set; }
+
+        public int ActionId { get; set; }
+
+        public string NextActionIdList { get; set; }
+
+        /// <summary>
+        /// Get the reference SP's Name which is specified in Config file.
+        /// </summary>
+        /// <returns>The key of store procedure.</returns>
+        public override string GetSettingKey()
+        {
+            return "SPU_TaskIns";
+        }
+
+        /// <summary>
+        /// Check data's constrains.
+        /// </summary>
+        /// <returns>True: valid; False: invalid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        }
     }
 }

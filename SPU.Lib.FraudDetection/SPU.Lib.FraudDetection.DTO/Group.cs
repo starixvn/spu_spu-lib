@@ -9,8 +9,6 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
-    using Fanex.NAP.Framework.Data;
-
     /// <summary>
     /// Group Class.
     /// </summary>
