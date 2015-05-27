@@ -11,14 +11,13 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.Criteria;
+    using System.Timers;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-    using SPU.Lib.Core;
-    using System.Threading;
-    using System.Collections;
 
     /// <summary>
     /// Task Class.
@@ -129,25 +128,25 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <summary>
         /// Scan suspicious tickets.
         /// </summary>        
-        public void Scan()
+        public void Scan(object source, ElapsedEventArgs e)
         {
             try
             {                
                 if (TaskInfo.IsActive)
-                {                    
+                {
                     IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
 
-                    List<SuspiciousInfo> suspiciousTickets = ExecuteRule(preConGroups);
+                    List<SuspiciousInfo> suspiciousInfoList = ExecuteRule(preConGroups);
 
                     if (TaskInfo.ActionId == 1)
                     {
-                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousTickets);
+                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList);
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(suspiciousTickets);                 
+                    TakeNextAction(suspiciousInfoList);                   
 
-                    //var t1 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));
+                    //var t1 = new System.Threading.Tasks.Task(() = > Console.WriteLine("Completed t1"));
 
                     //t1.ContinueWith(task1 =>
                     //{
@@ -158,11 +157,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                     //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\spu_" + TaskInfo.TaskName + ".txt", true))
                     //{
-                    //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString() );
+                    //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString());
                     //}                    
-                }
-
-                Thread.Sleep(TaskInfo.Interval);//todo convert into milisecond.
+                }                
             }
             catch (Exception ex)
             {
@@ -223,13 +220,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <param name="listSuspiciousInfo">List of suspicious tickets.</param>
         /// <returns>True if success.</returns>
-        private void TakeNextAction(List<SuspiciousInfo> listSuspiciousInfo)
+        private void TakeNextAction(List<SuspiciousInfo> suspiciousInfoList)
         {
-            if (listSuspiciousInfo.Count > 0)
+            if (suspiciousInfoList.Count > 0)
             {
                 foreach (var actionId in TaskInfo.NextActionIdList.Split(','))
                 {
-                    BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId), listSuspiciousInfo);
+                    BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId), suspiciousInfoList);
                     nextAction.TakeAction();
                 }
             }            

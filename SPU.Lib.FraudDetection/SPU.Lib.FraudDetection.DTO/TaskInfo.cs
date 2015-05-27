@@ -46,5 +46,19 @@ namespace SPU.Lib.FraudDetection.DTO
         public string IntervalType { get; set; } // day, hour, min, second
 
         public bool IsActive { get; set; }
+
+        public int Timer
+        {
+            get
+            {
+                switch (IntervalType)
+                {
+                    case "days": return Interval *24* 3600 * 1000;
+                    case "hours": return Interval * 3600 * 1000;
+                    case "minutes": return Interval * 60 *1000;
+                    default: return Interval*1000;
+                }
+            }
+        }
     }
 }
