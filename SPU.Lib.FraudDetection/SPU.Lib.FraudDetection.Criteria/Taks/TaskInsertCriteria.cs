@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.05.26">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Taks
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using System;
     using System.Collections.Generic;
@@ -20,6 +20,8 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
     /// </summary>
     public class TaskInsertCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+
         public int TaskId { get; set; }
 
         public string TaskName { get; set; }
@@ -41,6 +43,8 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
         public int ActionId { get; set; }
 
         public string NextActionIdList { get; set; }
+
+        public string NextActionTargetIdList { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
