@@ -37,6 +37,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public TaskInfo TaskInfo { get; set; }
 
+        public string IdsList { get; set; }
+
+        public List<SuspiciousInfo> suspiciousInfoList { get; set; }
+
         #endregion
         
         #region BuildTask
@@ -136,15 +140,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
 
-                    List<SuspiciousInfo> suspiciousInfoList = ExecuteRule(preConGroups);
+                    suspiciousInfoList = ExecuteRule(preConGroups);
 
                     if (TaskInfo.ActionId == 1)
                     {
-                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList);
+                        
+                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList,  TaskInfo.WorkflowId);
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(suspiciousInfoList);                   
+                    //TakeNextAction(suspiciousInfoList);                   
 
                     //var t1 = new System.Threading.Tasks.Task(() = > Console.WriteLine("Completed t1"));
 
@@ -155,7 +160,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     //});
                     //t1.Start();
 
-                    //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\spu_" + TaskInfo.TaskName + ".txt", true))
+                    //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\SPU_TEST\spu_" + TaskInfo.TaskName + ".txt", true))
                     //{
                     //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString());
                     //}                    
@@ -172,13 +177,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>        
         /// <returns>List of ids.</returns>
         private IEnumerable<IEnumerable<string>> ExecutePrecondition()
-        {                         
+        {
+            string preConditionQuery = string.Empty;
             IEnumerable<IEnumerable<string>> preConGroups = null;
             if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
             {
                 using (TaskService taskService = new TaskService())
                 {
-                    IEnumerable<string> preConResult = taskService.GetData<string>(TaskInfo.TaskPreconditions);
+                    preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("@WorkflowId", TaskInfo.WorkflowId.ToString());
+                    IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
+                    IdsList = string.Join(";", preConResult);
                     preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
                 }
             }
@@ -201,14 +209,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     foreach (IEnumerable<string> group in preConGroups)
                     {
-                        ruleQuery = TaskInfo.TaskRules.Replace("@Params", string.Join(",", group));
-                        suspiciousTickets.AddRange(taskService.GetData<SuspiciousInfo>(ruleQuery));
+                        ruleQuery = TaskInfo.TaskRules.Replace("\r\n"," ").Replace("@MatchIdList", string.Join(",", group));
+                        suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                     }
                 }
                 else
                 {
-                    ruleQuery = TaskInfo.TaskRules;
-                    suspiciousTickets.AddRange(taskService.GetData<SuspiciousInfo>(ruleQuery));
+                    ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ");
+                    suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                 }
             }
 

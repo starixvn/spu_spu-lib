@@ -34,9 +34,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             set { _assignGroupList = AssignGroupList; }
         }        
 
-        public override bool TakeAction()
+        public override void TakeAction()
         {
-            return true;// AssignCustomerGroup() && UpdateScannedMatch() && InsertSuspiciousInfo();
+            // AssignCustomerGroup() && UpdateScannedMatch() && InsertSuspiciousInfo();
         }
 
         private bool AssignCustomerGroup()
@@ -68,7 +68,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 custIdList = string.Join(";", custIdList, info.CustId);
                 matchIdList = string.Join(";", matchIdList, info.MatchId);
                 workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
-                groupTransIdList = string.Join(";", groupTransIdList, info.ListTransId);
+                groupTransIdList = string.Join(";", groupTransIdList, info.TransIdList);
             }
 
             criteria.CustIdList = custIdList;

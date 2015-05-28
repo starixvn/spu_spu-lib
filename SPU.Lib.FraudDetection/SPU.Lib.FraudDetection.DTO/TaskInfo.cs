@@ -40,6 +40,8 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public string NextActionIdList { get; set; }
 
+        public string NextActionTargetIdList { get; set; }        
+
         public int Interval { get; set; }
 
         public string IntervalType { get; set; } // day, hour, min, second

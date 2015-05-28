@@ -15,7 +15,9 @@ namespace SPU.Lib.FraudDetection.Criteria
     /// SuspiciousInfo Class.
     /// </summary>
     public class SuspiciousInfoInsertCriteria : CriteriaBase
-    {        
+    {
+        public int CreatorId { get; set; }
+
         public string CustIdList { get; set; }  //// format: "1;2;3".
         
         public string MatchIdList { get; set; } //// format: "1;2;3".

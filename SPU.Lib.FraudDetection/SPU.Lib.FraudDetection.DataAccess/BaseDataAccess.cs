@@ -17,7 +17,8 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.Core;    
+    using SPU.Lib.Core;
+    using System.Configuration;    
 
     /// <summary>
     /// Base Data Access.
@@ -28,7 +29,24 @@ namespace SPU.Lib.FraudDetection.DataAccess
 
         public BaseDataAccess()
         {
-            _sqlConnectionString = string.Empty; // TODO: get from config
+            _sqlConnectionString = GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
+
+        }
+
+        private string GetConnectionStringByName(string name)
+        {
+            // Assume failure. 
+            string returnValue = null;
+
+            // Look for the name in the connectionStrings section.
+            ConnectionStringSettings settings =
+                ConfigurationManager.ConnectionStrings[name];
+
+            // If found, return the connection string. 
+            if (settings != null)
+                returnValue = settings.ConnectionString;
+
+            return returnValue;
         }
 
         /// <summary>

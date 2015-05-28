@@ -19,10 +19,12 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
     /// MatchInsertCriteria Class.
     /// </summary>
     public class MatchInsertCriteria : CriteriaBase
-    {        
+    {
+        public int CreatorId { get; set; }
+
         public string MatchIdList { get; set; } //// format: "1;2;3".
 
-        public string WorkflowIdList { get; set; } //// format: "1;2;3".
+        public int WorkflowId { get; set; }
              
         public DateTime EventDate { get; set; }
         

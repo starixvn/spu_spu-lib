@@ -84,8 +84,48 @@ namespace SPU.Lib.FraudDetection.Service
                     WorkflowId = string.IsNullOrEmpty(dataRow["workflowid"].ToString())
                                     ? 0
                                     : int.Parse(dataRow["workflowid"].ToString()),
-                    ListTransId = dataRow["listtransid"].ToString()
+                    TransIdList = dataRow["listtransid"].ToString()
                 });
+            }
+
+            return suspiciousInfoList;
+        }
+
+        /// <summary>
+        /// Return a list of ids.
+        /// </summary>
+        /// <param name="sqlQueryString">The query string.</param>
+        /// <returns>List of ids.</returns>
+        public IEnumerable<string> ExecutePrecondition(string sqlQueryString)
+        {
+            List<string> IdList = new List<string>();
+            DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for(int i =0;i< dt.Rows.Count ; i++)
+            {
+                IdList.Add(dt.Rows[i][0].ToString());
+            }
+
+            return IdList as IEnumerable<string>;
+        }
+
+        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
+        {
+            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();
+            DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                SuspiciousInfo info = new SuspiciousInfo();
+                info.WorkflowId = workflowId;
+                info.MatchId =int.Parse(dt.Rows[i]["matchid"].ToString());
+                info.CustId = int.Parse(dt.Rows[i]["custid"].ToString());
+                info.TransIdList = dt.Rows[i]["transid"].ToString(); //todo get transidList 
+
+                if (suspiciousInfoList.Find(x => x.CustId == info.CustId && x.MatchId == info.MatchId) == null) //todo: will be remove after Long taks.
+                {
+                    suspiciousInfoList.Add(info);
+                }
             }
 
             return suspiciousInfoList;
