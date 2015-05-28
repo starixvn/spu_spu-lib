@@ -20,6 +20,6 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public int WorkflowId { get; set; }
 
-        public string ListTransId { get; set; }
+        public string TransIdList { get; set; }
     }
 }

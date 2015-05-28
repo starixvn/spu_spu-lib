@@ -20,6 +20,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         protected bool IsActive { get; set; }
 
-        public abstract bool TakeAction();
+        protected int ActionTargetID { get; set; }
+
+        public abstract void TakeAction();
     }
 }

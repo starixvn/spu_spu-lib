@@ -22,10 +22,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     public class ActionSaveSuspiciousInfo : BaseAction
     {
         private List<SuspiciousInfo> _suspiciousInfoList;
+        private string _matchIdList = string.Empty;
+        private int _workflowId = 0;
 
-        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList)
+        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList, string IdsList, int workflowId)
         {
             _suspiciousInfoList = suspiciousInfoList;
+            _matchIdList = IdsList;
+            _workflowId = workflowId;
         }
 
         public List<SuspiciousInfo> AssignGroupList
@@ -34,36 +38,31 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             set { _suspiciousInfoList = AssignGroupList; }
         }        
 
-        public override bool TakeAction()
+        public override void TakeAction()
         {            
-            return UpdateScannedMatch() && InsertSuspiciousInfo() ;// && AssignCustomerGroup();
-        }
+            if(_suspiciousInfoList.Count > 0)
+            {
+                var t1 = new System.Threading.Tasks.Task(() => UpdateScannedMatch());
 
-        private bool AssignCustomerGroup()
-        {
-            GroupService groupService = new GroupService();
-            CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
-            return groupService.AssignCustToGroup(criteria).IsSuccessful;
-        }
+                t1.ContinueWith(task1 =>
+                {
+                    var t2 = new System.Threading.Tasks.Task(() => InsertSuspiciousInfo());
+                    System.Threading.Thread.Sleep(5000);
+                    t2.Start();
+                });
+                t1.Start();
+                
+            }
+        }        
 
         private bool UpdateScannedMatch()
         {
             ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
             MatchInsertCriteria criteria = new MatchInsertCriteria();
-            
-            string matchIdList = string.Empty;
-            string workflowIdList = string.Empty;            
-            string eventDateList = string.Empty;
-
-            foreach (var info in _suspiciousInfoList)
-            {                
-                matchIdList = string.Join(";", matchIdList, info.MatchId);
-                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);                                
-            }
-
-            criteria.MatchIdList = matchIdList;
-            criteria.WorkflowIdList = workflowIdList;
-            criteria.EventDate = new DateTime(); //todo
+            criteria.CreatorId = 0;
+            criteria.MatchIdList = _matchIdList;
+            criteria.WorkflowId = _workflowId;
+            criteria.EventDate = DateTime.Now;// todo
 
             return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
         }
@@ -73,23 +72,24 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
             SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
 
-            string custIdList = string.Empty;
-            string matchIdList = string.Empty;
-            string workflowIdList = string.Empty;
-            string groupTransIdList = string.Empty;
+            List<int> custIdList = new List<int>();
+            List<int> matchIdList = new List<int>();
+            List<int> workflowIdList = new List<int>();
+            List<string> groupTransIdList = new List<string>();
 
             foreach (var info in _suspiciousInfoList)
             {
-                custIdList = string.Join(";", custIdList, info.CustId);
-                matchIdList = string.Join(";", matchIdList, info.MatchId);
-                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
-                groupTransIdList = string.Join(";", groupTransIdList, info.ListTransId);
+                custIdList.Add(info.CustId);
+                matchIdList.Add(info.MatchId);
+                workflowIdList.Add(info.WorkflowId);
+                groupTransIdList.Add(info.TransIdList);                
             }
 
-            criteria.CustIdList = custIdList;
-            criteria.MatchIdList = matchIdList;
-            criteria.WorkflowIdList = workflowIdList;
-            criteria.GroupTransIdList = groupTransIdList;
+            criteria.CreatorId = 0;
+            criteria.CustIdList = string.Join(";", custIdList);
+            criteria.MatchIdList = string.Join(";", matchIdList);
+            criteria.WorkflowIdList = string.Join(";", workflowIdList);
+            criteria.GroupTransIdList = string.Join(";", groupTransIdList);
 
             return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
         }
