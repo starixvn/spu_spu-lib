@@ -160,7 +160,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - "  + ex.InnerException.Message);
+                throw new Exception("Exception Task Scanning -- ", ex);
             }
         }
 

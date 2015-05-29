@@ -36,8 +36,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             AssignCustomerGroup();
         }
 
-        private bool AssignCustomerGroup()
-        {
+        private void AssignCustomerGroup()
+        {            
             try
             {
                 GroupService groupService = new GroupService();
@@ -56,10 +56,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 ICommandResult result = groupService.AssignCustToGroup(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);                    
+                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
                 }
-
-                return result.IsSuccessful;
             }
             catch (Exception ex)
             {
