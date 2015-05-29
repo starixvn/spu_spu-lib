@@ -21,14 +21,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         /// <param name="actionId">The actionId.</param>
         /// <returns>Action object.</returns>
-        public static BaseAction GetAction(short actionId, List<SuspiciousInfo> suspiciousList)
+        public static BaseAction GetAction(short actionId, int actionTargetId, List<SuspiciousInfo> suspiciousList)
         {
             switch (actionId)
             {
                 case 1:
-                    return new ActionSendEmail();
+                    return new ActionAssignGroup(suspiciousList, actionTargetId);
                 case 2:
-                    return new ActionAssignGroup(suspiciousList);
+                    return new ActionSendEmail(suspiciousList, "thai.tran@nexcel.vn");           
                 default:
                     return null;
             }

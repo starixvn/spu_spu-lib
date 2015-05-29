@@ -25,10 +25,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         private string _matchIdList = string.Empty;
         private int _workflowId = 0;
 
-        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList, string IdsList, int workflowId)
+        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int workflowId)
         {
             _suspiciousInfoList = suspiciousInfoList;
-            _matchIdList = IdsList;
+            _matchIdList = matchIdList;
             _workflowId = workflowId;
         }
 
@@ -57,41 +57,55 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         private bool UpdateScannedMatch()
         {
-            ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
-            MatchInsertCriteria criteria = new MatchInsertCriteria();
-            criteria.CreatorId = 0;
-            criteria.MatchIdList = _matchIdList;
-            criteria.WorkflowId = _workflowId;
-            criteria.EventDate = DateTime.Now;// todo
+            try
+            {
+                ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
+                MatchInsertCriteria criteria = new MatchInsertCriteria();
+                criteria.CreatorId = 0;
+                criteria.MatchIdList = _matchIdList;
+                criteria.WorkflowId = _workflowId;
+                criteria.EventDate = DateTime.Now;// todo
 
-            return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
+                return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception UpdateScannedMatch --", ex);
+            }
         }
 
         private bool InsertSuspiciousInfo()
-        {            
-            SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-            SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
-
-            List<int> custIdList = new List<int>();
-            List<int> matchIdList = new List<int>();
-            List<int> workflowIdList = new List<int>();
-            List<string> groupTransIdList = new List<string>();
-
-            foreach (var info in _suspiciousInfoList)
+        {
+            try
             {
-                custIdList.Add(info.CustId);
-                matchIdList.Add(info.MatchId);
-                workflowIdList.Add(info.WorkflowId);
-                groupTransIdList.Add(info.TransIdList);                
+                SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
+                SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
+
+                List<int> custIdList = new List<int>();
+                List<int> matchIdList = new List<int>();
+                List<int> workflowIdList = new List<int>();
+                List<string> groupTransIdList = new List<string>();
+
+                foreach (var info in _suspiciousInfoList)
+                {
+                    custIdList.Add(info.CustId);
+                    matchIdList.Add(info.MatchId);
+                    workflowIdList.Add(info.WorkflowId);
+                    groupTransIdList.Add(info.TransIdList);
+                }
+
+                criteria.CreatorId = 0;
+                criteria.CustIdList = string.Join(";", custIdList);
+                criteria.MatchIdList = string.Join(";", matchIdList);
+                criteria.WorkflowIdList = string.Join(";", workflowIdList);
+                criteria.GroupTransIdList = string.Join(";", groupTransIdList);
+
+                return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
             }
-
-            criteria.CreatorId = 0;
-            criteria.CustIdList = string.Join(";", custIdList);
-            criteria.MatchIdList = string.Join(";", matchIdList);
-            criteria.WorkflowIdList = string.Join(";", workflowIdList);
-            criteria.GroupTransIdList = string.Join(";", groupTransIdList);
-
-            return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
+            catch (Exception ex)
+            {
+                throw new Exception("Exception InsertSuspiciousInfo --", ex);
+            }
         }
     }
 }

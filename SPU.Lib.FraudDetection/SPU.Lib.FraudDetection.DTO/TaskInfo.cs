@@ -53,9 +53,9 @@ namespace SPU.Lib.FraudDetection.DTO
             {
                 switch (IntervalType)
                 {
-                    case "days": return Interval *24* 3600 * 1000;
-                    case "hours": return Interval * 3600 * 1000;
-                    case "minutes": return Interval * 60 *1000;
+                    case "day": return Interval *24* 3600 * 1000;
+                    case "hour": return Interval * 3600 * 1000;
+                    case "minute": return Interval * 60 *1000;
                     default: return Interval*1000;
                 }
             }

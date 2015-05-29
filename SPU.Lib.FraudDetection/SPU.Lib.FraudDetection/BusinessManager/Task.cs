@@ -37,12 +37,18 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public TaskInfo TaskInfo { get; set; }
 
+        /// <summary>
+        /// List of Ids retrieved from task's precondition.
+        /// </summary>
         public string IdsList { get; set; }
 
+        /// <summary>
+        /// List of suspicious info from tasks' rule.
+        /// </summary>
         public List<SuspiciousInfo> suspiciousInfoList { get; set; }
 
         #endregion
-        
+
         #region BuildTask
 
         /// <summary>
@@ -102,7 +108,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     string rules = RetrieveRules(match);
 
                     List<SuspiciousInfo> suspiciousList = taskService.GetData<SuspiciousInfo>(rules).ToList();
-                    
+
                     TakeNextAction(suspiciousList);
                 }
             }
@@ -124,18 +130,18 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
         }
-       
+
         #endregion
 
         #region Scan
-        
+
         /// <summary>
         /// Scan suspicious tickets.
         /// </summary>        
         public void Scan(object source, ElapsedEventArgs e)
         {
             try
-            {                
+            {
                 if (TaskInfo.IsActive)
                 {
                     IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
@@ -144,31 +150,22 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                     if (TaskInfo.ActionId == 1)
                     {
-                        
-                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList,  TaskInfo.WorkflowId);
+
+                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList, TaskInfo.WorkflowId);
                         saveAction.TakeAction();
                     }
 
-                    //TakeNextAction(suspiciousInfoList);                   
-
-                    //var t1 = new System.Threading.Tasks.Task(() = > Console.WriteLine("Completed t1"));
-
-                    //t1.ContinueWith(task1 =>
-                    //{
-                    //    var t2 = new System.Threading.Tasks.Task(() => Console.WriteLine("Completed t1"));
-                    //    t2.Start();
-                    //});
-                    //t1.Start();
+                    TakeNextAction(suspiciousInfoList);
 
                     //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\SPU_TEST\spu_" + TaskInfo.TaskName + ".txt", true))
                     //{
                     //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString());
                     //}                    
-                }                
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception Task Scanning -- " + ex.Message);
+                throw new Exception("Exception Task Scanning -- ", ex);
             }
         }
 
@@ -178,19 +175,28 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>List of ids.</returns>
         private IEnumerable<IEnumerable<string>> ExecutePrecondition()
         {
-            string preConditionQuery = string.Empty;
-            IEnumerable<IEnumerable<string>> preConGroups = null;
-            if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
+            try
             {
-                using (TaskService taskService = new TaskService())
+                string preConditionQuery = string.Empty;
+                IEnumerable<IEnumerable<string>> preConGroups = null;
+
+                if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
                 {
-                    preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("@WorkflowId", TaskInfo.WorkflowId.ToString());
-                    IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
-                    IdsList = string.Join(";", preConResult);
-                    preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
+                    using (TaskService taskService = new TaskService())
+                    {
+                        preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("@WorkflowId", TaskInfo.WorkflowId.ToString());
+                        IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
+                        IdsList = string.Join(";", preConResult);
+                        preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
+                    }
                 }
+
+                return preConGroups;
             }
-            return preConGroups;
+            catch (Exception ex)
+            {
+                throw new Exception("Exception ExecutePrecondition --", ex);
+            }
         }
 
         /// <summary>
@@ -199,30 +205,37 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="preConGroups">The retrieved list of ids from precondition.</param>
         /// <returns>List of suspicious info.</returns>
         private List<SuspiciousInfo> ExecuteRule(IEnumerable<IEnumerable<string>> preConGroups)
-        {            
-            string ruleQuery = string.Empty;
-            List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
-
-            using (TaskService taskService = new TaskService())
+        {
+            try
             {
-                if (preConGroups != null)
+                string ruleQuery = string.Empty;
+                List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
+
+                using (TaskService taskService = new TaskService())
                 {
-                    foreach (IEnumerable<string> group in preConGroups)
+                    if (preConGroups != null)
                     {
-                        ruleQuery = TaskInfo.TaskRules.Replace("\r\n"," ").Replace("@MatchIdList", string.Join(",", group));
+                        foreach (IEnumerable<string> group in preConGroups)
+                        {
+                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("@MatchIdList", string.Join(",", group));
+                            suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
+                        }
+                    }
+                    else
+                    {
+                        ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ");
                         suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                     }
                 }
-                else
-                {
-                    ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ");
-                    suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
-                }
-            }
 
-            return suspiciousTickets;
+                return suspiciousTickets;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception ExecuteRule --", ex);
+            }
         }
-      
+
         /// <summary>
         /// Do next action for the task.
         /// </summary>
@@ -232,12 +245,17 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (suspiciousInfoList.Count > 0)
             {
-                foreach (var actionId in TaskInfo.NextActionIdList.Split(','))
+                string[] nextActionIdList = TaskInfo.NextActionIdList.Split(',');
+                string[] nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
+                for (int i = 0; i < nextActionIdList.Count(); i++)
                 {
-                    BaseAction nextAction = ActionFactory.GetAction(short.Parse(actionId), suspiciousInfoList);
+                    BaseAction nextAction = ActionFactory.GetAction(
+                                                                        short.Parse(nextActionIdList[i].ToString()),
+                                                                        int.Parse(nextActionTargetIdList[i].ToString()),
+                                                                        suspiciousInfoList);
                     nextAction.TakeAction();
                 }
-            }            
+            }
         }
 
         #endregion
