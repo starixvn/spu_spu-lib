@@ -15,6 +15,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
     using SPU.Lib.FraudDetection.Criteria.Match;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     ///  Assign a suspicious customer to a customer group.
@@ -35,7 +36,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             AssignCustomerGroup();
         }
 
-        private void AssignCustomerGroup()
+        private bool AssignCustomerGroup()
         {
             try
             {
@@ -52,7 +53,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 criteria.GroupId = _nextActionTargetId;
                 criteria.CustIdList = string.Join(";", custIdList);
 
-                groupService.AssignCustToGroup(criteria);
+                ICommandResult result = groupService.AssignCustToGroup(criteria);
+                if (result.IsSuccessful == false)
+                {
+                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);                    
+                }
+
+                return result.IsSuccessful;
             }
             catch (Exception ex)
             {

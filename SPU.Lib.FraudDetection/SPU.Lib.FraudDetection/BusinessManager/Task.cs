@@ -155,17 +155,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(suspiciousInfoList);
-
-                    //using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\SPU_TEST\spu_" + TaskInfo.TaskName + ".txt", true))
-                    //{
-                    //    file.WriteLine(TaskInfo.TaskName + " -timer = " + DateTime.Now.ToLongTimeString());
-                    //}                    
+                    TakeNextAction(suspiciousInfoList);                                
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception Task Scanning -- ", ex);
+                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - "  + ex.InnerException.Message);
             }
         }
 
@@ -184,7 +179,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     using (TaskService taskService = new TaskService())
                     {
-                        preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("@WorkflowId", TaskInfo.WorkflowId.ToString());
+                        preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("$param1$", TaskInfo.WorkflowId.ToString());
                         IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
                         IdsList = string.Join(";", preConResult);
                         preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
@@ -217,7 +212,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     {
                         foreach (IEnumerable<string> group in preConGroups)
                         {
-                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("@MatchIdList", string.Join(",", group));
+                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("$param1$", string.Join(",", group));
                             suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                         }
                     }
@@ -243,18 +238,25 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>True if success.</returns>
         private void TakeNextAction(List<SuspiciousInfo> suspiciousInfoList)
         {
-            if (suspiciousInfoList.Count > 0)
+            try
             {
-                string[] nextActionIdList = TaskInfo.NextActionIdList.Split(',');
-                string[] nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
-                for (int i = 0; i < nextActionIdList.Count(); i++)
+                if (suspiciousInfoList.Count > 0)
                 {
-                    BaseAction nextAction = ActionFactory.GetAction(
-                                                                        short.Parse(nextActionIdList[i].ToString()),
-                                                                        int.Parse(nextActionTargetIdList[i].ToString()),
-                                                                        suspiciousInfoList);
-                    nextAction.TakeAction();
+                    string[] nextActionIdList = TaskInfo.NextActionIdList.Split(',');
+                    string[] nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
+                    for (int i = 0; i < nextActionIdList.Count(); i++)
+                    {
+                        BaseAction nextAction = ActionFactory.GetAction(
+                                                                            short.Parse(nextActionIdList[i].ToString()),
+                                                                            int.Parse(nextActionTargetIdList[i].ToString()),
+                                                                            suspiciousInfoList);
+                        nextAction.TakeAction();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception TakeNextAction --", ex);
             }
         }
 

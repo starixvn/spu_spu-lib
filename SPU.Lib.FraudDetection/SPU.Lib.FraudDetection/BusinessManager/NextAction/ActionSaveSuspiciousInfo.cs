@@ -15,6 +15,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
     using SPU.Lib.FraudDetection.Criteria.Match;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     ///  Save suspicious info.
@@ -65,8 +66,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 criteria.MatchIdList = _matchIdList;
                 criteria.WorkflowId = _workflowId;
                 criteria.EventDate = DateTime.Now;// todo
+                
+                ICommandResult result = scannedMatchesService.InsertScannedMatch(criteria);
+                if (result.IsSuccessful == false)
+                {
+                    Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);                
+                }
 
-                return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
+                return result.IsSuccessful;                
             }
             catch (Exception ex)
             {
@@ -100,7 +107,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 criteria.WorkflowIdList = string.Join(";", workflowIdList);
                 criteria.GroupTransIdList = string.Join(";", groupTransIdList);
 
-                return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
+                ICommandResult result = suspiciousInfoService.InsertSuspiciousInfo(criteria);
+                if (result.IsSuccessful == false)
+                {
+                    Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);                    
+                }
+
+                return result.IsSuccessful;
             }
             catch (Exception ex)
             {

@@ -33,18 +33,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             try
             {
                 string template = string.Empty;
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\SPU_TEST\spu_Email.txt", true))
+                foreach (var info in _suspiciousList)
                 {
-                    foreach (var info in _suspiciousList)
-                    {
-                        template += info.CustId + " -->" + info.TransIdList + "\r\n";
-                    }
-                    file.WriteLine("Suspicious info \r\n" + template);
+                    template += info.CustId + " -->" + info.TransIdList + "\r\n";
                 }
+                Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);                
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception AssignCustomerGroup --", ex);
+                throw new Exception("Exception ActionSendEmail --", ex);
             }            
         }
     }
