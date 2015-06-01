@@ -20,8 +20,28 @@ namespace SPU.Lib.FraudDetection.Criteria
     /// </summary>
     public class CustomerGroupAssignCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
+        public int CreatorId { get; set; }
 
-        public int GroupId { get; set; }   
+        public string CustIdList { get; set; }  //// format: "1;2;3".
+        
+        public int GroupId { get; set; }
+
+        /// <summary>
+        /// Get the reference SP's Name which is specified in Config file.
+        /// </summary>
+        /// <returns>The key of store procedure.</returns>
+        public override string GetSettingKey()
+        {
+            return "SPU_CustomerGroupInsert";
+        }
+
+        /// <summary>
+        /// Check data's constrains.
+        /// </summary>
+        /// <returns>True: valid; False: invalid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        }        
     }
 }

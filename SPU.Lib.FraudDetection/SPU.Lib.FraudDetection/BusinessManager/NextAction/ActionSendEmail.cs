@@ -10,17 +10,42 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
+    using System.Collections.Generic;
+    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// ActionSendEmail Class.
     /// </summary>
     public class ActionSendEmail : BaseAction
     {
-        public string Email { get; set; }
+        public string _emailList { get; set; } // format: a@abc.com; b@abc.com
+
+        private List<SuspiciousInfo> _suspiciousList;
+
+        public ActionSendEmail(List<SuspiciousInfo> suspiciousList, string emailList)
+        {
+            _suspiciousList = suspiciousList;
+            _emailList = emailList;
+        }
 
         public override void TakeAction()
-        {            
-            //throw new NotImplementedException(); ////todo : ask third party Email system
+        {
+            try
+            {
+                string template = string.Empty;
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\SPU_TEST\spu_Email.txt", true))
+                {
+                    foreach (var info in _suspiciousList)
+                    {
+                        template += info.CustId + " -->" + info.TransIdList + "\r\n";
+                    }
+                    file.WriteLine("Suspicious info \r\n" + template);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception AssignCustomerGroup --", ex);
+            }            
         }
     }
 }

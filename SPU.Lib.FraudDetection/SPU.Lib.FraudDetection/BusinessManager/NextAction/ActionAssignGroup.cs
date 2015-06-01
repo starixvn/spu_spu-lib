@@ -21,62 +21,43 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class ActionAssignGroup : BaseAction
     {
-        private List<SuspiciousInfo> _assignGroupList;
-        
-        public ActionAssignGroup(List<SuspiciousInfo> assignGroupList)
-        {
-            _assignGroupList = assignGroupList;
-        }
+        private List<SuspiciousInfo> _suspiciousList;
+        private int _nextActionTargetId = 0;
 
-        public List<SuspiciousInfo> AssignGroupList
+        public ActionAssignGroup(List<SuspiciousInfo> suspiciousList, int nextActionTargetId)
         {
-            get { return _assignGroupList; }
-            set { _assignGroupList = AssignGroupList; }
-        }        
+            _suspiciousList = suspiciousList;
+            _nextActionTargetId = nextActionTargetId;
+        }       
 
         public override void TakeAction()
         {
-            // AssignCustomerGroup() && UpdateScannedMatch() && InsertSuspiciousInfo();
+            AssignCustomerGroup();
         }
 
-        private bool AssignCustomerGroup()
+        private void AssignCustomerGroup()
         {
-            GroupService groupService = new GroupService();
-            CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
-            return groupService.AssignCustToGroup(criteria).IsSuccessful;
-        }
-
-        private bool UpdateScannedMatch()
-        {
-            ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
-            MatchInsertCriteria criteria = new MatchInsertCriteria();
-            return scannedMatchesService.InsertScannedMatch(criteria).IsSuccessful;
-        }
-
-        private bool InsertSuspiciousInfo()
-        {            
-            SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-            SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
-
-            string custIdList = string.Empty;
-            string matchIdList = string.Empty;
-            string workflowIdList = string.Empty;
-            string groupTransIdList = string.Empty;
-
-            foreach (var info in _assignGroupList)
+            try
             {
-                custIdList = string.Join(";", custIdList, info.CustId);
-                matchIdList = string.Join(";", matchIdList, info.MatchId);
-                workflowIdList = string.Join(";", workflowIdList, info.WorkflowId);
-                groupTransIdList = string.Join(";", groupTransIdList, info.TransIdList);
+                GroupService groupService = new GroupService();
+
+                List<int> custIdList = new List<int>();
+                foreach (var info in _suspiciousList)
+                {
+                    custIdList.Add(info.CustId);
+                }
+
+                CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
+                criteria.CreatorId = 0;
+                criteria.GroupId = _nextActionTargetId;
+                criteria.CustIdList = string.Join(";", custIdList);
+
+                groupService.AssignCustToGroup(criteria);
             }
-
-            criteria.CustIdList = custIdList;
-            criteria.MatchIdList = matchIdList;
-            criteria.WorkflowIdList = workflowIdList;
-            criteria.GroupTransIdList = groupTransIdList;
-
-            return suspiciousInfoService.InsertSuspiciousInfo(criteria).IsSuccessful;
-        }
+            catch (Exception ex)
+            {
+                throw new Exception("Exception AssignCustomerGroup --", ex);
+            }
+        }      
     }
 }

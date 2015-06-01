@@ -125,7 +125,7 @@ namespace SPU.Lib.FraudDetection.Service
                 info.WorkflowId = workflowId;
                 info.MatchId =int.Parse(dt.Rows[i]["matchid"].ToString());
                 info.CustId = int.Parse(dt.Rows[i]["custid"].ToString());
-                info.TransIdList = dt.Rows[i]["transid"].ToString(); //todo get transidList 
+                info.TransIdList = dt.Rows[i]["transidList"].ToString();
 
                 if (suspiciousInfoList.Find(x => x.CustId == info.CustId && x.MatchId == info.MatchId) == null) //todo: will be remove after Long taks.
                 {
