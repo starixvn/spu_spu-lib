@@ -14,6 +14,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
+using System.Messaging;
 
     /// <summary>
     /// FraudAutoDetection Class.
@@ -24,18 +25,31 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         private List<Task> _allTasks = new List<Task>();
 
+        public MessageQueue _OperationMessageQueue = null;
+
+        protected MessageQueue OperationMessageQueue
+        {
+            get
+            {
+                if (_OperationMessageQueue == null)
+                {
+                    _OperationMessageQueue = new MessageQueue();
+                    _OperationMessageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Task) });
+                    _OperationMessageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(Mq_ReceiveCompleted);
+                }
+                return _OperationMessageQueue;
+            }
+        }
+
         /// <summary>
         /// Loading all tasks for scanning suspicious tickets.
         /// </summary>
-        public FraudAutoDetection()
+        public FraudAutoDetection(string queuePath)
         {
             try
-            {
-                var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
-                foreach (TaskInfo taskinfo in taskInfoList)
-                {
-                    _allTasks.Add(new Task(taskinfo));
-                }
+            {                
+                OperationMessageQueue.Path = queuePath;
+                OperationMessageQueue.BeginReceive();
             }
             catch (Exception ex)
             {
@@ -43,6 +57,46 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
+        private void Mq_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
+        {
+            using (var msg = OperationMessageQueue.EndReceive(e.AsyncResult))
+            {
+                try
+                {
+                    var qItem = msg.Body as Task;
+                    qItem.Scan(this, null);                    
+                    //ProcessQueuedWorkItem(qItem);
+                }
+                catch (Exception ex)
+                {
+                    Fanex.Logging.Logger.Log.Error("Exception Mq_ReceiveCompleted: " + ex.Message);
+                    //TODO : Write to the log we failed in some way
+                    Environment.Exit(Environment.ExitCode);
+                }
+            }
+
+            OperationMessageQueue.BeginReceive();
+        }
+
+        public void LoadTasks()
+        {
+            try
+            {                
+                var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+                foreach (TaskInfo taskInfo in taskInfoList)
+                {
+                    var newTask = new Task(taskInfo);
+                    
+                    _allTasks.Add(newTask);
+                    OperationMessageQueue.Send(newTask);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         public void ScanSuspiciousTickets()
         {
             try

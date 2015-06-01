@@ -35,7 +35,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 string template = string.Empty;
                 foreach (var info in _suspiciousList)
                 {
-                    template += info.CustId + " -->" + info.TransIdList + "\r\n";
+                    template += info.CustId + "-->" + info.MatchId + "-->" + info.TransIdList + "\r\n";
                 }
                 Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);                
             }

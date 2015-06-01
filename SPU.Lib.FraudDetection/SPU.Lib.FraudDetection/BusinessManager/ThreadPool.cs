@@ -10,9 +10,10 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Timers;
+using System.Collections.Generic;
+using System.Messaging;
+using System.Threading;
+using System.Timers;
 
     /// <summary>
     /// Workflow Class.
@@ -97,6 +98,40 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 throw new Exception("Exception Stop and remove all tasks out the thread pool -- " + ex.Message);
             }
-        }     
+        }
+
+        internal static void AsynchronousTask()
+        {
+            MessageQueue myQueue = new MessageQueue(".\\myQueue");
+            myQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
+
+            // Add an event handler for the ReceiveCompleted event.
+            myQueue.ReceiveCompleted += new
+                ReceiveCompletedEventHandler(MyReceiveCompleted);
+
+            // Begin the asynchronous receive operation.
+            myQueue.BeginReceive();
+
+            // Do other work on the current thread.
+
+            return;
+        }
+
+        internal static void MyReceiveCompleted(Object source, ReceiveCompletedEventArgs asyncResult)
+        {
+            // Connect to the queue.
+			MessageQueue mq = (MessageQueue)source;
+
+			// End the asynchronous Receive operation.
+			Message m = mq.EndReceive(asyncResult.AsyncResult);
+
+			// Display message information on the screen.
+			Console.WriteLine("Message: " + (string)m.Body);
+
+			// Restart the asynchronous Receive operation.
+			mq.BeginReceive();
+			            
+			return; 
+        }
     }
 }

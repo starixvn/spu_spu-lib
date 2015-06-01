@@ -45,7 +45,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 List<int> custIdList = new List<int>();
                 foreach (var info in _suspiciousList)
                 {
-                    custIdList.Add(info.CustId);
+                    if (!custIdList.Contains(info.CustId))
+                    {
+                        custIdList.Add(info.CustId);
+                    }
                 }
 
                 CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
@@ -63,7 +66,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception AssignCustomerGroup --", ex);
+                throw new Exception("Exception AssignCustomerGroup --" + ex.Message);
             }
         }      
     }

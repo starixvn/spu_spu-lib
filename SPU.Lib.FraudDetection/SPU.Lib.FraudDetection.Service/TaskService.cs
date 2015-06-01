@@ -116,20 +116,33 @@ namespace SPU.Lib.FraudDetection.Service
 
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
         {
-            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();
+            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();            
             DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
+            int custId = 0;
+            int matchId = 0;
+            long transId = 0;
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                SuspiciousInfo info = new SuspiciousInfo();
-                info.WorkflowId = workflowId;
-                info.MatchId =int.Parse(dt.Rows[i]["matchid"].ToString());
-                info.CustId = int.Parse(dt.Rows[i]["custid"].ToString());
-                info.TransIdList = dt.Rows[i]["transidList"].ToString();
+                custId = int.Parse(dt.Rows[i]["matchid"].ToString());
+                matchId = int.Parse(dt.Rows[i]["custid"].ToString());
+                transId = long.Parse(dt.Rows[i]["transid"].ToString());
 
-                if (suspiciousInfoList.Find(x => x.CustId == info.CustId && x.MatchId == info.MatchId) == null) //todo: will be remove after Long taks.
+                var currentInfo = suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
+                
+                if (currentInfo == null)
                 {
+                    SuspiciousInfo info = new SuspiciousInfo();
+                    info.WorkflowId = workflowId;
+                    info.MatchId = matchId;
+                    info.CustId = custId;
+                    info.TransIdList = transId.ToString();
+
                     suspiciousInfoList.Add(info);
+                }
+                else
+                {
+                    suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList += "," + transId;                    
                 }
             }
 

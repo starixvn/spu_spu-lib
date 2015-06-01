@@ -26,6 +26,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         #region Constructor
 
+        public Task()
+        {
+        }
+
         public Task(TaskInfo taskInfo)
         {
             this.TaskInfo = taskInfo;
