@@ -22,8 +22,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     {
         public int CreatorId { get; set; }
 
-        public int TaskId { get; set; }
-
         public string TaskName { get; set; }
 
         public string TaskDesc { get; set; }
