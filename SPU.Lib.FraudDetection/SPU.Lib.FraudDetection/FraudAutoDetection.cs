@@ -23,9 +23,7 @@ using System.Messaging;
     {
         private TaskService _taskService = new TaskService();
 
-        private List<Task> _allTasks = new List<Task>();
-
-        public MessageQueue _OperationMessageQueue = null;
+        private MessageQueue _OperationMessageQueue = null;
 
         protected MessageQueue OperationMessageQueue
         {
@@ -63,9 +61,19 @@ using System.Messaging;
             {
                 try
                 {
-                    var qItem = msg.Body as Task;
-                    qItem.Scan(this, null);                    
-                    //ProcessQueuedWorkItem(qItem);
+                    var task = msg.Body as Task;
+                    if (msg.Label.Equals("UPDATE_TASK"))
+                    {
+                        ThreadPool.UpdateTask(task);
+                    }
+                    else if (msg.Label.Equals("REMOVE_TASK"))
+                    {
+                        ThreadPool.RemoveTask(task);
+                    }
+                    else
+                    {
+                        ThreadPool.AddTask(task);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -85,58 +93,94 @@ using System.Messaging;
                 var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
                 foreach (TaskInfo taskInfo in taskInfoList)
                 {
-                    var newTask = new Task(taskInfo);
-                    
-                    _allTasks.Add(newTask);
-                    OperationMessageQueue.Send(newTask);
-                }
+                    if (taskInfo.IsActive)
+                    {
+                        OperationMessageQueue.Send(new Task(taskInfo));                          
+                    }
+                }                               
             }
             catch (Exception ex)
             {
-                throw ex;
+                Fanex.Logging.Logger.Log.Error("Exception LoadTasks: " + ex.Message);             
             }
         }
-        
-        public void ScanSuspiciousTickets()
+
+        /// <summary>
+        /// The API to add new Task to the queue for scanning.
+        /// </summary>
+        /// <param name="newTask">The new task.</param>
+        /// <returns>True if success.</returns>
+        public bool AddNewTask(Task newTask)
         {
+            bool result = false;
             try
             {
-                foreach (Task task in _allTasks)
+                if (newTask != null && newTask is Task)
                 {
-                    if (task.TaskInfo.IsActive)
-                    {
-                        if (task.TaskInfo.IsBackgroundProcess)
-                        {
-                            ThreadPool.AddTask(task);
-                        }
-                        else
-                        {                            
-                            task.Scan(null, null);
-                        }
-                    }
+                    OperationMessageQueue.Send(newTask);
+                    result = true;
+                }                
+            }
+            catch (Exception ex)
+            {                
+                Fanex.Logging.Logger.Log.Error("Exception AddNewTask: " + ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool UpdateTask(Task task)
+        {
+            bool result = false;
+            try
+            {
+                if (task != null && task is Task)
+                {
+                    OperationMessageQueue.Send(task, "UPDATE_TASK");
+                    result = true;
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                Fanex.Logging.Logger.Log.Error("Exception UpdateTask: " + ex.Message);
             }
-        }        
+
+            return result;
+        }
+
+        public bool RemoveTask(Task task)
+        {
+            bool result = false;
+            try
+            {
+                if (task != null && task is Task)
+                {
+                    OperationMessageQueue.Send(task, "REMOVE_TASK");                    
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Fanex.Logging.Logger.Log.Error("Exception RemoveTask: " + ex.Message);
+            }
+
+            return result;
+        }
 
         public void Stop()
         {
             try
             {
                 ThreadPool.StopAllTasks();
+
+                OperationMessageQueue.ReceiveCompleted -= this.Mq_ReceiveCompleted;                
+                OperationMessageQueue.Purge();
+                OperationMessageQueue.Close();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
-
-        public List<Task> Tasks
-        {
-            get { return _allTasks; }
-        }
+        }        
     }
 }

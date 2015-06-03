@@ -11,6 +11,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// TaskInfo class.
@@ -51,12 +52,19 @@ namespace SPU.Lib.FraudDetection.DTO
         {
             get
             {
-                switch (IntervalType)
+                try
                 {
-                    case "day": return Interval *24* 3600 * 1000;
-                    case "hour": return Interval * 3600 * 1000;
-                    case "minute": return Interval * 60 *1000;
-                    default: return Interval*1000;
+                    switch (IntervalType.ToLower())
+                    {
+                        case "day": return Interval * 24 * 3600 * 1000;
+                        case "hour": return Interval * 3600 * 1000;
+                        case "minute": return Interval * 60 * 1000;
+                        default: return Interval * 1000; // second
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
             }
         }

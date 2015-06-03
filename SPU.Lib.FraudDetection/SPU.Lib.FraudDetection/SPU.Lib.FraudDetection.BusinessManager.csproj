@@ -83,6 +83,9 @@
     <Compile Include="BusinessManager\NextAction\ActionAssignGroup.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSendEmail.cs" />
     <Compile Include="BusinessManager\Configurations.cs" />
+    <Compile Include="BusinessManager\ThreadTimer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FraudAutoDetection.cs" />
     <Compile Include="FraudDetection.cs" />
     <Compile Include="BusinessManager\SupportedBettypes.cs" />
