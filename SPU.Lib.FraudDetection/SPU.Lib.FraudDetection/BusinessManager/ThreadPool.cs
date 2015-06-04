@@ -136,9 +136,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 foreach (ThreadTimer threadTimer in _threadTimerList)
                 {
                     threadTimer.Stop();
-                    threadTimer.Dispose();
-                    _threadTimerList.Remove(threadTimer);
-                }                
+                    threadTimer.Dispose();                    
+                }
+
+                _threadTimerList.Clear();
             }
             catch (Exception ex)
             {

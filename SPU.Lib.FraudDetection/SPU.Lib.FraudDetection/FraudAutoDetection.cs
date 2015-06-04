@@ -46,7 +46,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                OperationMessageQueue.Path = ConfigSettings.GetConnectionStringByName("queuePath"); 
+                OperationMessageQueue.Path = ConfigSettings.GetConfigStringByName("queuePath"); 
                 OperationMessageQueue.BeginReceive();
             }
             catch (Exception ex)

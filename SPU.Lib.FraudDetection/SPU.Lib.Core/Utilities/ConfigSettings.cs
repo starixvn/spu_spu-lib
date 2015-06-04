@@ -18,6 +18,11 @@ namespace SPU.Lib.Core
     /// </summary>
     public static class ConfigSettings
     {
+        /// <summary>
+        /// Get connection string.
+        /// </summary>
+        /// <param name="name">The key name.</param>
+        /// <returns>The connection string.</returns>
         public static string GetConnectionStringByName(string name)
         {
             // Assume failure. 
@@ -29,9 +34,16 @@ namespace SPU.Lib.Core
 
             // If found, return the connection string. 
             if (settings != null)
+            {
                 returnValue = settings.ConnectionString;
+            }
 
             return returnValue;
+        }
+
+        public static string GetConfigStringByName(string name)
+        {
+            return ConfigurationManager.AppSettings[name];
         }
     }
 }
