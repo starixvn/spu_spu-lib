@@ -29,26 +29,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
 
         public BaseDataAccess()
         {
-            _sqlConnectionString = GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
+            _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
 
         }
-
-        private string GetConnectionStringByName(string name)
-        {
-            // Assume failure. 
-            string returnValue = null;
-
-            // Look for the name in the connectionStrings section.
-            ConnectionStringSettings settings =
-                ConfigurationManager.ConnectionStrings[name];
-
-            // If found, return the connection string. 
-            if (settings != null)
-                returnValue = settings.ConnectionString;
-
-            return returnValue;
-        }
-
+        
         /// <summary>
         /// Execute non query.
         /// </summary>
