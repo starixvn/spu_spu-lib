@@ -10,11 +10,11 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
-    using System.Collections.Generic;
+    using System.Messaging;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.Criteria.Taks;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-using System.Messaging;
 
     /// <summary>
     /// FraudAutoDetection Class.
@@ -42,11 +42,11 @@ using System.Messaging;
         /// <summary>
         /// Loading all tasks for scanning suspicious tickets.
         /// </summary>
-        public FraudAutoDetection(string queuePath)
+        public FraudAutoDetection()
         {
             try
-            {                
-                OperationMessageQueue.Path = queuePath;
+            {
+                OperationMessageQueue.Path = ConfigSettings.GetConnectionStringByName("queuePath"); 
                 OperationMessageQueue.BeginReceive();
             }
             catch (Exception ex)
