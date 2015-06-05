@@ -31,17 +31,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         internal static void AddTask(Task task)
         {
             try
-            {
-                string timerName = string.Format(_threadNameTemplate, task.TaskInfo.TaskName).ToLower();
-
-                if (_threadTimerList.Find(x => x.TimerName.ToLower().Equals(timerName)) == null)
+            {                
+                if (_threadTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
                 {
                     ThreadTimer threadTimer = new ThreadTimer(task.TaskInfo.Timer);
                     threadTimer.TimerName = task.TaskInfo.TaskName;
                     threadTimer.Elapsed += new ElapsedEventHandler(task.Scan);
                     threadTimer.Enabled = true;
 
-                    _threadTimerList.Add(threadTimer);                    
+                    _threadTimerList.Add(threadTimer);                          
                 }
             }
             catch (Exception ex)
@@ -136,7 +134,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 foreach (ThreadTimer threadTimer in _threadTimerList)
                 {
                     threadTimer.Stop();
-                    threadTimer.Dispose();                    
+                    threadTimer.Close();
+                    threadTimer.Dispose();                 
                 }
 
                 _threadTimerList.Clear();

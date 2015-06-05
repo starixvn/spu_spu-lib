@@ -149,8 +149,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 if (TaskInfo.IsActive)
                 {
                     IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
-
-                    suspiciousInfoList = ExecuteRule(preConGroups);
+                    if (preConGroups != null)
+                    {
+                        suspiciousInfoList = ExecuteRule(preConGroups);
+                    }
 
                     if (TaskInfo.ActionId == 1)
                     {
@@ -216,14 +218,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     {
                         foreach (IEnumerable<string> group in preConGroups)
                         {
-                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("$param1$", string.Join(",", group));
+                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("$param1$", string.Join(",", group));                            
                             suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                         }
-                    }
-                    else
-                    {
-                        ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ");
-                        suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                     }
                 }
 

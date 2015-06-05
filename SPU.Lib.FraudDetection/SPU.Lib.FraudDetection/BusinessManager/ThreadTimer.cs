@@ -20,6 +20,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
         }
 
+        public int TaskId { get; set; }
+
         public string TimerName { get; set; }
     }
 }

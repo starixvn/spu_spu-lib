@@ -114,11 +114,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             bool result = false;
             try
-            {
+            {                
                 if (newTask != null && newTask is Task)
                 {
                     OperationMessageQueue.Send(newTask);
-                    result = true;
+                    result = true;                    
                 }                
             }
             catch (Exception ex)
