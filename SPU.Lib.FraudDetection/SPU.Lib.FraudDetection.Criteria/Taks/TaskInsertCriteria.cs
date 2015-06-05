@@ -28,7 +28,11 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
 
         public string TaskPreconditions { get; set; }
 
+        public string TaskPreconditionsOriginal { get; set; }
+
         public string TaskRules { get; set; }
+
+        public string TaskRulesOriginal { get; set; }
 
         public int WorkflowId { get; set; }
 
