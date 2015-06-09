@@ -13,7 +13,9 @@ namespace SPU.Lib.FraudDetection.DTO
     /// ConfigInfo Class.
     /// </summary>
     public class Config
-    {        
+    {
+        public int ConfigId { get; set; }
+
         public string ConfigName { get; set; }
 
         public string ConfigCategory { get; set; }
