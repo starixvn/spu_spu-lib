@@ -12,9 +12,9 @@ namespace SPU.Lib.FraudDetection.Service
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DataAccess;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.Core;    
+    using SPU.Lib.FraudDetection.DTO;    
 
     /// <summary>
     /// Workflow Service.

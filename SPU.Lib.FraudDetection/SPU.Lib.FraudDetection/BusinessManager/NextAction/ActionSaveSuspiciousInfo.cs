@@ -11,11 +11,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
     using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Match;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     ///  Save suspicious info.
@@ -41,7 +41,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public override void TakeAction()
         {            
-            if(_suspiciousInfoList.Count > 0)
+            if (_suspiciousInfoList.Count > 0)
             {
                 var t1 = new System.Threading.Tasks.Task(() => UpdateScannedMatch());
 
@@ -51,8 +51,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     System.Threading.Thread.Sleep(5000);
                     t2.Start();
                 });
-                t1.Start();
-                
+                t1.Start();                
             }
         }        
 
@@ -65,7 +64,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 criteria.CreatorId = 0;
                 criteria.MatchIdList = _matchIdList;
                 criteria.WorkflowId = _workflowId;
-                criteria.EventDate = DateTime.Now;// todo
+                criteria.EventDate = DateTime.Now; // todo
                 
                 ICommandResult result = scannedMatchesService.InsertScannedMatch(criteria);
                 if (result.IsSuccessful == false)

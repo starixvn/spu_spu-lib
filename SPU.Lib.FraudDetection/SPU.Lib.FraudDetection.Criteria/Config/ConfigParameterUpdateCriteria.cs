@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConfigParameterUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Long.Luu" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.06.10">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Taks
+namespace SPU.Lib.FraudDetection.Criteria
 {
     using System;
     using System.Collections.Generic;
@@ -16,17 +16,23 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TaskSelectAllCriteria Class.
+    /// ConfigParameterInsertCriteria Class.
     /// </summary>
-    public class TaskSelectAllCriteria : CriteriaBase
-    {      
+    public class ConfigParameterUpdateCriteria : CriteriaBase
+    {
+        public int CreatorId { get; set; }
+
+        public int PercentageMaxBet { get; set; }
+
+        public int SecondsToGoal { get; set; }
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskSelectAll";
+            return "SPU_ConfigurationParameterUpd";
         }
 
         /// <summary>
@@ -36,6 +42,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
         public override bool IsValid()
         {
             return true;
-        }        
+        }       
     }
 }

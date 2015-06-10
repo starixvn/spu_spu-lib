@@ -11,9 +11,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
+    using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-    using SPU.Lib.FraudDetection.Criteria;
 
     /// <summary>
     /// Supported Bet types Class.

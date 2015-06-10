@@ -11,11 +11,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     ///  Assign a suspicious customer to a customer group.

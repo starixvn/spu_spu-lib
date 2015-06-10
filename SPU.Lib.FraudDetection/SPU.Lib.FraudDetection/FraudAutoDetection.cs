@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using System;
     using System.Messaging;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
 
@@ -23,25 +23,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private TaskService _taskService = new TaskService();
 
-        private MessageQueue _OperationMessageQueue = null;
+        private MessageQueue _operationMessageQueue = null;
 
-        protected MessageQueue OperationMessageQueue
-        {
-            get
-            {
-                if (_OperationMessageQueue == null)
-                {
-                    _OperationMessageQueue = new MessageQueue();
-                    _OperationMessageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Task) });
-                    _OperationMessageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(Mq_ReceiveCompleted);
-                }
-                return _OperationMessageQueue;
-            }
-        }
-
-        /// <summary>
-        /// Loading all tasks for scanning suspicious tickets.
-        /// </summary>
         public FraudAutoDetection()
         {
             try
@@ -55,7 +38,22 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        private void Mq_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
+        protected MessageQueue OperationMessageQueue
+        {
+            get
+            {
+                if (_operationMessageQueue == null)
+                {
+                    _operationMessageQueue = new MessageQueue();
+                    _operationMessageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Task) });
+                    _operationMessageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(Mq_ReceiveCompleted);
+                }
+
+                return _operationMessageQueue;
+            }
+        }
+
+        public void Mq_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
         {
             using (var msg = OperationMessageQueue.EndReceive(e.AsyncResult))
             {
@@ -78,7 +76,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 catch (Exception ex)
                 {
                     Fanex.Logging.Logger.Log.Error("Exception Mq_ReceiveCompleted: " + ex.Message);
-                    //TODO : Write to the log we failed in some way
+
+                    // TODO : Write to the log we failed in some way
                     Environment.Exit(Environment.ExitCode);
                 }
             }

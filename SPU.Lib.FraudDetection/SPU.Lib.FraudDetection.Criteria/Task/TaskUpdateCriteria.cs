@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskDeleteCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Taks
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using System;
     using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TaskDeleteCriteria Class.
+    /// TaskUpdateCriteria Class.
     /// </summary>
-    public class TaskDeleteCriteria : CriteriaBase
+    public class TaskUpdateCriteria : CriteriaBase
     {
     }
 }

@@ -11,14 +11,14 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using System;
     using System.Collections;
+    using System.Configuration;
     using System.Data;
     using System.Data.SqlClient;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.Core;
-    using System.Configuration;    
+    using SPU.Lib.FraudDetection.Criteria;    
 
     /// <summary>
     /// Base Data Access.
@@ -30,7 +30,6 @@ namespace SPU.Lib.FraudDetection.DataAccess
         public BaseDataAccess()
         {
             _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
-
         }
         
         /// <summary>
@@ -110,7 +109,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
         /// </summary>
         /// <param name="hash">Input parameters.</param>
         /// <returns>Command result.</returns>
-        private CommandResult GetCommandResult(Hashtable hash)
+        public CommandResult GetCommandResult(Hashtable hash)
         {
             var errCode = hash["errcode"];
             var errMsg = hash["errmsg"];
@@ -126,15 +125,13 @@ namespace SPU.Lib.FraudDetection.DataAccess
         /// Returns the data collection.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="logCriteria">The log criteria.</param>
         /// <returns>Data Collection.</returns>
         public DataCollection ReturnDataCollection(ICriteria criteria)
         {
             // prepare SP parameters
             Hashtable hash = criteria.GetSpParams();
             
-            //hash = (new ResultCriteria()).AddSpParams(hash);
-
+            // hash = (new ResultCriteria()).AddSpParams(hash);
             var results = new DataCollection();
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))

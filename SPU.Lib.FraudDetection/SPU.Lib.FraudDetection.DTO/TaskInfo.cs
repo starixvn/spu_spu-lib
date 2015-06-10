@@ -10,8 +10,8 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TaskInfo class.
@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public int WorkflowId { get; set; }
 
-        public bool IsBackgroundProcess { get; set; } //get from [IsBackgroundProcess] in Action table
+        public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
 
         public int ActionId { get; set; }
 

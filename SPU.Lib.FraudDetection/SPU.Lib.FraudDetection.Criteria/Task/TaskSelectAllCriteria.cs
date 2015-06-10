@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TablesForeignKeySelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,14 +7,18 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Taks
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TablesForeignKeySelectAllCriteria Class.
+    /// TaskSelectAllCriteria Class.
     /// </summary>
-    public class TablesForeignKeySelectAllCriteria : CriteriaBase
+    public class TaskSelectAllCriteria : CriteriaBase
     {      
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
@@ -22,7 +26,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TablesForeignKeySelectAll";
+            return "SPU_TaskSelectAll";
         }
 
         /// <summary>

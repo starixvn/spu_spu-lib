@@ -41,15 +41,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public TaskInfo TaskInfo { get; set; }
 
-        /// <summary>
-        /// List of Ids retrieved from task's precondition.
-        /// </summary>
         public string IdsList { get; set; }
 
-        /// <summary>
-        /// List of suspicious info from tasks' rule.
-        /// </summary>
-        public List<SuspiciousInfo> suspiciousInfoList { get; set; }
+        public List<SuspiciousInfo> SuspiciousInfoList { get; set; }
 
         #endregion
 
@@ -67,8 +61,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             foreach (var preCond in TaskInfo.Preconditions)
             {
                 // TO DO
-                //strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
-                //sqlStr += string.Join(" AND ", strCond);
+                // strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
+                // sqlStr += string.Join(" AND ", strCond);
             }
 
             return sqlStr;
@@ -86,8 +80,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             foreach (var rule in TaskInfo.Rules)
             {
                 // TO DO
-                //strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
-                //sqlStr += string.Join(" AND ", strRule);
+                // strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
+                // sqlStr += string.Join(" AND ", strRule);
             }
 
             return sqlStr;
@@ -141,7 +135,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         /// <summary>
         /// Scan suspicious tickets.
-        /// </summary>        
+        /// </summary>
+        /// <param name="source">Source object.</param>
+        /// <param name="e">Elapsed Event Arguments.</param>
         public void Scan(object source, ElapsedEventArgs e)
         {
             try
@@ -151,17 +147,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
                     if (preConGroups != null)
                     {
-                        suspiciousInfoList = ExecuteRule(preConGroups);
+                        SuspiciousInfoList = ExecuteRule(preConGroups);
                     }
 
                     if (TaskInfo.ActionId == 1)
                     {
-
-                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList, TaskInfo.WorkflowId);
+                        var saveAction = new ActionSaveSuspiciousInfo(SuspiciousInfoList, IdsList, TaskInfo.WorkflowId);
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(suspiciousInfoList);                                
+                    TakeNextAction(SuspiciousInfoList);                                
                 }
             }
             catch (Exception ex)
@@ -235,8 +230,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <summary>
         /// Do next action for the task.
         /// </summary>
-        /// <param name="listSuspiciousInfo">List of suspicious tickets.</param>
-        /// <returns>True if success.</returns>
+        /// <param name="suspiciousInfoList">List of suspicious tickets.</param>
         private void TakeNextAction(List<SuspiciousInfo> suspiciousInfoList)
         {
             try

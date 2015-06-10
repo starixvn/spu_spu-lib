@@ -35,5 +35,10 @@ namespace SPU.Lib.FraudDetection.DataAccess
         {
             return ExecuteNonQuery(criteria);            
         }
+
+        public ICommandResult UpdateConfigParameters(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

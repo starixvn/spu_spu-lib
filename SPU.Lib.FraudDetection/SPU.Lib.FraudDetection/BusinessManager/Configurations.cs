@@ -73,7 +73,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
             foreach (var config in _configs)
             {
-                if (true) // config.Value.IsUpdate)
+                // if (config.Value.IsUpdate)
+                if (true) 
                 {
                     sqlStr += string.Format(tmpUpdate, config.Value.ConfigCategory, config.Value.ConfigControlType, config.Value.ConfigName);                    
                 }

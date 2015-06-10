@@ -47,5 +47,10 @@ namespace SPU.Lib.FraudDetection.Service
         {
             return _configDataAccess.UpdateConfigs(criteria);
         }
+
+        public ICommandResult UpdateConfigParameters(ICriteria criteria)
+        {
+            return _configDataAccess.UpdateConfigParameters(criteria);
+        }
     }
 }

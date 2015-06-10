@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.Criteria.Taks;
+    using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
 
@@ -67,7 +67,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
      
         public void AssignTaskToThreadPool(Task task, Match match)       
         {
-            ThreadPool.AddTask(task);//, () => { task.Run(match); });
+            ThreadPool.AddTask(task);
         }
      
         #endregion
@@ -78,7 +78,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_tasksInfo.Count == 0)
             {
-                var criteria = new TaskSelectAllByWorkflowIdCriteria(){ WorkFlowId = _workflowInfo.WorkflowId};
+                var criteria = new TaskSelectAllByWorkflowIdCriteria() { WorkFlowId = _workflowInfo.WorkflowId };
                 IEnumerable<TaskInfo> tasks = _workflowService.GetTasks(criteria);
                 _tasksInfo = tasks.ToList();
             }

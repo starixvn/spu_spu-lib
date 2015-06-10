@@ -10,8 +10,8 @@
 namespace SPU.Lib.Core
 {
     using System;
-    using System.Data;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
 
     /// <summary>
@@ -20,8 +20,12 @@ namespace SPU.Lib.Core
     public static class Extentions
     {
         /// <summary>
-        /// Break a list of items into chunks of a specific size
+        /// Break a list of items into chunks of a specific size.
         /// </summary>
+        /// <typeparam name="T">Delegate object.</typeparam>
+        /// <param name="source">Source object.</param>
+        /// <param name="chunksize">Chunk size.</param>
+        /// <returns>List of delegate object.</returns>
         public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunksize)
         {
             while (source.Any())

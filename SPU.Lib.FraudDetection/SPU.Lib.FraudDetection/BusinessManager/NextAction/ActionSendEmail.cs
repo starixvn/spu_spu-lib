@@ -18,8 +18,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class ActionSendEmail : BaseAction
     {
-        public string _emailList { get; set; } // format: a@abc.com; b@abc.com
-
         private List<SuspiciousInfo> _suspiciousList;
 
         public ActionSendEmail(List<SuspiciousInfo> suspiciousList, string emailList)
@@ -27,6 +25,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _suspiciousList = suspiciousList;
             _emailList = emailList;
         }
+
+        public string _emailList { get; set; } // format: a@abc.com; b@abc.com
 
         public override void TakeAction()
         {
@@ -37,6 +37,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     template += info.CustId + "-->" + info.MatchId + "-->" + info.TransIdList + "\r\n";
                 }
+
                 Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);                
             }
             catch (Exception ex)

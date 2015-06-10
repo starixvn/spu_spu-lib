@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Taks
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using System;
     using System.Collections.Generic;

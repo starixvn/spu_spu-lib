@@ -14,9 +14,9 @@ namespace SPU.Lib.FraudDetection.Service
     using System.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.Core;
 
     /// <summary>
     /// Task Service.
@@ -103,15 +103,15 @@ namespace SPU.Lib.FraudDetection.Service
         /// <returns>List of ids.</returns>
         public IEnumerable<string> ExecutePrecondition(string sqlQueryString)
         {
-            List<string> IdList = new List<string>();
+            List<string> listOfIDs = new List<string>();
             DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
 
-            for(int i =0;i< dt.Rows.Count ; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                IdList.Add(dt.Rows[i][0].ToString());
+                listOfIDs.Add(dt.Rows[i][0].ToString());
             }
 
-            return IdList as IEnumerable<string>;
+            return listOfIDs as IEnumerable<string>;
         }
 
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
@@ -151,7 +151,6 @@ namespace SPU.Lib.FraudDetection.Service
 
         void System.IDisposable.Dispose()
         {
-
         }
     }
 }
