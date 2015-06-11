@@ -58,6 +58,7 @@
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -84,6 +85,12 @@
     <Compile Include="Group\GroupUpdateCriteria.cs" />
     <Compile Include="Group\CustomerGroupAssignCriteria.cs" />
     <Compile Include="Group\GroupInsertCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetByNameCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetByIdCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterDeleteCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterInsertCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetAllCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterUpdateCriteria.cs" />
     <Compile Include="ScannedMatch\MatchSelectAllCriteria.cs" />
     <Compile Include="ScannedMatch\MatchInsertCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
