@@ -8,13 +8,15 @@
 //   <change who="Long.Luu" date="2015.04.01">Add ScanMatch: major function</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
-{
-    using System;
-    using SPU.Lib.FraudDetection.Criteria.Workflow;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+using System;
+using SPU.Lib.FraudDetection.BusinessManager;
+using SPU.Lib.FraudDetection.BusinessManager.NextAction;
+using SPU.Lib.FraudDetection.Criteria.Workflow;
+using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.Service;
 
+namespace SPU.Lib.FraudDetection
+{
     /// <summary>
     /// Main Class.
     /// </summary>
@@ -33,7 +35,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             BaseAction action = new ActionSendEmail(new System.Collections.Generic.List<SuspiciousInfo>(), "");
             action.TakeAction();
-        }  
+        }
 
         /// <summary>
         /// Major function of Fraud Detection.
@@ -49,6 +51,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     workflow.Run(_match);
                 }
             }
-        }      
+        }
     }
 }

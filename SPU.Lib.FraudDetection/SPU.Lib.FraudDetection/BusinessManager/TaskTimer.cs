@@ -14,9 +14,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// <summary>
     /// ThreadTimer class.
     /// </summary>
-    public class ThreadTimer : Timer
+    public class TaskTimer : Timer
     {
-        public ThreadTimer(double interval) : base(interval)
+        public TaskTimer(double interval)
+            : base(interval)
         {
         }
 

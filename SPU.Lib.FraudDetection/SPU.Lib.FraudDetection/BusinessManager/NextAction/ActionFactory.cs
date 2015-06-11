@@ -9,13 +9,14 @@
 
 using System.Collections.Generic;
 using SPU.Lib.FraudDetection.DTO;
-namespace SPU.Lib.FraudDetection.BusinessManager
+
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     /// <summary>
     /// ActionFactory Class.
     /// </summary>
     public static class ActionFactory
-    {        
+    {
         /// <summary>
         /// Get an action.
         /// </summary>
@@ -27,8 +28,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 case 1:
                     return new ActionAssignGroup(suspiciousList, actionTargetId);
+
                 case 2:
-                    return new ActionSendEmail(suspiciousList, "thai.tran@nexcel.vn");           
+                    return new ActionSendEmail(suspiciousList, "thai.tran@nexcel.vn");
+
                 default:
                     return null;
             }

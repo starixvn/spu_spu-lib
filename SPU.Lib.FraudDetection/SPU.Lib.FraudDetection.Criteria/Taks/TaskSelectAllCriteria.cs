@@ -9,17 +9,13 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.Taks
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TaskSelectAllCriteria Class.
     /// </summary>
     public class TaskSelectAllCriteria : CriteriaBase
-    {      
+    {
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>
@@ -36,6 +32,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Taks
         public override bool IsValid()
         {
             return true;
-        }        
+        }
     }
 }

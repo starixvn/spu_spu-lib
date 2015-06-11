@@ -7,39 +7,66 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
+using System;
+using System.Collections.Generic;
+using System.Messaging;
+
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Messaging;
-    using System.Threading;
-    using System.Timers;
+    public interface ITaskManager
+    {
+        List<TaskTimer> ThreadTimerList { get; set; }
+
+        /// <summary>
+        /// Add and start a task in the thread pool.
+        /// </summary>
+        /// <param name="task">The task to execute.</param>
+        void AddTask(Task task);
+
+        /// <summary>
+        /// Update a task.
+        /// </summary>
+        /// <param name="task">The task to update.</param>
+        void UpdateTask(Task task);
+
+        /// <summary>
+        /// Remove a task out the thread pool.
+        /// </summary>
+        /// <param name="task">The task name.</param>
+        /// <returns>True if item is successfully removed; otherwise, false.</returns>
+        void RemoveTask(Task task);
+
+        void StopTasks();
+    }
 
     /// <summary>
     /// Workflow Class.
     /// </summary>
-    public static class ThreadPool
-    {                
-        private static string _threadNameTemplate = "Task {0}";
+    public class TaskManager : ITaskManager
+    {
+        public List<TaskTimer> ThreadTimerList { get; set; }
 
-        private static List<ThreadTimer> _threadTimerList = new List<ThreadTimer>();
-        
+        public TaskManager()
+        {
+            ThreadTimerList = new List<TaskTimer>();
+        }
+
         /// <summary>
         /// Add and start a task in the thread pool.
         /// </summary>
-        /// <param name="task">The task to execute.</param>        
-        internal static void AddTask(Task task)
+        /// <param name="task">The task to execute.</param>
+        public void AddTask(Task task)
         {
             try
-            {                
-                if (_threadTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
+            {
+                if (ThreadTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
                 {
-                    ThreadTimer threadTimer = new ThreadTimer(task.TaskInfo.Timer);
+                    TaskTimer threadTimer = new TaskTimer(task.TaskInfo.Timer);
                     threadTimer.TimerName = task.TaskInfo.TaskName;
-                    threadTimer.Elapsed += new ElapsedEventHandler(task.Scan);
+                    threadTimer.Elapsed += task.Scan;
                     threadTimer.Enabled = true;
 
-                    _threadTimerList.Add(threadTimer);                          
+                    ThreadTimerList.Add(threadTimer);
                 }
             }
             catch (Exception ex)
@@ -48,56 +75,17 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        ///// <summary>
-        ///// Add and start a task in the thread pool.
-        ///// </summary>
-        ///// <param name="task">The task to execute.</param>        
-        //internal static void AddTask(Task task)
-        //{
-        //    try
-        //    {
-        //        string threadName = string.Format(_threadNameTemplate, task.TaskInfo.TaskName).ToLower();
-
-        //        if (_threads.Find(x => x.Name.ToLower().Equals(threadName)) == null)
-        //        {
-        //            ThreadStart action = new ThreadStart(() =>
-        //            {
-        //                System.Timers.Timer aTimer = new System.Timers.Timer(task.TaskInfo.Timer);
-        //                aTimer.Elapsed += new ElapsedEventHandler(task.Scan);
-        //                aTimer.Enabled = true;
-        //            });
-
-        //            Thread thread = new Thread(action);
-        //            thread.Name = threadName;
-        //            thread.Start();
-
-        //            ////Using Join if we want to execute the thread immediately (blocking calling other threads)
-        //            //if (Thread.CurrentThread.Name != thread.Name && thread.ThreadState != ThreadState.Unstarted)
-        //            //{
-        //            //    //// avoid the app hangs due to the current thread waits upon itselft indefinitely
-        //            //    thread.Join();
-        //            //}
-
-        //            _threads.Add(thread);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Exception Add a task into the thread pool -- " + ex.Message);
-        //    }
-        //}
-
         /// <summary>
         /// Update a task.
         /// </summary>
         /// <param name="task">The task to update.</param>
-        internal static void UpdateTask(Task task)
+        public void UpdateTask(Task task)
         {
             try
             {
                 RemoveTask(task);
                 AddTask(task);
-           }
+            }
             catch (Exception ex)
             {
                 throw new Exception("Exception Update a task into the thread pool -- " + ex.Message);
@@ -107,18 +95,18 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <summary>
         /// Remove a task out the thread pool.
         /// </summary>
-        /// <param name="taskName">The task name.</param>
+        /// <param name="task">The task name.</param>
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
-        internal static void RemoveTask(Task task)
+        public void RemoveTask(Task task)
         {
             try
             {
-                var threadTimer = _threadTimerList.Find(x => x.TimerName.ToLower().Equals(task.TaskInfo.TaskName));
+                var threadTimer = ThreadTimerList.Find(x => x.TimerName.ToLower().Equals(task.TaskInfo.TaskName));
                 if (threadTimer != null)
                 {
                     threadTimer.Stop();
                     threadTimer.Dispose();
-                    _threadTimerList.Remove(threadTimer);
+                    ThreadTimerList.Remove(threadTimer);
                 }
             }
             catch (Exception ex)
@@ -127,57 +115,23 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        internal static void StopAllTasks()
+        public void StopTasks()
         {
             try
-            {                
-                foreach (ThreadTimer threadTimer in _threadTimerList)
+            {
+                foreach (TaskTimer threadTimer in ThreadTimerList)
                 {
                     threadTimer.Stop();
                     threadTimer.Close();
-                    threadTimer.Dispose();                 
+                    threadTimer.Dispose();
                 }
 
-                _threadTimerList.Clear();
+                ThreadTimerList.Clear();
             }
             catch (Exception ex)
             {
                 throw new Exception("Exception Stop and remove all tasks out the thread pool -- " + ex.Message);
             }
-        }
-
-        internal static void AsynchronousTask()
-        {
-            MessageQueue myQueue = new MessageQueue(".\\myQueue");
-            myQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
-
-            // Add an event handler for the ReceiveCompleted event.
-            myQueue.ReceiveCompleted += new
-                ReceiveCompletedEventHandler(MyReceiveCompleted);
-
-            // Begin the asynchronous receive operation.
-            myQueue.BeginReceive();
-
-            // Do other work on the current thread.
-
-            return;
-        }
-
-        internal static void MyReceiveCompleted(Object source, ReceiveCompletedEventArgs asyncResult)
-        {
-            // Connect to the queue.
-			MessageQueue mq = (MessageQueue)source;
-
-			// End the asynchronous Receive operation.
-			Message m = mq.EndReceive(asyncResult.AsyncResult);
-
-			// Display message information on the screen.
-			Console.WriteLine("Message: " + (string)m.Body);
-
-			// Restart the asynchronous Receive operation.
-			mq.BeginReceive();
-			            
-			return; 
         }
     }
 }

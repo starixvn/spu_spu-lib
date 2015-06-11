@@ -8,26 +8,33 @@
 //   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
+using System;
+
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
     using System.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.Core;
 
     /// <summary>
     /// Task Service.
     /// </summary>
-    public class TaskService : QueryService, System.IDisposable
+    public class TaskService : QueryService, IDisposable, ITaskService
     {
-        private TaskDataAccess _taskDataAccess;
+        private readonly ITaskDataAccess _taskDataAccess;
 
         public TaskService()
         {
             _taskDataAccess = new TaskDataAccess();
+        }
+
+        public TaskService(ITaskDataAccess dataAccess)
+        {
+            _taskDataAccess = dataAccess;
         }
 
         public ICommandResult InsertTask(ICriteria criteria)
@@ -62,7 +69,7 @@ namespace SPU.Lib.FraudDetection.Service
 
         public IEnumerable<SuspiciousInfo> GetSuspiciousTickets(string query)
         {
-            return GetData<SuspiciousInfo>(query);            
+            return GetData<SuspiciousInfo>(query);
         }
 
         public IEnumerable<TablesForeignKey> GetTablesForeignKey(ICriteria criteria)
@@ -106,7 +113,7 @@ namespace SPU.Lib.FraudDetection.Service
             List<string> IdList = new List<string>();
             DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
 
-            for(int i =0;i< dt.Rows.Count ; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 IdList.Add(dt.Rows[i][0].ToString());
             }
@@ -116,7 +123,7 @@ namespace SPU.Lib.FraudDetection.Service
 
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
         {
-            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();            
+            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();
             DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
             int custId = 0;
             int matchId = 0;
@@ -129,7 +136,7 @@ namespace SPU.Lib.FraudDetection.Service
                 transId = long.Parse(dt.Rows[i]["transid"].ToString());
 
                 var currentInfo = suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
-                
+
                 if (currentInfo == null)
                 {
                     SuspiciousInfo info = new SuspiciousInfo();
@@ -142,16 +149,15 @@ namespace SPU.Lib.FraudDetection.Service
                 }
                 else
                 {
-                    suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList += "," + transId;                    
+                    suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList += "," + transId;
                 }
             }
 
             return suspiciousInfoList;
         }
 
-        void System.IDisposable.Dispose()
+        public void Dispose()
         {
-
         }
     }
 }

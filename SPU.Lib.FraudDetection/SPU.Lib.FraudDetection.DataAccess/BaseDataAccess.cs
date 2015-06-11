@@ -11,14 +11,14 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using System;
     using System.Collections;
+    using System.Configuration;
     using System.Data;
     using System.Data.SqlClient;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.Core;
-    using System.Configuration;    
+    using SPU.Lib.FraudDetection.Criteria;
 
     /// <summary>
     /// Base Data Access.
@@ -30,9 +30,8 @@ namespace SPU.Lib.FraudDetection.DataAccess
         public BaseDataAccess()
         {
             _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
-
         }
-        
+
         /// <summary>
         /// Execute non query.
         /// </summary>
@@ -50,7 +49,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
                 db.ExecuteNonQuery(hash);
 
                 return GetCommandResult(hash);
-            } 
+            }
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
 
             return sqlDt;
         }
-        
+
         /// <summary>
         /// Get Command Result.
         /// </summary>
@@ -132,7 +131,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
         {
             // prepare SP parameters
             Hashtable hash = criteria.GetSpParams();
-            
+
             //hash = (new ResultCriteria()).AddSpParams(hash);
 
             var results = new DataCollection();

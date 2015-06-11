@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     /// <summary>
     /// BaseAction Class.

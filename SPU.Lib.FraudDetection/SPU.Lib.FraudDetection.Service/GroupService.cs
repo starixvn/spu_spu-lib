@@ -10,16 +10,15 @@
 namespace SPU.Lib.FraudDetection.Service
 {
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;    
-    using SPU.Lib.FraudDetection.DataAccess;
-    using SPU.Lib.FraudDetection.DTO;
+    using Fanex.NAP.Framework.Data;
     using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.DataAccess;
 
     /// <summary>
     /// Group Service.
     /// </summary>
     public class GroupService : QueryService
-    {        
+    {
         private GroupDataAccess _groupDataAccess;
 
         public GroupService()

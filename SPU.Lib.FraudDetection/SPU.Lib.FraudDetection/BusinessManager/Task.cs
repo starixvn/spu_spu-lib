@@ -8,6 +8,8 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
+using SPU.Lib.FraudDetection.BusinessManager.NextAction;
+
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
@@ -35,7 +37,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             this.TaskInfo = taskInfo;
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Properties
 
@@ -51,7 +53,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// </summary>
         public List<SuspiciousInfo> suspiciousInfoList { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region BuildTask
 
@@ -93,14 +95,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return sqlStr;
         }
 
-        #endregion
+        #endregion BuildTask
 
         #region RunTask
 
         /// <summary>
         /// Execute a task for a suspicious match.
         /// </summary>
-        /// <param name="match">The match for scanning.</param>        
+        /// <param name="match">The match for scanning.</param>
         public void Run(Match match)
         {
             try
@@ -135,13 +137,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
         }
 
-        #endregion
+        #endregion RunTask
 
         #region Scan
 
         /// <summary>
         /// Scan suspicious tickets.
-        /// </summary>        
+        /// </summary>
         public void Scan(object source, ElapsedEventArgs e)
         {
             try
@@ -156,23 +158,22 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                     if (TaskInfo.ActionId == 1)
                     {
-
                         var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList, TaskInfo.WorkflowId);
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(suspiciousInfoList);                                
+                    TakeNextAction(suspiciousInfoList);
                 }
             }
             catch (Exception ex)
             {
-                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - "  + ex.InnerException.Message);
+                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - " + ex.InnerException.Message);
             }
         }
 
         /// <summary>
         /// Execute the precondition of task.
-        /// </summary>        
+        /// </summary>
         /// <returns>List of ids.</returns>
         private IEnumerable<IEnumerable<string>> ExecutePrecondition()
         {
@@ -218,7 +219,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     {
                         foreach (IEnumerable<string> group in preConGroups)
                         {
-                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("$param1$", string.Join(",", group));                            
+                            ruleQuery = TaskInfo.TaskRules.Replace("\r\n", " ").Replace("$param1$", string.Join(",", group));
                             suspiciousTickets.AddRange(taskService.ExecuteRule(ruleQuery, TaskInfo.WorkflowId));
                         }
                     }
@@ -261,6 +262,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
-        #endregion
+        #endregion Scan
     }
 }

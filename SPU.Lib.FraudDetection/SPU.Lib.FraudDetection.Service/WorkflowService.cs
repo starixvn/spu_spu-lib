@@ -7,14 +7,16 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
+using System;
+
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.Core;    
 
     /// <summary>
     /// Workflow Service.
@@ -56,6 +58,11 @@ namespace SPU.Lib.FraudDetection.Service
         public ICommandResult UpdateWorkflow(ICriteria criteria)
         {
             return _workflowDataAccess.UpdateWorkflow(criteria);
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

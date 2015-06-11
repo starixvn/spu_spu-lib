@@ -7,12 +7,12 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
-{
-    using System;
-    using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.DTO;
+using System;
+using System.Collections.Generic;
+using SPU.Lib.FraudDetection.DTO;
 
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
+{
     /// <summary>
     /// ActionSendEmail Class.
     /// </summary>
@@ -37,12 +37,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     template += info.CustId + "-->" + info.MatchId + "-->" + info.TransIdList + "\r\n";
                 }
-                Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);                
+                Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);
             }
             catch (Exception ex)
             {
                 throw new Exception("Exception ActionSendEmail --", ex);
-            }            
+            }
         }
     }
 }

@@ -10,8 +10,8 @@
 
 namespace SPU.Lib.FraudDetection.DTO
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TaskInfo class.
@@ -39,8 +39,8 @@ namespace SPU.Lib.FraudDetection.DTO
         public int ActionId { get; set; }
 
         public string NextActionIdList { get; set; }
-        
-        public string NextActionTargetIdList { get; set; }        
+
+        public string NextActionTargetIdList { get; set; }
 
         public int Interval { get; set; }
 
