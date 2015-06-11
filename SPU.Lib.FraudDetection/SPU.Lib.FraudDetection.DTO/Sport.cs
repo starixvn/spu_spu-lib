@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Bet type Class.
+    /// Sport Class.
     /// </summary>
     public class Sport
     {

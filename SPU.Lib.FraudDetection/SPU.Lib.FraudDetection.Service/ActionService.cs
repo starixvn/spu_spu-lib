@@ -10,7 +10,6 @@
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess;
     using SPU.Lib.FraudDetection.DTO;

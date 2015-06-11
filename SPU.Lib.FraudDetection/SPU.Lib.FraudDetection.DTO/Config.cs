@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// ConfigInfo Class.
+    /// Config Info Class.
     /// </summary>
     public class Config
     {

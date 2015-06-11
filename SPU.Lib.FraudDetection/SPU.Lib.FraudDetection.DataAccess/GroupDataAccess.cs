@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using SPU.Lib.Core;    
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Group Data Access.
     /// </summary>
     public class GroupDataAccess : BaseDataAccess
     {

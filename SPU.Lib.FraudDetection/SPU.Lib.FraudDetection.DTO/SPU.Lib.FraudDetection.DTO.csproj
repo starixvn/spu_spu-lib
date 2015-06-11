@@ -70,6 +70,7 @@
     <Compile Include="Bettype.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Action.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="TablesForeignKey.cs" />
     <Compile Include="Sport.cs" />
     <Compile Include="WorkflowInfo.cs" />

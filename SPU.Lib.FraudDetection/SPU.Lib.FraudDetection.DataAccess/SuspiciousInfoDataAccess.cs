@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Suspicious Info Data Access.
     /// </summary>
     public class SuspiciousInfoDataAccess : BaseDataAccess
     {

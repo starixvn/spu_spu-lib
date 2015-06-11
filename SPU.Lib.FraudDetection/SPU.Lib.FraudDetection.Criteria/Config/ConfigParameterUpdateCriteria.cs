@@ -9,10 +9,6 @@
 
 namespace SPU.Lib.FraudDetection.Criteria
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -22,9 +18,9 @@ namespace SPU.Lib.FraudDetection.Criteria
     {
         public int CreatorId { get; set; }
 
-        public int PercentageMaxBet { get; set; }
+        public string ListParamIDs { get; set; }
 
-        public int SecondsToGoal { get; set; }
+        public string ListParamNewValues { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

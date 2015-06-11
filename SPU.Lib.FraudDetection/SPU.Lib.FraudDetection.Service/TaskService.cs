@@ -114,6 +114,12 @@ namespace SPU.Lib.FraudDetection.Service
             return listOfIDs as IEnumerable<string>;
         }
 
+        /// <summary>
+        /// Execute Rule.
+        /// </summary>
+        /// <param name="sqlQueryString">SQL Query String.</param>
+        /// <param name="workflowId">Workflow ID.</param>
+        /// <returns>List of Suspicious Info.</returns>
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
         {
             List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();            

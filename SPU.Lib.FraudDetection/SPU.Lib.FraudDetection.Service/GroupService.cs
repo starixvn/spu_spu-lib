@@ -13,7 +13,6 @@ namespace SPU.Lib.FraudDetection.Service
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.Core;
     using SPU.Lib.FraudDetection.DataAccess;
-    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Group Service.

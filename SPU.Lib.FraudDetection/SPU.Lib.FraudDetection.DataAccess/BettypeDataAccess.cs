@@ -24,6 +24,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
         {
         }
 
+        /// <summary>
+        /// Insert Bettype.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <returns>Command Result.</returns>
         public ICommandResult InsertBettype(ICriteria criteria)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
@@ -35,6 +40,11 @@ namespace SPU.Lib.FraudDetection.DataAccess
             }
         }
 
+        /// <summary>
+        /// Delete Bettype.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        /// <returns>Command Result.</returns>
         public ICommandResult DeleteBettype(ICriteria criteria)
         {
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))

@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// SuspiciousInfo Class.
+    /// Suspicious Info Class.
     /// </summary>
     public class SuspiciousInfo
     {

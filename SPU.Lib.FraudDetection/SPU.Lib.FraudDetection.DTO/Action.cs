@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Bet type Class.
+    /// Action Class.
     /// </summary>
     public class Action
     {

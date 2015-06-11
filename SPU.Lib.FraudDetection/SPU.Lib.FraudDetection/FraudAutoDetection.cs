@@ -38,6 +38,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
+        /// <summary>
+        /// Manage message queue.
+        /// </summary>
         protected MessageQueue OperationMessageQueue
         {
             get
@@ -53,6 +56,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
         }
 
+        /// <summary>
+        /// Message queue receive.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event Arguments.</param>
         public void Mq_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
         {
             using (var msg = OperationMessageQueue.EndReceive(e.AsyncResult))
@@ -85,6 +93,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             OperationMessageQueue.BeginReceive();
         }
 
+        /// <summary>
+        /// Load Tasks.
+        /// </summary>
         public void LoadTasks()
         {
             try
@@ -128,6 +139,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return result;
         }
 
+        /// <summary>
+        /// Update Task.
+        /// </summary>
+        /// <param name="task">Task Info.</param>
+        /// <returns>Update result.</returns>
         public bool UpdateTask(Task task)
         {
             bool result = false;
@@ -147,6 +163,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return result;
         }
 
+        /// <summary>
+        /// Remove Task.
+        /// </summary>
+        /// <param name="task">Task Info.</param>
+        /// <returns>Remove result.</returns>
         public bool RemoveTask(Task task)
         {
             bool result = false;
@@ -166,6 +187,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return result;
         }
 
+        /// <summary>
+        /// Stop all tasks.
+        /// </summary>
         public void Stop()
         {
             try

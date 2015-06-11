@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.DTO
     using System.Collections.Generic;
 
     /// <summary>
-    /// TaskInfo class.
+    /// Task Info class.
     /// </summary>
     public class TaskInfo
     {

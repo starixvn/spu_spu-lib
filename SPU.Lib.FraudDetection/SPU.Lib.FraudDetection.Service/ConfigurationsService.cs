@@ -10,7 +10,6 @@
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
-    using System.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DataAccess;
@@ -41,6 +40,11 @@ namespace SPU.Lib.FraudDetection.Service
         public IEnumerable<Config> GetConfigs(ICriteria criteria)
         {
             return GetData<Config>(criteria);
+        }
+
+        public IEnumerable<Parameter> GetParameters(ICriteria criteria)
+        {
+            return GetData<Parameter>(criteria);
         }
 
         public ICommandResult UpdateConfigs(ICriteria criteria)

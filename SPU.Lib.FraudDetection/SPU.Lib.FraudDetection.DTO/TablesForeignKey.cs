@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Group Class.
+    /// Tables Foreign Key Class.
     /// </summary>
     public class TablesForeignKey
     {
