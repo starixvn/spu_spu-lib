@@ -1,54 +1,18 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ThreadPool.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
-// </history>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Messaging;
 
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
-    public interface ITaskManager
-    {
-        List<TaskTimer> ThreadTimerList { get; set; }
-
-        /// <summary>
-        /// Add and start a task in the thread pool.
-        /// </summary>
-        /// <param name="task">The task to execute.</param>
-        void AddTask(Task task);
-
-        /// <summary>
-        /// Update a task.
-        /// </summary>
-        /// <param name="task">The task to update.</param>
-        void UpdateTask(Task task);
-
-        /// <summary>
-        /// Remove a task out the thread pool.
-        /// </summary>
-        /// <param name="task">The task name.</param>
-        /// <returns>True if item is successfully removed; otherwise, false.</returns>
-        void RemoveTask(Task task);
-
-        void StopTasks();
-    }
-
     /// <summary>
     /// Workflow Class.
     /// </summary>
     public class TaskManager : ITaskManager
     {
-        public List<TaskTimer> ThreadTimerList { get; set; }
+        public List<TaskTimer> TaskTimerList { get; set; }
 
         public TaskManager()
         {
-            ThreadTimerList = new List<TaskTimer>();
+            TaskTimerList = new List<TaskTimer>();
         }
 
         /// <summary>
@@ -59,14 +23,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                if (ThreadTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
+                if (TaskTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
                 {
                     TaskTimer threadTimer = new TaskTimer(task.TaskInfo.Timer);
                     threadTimer.TimerName = task.TaskInfo.TaskName;
                     threadTimer.Elapsed += task.Scan;
                     threadTimer.Enabled = true;
 
-                    ThreadTimerList.Add(threadTimer);
+                    TaskTimerList.Add(threadTimer);
                 }
             }
             catch (Exception ex)
@@ -101,12 +65,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                var threadTimer = ThreadTimerList.Find(x => x.TimerName.ToLower().Equals(task.TaskInfo.TaskName));
+                var threadTimer = TaskTimerList.Find(x => x.TimerName.ToLower().Equals(task.TaskInfo.TaskName));
                 if (threadTimer != null)
                 {
                     threadTimer.Stop();
                     threadTimer.Dispose();
-                    ThreadTimerList.Remove(threadTimer);
+                    TaskTimerList.Remove(threadTimer);
                 }
             }
             catch (Exception ex)
@@ -119,14 +83,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                foreach (TaskTimer threadTimer in ThreadTimerList)
+                foreach (TaskTimer threadTimer in TaskTimerList)
                 {
                     threadTimer.Stop();
                     threadTimer.Close();
                     threadTimer.Dispose();
                 }
 
-                ThreadTimerList.Clear();
+                TaskTimerList.Clear();
             }
             catch (Exception ex)
             {

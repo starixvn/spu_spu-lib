@@ -75,9 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessManager\ITaskManager.cs" />
+    <Compile Include="IReceivingMessageHandler.cs" />
+    <Compile Include="ReceivedMessageHandler.cs" />
     <Compile Include="SendingTasks\AddingTask.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSaveSuspiciousInfo.cs" />
-    <Compile Include="BusinessManager\ThreadPool.cs" />
+    <Compile Include="BusinessManager\TaskManager.cs" />
     <Compile Include="BusinessManager\NextAction\ActionFactory.cs" />
     <Compile Include="BusinessManager\ScannedMatches.cs" />
     <Compile Include="BusinessManager\NextAction\BaseAction.cs" />
@@ -88,7 +91,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SendingTasks\ISendingTask.cs" />
-    <Compile Include="ITaskManager.cs" />
     <Compile Include="SendingTasks\RemovingTask.cs" />
     <Compile Include="SendingTasks\SendingTask.cs" />
     <Compile Include="SendingTasks\SendingTaskFactory.cs" />
@@ -102,7 +104,7 @@
     <Compile Include="ITaskLoader.cs" />
     <Compile Include="MessageQueueExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskManager.cs" />
+    <Compile Include="FraudAutoDetection.cs" />
     <Compile Include="SendingTasks\UpdatingTask.cs" />
   </ItemGroup>
   <ItemGroup>

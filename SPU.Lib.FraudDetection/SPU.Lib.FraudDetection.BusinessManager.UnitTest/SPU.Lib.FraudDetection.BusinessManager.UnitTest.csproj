@@ -134,6 +134,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReceivingMessageHandlerTest.cs" />
     <Compile Include="RemovingTaskTest.cs" />
     <Compile Include="UpdatingTaskTest.cs" />
     <Compile Include="AddingTaskTest.cs" />

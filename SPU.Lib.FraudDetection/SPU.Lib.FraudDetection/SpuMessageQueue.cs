@@ -18,16 +18,17 @@ namespace SPU.Lib.FraudDetection
 {
     public class SpuMessageQueue : IMessageQueue
     {
-        private MessageQueue _messageQueue;
+        private readonly MessageQueue _messageQueue;
 
         public event ReceiveCompletedEventHandler ReceiveCompleted;
 
         public SpuMessageQueue()
         {
-            _messageQueue = new MessageQueue();
-            _messageQueue.Path = ConfigSettings.GetConfigStringByName("queuePath");
-            _messageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Task) });
-            //_messageQueueQueue.ReceiveCompleted += ReceiveCompleted;
+            _messageQueue = new MessageQueue
+            {
+                Path = ConfigSettings.GetConfigStringByName("queuePath"),
+                Formatter = new XmlMessageFormatter(new[] { typeof(Task) })
+            };
 
             _messageQueue.Purge();
         }
