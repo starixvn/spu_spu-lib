@@ -7,15 +7,15 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
-{
-    using System;
-    using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+using System;
+using System.Collections.Generic;
+using Fanex.NAP.Framework.Command;
+using SPU.Lib.FraudDetection.Criteria;
+using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.Service;
 
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
+{
     /// <summary>
     ///  Assign a suspicious customer to a customer group.
     /// </summary>
@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _suspiciousList = suspiciousList;
             _nextActionTargetId = nextActionTargetId;
-        }       
+        }
 
         public override void TakeAction()
         {
@@ -58,7 +58,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 ICommandResult result = groupService.AssignCustToGroup(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);                    
+                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
                 }
 
                 return result.IsSuccessful;
@@ -67,6 +67,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 throw new Exception("Exception AssignCustomerGroup --" + ex.Message);
             }
-        }      
+        }
     }
 }

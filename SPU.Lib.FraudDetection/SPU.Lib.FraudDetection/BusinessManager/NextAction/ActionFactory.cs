@@ -7,7 +7,8 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
+
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System.Collections.Generic;
     using SPU.Lib.FraudDetection.DTO;
@@ -16,7 +17,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// ActionFactory Class.
     /// </summary>
     public static class ActionFactory
-    {        
+    {
         /// <summary>
         /// Get An Action.
         /// </summary>
@@ -30,8 +31,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 case 1:
                     return new ActionAssignGroup(suspiciousList, actionTargetId);
+
                 case 2:
                     return new ActionSendEmail(suspiciousList, "long.luu@nexcel.vn");           
+
                 default:
                     return null;
             }

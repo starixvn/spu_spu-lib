@@ -1,0 +1,194 @@
+﻿using SPU.Lib.FraudDetection.BusinessManager;
+using SPU.Lib.FraudDetection.SendingTasks;
+
+namespace SPU.Lib.FraudDetection
+{
+<<<<<<< HEAD
+    using System;
+    using System.Messaging;
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.Criteria.Task;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service;
+
+=======
+>>>>>>> unit-test-message-queue
+    /// <summary>
+    /// FraudAutoDetection Class.
+    /// </summary>
+    public class FraudAutoDetection
+    {
+<<<<<<< HEAD
+        private TaskService _taskService = new TaskService();
+
+        private MessageQueue _operationMessageQueue = null;
+
+        public FraudAutoDetection()
+        {
+            try
+            {
+                OperationMessageQueue.Path = ConfigSettings.GetConfigStringByName("queuePath"); 
+                OperationMessageQueue.BeginReceive();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Manage message queue.
+        /// </summary>
+        protected MessageQueue OperationMessageQueue
+        {
+            get
+            {
+                if (_operationMessageQueue == null)
+                {
+                    _operationMessageQueue = new MessageQueue();
+                    _operationMessageQueue.Formatter = new XmlMessageFormatter(new Type[] { typeof(Task) });
+                    _operationMessageQueue.ReceiveCompleted += new ReceiveCompletedEventHandler(Mq_ReceiveCompleted);
+                }
+
+                return _operationMessageQueue;
+            }
+        }
+
+        /// <summary>
+        /// Message queue receive.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event Arguments.</param>
+        public void Mq_ReceiveCompleted(object sender, ReceiveCompletedEventArgs e)
+        {
+            using (var msg = OperationMessageQueue.EndReceive(e.AsyncResult))
+            {
+                try
+                {
+                    var task = msg.Body as Task;
+                    if (msg.Label.Equals("UPDATE_TASK"))
+                    {
+                        ThreadPool.UpdateTask(task);
+                    }
+                    else if (msg.Label.Equals("REMOVE_TASK"))
+                    {
+                        ThreadPool.RemoveTask(task);
+                    }
+                    else
+                    {
+                        ThreadPool.AddTask(task);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Fanex.Logging.Logger.Log.Error("Exception Mq_ReceiveCompleted: " + ex.Message);
+
+                    // TODO : Write to the log we failed in some way
+                    Environment.Exit(Environment.ExitCode);
+                }
+            }
+
+            OperationMessageQueue.BeginReceive();
+        }
+
+        /// <summary>
+        /// Load Tasks.
+        /// </summary>
+        public void LoadTasks()
+        {
+            try
+            {                
+                var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+                foreach (TaskInfo taskInfo in taskInfoList)
+                {
+                    if (taskInfo.IsActive)
+                    {
+                        OperationMessageQueue.Send(new Task(taskInfo));                          
+                    }
+                }                               
+            }
+            catch (Exception ex)
+            {
+                Fanex.Logging.Logger.Log.Error("Exception LoadTasks: " + ex.Message);             
+            }
+=======
+        private ITaskManager taskManager;
+
+        /// <summary>
+        /// Loading all tasks for scanning suspicious tickets.
+        /// </summary>
+        public FraudAutoDetection()
+        {
+            taskManager = new TaskManager();
+>>>>>>> unit-test-message-queue
+        }
+
+        /// <summary>
+        /// The API to add new Task to the queue for scanning.
+        /// </summary>
+        /// <param name="newTask">The new task.</param>
+        /// <returns>True if success.</returns>
+        public bool AddNewTask(Task newTask)
+        {
+            var sender = SendingTaskFactory.GetSender(SendingType.AddingTask);
+            return sender.Send(newTask);
+        }
+
+        /// <summary>
+        /// Update Task.
+        /// </summary>
+        /// <param name="task">Task Info.</param>
+        /// <returns>Update result.</returns>
+        public bool UpdateTask(Task task)
+        {
+            var sender = SendingTaskFactory.GetSender(SendingType.UpdatingTask);
+            return sender.Send(task);
+        }
+
+        /// <summary>
+        /// Remove Task.
+        /// </summary>
+        /// <param name="task">Task Info.</param>
+        /// <returns>Remove result.</returns>
+        public bool RemoveTask(Task task)
+        {
+            var sender = SendingTaskFactory.GetSender(SendingType.RemovingTask);
+            return sender.Send(task);
+        }
+
+<<<<<<< HEAD
+        /// <summary>
+        /// Stop all tasks.
+        /// </summary>
+        public void Stop()
+        {
+            try
+            {
+                ThreadPool.StopAllTasks();
+
+                OperationMessageQueue.ReceiveCompleted -= this.Mq_ReceiveCompleted;                
+                OperationMessageQueue.Purge();
+                OperationMessageQueue.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }        
+=======
+        //public void Stop()
+        //{
+        //    try
+        //    {
+        //        _threadPool.StopAllTasks();
+        //        _messageQueue.ReceiveCompleted -= Mq_ReceiveCompleted;
+        //        _messageQueue.Stop();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+>>>>>>> unit-test-message-queue
+    }
+}

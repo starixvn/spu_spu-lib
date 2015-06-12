@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
+using System;
+
 namespace SPU.Lib.FraudDetection.Service
 {
     using System.Collections.Generic;
@@ -56,6 +58,11 @@ namespace SPU.Lib.FraudDetection.Service
         public ICommandResult UpdateWorkflow(ICriteria criteria)
         {
             return _workflowDataAccess.UpdateWorkflow(criteria);
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

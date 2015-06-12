@@ -27,25 +27,28 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         private WorkflowService _workflowService = new WorkflowService();
 
+        public TaskManager ThreadPool { get; set; }
+
         private WorkflowInfo _workflowInfo;
 
-        #endregion        
-        
+        #endregion Properties
+
         #region Constructor
 
         public Workflow(WorkflowInfo workflowInfo)
         {
             _workflowInfo = workflowInfo;
+            ThreadPool = new TaskManager();
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Execute Methods
 
         /// <summary>
         /// Execute a workflow for a match.
         /// </summary>
-        /// <param name="match">The match scanned.</param>        
+        /// <param name="match">The match scanned.</param>
         public void Run(Match match)
         {
             foreach (TaskInfo taskInfo in GetTasks())
@@ -60,20 +63,20 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     else
                     {
                         task.Run(match);
-                    }                    
+                    }
                 }
             }
         }
-     
-        public void AssignTaskToThreadPool(Task task, Match match)       
+
+        public void AssignTaskToThreadPool(Task task, Match match)
         {
             ThreadPool.AddTask(task);
         }
-     
-        #endregion
+
+        #endregion Execute Methods
 
         #region Task Methods
-       
+
         public List<TaskInfo> GetTasks()
         {
             if (_tasksInfo.Count == 0)
@@ -88,14 +91,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public void InsertTask(TaskInfo task)
         {
-            _tasksInfo.Add(task);            
-        }       
+            _tasksInfo.Add(task);
+        }
 
         public void DeleteTask(TaskInfo task)
         {
             _tasksInfo.Remove(task);
-        }       
+        }
 
-        #endregion     
+        #endregion Task Methods
     }
 }

@@ -7,16 +7,16 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
-{
-    using System;
-    using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+using System;
+using System.Collections.Generic;
+using Fanex.NAP.Framework.Command;
+using SPU.Lib.FraudDetection.Criteria;
+using SPU.Lib.FraudDetection.Criteria.Match;
+using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.Service;
 
+namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
+{
     /// <summary>
     ///  Save suspicious info.
     /// </summary>
@@ -37,10 +37,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             get { return _suspiciousInfoList; }
             set { _suspiciousInfoList = AssignGroupList; }
-        }        
+        }
 
         public override void TakeAction()
-        {            
+        {
             if (_suspiciousInfoList.Count > 0)
             {
                 var t1 = new System.Threading.Tasks.Task(() => UpdateScannedMatch());
@@ -53,7 +53,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 });
                 t1.Start();                
             }
-        }        
+        }
 
         private bool UpdateScannedMatch()
         {
@@ -65,14 +65,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 criteria.MatchIdList = _matchIdList;
                 criteria.WorkflowId = _workflowId;
                 criteria.EventDate = DateTime.Now; // todo
-                
+
                 ICommandResult result = scannedMatchesService.InsertScannedMatch(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);                
+                    Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
                 }
 
-                return result.IsSuccessful;                
+                return result.IsSuccessful;
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 ICommandResult result = suspiciousInfoService.InsertSuspiciousInfo(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);                    
+                    Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
                 }
 
                 return result.IsSuccessful;

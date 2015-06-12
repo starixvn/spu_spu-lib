@@ -70,6 +70,7 @@
     <Compile Include="BettypeService.cs" />
     <Compile Include="ConfigurationsService.cs" />
     <Compile Include="ActionService.cs" />
+    <Compile Include="ITaskService.cs" />
     <Compile Include="WorkflowService.cs" />
     <Compile Include="GroupService.cs" />
     <Compile Include="QueryService.cs" />

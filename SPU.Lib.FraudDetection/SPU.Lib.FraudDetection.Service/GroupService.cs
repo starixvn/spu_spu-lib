@@ -18,7 +18,7 @@ namespace SPU.Lib.FraudDetection.Service
     /// Group Service.
     /// </summary>
     public class GroupService : QueryService
-    {        
+    {
         private GroupDataAccess _groupDataAccess;
 
         public GroupService()

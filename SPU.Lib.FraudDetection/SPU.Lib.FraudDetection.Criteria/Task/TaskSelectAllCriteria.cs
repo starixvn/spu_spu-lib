@@ -15,7 +15,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     /// TaskSelectAllCriteria Class.
     /// </summary>
     public class TaskSelectAllCriteria : CriteriaBase
-    {      
+    {
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>
@@ -32,6 +32,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public override bool IsValid()
         {
             return true;
-        }        
+        }
     }
 }
