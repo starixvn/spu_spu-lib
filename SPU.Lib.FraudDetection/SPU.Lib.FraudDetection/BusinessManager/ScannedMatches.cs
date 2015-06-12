@@ -14,16 +14,17 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using Fanex.NAP.Framework.Command;
     using SPU.Lib.FraudDetection.Criteria.Match;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;    
 
     /// <summary>
-    /// Configurations Class.
+    /// Scanned Matches Class.
     /// </summary>
     public class ScannedMatches
     {
         private List<Match> _scannedMatches = new List<Match>();
 
-        private ScannedMatchesService _scannedMatchService = new ScannedMatchesService();
+        private IScannedMatchesService _scannedMatchService = new ScannedMatchesService();
 
         /// <summary>
         /// Get configuration list.
@@ -33,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_scannedMatches.Count == 0)
             {
-                IEnumerable<Match> matches = _scannedMatchService.GetData<Match>(new MatchSelectAllCriteria());
+                IEnumerable<Match> matches = _scannedMatchService.GetScannedMatches(new MatchSelectAllCriteria());
                 _scannedMatches = matches.ToList();
             }
 

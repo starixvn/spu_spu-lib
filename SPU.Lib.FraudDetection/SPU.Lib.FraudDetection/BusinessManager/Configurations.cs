@@ -13,7 +13,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using Fanex.NAP.Framework.Command;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;    
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;    
 
     /// <summary>
     /// Configurations Class.

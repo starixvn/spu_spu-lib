@@ -67,16 +67,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionDataAccess.cs" />
-    <Compile Include="BettypeDataAccess.cs" />
-    <Compile Include="ConfigurationsDataAccess.cs" />
-    <Compile Include="WorkflowDataAccess.cs" />
-    <Compile Include="GroupDataAccess.cs" />
-    <Compile Include="SuspiciousInfoDataAccess.cs" />
-    <Compile Include="TaskDataAccess.cs" />
+    <Compile Include="Implement\EventDataAccess.cs" />
+    <Compile Include="Implement\BettypeDataAccess.cs" />
+    <Compile Include="Implement\ConfigurationsDataAccess.cs" />
+    <Compile Include="Implement\GroupDataAccess.cs" />
+    <Compile Include="Implement\ScannedMatchesDataAccess.cs" />
+    <Compile Include="Implement\SuspiciousInfoDataAccess.cs" />
+    <Compile Include="Implement\TaskDataAccess.cs" />
+    <Compile Include="Implement\WorkflowDataAccess.cs" />
+    <Compile Include="Interface\IEventDataAccess.cs" />
+    <Compile Include="Interface\IBettypeDataAccess.cs" />
+    <Compile Include="Interface\IConfigurationsDataAccess.cs" />
+    <Compile Include="Interface\IGroupDataAccess.cs" />
+    <Compile Include="Interface\IScannedMatchesDataAccess.cs" />
+    <Compile Include="Interface\ISuspiciousInfoDataAccess.cs" />
+    <Compile Include="Interface\ITaskDataAccess.cs" />
+    <Compile Include="Interface\IWorkflowDataAccess.cs" />
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScannedMatchesDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

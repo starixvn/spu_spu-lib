@@ -1,10 +1,19 @@
-﻿using System;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.SendingTasks;
+﻿// --------------------------------------------------------------------------
+// <copyright file="UpdatingTaskTest.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using System;
+    using Moq;
+    using NUnit.Framework;
+    using SPU.Lib.FraudDetection.SendingTasks;
+
     [TestFixture]
     public class UpdatingTaskTest
     {
@@ -26,9 +35,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(task);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(
-                It.IsAny<Task>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(1));
+            _mockQueue.Verify(
+                x => x.Send(It.IsAny<Task>(), It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(1));
             Assert.IsTrue(result);
         }
 
@@ -39,8 +47,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(null);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<Task>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(0));
+            _mockQueue.Verify(
+                x => x.Send(It.IsAny<Task>(), It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(0));
             Assert.IsFalse(result);
         }
     }

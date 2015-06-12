@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="FraudAutoDetection.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SpuMessageQueue.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,18 +7,19 @@
 //   <change who="Thai.Tran" date="2015.05.21">Created</change>
 // </history>
 
-using System;
-using System.Messaging;
-using SPU.Lib.Core;
-using SPU.Lib.FraudDetection.BusinessManager;
-
 namespace SPU.Lib.FraudDetection
 {
+    using System;
+    using System.Messaging;
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.BusinessManager;
+
+    /// <summary>
+    /// SPU Message Queue.
+    /// </summary>
     public class SpuMessageQueue : IMessageQueue
     {
         private readonly MessageQueue _messageQueue;
-
-        public event ReceiveCompletedEventHandler ReceiveCompleted;
 
         public SpuMessageQueue()
         {
@@ -30,6 +31,8 @@ namespace SPU.Lib.FraudDetection
 
             _messageQueue.Purge();
         }
+
+        public event ReceiveCompletedEventHandler ReceiveCompleted;
 
         public void Send(object task)
         {

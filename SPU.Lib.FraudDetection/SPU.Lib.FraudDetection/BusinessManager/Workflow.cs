@@ -14,7 +14,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using System.Linq;
     using SPU.Lib.FraudDetection.Criteria.Task;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Workflow Class.
@@ -25,9 +26,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         private List<TaskInfo> _tasksInfo = new List<TaskInfo>();
 
-        private WorkflowService _workflowService = new WorkflowService();
-
-        public TaskManager ThreadPool { get; set; }
+        private IWorkflowService _workflowService = new WorkflowService();
 
         private WorkflowInfo _workflowInfo;
 
@@ -40,6 +39,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _workflowInfo = workflowInfo;
             ThreadPool = new TaskManager();
         }
+
+        public TaskManager ThreadPool { get; set; }
 
         #endregion Constructor
 

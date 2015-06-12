@@ -8,17 +8,18 @@
 //   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
-using System;
-
-namespace SPU.Lib.FraudDetection.Service
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DataAccess.Implement;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
     using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Task Service.

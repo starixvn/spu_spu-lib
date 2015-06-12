@@ -7,12 +7,12 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-using System;
-using System.Collections.Generic;
-using SPU.Lib.FraudDetection.DTO;
-
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
+    using System;
+    using System.Collections.Generic;
+    using SPU.Lib.FraudDetection.DTO;
+
     /// <summary>
     /// ActionSendEmail Class.
     /// </summary>

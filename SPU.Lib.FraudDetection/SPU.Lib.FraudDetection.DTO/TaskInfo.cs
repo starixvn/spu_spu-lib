@@ -36,7 +36,7 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
 
-        public int ActionId { get; set; }
+        public int EventId { get; set; }
 
         public string NextActionIdList { get; set; }
 

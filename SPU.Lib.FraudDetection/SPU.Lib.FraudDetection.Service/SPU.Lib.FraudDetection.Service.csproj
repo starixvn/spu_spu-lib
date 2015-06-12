@@ -67,17 +67,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BettypeService.cs" />
-    <Compile Include="ConfigurationsService.cs" />
-    <Compile Include="ActionService.cs" />
-    <Compile Include="ITaskService.cs" />
-    <Compile Include="WorkflowService.cs" />
-    <Compile Include="GroupService.cs" />
+    <Compile Include="Implement\BettypeService.cs" />
+    <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\EventService.cs" />
+    <Compile Include="Interface\IEventService.cs" />
+    <Compile Include="Interface\IBettypeService.cs" />
+    <Compile Include="Interface\IConfigurationsService.cs" />
+    <Compile Include="Interface\IGroupService.cs" />
+    <Compile Include="Interface\ITaskService.cs" />
+    <Compile Include="Implement\WorkflowService.cs" />
+    <Compile Include="Implement\GroupService.cs" />
+    <Compile Include="Interface\IScannedMatchesService.cs" />
+    <Compile Include="Interface\ISuspiciousInfoService.cs" />
+    <Compile Include="Interface\IWorkflowService.cs" />
     <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScannedMatchesService.cs" />
-    <Compile Include="SuspiciousInfoService.cs" />
-    <Compile Include="TaskService.cs" />
+    <Compile Include="Implement\ScannedMatchesService.cs" />
+    <Compile Include="Implement\SuspiciousInfoService.cs" />
+    <Compile Include="Implement\TaskService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -8,8 +8,6 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-using SPU.Lib.FraudDetection.BusinessManager.NextAction;
-
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
@@ -18,8 +16,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using System.Linq;
     using System.Timers;
     using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.BusinessManager.NextAction;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Task Class.
@@ -103,7 +103,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (CheckPreconditions(match))
                 {
-                    TaskService taskService = new TaskService();
+                    ITaskService taskService = new TaskService();
 
                     string rules = RetrieveRules(match);
 
@@ -122,7 +122,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
 
-            TaskService taskService = new TaskService();
+            ITaskService taskService = new TaskService();
             return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;
         }
 
@@ -152,7 +152,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                         SuspiciousInfoList = ExecuteRule(preConGroups);
                     }
 
-                    if (TaskInfo.ActionId == 1)
+                    if (TaskInfo.EventId == 1)
                     {
                         var saveAction = new ActionSaveSuspiciousInfo(SuspiciousInfoList, IdsList, TaskInfo.WorkflowId);
                         saveAction.TakeAction();
@@ -180,7 +180,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
                 if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
                 {
-                    using (TaskService taskService = new TaskService())
+                    using (var taskService = new TaskService())
                     {
                         preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("$param1$", TaskInfo.WorkflowId.ToString());
                         IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
@@ -209,7 +209,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 string ruleQuery = string.Empty;
                 List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
 
-                using (TaskService taskService = new TaskService())
+                using (var taskService = new TaskService())
                 {
                     if (preConGroups != null)
                     {

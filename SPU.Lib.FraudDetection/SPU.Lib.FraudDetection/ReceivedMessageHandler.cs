@@ -1,10 +1,22 @@
-using System;
-using System.Messaging;
-using SPU.Lib.FraudDetection.BusinessManager;
-using SPU.Lib.FraudDetection.SendingTasks;
+// --------------------------------------------------------------------------
+// <copyright file="ReceivingMessageHandler.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection
 {
+    using System;
+    using System.Messaging;
+    using SPU.Lib.FraudDetection.BusinessManager;
+    using SPU.Lib.FraudDetection.SendingTasks;
+
+    /// <summary>
+    /// Receiving Message Handler.
+    /// </summary>
     public class ReceivingMessageHandler : IReceivingMessageHandler
     {
         private readonly IMessageQueue _queue;

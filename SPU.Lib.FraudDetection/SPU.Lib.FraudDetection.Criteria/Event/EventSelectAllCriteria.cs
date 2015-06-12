@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ActionSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="EventSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,13 +12,13 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// ActionSelectAllCriteria Class.
+    /// EventSelectAllCriteria Class.
     /// </summary>
-    public class ActionSelectAllCriteria : CriteriaBase
+    public class EventSelectAllCriteria : CriteriaBase
     {        
         public override string GetSettingKey()
         {
-            return "SPU_ActionSelectAll";
+            return "SPU_EventSelectAll";
         }
 
         /// <summary>

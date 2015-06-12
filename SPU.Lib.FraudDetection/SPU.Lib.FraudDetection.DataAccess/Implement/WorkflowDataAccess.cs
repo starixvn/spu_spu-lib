@@ -7,24 +7,21 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;    
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
 
     /// <summary>
-    /// Workflow Data Access.
+    /// Workflow Data Access Implement.
     /// </summary>
-    public class WorkflowDataAccess : BaseDataAccess
+    public class WorkflowDataAccess : BaseDataAccess, IWorkflowDataAccess
     {
-        public WorkflowDataAccess() : base()
-        {
-        }
-
         public ICommandResult InsertWorkflow(ICriteria criteria)
         {
-            return ExecuteNonQuery(criteria);            
+            return ExecuteNonQuery(criteria);
         }
 
         public ICommandResult UpdateWorkflow(ICriteria criteria)
@@ -34,7 +31,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
 
         public ICommandResult DeleteWorkflow(ICriteria criteria)
         {
-            return ExecuteNonQuery(criteria);            
+            return ExecuteNonQuery(criteria);
         }
 
         public DataCollection GetWorkflows(ICriteria criteria)

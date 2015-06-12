@@ -8,22 +8,23 @@
 //   <change who="Long.Luu" date="2015.04.01">Add ScanMatch: major function</change>
 // </history>
 
-using System;
-using SPU.Lib.FraudDetection.BusinessManager;
-using SPU.Lib.FraudDetection.BusinessManager.NextAction;
-using SPU.Lib.FraudDetection.Criteria.Workflow;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
-
 namespace SPU.Lib.FraudDetection
 {
+    using System;
+    using SPU.Lib.FraudDetection.BusinessManager;
+    using SPU.Lib.FraudDetection.BusinessManager.NextAction;
+    using SPU.Lib.FraudDetection.Criteria.Workflow;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;   
+
     /// <summary>
     /// Main Class.
     /// </summary>
     public class FraudDetection
     {
         private Match _match;
-        private WorkflowService _workflowService;
+        private IWorkflowService _workflowService;
 
         public FraudDetection(int matchId, DateTime eventDate)
         {

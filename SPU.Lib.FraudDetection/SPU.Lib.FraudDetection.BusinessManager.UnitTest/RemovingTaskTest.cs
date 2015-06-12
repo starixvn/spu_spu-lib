@@ -1,10 +1,19 @@
-﻿using System;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.SendingTasks;
+﻿// --------------------------------------------------------------------------
+// <copyright file="RemovingTaskTest.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using System;
+    using Moq;
+    using NUnit.Framework;
+    using SPU.Lib.FraudDetection.SendingTasks;
+
     [TestFixture]
     public class RemovingTaskTest
     {

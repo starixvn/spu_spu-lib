@@ -1,12 +1,22 @@
-﻿using System;
-using Fanex.Logging;
-using SPU.Lib.FraudDetection.BusinessManager;
-using SPU.Lib.FraudDetection.Criteria.Task;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
+﻿// --------------------------------------------------------------------------
+// <copyright file="ITaskLoader.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection
 {
+    using System;
+    using Fanex.Logging;
+    using SPU.Lib.FraudDetection.BusinessManager;
+    using SPU.Lib.FraudDetection.Criteria.Task;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
+
     public interface ITaskLoader
     {
         void LoadTasks();

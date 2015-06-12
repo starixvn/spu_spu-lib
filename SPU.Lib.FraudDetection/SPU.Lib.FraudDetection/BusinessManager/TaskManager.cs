@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// --------------------------------------------------------------------------
+// <copyright file="TaskManager.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Workflow Class.
     /// </summary>
     public class TaskManager : ITaskManager
-    {
-        public List<TaskTimer> TaskTimerList { get; set; }
-
+    {        
         public TaskManager()
         {
             TaskTimerList = new List<TaskTimer>();
         }
+
+        public List<TaskTimer> TaskTimerList { get; set; }
 
         /// <summary>
         /// Add and start a task in the thread pool.
@@ -60,7 +69,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// Remove a task out the thread pool.
         /// </summary>
         /// <param name="task">The task name.</param>
-        /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(Task task)
         {
             try

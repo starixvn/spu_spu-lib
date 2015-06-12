@@ -13,7 +13,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using System.Linq;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Supported Bet types Class.
@@ -22,7 +23,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         private List<Bettype> _supportedBettypes = new List<Bettype>();
 
-        private BettypeService _bettypeService = new BettypeService(); 
+        private IBettypeService _bettypeService = new BettypeService(); 
 
         public List<Bettype> GetSupportedBettypes()
         {

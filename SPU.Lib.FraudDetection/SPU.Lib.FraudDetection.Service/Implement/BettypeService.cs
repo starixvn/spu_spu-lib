@@ -7,20 +7,22 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DataAccess.Implement;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
     using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Bet-type Service.
     /// </summary>
-    public class BettypeService : QueryService
+    public class BettypeService : QueryService, IBettypeService
     {
-        private BettypeDataAccess _bettypeDataAccess;
+        private IBettypeDataAccess _bettypeDataAccess;
 
         public BettypeService()
         {

@@ -7,15 +7,16 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-using System;
-using System.Collections.Generic;
-using Fanex.NAP.Framework.Command;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
-
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
+    using System;
+    using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
+    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;   
+
     /// <summary>
     ///  Assign a suspicious customer to a customer group.
     /// </summary>
@@ -39,7 +40,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                GroupService groupService = new GroupService();
+                IGroupService groupService = new GroupService();
 
                 List<int> custIdList = new List<int>();
                 foreach (var info in _suspiciousList)

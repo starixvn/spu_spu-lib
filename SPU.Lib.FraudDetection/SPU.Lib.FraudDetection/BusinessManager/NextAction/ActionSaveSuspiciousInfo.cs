@@ -7,16 +7,17 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-using System;
-using System.Collections.Generic;
-using Fanex.NAP.Framework.Command;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.Criteria.Match;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
-
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
+    using System;
+    using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
+    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.Criteria.Match;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Implement;
+    using SPU.Lib.FraudDetection.Service.Interface;
+
     /// <summary>
     ///  Save suspicious info.
     /// </summary>
@@ -59,7 +60,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                ScannedMatchesService scannedMatchesService = new ScannedMatchesService();
+                IScannedMatchesService scannedMatchesService = new ScannedMatchesService();
                 MatchInsertCriteria criteria = new MatchInsertCriteria();
                 criteria.CreatorId = 0;
                 criteria.MatchIdList = _matchIdList;

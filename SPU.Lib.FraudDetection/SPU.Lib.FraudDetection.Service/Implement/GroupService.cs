@@ -7,19 +7,21 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DataAccess.Implement;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Group Service.
     /// </summary>
-    public class GroupService : QueryService
+    public class GroupService : QueryService, IGroupService
     {
-        private GroupDataAccess _groupDataAccess;
+        private IGroupDataAccess _groupDataAccess;
 
         public GroupService()
         {

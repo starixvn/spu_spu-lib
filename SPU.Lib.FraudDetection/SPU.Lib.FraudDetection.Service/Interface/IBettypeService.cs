@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ActionDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IBettypeService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,24 +7,24 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
-    /// Action Data Access.
+    /// Bet-type Service interface.
     /// </summary>
-    public class ActionDataAccess : BaseDataAccess
+    public interface IBettypeService
     {
-        public ActionDataAccess() : base()
-        {
-        }
-        
-        public List<Bettype> GetActions(ICriteria criteria)
-        {
-            return null;
-        }
+        ICommandResult InsertBettype(ICriteria criteria);
+
+        ICommandResult DeleteBettype(ICriteria criteria);
+
+        IEnumerable<Bettype> GetAllSBBettypes(ICriteria criteria);
+
+        IEnumerable<Sport> GetAllSBSports(ICriteria criteria);
     }
 }

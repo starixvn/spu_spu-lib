@@ -37,7 +37,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         {
             var sampleTask = new TaskInfo
             {
-                ActionId = 2,
+                EventId = 2,
                 Interval = 60,
                 IntervalType = "Second",
                 IsBackgroundProcess = true,

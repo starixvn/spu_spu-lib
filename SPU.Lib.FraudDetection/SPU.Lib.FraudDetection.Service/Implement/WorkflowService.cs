@@ -7,23 +7,24 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-using System;
-
-namespace SPU.Lib.FraudDetection.Service
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
     using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess;
-    using SPU.Lib.FraudDetection.DTO;    
+    using SPU.Lib.FraudDetection.DataAccess.Implement;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Workflow Service.
     /// </summary>
-    public class WorkflowService : QueryService
+    public class WorkflowService : QueryService, IWorkflowService
     {
-        private WorkflowDataAccess _workflowDataAccess;
+        private IWorkflowDataAccess _workflowDataAccess;
 
         public WorkflowService()
         {

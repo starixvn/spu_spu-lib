@@ -1,21 +1,27 @@
-﻿using SPU.Lib.FraudDetection.BusinessManager;
-using SPU.Lib.FraudDetection.SendingTasks;
+﻿// --------------------------------------------------------------------------
+// <copyright file="FraudAutoDetection.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.06.12">Created</change>
+// </history>
 
 namespace SPU.Lib.FraudDetection
 {
+    using SPU.Lib.FraudDetection.BusinessManager;
+    using SPU.Lib.FraudDetection.SendingTasks;
+
     /// <summary>
     /// FraudAutoDetection Class.
     /// </summary>
     public class FraudAutoDetection
     {
-        private ITaskManager taskManager;
+        private ITaskManager _taskManager;
 
-        /// <summary>
-        /// Loading all tasks for scanning suspicious tickets.
-        /// </summary>
         public FraudAutoDetection()
         {
-            taskManager = new TaskManager();
+            _taskManager = new TaskManager();
         }
 
         /// <summary>
@@ -40,19 +46,5 @@ namespace SPU.Lib.FraudDetection
             var sender = SendingTaskFactory.GetSender(SendingType.RemovingTask);
             return sender.Send(task);
         }
-
-        //public void Stop()
-        //{
-        //    try
-        //    {
-        //        _threadPool.StopAllTasks();
-        //        _messageQueue.ReceiveCompleted -= Mq_ReceiveCompleted;
-        //        _messageQueue.Stop();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
     }
 }

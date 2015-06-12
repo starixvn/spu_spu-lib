@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Action.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IEventService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,19 +7,17 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DTO
+namespace SPU.Lib.FraudDetection.Service.Interface
 {
+    using System.Collections.Generic;
+    using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.DTO;
+
     /// <summary>
-    /// Action Class.
+    /// Event Service interface.
     /// </summary>
-    public class Action
+    public interface IEventService
     {
-        public int ActionId { get; set; }
-
-        public string ActionName { get; set; }
-
-        public string ActionDesc { get; set; }
-
-        public bool IsBackgroundProcess { get; set; }
+        IEnumerable<Event> GetEvents(ICriteria criteria);
     }
 }

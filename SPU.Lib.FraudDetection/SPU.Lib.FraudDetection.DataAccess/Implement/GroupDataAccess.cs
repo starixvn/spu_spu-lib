@@ -7,21 +7,18 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;    
+    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
 
     /// <summary>
-    /// Group Data Access.
+    /// Group Data Access Implement.
     /// </summary>
-    public class GroupDataAccess : BaseDataAccess
+    public class GroupDataAccess : BaseDataAccess, IGroupDataAccess
     {
-        public GroupDataAccess() : base()
-        {
-        }
-
         public ICommandResult InsertGroup(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

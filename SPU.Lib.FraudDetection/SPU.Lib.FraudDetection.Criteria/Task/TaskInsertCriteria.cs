@@ -38,7 +38,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
 
         public bool IsActive { get; set; }
 
-        public int ActionId { get; set; }
+        public int EventId { get; set; }
 
         public string NextActionIdList { get; set; }
 

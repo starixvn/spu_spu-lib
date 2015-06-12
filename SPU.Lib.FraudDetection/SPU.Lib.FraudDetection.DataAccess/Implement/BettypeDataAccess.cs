@@ -7,55 +7,36 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using System.Collections.Generic;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.Criteria;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
 
     /// <summary>
-    /// Bet-type Data Access.
+    /// Bet-type Data Access Implement.
     /// </summary>
-    public class BettypeDataAccess : BaseDataAccess
+    public class BettypeDataAccess : BaseDataAccess, IBettypeDataAccess
     {
-        public BettypeDataAccess() : base()
-        {
-        }
-
         /// <summary>
-        /// Insert Bettype.
+        /// Insert Bet-type.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Command Result.</returns>
         public ICommandResult InsertBettype(ICriteria criteria)
         {
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var param = criteria.GetSpParams();
-                objectDb.ExecuteNonQuery(param);
-
-                return new CommandResult();
-            }
+            return ExecuteNonQuery(criteria);
         }
 
         /// <summary>
-        /// Delete Bettype.
+        /// Delete Bet-type.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Command Result.</returns>
         public ICommandResult DeleteBettype(ICriteria criteria)
         {
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var param = criteria.GetSpParams();
-                objectDb.ExecuteNonQuery(param);
-
-                return new CommandResult();
-            }
+            return ExecuteNonQuery(criteria);
         }
-        
-        // Get all bet-types should use GetData from QueryService
     }
 }

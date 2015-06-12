@@ -7,20 +7,17 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
 
     /// <summary>
-    /// Suspicious Info Data Access.
+    /// Suspicious Info Data Access Implement.
     /// </summary>
-    public class SuspiciousInfoDataAccess : BaseDataAccess
+    public class SuspiciousInfoDataAccess : BaseDataAccess, ISuspiciousInfoDataAccess
     {
-        public SuspiciousInfoDataAccess() : base()
-        {
-        }
-
         public ICommandResult InsertSuspiciousInfo(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
