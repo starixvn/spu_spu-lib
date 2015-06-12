@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
     public interface ITaskManager
     {
-        List<TaskTimer> TaskTimerList { get; set; }
+        List<TaskTimer> TaskTimers { get; set; }
 
         /// <summary>
         /// Add and start a task in the thread pool.
@@ -33,6 +33,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="task">The task name.</param>
         void RemoveTask(Task task);
 
-        void StopTasks();
+        void ClearTasks();
+
+        bool Exist(Task task);
     }
 }
