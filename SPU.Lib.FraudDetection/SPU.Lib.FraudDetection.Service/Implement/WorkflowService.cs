@@ -11,13 +11,13 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
     using System.Collections.Generic;
+    using Core;
+    using DataAccess.Implement;
+    using DataAccess.Interface;
+    using DTO;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess.Implement;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Interface;
 
     /// <summary>
     /// Workflow Service.

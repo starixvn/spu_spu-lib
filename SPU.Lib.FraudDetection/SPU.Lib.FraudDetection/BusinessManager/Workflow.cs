@@ -12,10 +12,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.Criteria.Task;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Criteria.Task;
+    using DTO;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
     /// Workflow Class.
@@ -52,7 +52,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="match">The match scanned.</param>
         public void Run(Match match)
         {
-            foreach (TaskInfo taskInfo in GetTasks())
+            foreach (var taskInfo in GetTasks())
             {
                 if (taskInfo.IsActive)
                 {
@@ -83,7 +83,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             if (_tasksInfo.Count == 0)
             {
                 var criteria = new TaskSelectAllByWorkflowIdCriteria() { WorkFlowId = _workflowInfo.WorkflowId };
-                IEnumerable<TaskInfo> tasks = _workflowService.GetTasks(criteria);
+                var tasks = _workflowService.GetTasks(criteria);
                 _tasksInfo = tasks.ToList();
             }
 

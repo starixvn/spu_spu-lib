@@ -11,7 +11,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
+    using Interface;
 
     /// <summary>
     /// Scanned Matches Data Access Implement.

@@ -12,10 +12,10 @@ namespace SPU.Lib.FraudDetection.Service
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using DataAccess;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess;
 
     /// <summary>
     /// Query Service.

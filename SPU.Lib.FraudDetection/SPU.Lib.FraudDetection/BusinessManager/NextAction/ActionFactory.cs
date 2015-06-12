@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.DTO;
+    using DTO;
 
     /// <summary>
     /// ActionFactory Class.

@@ -11,25 +11,25 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Criteria;
+    using DTO;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
     /// Supported Bet types Class.
     /// </summary>
     public class SupportedBettypes
     {
-        private List<Bettype> _supportedBettypes = new List<Bettype>();
+        private readonly IBettypeService _bettypeService = new BettypeService(); 
 
-        private IBettypeService _bettypeService = new BettypeService(); 
+        private List<Bettype> _supportedBettypes = new List<Bettype>();
 
         public List<Bettype> GetSupportedBettypes()
         {
             if (_supportedBettypes.Count == 0)
             {
-                IEnumerable<Bettype> bettypes = _bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
+                var bettypes = _bettypeService.GetAllSBBettypes(new BettypeSelectAllCriteria());
                 _supportedBettypes = bettypes.ToList();
             }
 
@@ -40,7 +40,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _supportedBettypes.Add(bettype);
             
-            BettypeInsertCriteria criteria = new BettypeInsertCriteria();
+            var criteria = new BettypeInsertCriteria();
             return _bettypeService.InsertBettype(criteria).IsSuccessful;
         }
 
@@ -48,7 +48,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _supportedBettypes.Remove(bettype);
 
-            BettypeDeleteCriteria criteria = new BettypeDeleteCriteria();
+            var criteria = new BettypeDeleteCriteria();
             return _bettypeService.DeleteBettype(criteria).IsSuccessful;            
         }
     }

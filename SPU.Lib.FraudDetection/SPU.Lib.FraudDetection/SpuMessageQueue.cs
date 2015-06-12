@@ -11,8 +11,8 @@ namespace SPU.Lib.FraudDetection
 {
     using System;
     using System.Messaging;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.BusinessManager;
+    using BusinessManager;
+    using Core;
 
     /// <summary>
     /// SPU Message Queue.

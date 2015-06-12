@@ -9,8 +9,8 @@
 
 namespace SPU.Lib.FraudDetection
 {
-    using SPU.Lib.FraudDetection.BusinessManager;
-    using SPU.Lib.FraudDetection.SendingTasks;
+    using BusinessManager;
+    using SendingTasks;
 
     /// <summary>
     /// FraudAutoDetection Class.

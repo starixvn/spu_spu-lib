@@ -11,8 +11,8 @@ namespace SPU.Lib.FraudDetection
 {
     using System;
     using System.Messaging;
-    using SPU.Lib.FraudDetection.BusinessManager;
-    using SPU.Lib.FraudDetection.SendingTasks;
+    using BusinessManager;
+    using SendingTasks;
 
     /// <summary>
     /// Receiving Message Handler.

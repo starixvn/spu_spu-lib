@@ -6,13 +6,12 @@
 // <history>
 //   <change who="Thai.Tran" date="2015.4.27">Create</change>
 // </history>
+
 namespace SPU.Lib.Core
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;        
-    using System.Drawing;
+    using System.Diagnostics.CodeAnalysis;
     using System.Text;    
 
     /// <summary>
@@ -31,14 +30,14 @@ namespace SPU.Lib.Core
         /// <returns>Object System.String.</returns>
         public static string DataForFanexGrid(IDataReader dr)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.Append("[");
             while (dr.Read())
             {
                 builder.Append("{");
                 builder.Append("Columns:");
                 builder.Append("[");
-                for (int j = 0; j < dr.FieldCount; j++)
+                for (var j = 0; j < dr.FieldCount; j++)
                 {
                     builder.Append("{");
                     builder.Append("Name:");
@@ -77,15 +76,15 @@ namespace SPU.Lib.Core
         /// <returns>Object System.String.</returns>
         public static string DataForFanexGrid(DataCollection col)
         {
-            bool flag = false;
-            StringBuilder builder = new StringBuilder();
+            var flag = false;
+            var builder = new StringBuilder();
             builder.Append("[");
             builder.Append("{");
             builder.Append("data:[");
 
             if (col != null && col.Data != null && col.Data.Tables.Count > 0)
             {
-                DataTable dt = col.Data.Tables[0];                
+                var dt = col.Data.Tables[0];                
                 foreach (DataRow row in dt.Rows)
                 {
                     if (!flag)
@@ -96,7 +95,7 @@ namespace SPU.Lib.Core
                     builder.Append("{");
                     builder.Append("Columns:");
                     builder.Append("[");
-                    for (int j = 0; j < dt.Columns.Count; j++)
+                    for (var j = 0; j < dt.Columns.Count; j++)
                     {
                         builder.Append("{");
                         builder.Append("Name:");
@@ -146,15 +145,15 @@ namespace SPU.Lib.Core
         /// <returns>Object System.String.</returns>
         public static string DataForFanexGrid_PreventContainQuote(DataCollection col)
         {
-            bool flag = false;
-            StringBuilder builder = new StringBuilder();
+            var flag = false;
+            var builder = new StringBuilder();
             builder.Append("[");
             builder.Append("{");
             builder.Append("data:[");
 
             if (col != null && col.Data != null && col.Data.Tables.Count > 0)
             {
-                DataTable dt = col.Data.Tables[0];               
+                var dt = col.Data.Tables[0];               
                 foreach (DataRow row in dt.Rows)
                 {
                     if (!flag)
@@ -165,7 +164,7 @@ namespace SPU.Lib.Core
                     builder.Append("{");
                     builder.Append("Columns:");
                     builder.Append("[");
-                    for (int j = 0; j < dt.Columns.Count; j++)
+                    for (var j = 0; j < dt.Columns.Count; j++)
                     {
                         var value = row[j].ConvertToString();
                         value = value.Replace("\\", "\\\\");

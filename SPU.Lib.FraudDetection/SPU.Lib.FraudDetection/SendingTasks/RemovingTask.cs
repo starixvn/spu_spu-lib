@@ -9,8 +9,6 @@
 
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
-    using SPU.Lib.FraudDetection.BusinessManager;
-
     /// <summary>
     /// Removing Task.
     /// </summary>

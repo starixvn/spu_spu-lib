@@ -10,8 +10,8 @@
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
+    using DTO;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Event Service interface.

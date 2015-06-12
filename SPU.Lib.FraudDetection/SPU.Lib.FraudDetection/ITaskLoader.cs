@@ -10,12 +10,11 @@
 namespace SPU.Lib.FraudDetection
 {
     using System;
+    using BusinessManager;
+    using Criteria.Task;
     using Fanex.Logging;
-    using SPU.Lib.FraudDetection.BusinessManager;
-    using SPU.Lib.FraudDetection.Criteria.Task;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Service.Implement;
+    using Service.Interface;
 
     public interface ITaskLoader
     {
@@ -46,7 +45,7 @@ namespace SPU.Lib.FraudDetection
             {
                 var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
 
-                foreach (TaskInfo taskInfo in taskInfoList)
+                foreach (var taskInfo in taskInfoList)
                 {
                     if (taskInfo.IsActive)
                     {

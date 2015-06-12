@@ -11,11 +11,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Criteria.Match;
+    using DTO;
     using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;    
+    using Service.Implement;
+    using Service.Interface;    
 
     /// <summary>
     /// Scanned Matches Class.
@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_scannedMatches.Count == 0)
             {
-                IEnumerable<Match> matches = _scannedMatchService.GetScannedMatches(new MatchSelectAllCriteria());
+                var matches = _scannedMatchService.GetScannedMatches(new MatchSelectAllCriteria());
                 _scannedMatches = matches.ToList();
             }
 
@@ -45,7 +45,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _scannedMatches.Add(match);
 
-            MatchInsertCriteria criteria = new MatchInsertCriteria();
+            var criteria = new MatchInsertCriteria();
 
             return _scannedMatchService.InsertScannedMatch(criteria);
         }            

@@ -11,12 +11,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.Criteria.Match;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Criteria;
+    using Criteria.Match;
+    using DTO;
+    using Service.Implement;
 
     /// <summary>
     ///  Save suspicious info.
@@ -60,14 +58,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                IScannedMatchesService scannedMatchesService = new ScannedMatchesService();
-                MatchInsertCriteria criteria = new MatchInsertCriteria();
+                var scannedMatchesService = new ScannedMatchesService();
+                var criteria = new MatchInsertCriteria();
                 criteria.CreatorId = 0;
                 criteria.MatchIdList = _matchIdList;
                 criteria.WorkflowId = _workflowId;
                 criteria.EventDate = DateTime.Now; // todo
 
-                ICommandResult result = scannedMatchesService.InsertScannedMatch(criteria);
+                var result = scannedMatchesService.InsertScannedMatch(criteria);
                 if (result.IsSuccessful == false)
                 {
                     Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
@@ -85,13 +83,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                SuspiciousInfoService suspiciousInfoService = new SuspiciousInfoService();
-                SuspiciousInfoInsertCriteria criteria = new SuspiciousInfoInsertCriteria();
+                var suspiciousInfoService = new SuspiciousInfoService();
+                var criteria = new SuspiciousInfoInsertCriteria();
 
-                List<int> custIdList = new List<int>();
-                List<int> matchIdList = new List<int>();
-                List<int> workflowIdList = new List<int>();
-                List<string> groupTransIdList = new List<string>();
+                var custIdList = new List<int>();
+                var matchIdList = new List<int>();
+                var workflowIdList = new List<int>();
+                var groupTransIdList = new List<string>();
 
                 foreach (var info in _suspiciousInfoList)
                 {
@@ -107,7 +105,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                 criteria.WorkflowIdList = string.Join(";", workflowIdList);
                 criteria.GroupTransIdList = string.Join(";", groupTransIdList);
 
-                ICommandResult result = suspiciousInfoService.InsertSuspiciousInfo(criteria);
+                var result = suspiciousInfoService.InsertSuspiciousInfo(criteria);
                 if (result.IsSuccessful == false)
                 {
                     Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);

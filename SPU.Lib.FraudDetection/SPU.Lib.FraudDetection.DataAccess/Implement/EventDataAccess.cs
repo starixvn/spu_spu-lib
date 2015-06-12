@@ -9,10 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using System.Collections.Generic;
-    using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
-    using SPU.Lib.FraudDetection.DTO;
+    using Interface;
 
     /// <summary>
     /// Event Data Access Implement.

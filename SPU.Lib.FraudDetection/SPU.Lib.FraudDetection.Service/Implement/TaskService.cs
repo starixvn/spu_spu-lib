@@ -13,13 +13,13 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using Core;
+    using DataAccess.Implement;
+    using DataAccess.Interface;
+    using DTO;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess.Implement;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Interface;
 
     /// <summary>
     /// Task Service.
@@ -111,15 +111,15 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <returns>List of ids.</returns>
         public IEnumerable<string> ExecutePrecondition(string sqlQueryString)
         {
-            List<string> listOfIDs = new List<string>();
-            DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
+            var listOfIDs = new List<string>();
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (var i = 0; i < dt.Rows.Count; i++)
             {
                 listOfIDs.Add(dt.Rows[i][0].ToString());
             }
 
-            return listOfIDs as IEnumerable<string>;
+            return listOfIDs;
         }
 
         /// <summary>
@@ -130,10 +130,10 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <returns>List of Suspicious Info.</returns>
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
         {
-            List<SuspiciousInfo> suspiciousInfoList = new List<SuspiciousInfo>();
-            DataTable dt = ExecuteReaderQueryInline(sqlQueryString);
-            int custId = 0;
-            int matchId = 0;
+            var suspiciousInfoList = new List<SuspiciousInfo>();
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+            var custId = 0;
+            var matchId = 0;
             long transId = 0;
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -146,7 +146,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
                 if (currentInfo == null)
                 {
-                    SuspiciousInfo info = new SuspiciousInfo();
+                    var info = new SuspiciousInfo();
                     info.WorkflowId = workflowId;
                     info.MatchId = matchId;
                     info.CustId = custId;

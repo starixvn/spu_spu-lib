@@ -10,11 +10,10 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
+    using Criteria;
+    using DTO;
     using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;    
+    using Service.Implement;   
 
     /// <summary>
     /// Configurations Class.
@@ -33,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_configs.Count == 0)
             {
-                IEnumerable<Config> configs = _configService.GetConfigs(new ConfigSelectAllCriteria());
+                var configs = _configService.GetConfigs(new ConfigSelectAllCriteria());
 
                 foreach (var config in configs)
                 {
@@ -55,7 +54,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             _configs.Add(config.ConfigName, config);
 
-            ConfigInsertCriteria criteria = new ConfigInsertCriteria();
+            var criteria = new ConfigInsertCriteria();
             criteria.ConfigName = config.ConfigName;
             criteria.ConfigCategory = config.ConfigCategory;
             criteria.ConfigControlType = config.ConfigControlType;
@@ -69,8 +68,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>True if success.</returns>
         public bool UpdateConfigs()
         {
-            string tmpUpdate = " Update [dbo].[Configurations] Set ConfigCategory = {0}, ConfigControlType = {1} Where ConfigName = {2} ";
-            string sqlStr = string.Empty;
+            var tmpUpdate = " Update [dbo].[Configurations] Set ConfigCategory = {0}, ConfigControlType = {1} Where ConfigName = {2} ";
+            var sqlStr = string.Empty;
 
             foreach (var config in _configs)
             {

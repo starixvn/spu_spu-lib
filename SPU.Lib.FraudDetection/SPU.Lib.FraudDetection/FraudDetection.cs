@@ -11,12 +11,12 @@
 namespace SPU.Lib.FraudDetection
 {
     using System;
-    using SPU.Lib.FraudDetection.BusinessManager;
-    using SPU.Lib.FraudDetection.BusinessManager.NextAction;
-    using SPU.Lib.FraudDetection.Criteria.Workflow;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;   
+    using BusinessManager;
+    using BusinessManager.NextAction;
+    using Criteria.Workflow;
+    using DTO;
+    using Service.Implement;
+    using Service.Interface;   
 
     /// <summary>
     /// Main Class.

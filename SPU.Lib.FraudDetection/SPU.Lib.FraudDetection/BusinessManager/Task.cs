@@ -11,15 +11,14 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.BusinessManager.NextAction;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Core;
+    using DTO;
+    using NextAction;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
     /// Task Class.
@@ -34,7 +33,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public Task(TaskInfo taskInfo)
         {
-            this.TaskInfo = taskInfo;
+            TaskInfo = taskInfo;
         }
 
         #endregion Constructor
@@ -57,8 +56,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>The precondition string.</returns>
         public string BuildPreconditions()
         {
-            string sqlStr = string.Empty;
-            string strCond = string.Empty;
+            var sqlStr = string.Empty;
 
             foreach (var preCond in TaskInfo.Preconditions)
             {
@@ -76,8 +74,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>The rule string.</returns>
         public string BuildRules()
         {
-            string sqlStr = string.Empty;
-            string strRule = string.Empty;
+            var sqlStr = string.Empty;
 
             foreach (var rule in TaskInfo.Rules)
             {
@@ -120,7 +117,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool CheckPreconditions(Match match)
         {
-            string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
+            var sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
 
             ITaskService taskService = new TaskService();
             return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;
@@ -128,7 +125,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public string RetrieveRules(Match match)
         {
-            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
+            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules);
         }
 
         #endregion RunTask
@@ -146,7 +143,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (TaskInfo.IsActive)
                 {
-                    IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
+                    var preConGroups = ExecutePrecondition();
                     if (preConGroups != null)
                     {
                         SuspiciousInfoList = ExecuteRule(preConGroups);
@@ -175,7 +172,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                string preConditionQuery = string.Empty;
+                var preConditionQuery = string.Empty;
                 IEnumerable<IEnumerable<string>> preConGroups = null;
 
                 if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
@@ -183,7 +180,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     using (var taskService = new TaskService())
                     {
                         preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("$param1$", TaskInfo.WorkflowId.ToString());
-                        IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
+                        var preConResult = taskService.ExecutePrecondition(preConditionQuery);
                         IdsList = string.Join(";", preConResult);
                         preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
                     }
@@ -206,8 +203,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                string ruleQuery = string.Empty;
-                List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
+                var ruleQuery = string.Empty;
+                var suspiciousTickets = new List<SuspiciousInfo>();
 
                 using (var taskService = new TaskService())
                 {
@@ -239,13 +236,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (suspiciousInfoList.Count > 0)
                 {
-                    string[] nextActionIdList = TaskInfo.NextActionIdList.Split(',');
-                    string[] nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
-                    for (int i = 0; i < nextActionIdList.Count(); i++)
+                    var nextActionIdList = TaskInfo.NextActionIdList.Split(',');
+                    var nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
+                    for (var i = 0; i < nextActionIdList.Count(); i++)
                     {
                         BaseAction nextAction = ActionFactory.GetAction(
-                                                                            short.Parse(nextActionIdList[i].ToString()),
-                                                                            int.Parse(nextActionTargetIdList[i].ToString()),
+                                                                            short.Parse(nextActionIdList[i]),
+                                                                            int.Parse(nextActionTargetIdList[i]),
                                                                             suspiciousInfoList);
                         nextAction.TakeAction();
                     }

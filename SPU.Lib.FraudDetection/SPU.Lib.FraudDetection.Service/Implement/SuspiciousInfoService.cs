@@ -9,11 +9,11 @@
 
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using DataAccess.Implement;
+    using DataAccess.Interface;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Implement;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
-    using SPU.Lib.FraudDetection.Service.Interface;
+    using Interface;
 
     /// <summary>
     /// Suspicious Info Service.

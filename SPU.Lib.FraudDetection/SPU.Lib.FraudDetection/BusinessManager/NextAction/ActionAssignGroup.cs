@@ -11,11 +11,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.Criteria;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;   
+    using Criteria;
+    using DTO;
+    using Service.Implement;
+    using Service.Interface;   
 
     /// <summary>
     ///  Assign a suspicious customer to a customer group.
@@ -42,7 +41,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             {
                 IGroupService groupService = new GroupService();
 
-                List<int> custIdList = new List<int>();
+                var custIdList = new List<int>();
                 foreach (var info in _suspiciousList)
                 {
                     if (!custIdList.Contains(info.CustId))
@@ -51,12 +50,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                     }
                 }
 
-                CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
+                var criteria = new CustomerGroupAssignCriteria();
                 criteria.CreatorId = 0;
                 criteria.GroupId = _nextActionTargetId;
                 criteria.CustIdList = string.Join(";", custIdList);
 
-                ICommandResult result = groupService.AssignCustToGroup(criteria);
+                var result = groupService.AssignCustToGroup(criteria);
                 if (result.IsSuccessful == false)
                 {
                     Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);

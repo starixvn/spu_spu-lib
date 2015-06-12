@@ -11,10 +11,10 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
     using System.Data;
+    using Core;
+    using DTO;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Task Service interface.

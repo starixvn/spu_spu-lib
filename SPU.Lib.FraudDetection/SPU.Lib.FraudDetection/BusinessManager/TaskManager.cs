@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (TaskTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
                 {
-                    TaskTimer threadTimer = new TaskTimer(task.TaskInfo.Timer);
+                    var threadTimer = new TaskTimer(task.TaskInfo.Timer);
                     threadTimer.TimerName = task.TaskInfo.TaskName;
                     threadTimer.Elapsed += task.Scan;
                     threadTimer.Enabled = true;

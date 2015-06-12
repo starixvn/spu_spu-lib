@@ -9,9 +9,9 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
+    using Core;
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;    
+    using Fanex.NAP.Framework.Data;    
 
     /// <summary>
     /// Group Data Access Interface.

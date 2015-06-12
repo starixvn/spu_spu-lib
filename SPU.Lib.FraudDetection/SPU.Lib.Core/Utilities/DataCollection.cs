@@ -9,7 +9,6 @@
 
 namespace SPU.Lib.Core
 {
-    using System;
     using System.Data;    
 
     /// <summary>

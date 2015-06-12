@@ -9,10 +9,9 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
+    using Interface;
 
     /// <summary>
     /// Bet-type Data Access Implement.

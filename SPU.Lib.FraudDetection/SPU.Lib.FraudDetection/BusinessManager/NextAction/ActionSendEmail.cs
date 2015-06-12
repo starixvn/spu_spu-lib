@@ -11,7 +11,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
     using System.Collections.Generic;
-    using SPU.Lib.FraudDetection.DTO;
+    using DTO;
 
     /// <summary>
     /// ActionSendEmail Class.
@@ -32,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                string template = string.Empty;
+                var template = string.Empty;
                 foreach (var info in _suspiciousList)
                 {
                     template += info.CustId + "-->" + info.MatchId + "-->" + info.TransIdList + "\r\n";
