@@ -28,14 +28,14 @@ namespace SPU.Lib.FraudDetection
         {
             _taskManager = new TaskManager();
             _queue = new SpuMessageQueue();
-            _queue.ReceiveCompleted += HandleReceivedMessage;
+            _queue.AttachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
         public ReceivingMessageHandler(ITaskManager taskManager, IMessageQueue queue)
         {
             _taskManager = taskManager;
             _queue = queue;
-            _queue.ReceiveCompleted += HandleReceivedMessage;
+            _queue.AttachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
         public void HandleReceivedMessage(object sender, ReceiveCompletedEventArgs e)
@@ -83,6 +83,7 @@ namespace SPU.Lib.FraudDetection
         public void ClearTasks()
         {
             _taskManager.ClearTasks();
+            _queue.DeattachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
         private SendingType ConvertLabelIntoSendingType(Message msg)

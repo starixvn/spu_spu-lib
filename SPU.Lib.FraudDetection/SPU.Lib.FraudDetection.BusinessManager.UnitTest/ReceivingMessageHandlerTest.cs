@@ -31,15 +31,5 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             // --- Assert ---
             _mockQueue.Verify(x => x.BeginReceive(), Times.Exactly(1));
         }
-
-        [Test]
-        public void When_Raise_ReceiveCompleted_Then_EndReceive_Should_Be_Called()
-        {
-            // --- Act ---
-            //_mockQueue.Raise(x => x.ReceiveCompleted += null, eventArgs);
-
-            // --- Assert ---
-            //_mockQueue.Verify(x => x.EndReceive(It.IsAny<IAsyncResult>()), Times.Exactly(1));
-        }
     }
 }

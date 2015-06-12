@@ -102,7 +102,6 @@
     <Compile Include="BusinessManager\Workflow.cs" />
     <Compile Include="IMessageQueue.cs" />
     <Compile Include="ITaskLoader.cs" />
-    <Compile Include="MessageQueueExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendingTasks\UpdatingTask.cs" />
     <Compile Include="TaskLoader.cs" />

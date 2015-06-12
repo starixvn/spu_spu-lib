@@ -23,9 +23,8 @@ namespace SPU.Lib.FraudDetection
 
         public SpuMessageQueue()
         {
-            _messageQueue = new MessageQueue
+            _messageQueue = new MessageQueue(ConfigSettings.GetConfigStringByName("queuePath"))
             {
-                Path = ConfigSettings.GetConfigStringByName("queuePath"),
                 Formatter = new XmlMessageFormatter(new[] { typeof(Task) })
             };
 
@@ -33,6 +32,16 @@ namespace SPU.Lib.FraudDetection
         }
 
         public event ReceiveCompletedEventHandler ReceiveCompleted;
+
+        public void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)
+        {
+            _messageQueue.ReceiveCompleted += receiveCompleted;
+        }
+
+        public void DeattachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)
+        {
+            _messageQueue.ReceiveCompleted -= receiveCompleted;
+        }
 
         public void Send(object task)
         {

@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.SendingTasks;
-using SPU.Lib.FraudDetection.Service;
+using SPU.Lib.FraudDetection.Service.Interface;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {

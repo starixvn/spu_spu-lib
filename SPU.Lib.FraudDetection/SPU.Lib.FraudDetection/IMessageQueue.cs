@@ -17,7 +17,9 @@ namespace SPU.Lib.FraudDetection
     /// </summary>
     public interface IMessageQueue
     {
-        event ReceiveCompletedEventHandler ReceiveCompleted;
+        void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted);
+
+        void DeattachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted);
 
         void Send(object task);
 
