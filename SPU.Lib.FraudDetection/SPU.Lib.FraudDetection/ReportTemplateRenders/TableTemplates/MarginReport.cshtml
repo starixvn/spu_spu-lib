@@ -1,0 +1,36 @@
+﻿@using System.Net.Configuration
+@using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
+@model IList<MarginCustormer>
+
+@{
+    const int TwoPreviousMonths = 2;
+}
+<h3>Margin %</h3>
+<table>
+    <tr>
+        <td>Member</td>
+        @for (int i = TwoPreviousMonths; i >= 0; i--)
+        {
+            <td>@DateTime.Now.AddMonths(-i).ToString("MMM")</td>
+        }
+    </tr>
+    @if (Model.Any())
+    {
+        foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Member</td>
+            @foreach (var margin in customer.Margins)
+            {
+                <td>@margin</td>
+            }
+            </tr>
+        }
+    }
+    else
+    {
+    <tr>
+        <td colspan="4">No data is available.</td>
+    </tr>
+    }
+</table>

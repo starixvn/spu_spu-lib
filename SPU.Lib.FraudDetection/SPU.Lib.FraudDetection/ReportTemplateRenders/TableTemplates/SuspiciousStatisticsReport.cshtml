@@ -1,0 +1,38 @@
+﻿@using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
+@model IList<SuspiciousCustormer>
+
+<h3>Suspsioucs Statistic</h3>
+    <table>
+        <tr>
+            <td>Member</td>
+            <td>Worflow</td>
+            <td>Sport</td>
+            <td>League</td>
+            <td>MatchId</td>
+            <td>Match Code</td>
+            <td>Event Date</td>
+            <td>Event</td>
+        </tr>
+@if (Model.Any())
+{
+    foreach (var customer in Model)
+     {
+         <tr>
+             <td>@customer.Member</td>
+             <td>@customer.Workflow</td>
+             <td>@customer.Sport</td>
+             <td>@customer.League</td>
+             <td>@customer.MatchId</td>
+             <td>@customer.MatchCode</td>
+             <td>@customer.EventDate</td>
+             <td>@customer.Event</td>
+         </tr>
+     }
+}
+else
+{
+        <tr>
+            <td colspan="8">No data is available.</td>
+        </tr>
+}
+    </table>
