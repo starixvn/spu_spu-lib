@@ -16,17 +16,13 @@ namespace SPU.Lib.FraudDetection.DTO
     {
         public int MailId { get; set; }
 
+        public int MailingListId { get; set; }
+
         public string MailCode { get; set; }
 
-        public string MailDescription { get; set; }
+        public string MailDesc { get; set; }
 
         public string MailSubject { get; set; }
-
-        public string MailAddressSentTo { get; set; }
-
-        public string MailAddressCc { get; set; }
-
-        public string MailAddressBcc { get; set; }
 
         public string MailContent { get; set; }
 

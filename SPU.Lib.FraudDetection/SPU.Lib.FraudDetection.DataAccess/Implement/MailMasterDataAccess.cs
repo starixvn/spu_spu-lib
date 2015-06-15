@@ -7,16 +7,19 @@
 //   <change who="Aaron.Cao" date="2015.06.11">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
+    using System.Collections.Generic;
+    using Fanex.Data;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;
+    using SPU.Lib.FraudDetection.DataAccess.Interface;
+    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Mail master Data Access.
     /// </summary>
-    public class MailMasterDataAccess : BaseDataAccess
+    public class MailMasterDataAccess : BaseDataAccess, IMailMasterDataAccess
     {
         public MailMasterDataAccess()
             : base()
@@ -38,9 +41,19 @@ namespace SPU.Lib.FraudDetection.DataAccess
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetMails(ICriteria criteria)
+        /// <summary>
+        /// Get mail templates from system.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>A list of mail templates.</returns>
+        public IEnumerable<MailMasterInfo> GetMails(ICriteria criteria)
         {
-            return ReturnDataCollection(criteria);
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var mails = db.Query<MailMasterInfo>(criteria.GetSpParams());
+
+                return mails;
+            }
         }
     }
 }

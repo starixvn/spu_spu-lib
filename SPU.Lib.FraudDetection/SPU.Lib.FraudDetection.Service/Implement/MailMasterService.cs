@@ -7,17 +7,19 @@
 //   <change who="Aaron.Cao" date="2015.06.11">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DataAccess;
+    using SPU.Lib.FraudDetection.DataAccess.Implement;
+    using SPU.Lib.FraudDetection.DTO;
+    using SPU.Lib.FraudDetection.Service.Interface;
 
     /// <summary>
     /// Mail master Service.
     /// </summary>
-    public class MailMasterService : QueryService
+    public class MailMasterService : QueryService, IMailMasterService
     {
         private readonly MailMasterDataAccess _mailMasterDataAccess;
 
@@ -36,14 +38,14 @@ namespace SPU.Lib.FraudDetection.Service
             return _mailMasterDataAccess.DeleteMail(criteria);
         }
 
-        public DataCollection GetMails(ICriteria criteria)
-        {
-            return _mailMasterDataAccess.GetMails(criteria);
-        }
-
         public ICommandResult UpdateMail(ICriteria criteria)
         {
             return _mailMasterDataAccess.UpdateMail(criteria);
+        }
+
+        public IEnumerable<MailMasterInfo> GetMails(ICriteria criteria)
+        {
+            return _mailMasterDataAccess.GetMails(criteria);
         }
     }
 }

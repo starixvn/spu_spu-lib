@@ -71,8 +71,9 @@
     <Compile Include="Implement\BettypeDataAccess.cs" />
     <Compile Include="Implement\ConfigurationsDataAccess.cs" />
     <Compile Include="Implement\GroupDataAccess.cs" />
+    <Compile Include="Implement\MailMasterDataAccess.cs" />
     <Compile Include="Implement\ScannedMatchesDataAccess.cs" />
-    <Compile Include="MailMasterDataAccess.cs" />
+    <Compile Include="Interface\IMailMasterDataAccess.cs" />
     <Compile Include="Implement\SuspiciousInfoDataAccess.cs" />
     <Compile Include="Implement\TaskDataAccess.cs" />
     <Compile Include="Implement\WorkflowDataAccess.cs" />

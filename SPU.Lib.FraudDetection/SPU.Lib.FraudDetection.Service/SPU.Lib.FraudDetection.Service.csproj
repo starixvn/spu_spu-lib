@@ -71,7 +71,8 @@
     <Compile Include="Implement\ConfigurationsService.cs" />
     <Compile Include="Implement\EventService.cs" />
     <Compile Include="Interface\IEventService.cs" />
-    <Compile Include="MailMasterService.cs" />
+    <Compile Include="Interface\IMailMasterService.cs" />
+    <Compile Include="Implement\MailMasterService.cs" />
     <Compile Include="Interface\IBettypeService.cs" />
     <Compile Include="Interface\IConfigurationsService.cs" />
     <Compile Include="Interface\IGroupService.cs" />
