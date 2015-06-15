@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection
     using Criteria.Workflow;
     using DTO;
     using Service.Implement;
-    using Service.Interface;   
+    using Service.Interface;
 
     /// <summary>
     /// Main Class.

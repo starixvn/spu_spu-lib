@@ -27,8 +27,6 @@ namespace SPU.Lib.FraudDetection
             {
                 Formatter = new XmlMessageFormatter(new[] { typeof(Task) })
             };
-
-            _messageQueue.Purge();
         }
 
         public event ReceiveCompletedEventHandler ReceiveCompleted;
