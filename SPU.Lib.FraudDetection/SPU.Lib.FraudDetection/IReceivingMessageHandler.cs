@@ -16,8 +16,6 @@ namespace SPU.Lib.FraudDetection
     /// </summary>
     public interface IReceivingMessageHandler
     {
-        long ReceiveMessageCount { get; set; }
-
         void HandleReceivedMessage(object sender, ReceiveCompletedEventArgs e);
 
         void TriggerReceivingMessage();

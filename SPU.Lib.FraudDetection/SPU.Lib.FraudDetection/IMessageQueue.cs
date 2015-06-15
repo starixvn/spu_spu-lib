@@ -27,6 +27,8 @@ namespace SPU.Lib.FraudDetection
 
         void Stop();
 
+        void Clear();
+
         void BeginReceive();
 
         Message EndReceive(IAsyncResult asyncResult);

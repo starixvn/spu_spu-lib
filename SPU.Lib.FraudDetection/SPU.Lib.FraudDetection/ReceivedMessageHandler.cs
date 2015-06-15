@@ -22,8 +22,6 @@ namespace SPU.Lib.FraudDetection
         private readonly IMessageQueue _queue;
         private readonly ITaskManager _taskManager;
 
-        public long ReceiveMessageCount { get; set; }
-
         public ReceivingMessageHandler()
         {
             _taskManager = new TaskManager();
@@ -40,8 +38,6 @@ namespace SPU.Lib.FraudDetection
 
         public void HandleReceivedMessage(object sender, ReceiveCompletedEventArgs e)
         {
-            ReceiveMessageCount++;
-
             using (var msg = _queue.EndReceive(e.AsyncResult))
             {
                 var task = msg.Body as Task;
