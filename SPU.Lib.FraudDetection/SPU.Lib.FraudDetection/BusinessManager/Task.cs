@@ -46,6 +46,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public List<SuspiciousInfo> SuspiciousInfoList { get; set; }
 
+        public string TaskCode
+        {
+            get { return string.Format("{0}-{1}", TaskInfo.WorkflowId, TaskInfo.TaskId); }
+        }
+
         #endregion Properties
 
         #region BuildTask
@@ -155,7 +160,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(SuspiciousInfoList);                                
+                    TakeNextAction(SuspiciousInfoList);
                 }
             }
             catch (Exception ex)

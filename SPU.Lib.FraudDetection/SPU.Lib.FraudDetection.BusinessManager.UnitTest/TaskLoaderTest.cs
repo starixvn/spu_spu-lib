@@ -1,23 +1,15 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="TaskLoaderTest.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Long.Luu" date="2015.06.12">Created</change>
-// </history>
+﻿using System;
+using System.Collections.Generic;
+using Fanex.Data.Configuration;
+using Fanex.NAP.Framework.Data;
+using Moq;
+using NUnit.Framework;
+using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.SendingTasks;
+using SPU.Lib.FraudDetection.Service.Interface;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
-    using System.Collections.Generic;
-    using Fanex.Data.Configuration;
-    using Fanex.NAP.Framework.Data;
-    using Moq;
-    using NUnit.Framework;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service.Implement;
-    using SPU.Lib.FraudDetection.Service.Interface;
-
     public class TaskLoaderTest
     {
         private Mock<ITaskService> _mockTaskService;
@@ -49,7 +41,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             _sut.LoadTasks();
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<object>()), Times.Exactly(1));
+            _mockQueue.Verify(x => x.Send(It.IsAny<object>(),
+                It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(1));
         }
 
         [Test]
@@ -67,6 +60,37 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 
             //--- Assert ---
             _mockQueue.Verify(x => x.Send(It.IsAny<object>()), Times.Exactly(0));
+        }
+
+        [Test]
+        public void Send_Should_Called_Twice_When_Two_Active_Tasks()
+        {
+            //--- Arrange ---
+            var sampleTask1 = GetSampleTask();
+            sampleTask1.IsActive = true;
+
+            var sampleTask2 = GetSampleTask();
+            sampleTask2.IsActive = true;
+
+            var sampleTasks = new List<TaskInfo> { sampleTask1, sampleTask2 };
+            _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
+
+            //--- Act ---
+            _sut.LoadTasks();
+
+            //--- Assert ---
+            _mockQueue.Verify(x => x.Send(It.IsAny<object>(),
+                It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(2));
+        }
+
+        [Test]
+        public void Real_Send_Should_Called_Twice_When_Two_Active_Tasks()
+        {
+            //--- Arrange ---
+            var sut = new TaskLoader();
+
+            //--- Act ---
+            sut.LoadTasks();
         }
 
         #endregion Tests For Calling LoadTasks

@@ -1,28 +1,20 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="TaskManager.cs" company="Nexcel Solutions Vietnam">
-// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Long.Luu" date="2015.06.12">Created</change>
-// </history>
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Workflow Class.
     /// </summary>
     public class TaskManager : ITaskManager
-    {        
+    {
+        public List<TaskTimer> TaskTimers { get; set; }
+
         public TaskManager()
         {
-            TaskTimerList = new List<TaskTimer>();
+            TaskTimers = new List<TaskTimer>();
         }
-
-        public List<TaskTimer> TaskTimerList { get; set; }
 
         /// <summary>
         /// Add and start a task in the thread pool.
@@ -30,22 +22,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="task">The task to execute.</param>
         public void AddTask(Task task)
         {
-            try
+            if (Exist(task))
             {
-                if (TaskTimerList.Find(x => x.TaskId == task.TaskInfo.TaskId) == null)
-                {
-                    var threadTimer = new TaskTimer(task.TaskInfo.Timer);
-                    threadTimer.TimerName = task.TaskInfo.TaskName;
-                    threadTimer.Elapsed += task.Scan;
-                    threadTimer.Enabled = true;
+                return;
+            }
 
-                    TaskTimerList.Add(threadTimer);
-                }
-            }
-            catch (Exception ex)
+            var threadTimer = new TaskTimer(task.TaskInfo.Timer)
             {
-                throw new Exception("Exception Add a task into the thread pool -- " + ex.Message);
-            }
+                TaskCode = task.TaskCode,
+                TimerName = task.TaskInfo.TaskName
+            };
+
+            threadTimer.Elapsed += task.Scan;
+            threadTimer.Enabled = true;
+
+            TaskTimers.Add(threadTimer);
         }
 
         /// <summary>
@@ -54,56 +45,44 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <param name="task">The task to update.</param>
         public void UpdateTask(Task task)
         {
-            try
-            {
-                RemoveTask(task);
-                AddTask(task);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception Update a task into the thread pool -- " + ex.Message);
-            }
+            RemoveTask(task);
+            AddTask(task);
         }
 
         /// <summary>
         /// Remove a task out the thread pool.
         /// </summary>
         /// <param name="task">The task name.</param>
+        /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(Task task)
         {
-            try
+            var taskTimer = TaskTimers.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+
+            if (taskTimer == null)
             {
-                var threadTimer = TaskTimerList.Find(x => x.TimerName.ToLower().Equals(task.TaskInfo.TaskName));
-                if (threadTimer != null)
-                {
-                    threadTimer.Stop();
-                    threadTimer.Dispose();
-                    TaskTimerList.Remove(threadTimer);
-                }
+                return;
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception Remove a task out the thread pool -- " + ex.Message);
-            }
+
+            taskTimer.Stop();
+            taskTimer.Dispose();
+            TaskTimers.Remove(taskTimer);
         }
 
-        public void StopTasks()
+        public void ClearTasks()
         {
-            try
+            foreach (TaskTimer threadTimer in TaskTimers)
             {
-                foreach (TaskTimer threadTimer in TaskTimerList)
-                {
-                    threadTimer.Stop();
-                    threadTimer.Close();
-                    threadTimer.Dispose();
-                }
+                threadTimer.Stop();
+                threadTimer.Close();
+                threadTimer.Dispose();
+            }
 
-                TaskTimerList.Clear();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception Stop and remove all tasks out the thread pool -- " + ex.Message);
-            }
+            TaskTimers.Clear();
+        }
+
+        public bool Exist(Task task)
+        {
+            return TaskTimers.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
