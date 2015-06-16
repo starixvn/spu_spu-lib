@@ -25,7 +25,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 
         [DisplayName("Mailing List")]
         [Required(ErrorMessage = "Mailing List Required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Mailing List must be a positive number")]
+        [Range(0, int.MaxValue, ErrorMessage = "Mailing List must be a positive number")]
         public int MailingListId { get; set; }
 
         [Required(ErrorMessage = "Mail Code Required.")]
