@@ -26,5 +26,9 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult UpdateMail(ICriteria criteria);
 
         IEnumerable<MailMasterInfo> GetMails(ICriteria criteria);
+
+        MailMasterInfo GetMailById(ICriteria criteria);
+
+        MailMasterInfo GetMailByName(ICriteria criteria);
     }
 }

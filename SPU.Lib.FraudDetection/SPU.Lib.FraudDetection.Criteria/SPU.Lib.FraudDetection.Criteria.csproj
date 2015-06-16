@@ -79,6 +79,7 @@
     <Compile Include="Config\ConfigSelectAllCriteria.cs" />
     <Compile Include="Event\EventSelectAllCriteria.cs" />
     <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
     <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
     <Compile Include="Group\GroupSelectAllCriteria.cs" />
     <Compile Include="Group\GroupDeleteCriteria.cs" />
@@ -111,7 +112,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Name>SPU.Lib.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
     /// </summary>
     public class MailMasterGetByNameCriteria : CriteriaBase
     {
-        public int MailId { get; set; }
+        public string MailCode { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

@@ -16,6 +16,8 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
     /// </summary>
     public class MailMasterDeleteCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+
         public int MailId { get; set; }
 
         /// <summary>

@@ -9,8 +9,10 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Framework.Data;
+    using SPU.Lib.Core;
 
     /// <summary>
     /// MailMasterInsertCriteria Class.
@@ -19,21 +21,20 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
     {
         public int CreatorId { get; set; }
 
-        [Required(ErrorMessage = "Mail Code Required")]
-        [RegularExpression(@"^[\S]*$", ErrorMessage = "White space found")]
+        [DisplayName("Mailing List")]
+        [Required(ErrorMessage = "Mailing List Required.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Mailing List must be a positive number")]
+        public int MailingListId { get; set; }
+
+        [Required(ErrorMessage = "Mail Code Required.")]
+        [RegularExpression(@"^[\S]*$", ErrorMessage = "White space found.")]
+        [MailCodeUnique]
         public string MailCode { get; set; }
 
-        public string MailDescription { get; set; }
+        public string MailDesc { get; set; }
 
-        [Required(ErrorMessage = "Subject Required")]
+        [Required(ErrorMessage = "Subject Required.")]
         public string MailSubject { get; set; }
-
-        [Required(ErrorMessage = "Email Address Required")]
-        public string MailAddressSentTo { get; set; }
-
-        public string MailAddressCc { get; set; }
-
-        public string MailAddressBcc { get; set; }
 
         public string MailContent { get; set; }
 

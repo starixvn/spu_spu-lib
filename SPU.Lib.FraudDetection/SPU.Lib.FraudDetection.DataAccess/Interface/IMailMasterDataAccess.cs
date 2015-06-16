@@ -24,7 +24,5 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
         ICommandResult UpdateMail(ICriteria criteria);
 
         ICommandResult DeleteMail(ICriteria criteria);
-
-        IEnumerable<MailMasterInfo> GetMails(ICriteria criteria);
     }
 }

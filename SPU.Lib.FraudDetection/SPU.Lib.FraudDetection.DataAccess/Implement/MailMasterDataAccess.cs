@@ -40,20 +40,5 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
         {
             return ExecuteNonQuery(criteria);
         }
-
-        /// <summary>
-        /// Get mail templates from system.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>A list of mail templates.</returns>
-        public IEnumerable<MailMasterInfo> GetMails(ICriteria criteria)
-        {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                var mails = db.Query<MailMasterInfo>(criteria.GetSpParams());
-
-                return mails;
-            }
-        }
     }
 }
