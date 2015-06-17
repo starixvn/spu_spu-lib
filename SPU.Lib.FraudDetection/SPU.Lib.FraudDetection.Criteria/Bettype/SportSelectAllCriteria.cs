@@ -9,7 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria to select all supporting bet types.

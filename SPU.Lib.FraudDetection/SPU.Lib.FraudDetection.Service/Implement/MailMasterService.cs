@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using SPU.Lib.FraudDetection.DataAccess.Implement;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service.Interface;
@@ -49,7 +49,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return GetData<MailMasterInfo>(criteria);
         }
 
-        public MailMasterInfo GetMailById(ICriteria criteria)
+        public MailMasterInfo GetMailById(Fanex.Data.Repository.ICriteria criteria)
         {
             var result = GetData<MailMasterInfo>(criteria);
 

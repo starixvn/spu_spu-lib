@@ -9,7 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// MailMasterGetByNameCriteria Class.

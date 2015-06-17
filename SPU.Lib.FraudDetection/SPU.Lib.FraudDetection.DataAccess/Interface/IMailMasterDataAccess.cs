@@ -11,7 +11,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     using System.Collections.Generic;
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>

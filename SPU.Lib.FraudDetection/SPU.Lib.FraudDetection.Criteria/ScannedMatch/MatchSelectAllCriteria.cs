@@ -9,7 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.Match
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// MatchSelectAllCriteria Class.

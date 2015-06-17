@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.Criteria.Match
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// MatchInsertCriteria Class.

@@ -15,7 +15,7 @@ namespace SPU.Lib.FraudDetection.Service
     using DataAccess;
     using Fanex.Data;
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Query Service.

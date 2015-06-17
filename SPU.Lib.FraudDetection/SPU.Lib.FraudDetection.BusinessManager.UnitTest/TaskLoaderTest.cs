@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fanex.Data.Configuration;
-using Fanex.NAP.Framework.Data;
+using Fanex.Data.Repository;
 using Moq;
 using NUnit.Framework;
 using SPU.Lib.FraudDetection.DTO;

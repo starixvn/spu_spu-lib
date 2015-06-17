@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using System.Collections.Generic;
     using DTO;
     using Fanex.NAP.Framework.Command;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Bet-type Service interface.

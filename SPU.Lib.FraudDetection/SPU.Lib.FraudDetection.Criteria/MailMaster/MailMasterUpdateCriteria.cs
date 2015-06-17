@@ -11,7 +11,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
     using SPU.Lib.Core;
 
     /// <summary>
