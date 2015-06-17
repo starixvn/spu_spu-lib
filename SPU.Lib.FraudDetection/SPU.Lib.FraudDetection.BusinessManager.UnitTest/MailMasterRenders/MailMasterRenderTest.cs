@@ -18,10 +18,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
             var mockReportTableRender = new Mock<IReportTemplateRender>();
             var mockPlaceholderReplacer = new PlaceholderReplacer();
 
-            var sut = new MailMasterRender(mockMailMasterService.Object, mockReportTableRender.Object, mockPlaceholderReplacer)
-            {
-                MailMasterId = 1
-            };
+            var sut = new MailMasterRender(mockMailMasterService.Object, mockReportTableRender.Object, mockPlaceholderReplacer);
 
             mockMailMasterService.Setup(x => x.GetMailById(It.IsAny<ICriteria>())).Returns(new MailMasterInfo
             {
@@ -31,7 +28,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
             mockReportTableRender.Setup(x => x.RenderContent()).Returns("Placeholder has already replaced.");
 
             // Act
-            var actualContent = sut.RenderContentOfMailMaster();
+            var actualContent = sut.RenderContentOfMailMaster(10);
 
             // Assert
             Assert.IsFalse(actualContent.MailContent.Contains("&lt;placeholder&gt;"));

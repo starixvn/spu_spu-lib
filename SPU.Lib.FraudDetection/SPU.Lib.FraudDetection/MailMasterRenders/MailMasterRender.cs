@@ -10,25 +10,23 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
     public class MailMasterRender : IMailMasterRender
     {
-        public int MailMasterId { get; set; }
+        public IMailMasterService MailMasterService { get; set; }
 
-        private IMailMasterService _mailMasterService;
+        public IReportTemplateRender ReportTemplateRender { get; set; }
 
-        private IReportTemplateRender _reportTemplateRender;
-
-        private IPlaceholderReplacer _placeholderReplacer;
+        public IPlaceholderReplacer PlaceholderReplacer { get; set; }
 
         public MailMasterRender()
         {
-            _mailMasterService = new MailMasterService();
-            _placeholderReplacer = new PlaceholderReplacer();
+            MailMasterService = new MailMasterService();
+            PlaceholderReplacer = new PlaceholderReplacer();
         }
 
         public MailMasterRender(IReportTemplateRender reportTemplateRender)
         {
-            _mailMasterService = new MailMasterService();
-            _placeholderReplacer = new PlaceholderReplacer();
-            _reportTemplateRender = reportTemplateRender;
+            MailMasterService = new MailMasterService();
+            PlaceholderReplacer = new PlaceholderReplacer();
+            ReportTemplateRender = reportTemplateRender;
         }
         
         public MailMasterRender(
@@ -37,18 +35,18 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             IPlaceholderReplacer placeholderReplacer
             )
         {
-            _mailMasterService = mailMasterService;
-            _placeholderReplacer = placeholderReplacer;
-            _reportTemplateRender = reportTemplateRender;
+            MailMasterService = mailMasterService;
+            PlaceholderReplacer = placeholderReplacer;
+            ReportTemplateRender = reportTemplateRender;
         }
 
-        public MailMasterInfo RenderContentOfMailMaster()
+        public MailMasterInfo RenderContentOfMailMaster(int mailMasterId)
         {
-            var mailMaster = _mailMasterService.GetMailById(new MailMasterGetByIdCriteria{ MailId = MailMasterId});
+            var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
 
-            var contentOfPlaceholder = _reportTemplateRender.RenderContent();
+            var contentOfPlaceholder = ReportTemplateRender.RenderContent();
 
-            var newMailContent = _placeholderReplacer.ReplacePlaceholder(mailMaster.MailContent, contentOfPlaceholder);
+            var newMailContent = PlaceholderReplacer.ReplacePlaceholder(mailMaster.MailContent, contentOfPlaceholder);
 
             mailMaster.MailContent = newMailContent;
 

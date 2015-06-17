@@ -4,8 +4,6 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
     public interface IMailMasterRender
     {
-        int MailMasterId { get; set; }
-
-        MailMasterInfo RenderContentOfMailMaster();
+        MailMasterInfo RenderContentOfMailMaster(int mailMasterId);
     }
 }

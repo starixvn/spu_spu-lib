@@ -8,16 +8,16 @@ namespace SPU.Lib.FraudDetection.MailSenders
     {
         IMailMasterRender MailMasterRender { get; set; }
 
-        void SendMail();
+        void SendMail(int mailMasterId);
     }
 
     public class SpuMailSender : IMailSender
     {
         public IMailMasterRender MailMasterRender { get; set; }
 
-        public void SendMail()
+        public void SendMail(int mailMasterId)
         {
-            var mail = MailMasterRender.RenderContentOfMailMaster();
+            var mail = MailMasterRender.RenderContentOfMailMaster(mailMasterId);
 
             var newMail = new Mail
             {

@@ -6,4 +6,14 @@
     <Setting Key="SPU_SuspiciousInfoInsert" SpName="SPU_SuspiciousInfoInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_CustomerGroupInsert" SpName="SPU_CustomerGroupInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
+
+  <Function Name="SPU_MailMaster">
+    <Setting Key="SPU_MailMasterGetAll" SpName="SPU_MailMasterGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterDelete" SpName="SPU_MailMasterDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterGetById" SpName="SPU_MailMasterGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterGetByName" SpName="SPU_MailMasterGetByName" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterIns" SpName="SPU_MailMasterIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterUpdate" SpName="SPU_MailMasterUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_MailMasterActivate" SpName="SPU_MailMasterActivate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
 </Functions>

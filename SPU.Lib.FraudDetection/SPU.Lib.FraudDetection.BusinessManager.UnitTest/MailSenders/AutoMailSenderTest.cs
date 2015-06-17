@@ -1,8 +1,11 @@
-﻿using Moq;
+﻿using Fanex.Data.Configuration;
+using Moq;
 using NUnit.Framework;
 using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.MailMasterRenders;
 using SPU.Lib.FraudDetection.MailSenders;
+using SPU.Lib.FraudDetection.ReportTemplateRenders;
+using SPU.Lib.FraudDetection.Service.Implement;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
 {
@@ -15,8 +18,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
             var sut = new SpuMailSender();
 
             var mockMailMasterRender = new Mock<IMailMasterRender>();
+
             sut.MailMasterRender = mockMailMasterRender.Object;
-            mockMailMasterRender.Setup(x => x.RenderContentOfMailMaster()).Returns(new MailMasterInfo()
+            mockMailMasterRender.Setup(x => x.RenderContentOfMailMaster(It.IsAny<int>())).Returns(new MailMasterInfo()
             {
                 MailSubject = "Subjet Test",
                 MailContent = "Content Test",
@@ -24,9 +28,26 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                 MailDesc = "Brian is testing"
             });
 
-            sut.SendMail();
+            sut.SendMail(10);
 
-            mockMailMasterRender.Verify(x => x.RenderContentOfMailMaster(), Times.Exactly(1));
+            mockMailMasterRender.Verify(x => x.RenderContentOfMailMaster(It.IsAny<int>()), Times.Exactly(1));
+        }
+
+        [Test]
+        public void TestSendMail2()
+        {
+            DbSettingProviderManager.Current.Start();
+
+            var sut = new SpuMailSender();
+
+            var mockReportTemplateRender = new Mock<IReportTemplateRender>();
+            var mockMailMasterRender = new MailMasterRender(mockReportTemplateRender.Object);
+            
+            sut.MailMasterRender = mockMailMasterRender;
+
+            mockReportTemplateRender.Setup(x => x.RenderContent()).Returns("Suspicious Statistic Table and Margin Table");
+
+            sut.SendMail(10);
         }
     }
 }

@@ -54,6 +54,11 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
                 tempContent = tempContent.Substring(offset);
             }
 
+            if (offset < content.Length)
+            {
+                builder.Append(tempContent);
+            }
+
             var newContent = builder.ToString();
 
             return newContent;
