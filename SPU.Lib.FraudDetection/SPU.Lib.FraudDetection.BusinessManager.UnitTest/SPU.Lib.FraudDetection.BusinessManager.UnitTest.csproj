@@ -35,6 +35,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
@@ -46,6 +52,9 @@
     <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.MailDelivery.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Fanex.MailDelivery.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -110,6 +119,12 @@
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\packages\Fanex.MailStation.1.0.7.0\lib\net40\RabbitMQ.Client.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
@@ -142,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MailMasterRenders\MailMasterRenderTest.cs" />
+    <Compile Include="MailSenders\AutoMailSenderTest.cs" />
     <Compile Include="ReceivingMessageHandlerTest.cs" />
     <Compile Include="RemovingTaskTest.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />

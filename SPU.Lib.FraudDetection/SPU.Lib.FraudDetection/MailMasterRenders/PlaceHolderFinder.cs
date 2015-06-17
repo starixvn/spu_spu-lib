@@ -12,12 +12,12 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
         {
             OpenTagFinder = new TagFinder
             {
-                Tag = "<placeholder>"
+                Tag = "&lt;placeholder&gt;"
             };
 
             CloseTagFinder = new TagFinder
             {
-                Tag = "</placeholder>"
+                Tag = "&lt;/placeholder&gt;"
             };
         }
 
