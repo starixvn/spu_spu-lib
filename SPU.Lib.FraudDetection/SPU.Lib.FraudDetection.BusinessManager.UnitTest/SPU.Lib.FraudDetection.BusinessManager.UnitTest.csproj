@@ -141,6 +141,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MailMasterRenders\MailMasterRenderTest.cs" />
     <Compile Include="ReceivingMessageHandlerTest.cs" />
     <Compile Include="RemovingTaskTest.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />

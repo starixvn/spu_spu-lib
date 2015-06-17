@@ -9,7 +9,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class TaskManager : ITaskManager
     {
-        public List<TaskTimer> TaskTimers { get; set; }
+        public IList<TaskTimer> TaskTimers { get; set; }
 
         public TaskManager()
         {

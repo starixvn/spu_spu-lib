@@ -76,7 +76,6 @@
     <Compile Include="Interface\IBettypeService.cs" />
     <Compile Include="Interface\IConfigurationsService.cs" />
     <Compile Include="Interface\IGroupService.cs" />
-    <Compile Include="Interface\IReportTemplateRender.cs" />
     <Compile Include="Interface\ITaskService.cs" />
     <Compile Include="Implement\WorkflowService.cs" />
     <Compile Include="Implement\GroupService.cs" />

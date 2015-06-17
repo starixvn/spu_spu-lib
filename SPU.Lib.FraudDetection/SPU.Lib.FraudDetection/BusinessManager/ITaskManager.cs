@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
     public interface ITaskManager
     {
-        List<TaskTimer> TaskTimers { get; set; }
+        IList<TaskTimer> TaskTimers { get; set; }
 
         /// <summary>
         /// Add and start a task in the thread pool.

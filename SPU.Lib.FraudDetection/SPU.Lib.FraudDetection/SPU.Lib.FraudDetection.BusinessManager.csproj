@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="BusinessManager\ITaskManager.cs" />
     <Compile Include="IReceivingMessageHandler.cs" />
+    <Compile Include="MailMasterRenders\IMailMasterRender.cs" />
     <Compile Include="ReceivedMessageHandler.cs" />
     <Compile Include="ReportTemplateRenders\IReportTemplateRender.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRender.cs" />
