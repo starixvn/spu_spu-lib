@@ -5,9 +5,25 @@ namespace SPU.Lib.FraudDetection.DTO
 {
     public class MatchDetail
     {
-        public string SportName { get; set; }
+        public int SportType { get; set; }
 
-        public string LeagueName { get; set; }
+        public string SportName
+        {
+            get
+            {
+                return RefData.GetSportName(SportType.ToString(), "en", string.Empty);
+            }
+        }
+
+        public int LeagueId { get; set; }
+
+        public string LeagueName
+        {
+            get
+            {
+                return RefData.GetLeagueName(LeagueId.ToString(), "en", string.Empty);
+            }
+        }
 
         public int MatchId { get; set; }
 

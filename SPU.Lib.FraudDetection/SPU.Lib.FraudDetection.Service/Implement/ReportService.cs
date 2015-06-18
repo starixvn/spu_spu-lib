@@ -33,31 +33,40 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return model;
         }
 
-        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list, IEnumerable<MatchDetail> matches,
+        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list, IList<MatchDetail> matches,
             IDictionary<int, string> customers)
         {
             var model = new SuspiciousStatisticViewModel();
 
+            if (customers.Count == 0 || matches.Count == 0)
+            {
+                return model;
+            }
+
             foreach (var item in list)
             {
-                var match = matches.Single(t => t.MatchId == item.MatchId);
+                var match = matches.FirstOrDefault(t => t.MatchId == item.MatchId);
 
-                model.SuspiciousCustormers.Add(new SuspiciousCustormer
+                if (match != null)
                 {
-                    Member = customers[item.CustId],
-                    MatchId = match.MatchId,
-                    MatchCode = match.MatchCode,
-                    EventDate = match.EventDate,
-                    League = match.LeagueName,
-                    Sport = match.SportName,
-                    Workflow = item.WorkflowId.ToString(),
-                    Event = string.Format("{0} -vs- {1}", match.HomeName, match.AwayName)
-                });
+                    model.SuspiciousCustormers.Add(new SuspiciousCustormer
+                    {
+                        Member = customers[item.CustId],
+                        MatchId = match.MatchId,
+                        MatchCode = match.MatchCode,
+                        EventDate = match.EventDate,
+                        League = match.LeagueName,
+                        Sport = match.SportName,
+                        Workflow = item.WorkflowId.ToString(),
+                        Event = string.Format("{0} -vs- {1}", match.HomeName, match.AwayName)
+                    });
+                }
             }
+
             return model;
         }
 
-        private IEnumerable<MatchDetail> GetDistinctMatches(IList<SuspiciousInfo> list)
+        private IList<MatchDetail> GetDistinctMatches(IList<SuspiciousInfo> list)
         {
             var distinctMatches = list.Select(t => t.MatchId).Distinct().ToList();
             var matchCount = distinctMatches.Count;

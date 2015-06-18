@@ -165,7 +165,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - " + ex.InnerException.Message);
+                Fanex.Logging.Logger.Log.Error("Scan : " + ex.Message);
             }
         }
 
@@ -195,8 +195,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception ExecutePrecondition --", ex);
+                Fanex.Logging.Logger.Log.Error("ExecutePrecondition : " + ex);
             }
+
+            return new List<IEnumerable<string>> ();
         }
 
         /// <summary>
@@ -227,8 +229,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception ExecuteRule --", ex);
+                WriteLog(ex);
             }
+
+            return new List<SuspiciousInfo>();
         }
 
         /// <summary>
@@ -243,9 +247,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     var nextActionIdList = TaskInfo.NextActionIdList.Split(',');
                     var nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
+
+                    
                     for (var i = 0; i < nextActionIdList.Count(); i++)
                     {
-                        BaseAction nextAction = ActionFactory.GetAction(
+                        var nextAction = ActionFactory.GetAction(
                                                                             short.Parse(nextActionIdList[i]),
                                                                             int.Parse(nextActionTargetIdList[i]),
                                                                             suspiciousInfoList);
@@ -255,8 +261,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception TakeNextAction --", ex);
+                WriteLog(ex);
             }
+        }
+
+        private void WriteLog(Exception exception)
+        {
+            var message = "\r\nError:" + exception.Message +
+                          "\r\nStackTrace: " + exception.StackTrace;
+
+            Fanex.Logging.Logger.Log.Error(message);
         }
 
         #endregion Scan

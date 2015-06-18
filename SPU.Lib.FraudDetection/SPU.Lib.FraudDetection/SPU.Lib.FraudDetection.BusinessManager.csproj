@@ -107,16 +107,20 @@
     <Compile Include="MailMasterRenders\TagFinder.cs" />
     <Compile Include="MailMasterRenders\Location.cs" />
     <Compile Include="MailMasterRenders\MailMasterRender.cs" />
+    <Compile Include="MailMasterRenders\IMailMasterRenderAbstractFactory.cs" />
     <Compile Include="MailSenders\IMailSender.cs" />
+    <Compile Include="MailSenders\SpuMailSender.cs" />
     <Compile Include="ReceivedMessageHandler.cs" />
-    <Compile Include="ReportTemplateRenders\IRenderAbstractFactory.cs" />
+    <Compile Include="ReportTemplateRenders\IReportRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\IReportTemplateRender.cs" />
+    <Compile Include="ReportTemplateRenders\SuspiciousStatisticReporRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRender.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\IRazor.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\ITableRender.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRender.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousStatisticsTableRender.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\TableRender.cs" />
+    <Compile Include="ReportTemplateRenders\TemplateFileManager.cs" />
     <Compile Include="SendingTasks\AddingTask.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSaveSuspiciousInfo.cs" />
     <Compile Include="BusinessManager\TaskManager.cs" />
@@ -171,8 +175,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="ReportTemplateRenders\TableTemplates\MarginReport.cshtml" />
-    <None Include="ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml" />
+    <Content Include="ReportTemplateRenders\TableTemplates\MarginReport.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

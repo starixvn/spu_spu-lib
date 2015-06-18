@@ -1,25 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
 
 namespace SPU.Lib.FraudDetection.ReportTemplateRenders
 {
-    public interface IReportRenderAbstractFactory
-    {
-        IReportTemplateRender GetReportTemplateRender();
-    }
-
     public class SuspiciousStatisticReporRenderAbstractFactory : IReportRenderAbstractFactory
     {
         public SuspiciousStatisticViewModel SuspiciousStatisticViewModel { get; set; }
 
-        public IList<string> Templates{ get; set; }
-
         public SuspiciousStatisticReporRenderAbstractFactory()
         {
             SuspiciousStatisticViewModel =new SuspiciousStatisticViewModel();
-            Templates = new List<string>();
+        }
+
+        public string CurrentDirectory
+        {
+            get 
+            { 
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
         }
 
         public IReportTemplateRender GetReportTemplateRender()
@@ -27,13 +29,13 @@ namespace SPU.Lib.FraudDetection.ReportTemplateRenders
             var suspiciousTableRender = new SuspiciousStatisticsTableRender
             {
                 Model = SuspiciousStatisticViewModel.SuspiciousCustormers,
-                Template = Templates[0],
+                Template = File.ReadAllText(CurrentDirectory + TemplateFileManager.SuspiciousStatisticTemplateFile)
             };
 
             var marginTableRender = new MarginTableRender
             {
                 Model = SuspiciousStatisticViewModel.MarginCustormers,
-                Template = Templates[1]
+                Template = File.ReadAllText(CurrentDirectory + TemplateFileManager.MarginTemplateFile)
             };
 
             return new SuspiciousStatisticReportRender

@@ -7,6 +7,13 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
+using System.IO;
+using SPU.Lib.FraudDetection.MailMasterRenders;
+using SPU.Lib.FraudDetection.MailSenders;
+using SPU.Lib.FraudDetection.ReportTemplateRenders;
+using SPU.Lib.FraudDetection.Service.Implement;
+using SPU.Lib.FraudDetection.Service.Interface;
+
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
@@ -18,31 +25,45 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     /// </summary>
     public class ActionSendEmail : BaseAction
     {
-        private List<SuspiciousInfo> _suspiciousList;
+        private readonly IList<SuspiciousInfo> _suspiciousList;
 
-        public ActionSendEmail(List<SuspiciousInfo> suspiciousList, string emailList)
+        private readonly int _mailMasterId;
+
+        public IMailSender MailSender { get; set; }
+
+        public IReportService ReportService { get; set; }
+
+        public ActionSendEmail(List<SuspiciousInfo> suspiciousList, int mailMasterId)
         {
             _suspiciousList = suspiciousList;
-            _emailList = emailList;
+            _mailMasterId = mailMasterId;
+            MailSender = new SpuMailSender();
+            ReportService = new ReportService();
         }
-
-        public string _emailList { get; set; } // format: a@abc.com; b@abc.com
 
         public override void TakeAction()
         {
-            try
+            if (_suspiciousList.Count > 0)
             {
-                var template = string.Empty;
-                foreach (var info in _suspiciousList)
-                {
-                    template += info.CustId + "-->" + info.MatchId + "-->" + info.TransIdList + "\r\n";
-                }
+                var model = ReportService.GetSuspiciousCustomerStatistics(_suspiciousList);
 
-                Fanex.Logging.Logger.Log.Info("Suspicious info \r\n" + template);
+                var renderFactory = new SuspiciousStatisticReporRenderAbstractFactory
+                {
+                    SuspiciousStatisticViewModel = model
+                };
+
+                var mailMasterRenderAbstractFactory = new MailMasterRenderAbstractFactory
+                {
+                    ReportRenderFactory = renderFactory
+                };
+
+                MailSender.MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory;
+
+                MailSender.SendMail(_mailMasterId);
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("Exception ActionSendEmail --", ex);
+                
             }
         }
     }

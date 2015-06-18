@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection
 
         public static void Start(string[] args)
         {
-            BaseAction action = new ActionSendEmail(new System.Collections.Generic.List<SuspiciousInfo>(), string.Empty);
+            BaseAction action = new ActionSendEmail(new System.Collections.Generic.List<SuspiciousInfo>(), 10);
             action.TakeAction();
         }
 

@@ -13,8 +13,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
     [TestFixture]
     public class SuspiciousStatisticReportRenderTest
     {
-        private const string MarginTemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\MarginReport.cshtml";
-        private const string SuspiciousTemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
+        private const string MarginTemplateFilePath = TemplateFileManager.MarginTemplateFile;
+        private const string SuspiciousTemplateFilePath = TemplateFileManager.SuspiciousStatisticTemplateFile;
 
         [Test]
         public void When_Include_Two_Table_Renders_Then_Content_Of_Two_Reports_Should_Be_Inserted_Into_The_Report()
@@ -44,16 +44,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
                 SuspiciousCustormers = GetSampleSuspiciousCustormers()
             };
 
-            var templates = new List<string>
-            {
-                File.ReadAllText(SuspiciousTemplateFilePath),
-                File.ReadAllText(MarginTemplateFilePath)
-            };
-
             var renderFactory = new SuspiciousStatisticReporRenderAbstractFactory
             {
                 SuspiciousStatisticViewModel = model,
-                Templates = templates
             };
 
             var sut = renderFactory.GetReportTemplateRender();

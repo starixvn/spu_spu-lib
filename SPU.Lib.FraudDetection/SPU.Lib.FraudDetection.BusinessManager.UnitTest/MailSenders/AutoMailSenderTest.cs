@@ -15,9 +15,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
     [TestFixture]
     public class SpuMailSenderTest
     {
-        private const string MarginTemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\MarginReport.cshtml";
-        private const string SuspiciousTemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
-
         [SetUp]
         public void SetUp()
         {
@@ -27,56 +24,78 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
         [Test]
         public void When_Calling_Send_Mail_Then_RenderContent_Should_Be_Called()
         {
-            const string partialContent = "Suspicious Statistic Table and Margin Table"; 
-            var sut = new SpuMailSender();
-
-            var abstractFactory = new Mock<IReportRenderAbstractFactory>();
+            // --- Arrange --
+            const string partialContent = "Suspicious Statistic Table and Margin Table";
+            var reporRenderAbstractFactory = new Mock<IReportRenderAbstractFactory>();
             var mockMailRender = new Mock<IReportTemplateRender>();
-            var mockMailMasterRender = new MailMasterRender(abstractFactory.Object);
-            abstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailRender.Object);
-            
-
-            sut.MailMasterRender = mockMailMasterRender;
-
+            var mockMailRenderAbstractFactory = new Mock<IMailMasterRenderAbstractFactory>();
+            var mockMailMasterRender = new MailMasterRender(reporRenderAbstractFactory.Object);
+            reporRenderAbstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailRender.Object);
+            mockMailRenderAbstractFactory.Setup(x => x.GetMailMasterRender()).Returns(mockMailMasterRender);
             mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
-            sut.SendMail(10, null);
+            // --- Act --
+            var sut = new SpuMailSender()
+            {
+                MailMasterRenderAbstractFactory = mockMailRenderAbstractFactory.Object
+            };
 
+            sut.SendMail(10);
+
+            // --- Assert --
             mockMailRender.Verify(x => x.RenderContent(), Times.Exactly(1));
         }
 
         [Test]
         public void Test_Intergrating_Mail_Master_Into_System()
         {
-            DbSettingProviderManager.Current.Start();
-
-            var sut = new SpuMailSender();
-
             var model = GetSampleData();
-
-            var templates = new List<string>
-            {
-                File.ReadAllText(SuspiciousTemplateFilePath),
-                File.ReadAllText(MarginTemplateFilePath)
-            };
 
             var renderFactory = new SuspiciousStatisticReporRenderAbstractFactory
             {
-                SuspiciousStatisticViewModel = model,
-                Templates = templates
+                SuspiciousStatisticViewModel = model
             };
 
-            var mockMailMasterRender = new MailMasterRender
+            var mailMasterRenderAbstractFactory = new MailMasterRenderAbstractFactory
             {
-                ReportRenderAbstractFactory = renderFactory
+                ReportRenderFactory = renderFactory
             };
 
-            sut.MailMasterRender = mockMailMasterRender;
+            var sut = new SpuMailSender
+            {
+                MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory
+            };
 
-            sut.SendMail(10, model);
+            sut.SendMail(10);
         }
 
         private SuspiciousStatisticViewModel GetSampleData()
+        {
+            var sut = new ReportService();
+
+            var list = new List<SuspiciousInfo>
+            {
+                new SuspiciousInfo
+                {
+                    CustId = 1280,
+                    MatchId = 13606626
+                },
+                new SuspiciousInfo
+                {
+                    CustId = 1280,
+                    MatchId = 13659022
+                },
+                new SuspiciousInfo
+                {
+                    CustId = 1280,
+                    MatchId = 13675244
+                },
+            };
+
+            return sut.GetSuspiciousCustomerStatistics(list);
+        }
+
+        private SuspiciousStatisticViewModel GetSampleDataFromArchive()
         {
             var sut = new ReportService();
 

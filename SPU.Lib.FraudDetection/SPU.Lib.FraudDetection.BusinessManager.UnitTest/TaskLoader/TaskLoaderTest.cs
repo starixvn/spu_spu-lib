@@ -8,7 +8,7 @@ using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.SendingTasks;
 using SPU.Lib.FraudDetection.Service.Interface;
 
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
 {
     public class TaskLoaderTest
     {
@@ -83,14 +83,20 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
                 It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(2));
         }
 
-        [Test]
+        //[Test]
         public void Real_Send_Should_Called_Twice_When_Two_Active_Tasks()
         {
             //--- Arrange ---
-            var sut = new TaskLoader();
+            var sut = new Lib.FraudDetection.TaskLoader();
+
+            var queue = new SpuMessageQueue();
+            queue.Clear();
 
             //--- Act ---
             sut.LoadTasks();
+
+            while (true) ;
+
         }
 
         #endregion Tests For Calling LoadTasks
@@ -101,7 +107,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             DbSettingProviderManager.Current.Start();
             _mockTaskService = new Mock<ITaskService>();
             _mockQueue = new Mock<IMessageQueue>();
-            _sut = new TaskLoader(_mockTaskService.Object, _mockQueue.Object);
+            _sut = new Lib.FraudDetection.TaskLoader(_mockTaskService.Object, _mockQueue.Object);
         }
 
         private TaskInfo GetSampleTask()

@@ -32,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                     return new ActionAssignGroup(suspiciousList, actionTargetId);
 
                 case 2:
-                    return new ActionSendEmail(suspiciousList, "long.luu@nexcel.vn");           
+                    return new ActionSendEmail(suspiciousList, 10);
 
                 default:
                     return null;

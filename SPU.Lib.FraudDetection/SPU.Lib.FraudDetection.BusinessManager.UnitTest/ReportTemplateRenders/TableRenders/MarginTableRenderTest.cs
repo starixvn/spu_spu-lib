@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Moq;
 using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.DTO.ReportTemplate;
+using SPU.Lib.FraudDetection.ReportTemplateRenders;
 using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
@@ -12,7 +11,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
     [TestFixture]
     public class MarginTableRenderTest
     {
-        private const string TemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\MarginReport.cshtml";
+        private const string TemplateFilePath = TemplateFileManager.MarginTemplateFile;
 
         [Test]
         public void When_Call_RenderTable_Then_Method_Parse_Should_Be_Called()
@@ -76,13 +75,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
             var sampleCustomer1 = new MarginCustormer
             {
                 Member = "member03",
-                Margins = new List<double> { 0.98, 1.23,  3.50 }
+                Margins = new List<double> { 0.98, 1.23, 3.50 }
             };
 
             var sampleCustomer2 = new MarginCustormer
             {
                 Member = "member04",
-                Margins = new List<double> { 1.98, 12.23,  32.50 }
+                Margins = new List<double> { 1.98, 12.23, 32.50 }
             };
 
             var suspiciousCustomers = new List<MarginCustormer>
