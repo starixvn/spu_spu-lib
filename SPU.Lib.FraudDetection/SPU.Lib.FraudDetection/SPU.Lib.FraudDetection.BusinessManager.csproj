@@ -109,14 +109,12 @@
     <Compile Include="MailMasterRenders\MailMasterRender.cs" />
     <Compile Include="MailSenders\IMailSender.cs" />
     <Compile Include="ReceivedMessageHandler.cs" />
+    <Compile Include="ReportTemplateRenders\IRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\IReportTemplateRender.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRender.cs" />
-    <Compile Include="ReportTemplateRenders\SuspiciousStatisticViewModel.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\IRazor.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\ITableRender.cs" />
-    <Compile Include="ReportTemplateRenders\TableRenders\MarginCustormer.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRender.cs" />
-    <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousCustormer.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousStatisticsTableRender.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\TableRender.cs" />
     <Compile Include="SendingTasks\AddingTask.cs" />

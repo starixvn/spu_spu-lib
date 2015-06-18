@@ -4,6 +4,7 @@ using System.IO;
 using Moq;
 using NUnit.Framework;
 using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders

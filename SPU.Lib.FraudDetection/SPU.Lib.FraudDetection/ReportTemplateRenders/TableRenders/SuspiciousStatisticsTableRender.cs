@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 
 namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
 {

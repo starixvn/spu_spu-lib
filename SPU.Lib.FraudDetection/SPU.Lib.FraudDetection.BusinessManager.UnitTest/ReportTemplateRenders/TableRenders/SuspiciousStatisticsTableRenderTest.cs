@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Moq;
 using NUnit.Framework;
+using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
@@ -78,7 +79,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,
-                MatchCode = 2345,
+                MatchCode = "2345",
                 EventDate = DateTime.Parse("6/13/2015"),
                 Event = "Manchester United vs Chelsea"
             };
@@ -90,7 +91,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,
-                MatchCode = 2345,
+                MatchCode = "2345",
                 EventDate = DateTime.Parse("6/13/2015"),
                 Event = "Manchester United vs Chelsea"
             };

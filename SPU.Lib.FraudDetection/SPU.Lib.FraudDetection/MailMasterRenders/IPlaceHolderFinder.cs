@@ -45,8 +45,8 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
                 builder.Append(subContent);
                 builder.Append(placeHolderContent);
 
-                offset = location.EndPlaceholder + PlaceHolderFinder.CloseTagFinder.Tag.Length + 1;
-                if (offset > content.Length)
+                offset = location.EndPlaceholder + PlaceHolderFinder.CloseTagFinder.Tag.Length;
+                if (offset >= content.Length)
                 {
                     break;
                 }

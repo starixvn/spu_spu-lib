@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using Moq;
 using NUnit.Framework;
+using SPU.Lib.FraudDetection.DTO;
+using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.ReportTemplateRenders;
 using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
 
@@ -21,19 +23,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
             const string contentOfMarginTable = "It's the content of margin table.";
             const string contentOfSuspiciousStatisticTable = "It's the content of suspicious statistic table.";
 
-            var mockTableRender1 = new Mock<ITableRender>();
-            var mockTableRender2 = new Mock<ITableRender>();
-            mockTableRender1.Setup(x => x.RenderTable()).Returns(contentOfMarginTable);
-            mockTableRender2.Setup(x => x.RenderTable()).Returns(contentOfSuspiciousStatisticTable);
-
-            var sut = new SuspiciousStatisticReportRender
-            {
-                TableRenders = new List<ITableRender>
-                {
-                    mockTableRender1.Object,
-                    mockTableRender2.Object
-                }
-            };
+            var fakeRenderFactory = new FakeSuspiciousStatisticReporRenderAbstractFactory();
+            var sut = fakeRenderFactory.GetReportTemplateRender();
 
             // ---- Act ---
 
@@ -53,26 +44,19 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
                 SuspiciousCustormers = GetSampleSuspiciousCustormers()
             };
 
-            var mockTableRender1 = new SuspiciousStatisticsTableRender
+            var templates = new List<string>
             {
-                Model = model.SuspiciousCustormers,
-                Template = File.ReadAllText(SuspiciousTemplateFilePath)
+                File.ReadAllText(SuspiciousTemplateFilePath),
+                File.ReadAllText(MarginTemplateFilePath)
             };
 
-            var mockTableRender2 = new MarginTableRender
+            var renderFactory = new SuspiciousStatisticReporRenderAbstractFactory
             {
-                Model = model.MarginCustormers,
-                Template = File.ReadAllText(MarginTemplateFilePath)
+                SuspiciousStatisticViewModel = model,
+                Templates = templates
             };
 
-            var sut = new SuspiciousStatisticReportRender
-            {
-                TableRenders = new List<ITableRender>
-                {
-                    mockTableRender1,
-                    mockTableRender2
-                }
-            };
+            var sut = renderFactory.GetReportTemplateRender();
 
             // ---- Act ---
 
@@ -87,7 +71,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
 
         #region Manage Sample Data
 
-        private List<MarginCustormer> GetSampleMarginCustormers()
+        private IList<MarginCustormer> GetSampleMarginCustormers()
         {
             var sampleCustomer1 = new MarginCustormer
             {
@@ -119,7 +103,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,
-                MatchCode = 2345,
+                MatchCode = "2345",
                 EventDate = DateTime.Parse("6/13/2015"),
                 Event = "Manchester United vs Chelsea"
             };
@@ -131,7 +115,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,
-                MatchCode = 2345,
+                MatchCode = "2345",
                 EventDate = DateTime.Parse("6/13/2015"),
                 Event = "Manchester United vs Chelsea"
             };

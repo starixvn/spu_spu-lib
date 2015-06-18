@@ -77,6 +77,7 @@
     <Compile Include="Event\EventSelectAllCriteria.cs" />
     <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
     <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />
     <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
     <Compile Include="Group\GroupSelectAllCriteria.cs" />
     <Compile Include="Group\GroupDeleteCriteria.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\CustomerSelectCritiria.cs" />
     <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
     <Compile Include="Task\TaskSelectAllCriteria.cs" />
     <Compile Include="Task\TaskSelectAllByWorkflowIdCriteria.cs" />

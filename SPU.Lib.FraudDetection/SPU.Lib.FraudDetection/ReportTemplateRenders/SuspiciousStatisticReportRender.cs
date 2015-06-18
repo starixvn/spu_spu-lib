@@ -25,4 +25,10 @@ namespace SPU.Lib.FraudDetection.ReportTemplateRenders
             return result;
         }
     }
+
+    public enum ReportTemplateType
+    {
+        SuspiciousStatistic,
+        FakeSuspiciousStatistic
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Fanex.MailDelivery.Client.Handlers;
 using Fanex.MailDelivery.Client.Models;
+using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.MailMasterRenders;
 
 namespace SPU.Lib.FraudDetection.MailSenders
@@ -8,14 +9,14 @@ namespace SPU.Lib.FraudDetection.MailSenders
     {
         IMailMasterRender MailMasterRender { get; set; }
 
-        void SendMail(int mailMasterId);
+        void SendMail(int mailMasterId, SuspiciousStatisticViewModel model);
     }
 
     public class SpuMailSender : IMailSender
     {
         public IMailMasterRender MailMasterRender { get; set; }
 
-        public void SendMail(int mailMasterId)
+        public void SendMail(int mailMasterId, SuspiciousStatisticViewModel model)
         {
             var mail = MailMasterRender.RenderContentOfMailMaster(mailMasterId);
 

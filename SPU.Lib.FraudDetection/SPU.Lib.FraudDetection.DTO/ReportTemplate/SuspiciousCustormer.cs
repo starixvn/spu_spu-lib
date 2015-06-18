@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
 
         public int MatchId { get; set; }
 
-        public int MatchCode { get; set; }
+        public string MatchCode { get; set; }
 
         public DateTime EventDate { get; set; }
 
