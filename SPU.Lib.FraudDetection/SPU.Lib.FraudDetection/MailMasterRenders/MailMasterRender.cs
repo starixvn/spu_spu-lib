@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
     {
         public IMailMasterService MailMasterService { get; set; }
 
-        public IReportTemplateRender ReportTemplateRender { get; set; }
+        public IReportRenderAbstractFactory ReportRenderAbstractFactory { get; set; }
 
         public IPlaceholderReplacer PlaceholderReplacer { get; set; }
 
@@ -22,29 +22,31 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             PlaceholderReplacer = new PlaceholderReplacer();
         }
 
-        public MailMasterRender(IReportTemplateRender reportTemplateRender)
+        public MailMasterRender(IReportRenderAbstractFactory renderAbstractFactory)
         {
             MailMasterService = new MailMasterService();
             PlaceholderReplacer = new PlaceholderReplacer();
-            ReportTemplateRender = reportTemplateRender;
+            ReportRenderAbstractFactory = renderAbstractFactory;
         }
         
         public MailMasterRender(
-            IMailMasterService mailMasterService, 
-            IReportTemplateRender reportTemplateRender,
+            IMailMasterService mailMasterService,
+            IReportRenderAbstractFactory renderAbstractFactory,
             IPlaceholderReplacer placeholderReplacer
             )
         {
             MailMasterService = mailMasterService;
             PlaceholderReplacer = placeholderReplacer;
-            ReportTemplateRender = reportTemplateRender;
+            ReportRenderAbstractFactory = renderAbstractFactory;
         }
 
         public MailMasterInfo RenderContentOfMailMaster(int mailMasterId)
         {
             var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
 
-            var contentOfPlaceholder = ReportTemplateRender.RenderContent();
+            var render = ReportRenderAbstractFactory.GetReportTemplateRender();
+
+            var contentOfPlaceholder = render.RenderContent();
 
             var newMailContent = PlaceholderReplacer.ReplacePlaceholder(mailMaster.MailContent, contentOfPlaceholder);
 

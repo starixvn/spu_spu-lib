@@ -30,16 +30,19 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
             const string partialContent = "Suspicious Statistic Table and Margin Table"; 
             var sut = new SpuMailSender();
 
-            var mockReportTemplateRender = new Mock<IReportTemplateRender>();
-            var mockMailMasterRender = new MailMasterRender(mockReportTemplateRender.Object);
+            var abstractFactory = new Mock<IReportRenderAbstractFactory>();
+            var mockMailRender = new Mock<IReportTemplateRender>();
+            var mockMailMasterRender = new MailMasterRender(abstractFactory.Object);
+            abstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailRender.Object);
+            
 
             sut.MailMasterRender = mockMailMasterRender;
 
-            mockReportTemplateRender.Setup(x => x.RenderContent()).Returns(partialContent);
+            mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
             sut.SendMail(10, null);
 
-            mockReportTemplateRender.Verify(x => x.RenderContent(), Times.Exactly(1));
+            mockMailRender.Verify(x => x.RenderContent(), Times.Exactly(1));
         }
 
         [Test]
@@ -63,11 +66,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                 Templates = templates
             };
 
-            var reportRender = renderFactory.GetReportTemplateRender();
-
             var mockMailMasterRender = new MailMasterRender
             {
-                ReportTemplateRender = reportRender
+                ReportRenderAbstractFactory = renderFactory
             };
 
             sut.MailMasterRender = mockMailMasterRender;
