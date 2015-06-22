@@ -77,18 +77,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
             {
                 new SuspiciousInfo
                 {
-                    CustId = 1280,
-                    MatchId = 13606626
+                    CustId = 3293,
+                    MatchId = 13645510,
+                    WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13659022
+                    MatchId = 13659022,
+                    WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13675244
+                    MatchId = 13675244,
+                    WorkflowId = 4
                 },
             };
 
@@ -104,18 +107,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13606626
+                    MatchId = 13606626,
+                    WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13659022
+                    MatchId = 13659022,
+                    WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13675244
-                },
+                    MatchId = 13675244,
+                    WorkflowId = 4
+                }
             };
 
             return sut.GetSuspiciousCustomerStatistics(list);

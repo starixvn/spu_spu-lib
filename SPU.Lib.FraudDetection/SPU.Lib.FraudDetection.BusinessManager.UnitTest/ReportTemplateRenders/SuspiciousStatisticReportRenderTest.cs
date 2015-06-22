@@ -69,13 +69,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
             var sampleCustomer1 = new MarginCustormer
             {
                 Member = "member03",
-                Margins = new List<double> {0.98, 1.23, 3.50}
+                Margins = new List<double?> {0.98, 1.23, 3.50}
             };
 
             var sampleCustomer2 = new MarginCustormer
             {
                 Member = "member04",
-                Margins = new List<double> {1.98, 12.23, 32.50}
+                Margins = new List<double?> {1.98, 12.23, 32.50}
             };
 
             var suspiciousCustomers = new List<MarginCustormer>

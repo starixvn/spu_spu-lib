@@ -61,6 +61,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _workflowDataAccess.UpdateWorkflow(criteria);
         }
 
+        public WorkflowInfo GetWorkflowById(ICriteria criteria)
+        {
+            return this.Get<WorkflowInfo>(criteria);
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

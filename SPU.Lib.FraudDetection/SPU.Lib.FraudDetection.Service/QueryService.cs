@@ -39,6 +39,11 @@ namespace SPU.Lib.FraudDetection.Service
             return _repository.Query<T>(paramaters);
         }
 
+        public virtual T Get<T>(ICriteria criteria)
+        {
+            return _repository.Get<T>(criteria);
+        }
+
         /// <summary>
         /// Get Data by template.
         /// </summary>

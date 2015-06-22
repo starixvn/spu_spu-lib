@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
+using SPU.Lib.FraudDetection.Criteria.Workflow;
 using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.DTO.ReportTemplate;
 using SPU.Lib.FraudDetection.Service.Interface;
@@ -15,11 +16,14 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
         public IWorkflowService WorkflowService { get; set; }
 
+        public IBalanceUpDayService BalanceUpDayService { get; set; }
+
         public ReportService()
         {
             CustomerService = new CustomerService();
             MatchService = new MatchService();
             WorkflowService = new WorkflowService();
+            BalanceUpDayService = new BalanceUpDayService();
         }
 
         public SuspiciousStatisticViewModel GetSuspiciousCustomerStatistics(IList<SuspiciousInfo> list)
@@ -28,15 +32,38 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
             var matches = GetDistinctMatches(list);
 
+            //var margins = GetMarginCustomer(list);
+
             var model = BuildSuspiciousStatisticViewModel(list, matches, customers);
 
             return model;
+        }
+
+        private IList<object> GetMarginCustomer(IList<SuspiciousInfo> list)
+        {
+            var balanceUpDay = BalanceUpDayService.GetBalanceUpDay(new BalanceUpDaySelectCriteria()).BalanceUpDay;
+
+            var criteria = new MarginCustomerSelectCriteria
+            {
+                BalanceUpDay = balanceUpDay,
+                ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
+            };
+
+            var margins = CustomerService.GetMarginCustomerByCustId(criteria);
+            var groupByCustId = margins.GroupBy(t => t.CustId);
+
+            return null;
         }
 
         private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list, IList<MatchDetail> matches,
             IDictionary<int, string> customers)
         {
             var model = new SuspiciousStatisticViewModel();
+
+            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria()
+            {
+                WorkflowId = list[0].WorkflowId
+            });
 
             if (customers.Count == 0 || matches.Count == 0)
             {
@@ -57,7 +84,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                         EventDate = match.EventDate,
                         League = match.LeagueName,
                         Sport = match.SportName,
-                        Workflow = item.WorkflowId.ToString(),
+                        Workflow = workflow.WorkflowName,
                         Event = string.Format("{0} -vs- {1}", match.HomeName, match.AwayName)
                     });
                 }

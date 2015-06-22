@@ -22,7 +22,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
 
         public int PageCount { get; set; }
 
-        public int RowCount { get; set; }        
+        public int RowCount { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

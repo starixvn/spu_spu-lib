@@ -252,9 +252,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                     for (var i = 0; i < nextActionIdList.Count(); i++)
                     {
                         var nextAction = ActionFactory.GetAction(
-                                                                            short.Parse(nextActionIdList[i]),
-                                                                            int.Parse(nextActionTargetIdList[i]),
-                                                                            suspiciousInfoList);
+                                                                    short.Parse(nextActionIdList[i]),
+                                                                    int.Parse(nextActionTargetIdList[i]),
+                                                                    suspiciousInfoList);
                         nextAction.TakeAction();
                     }
                 }

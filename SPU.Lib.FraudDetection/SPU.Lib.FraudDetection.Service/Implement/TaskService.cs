@@ -138,19 +138,21 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                custId = int.Parse(dt.Rows[i]["matchid"].ToString());
-                matchId = int.Parse(dt.Rows[i]["custid"].ToString());
+                custId = int.Parse(dt.Rows[i]["custid"].ToString());
+                matchId = int.Parse(dt.Rows[i]["matchid"].ToString());
                 transId = long.Parse(dt.Rows[i]["transid"].ToString());
 
                 var currentInfo = suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
 
                 if (currentInfo == null)
                 {
-                    var info = new SuspiciousInfo();
-                    info.WorkflowId = workflowId;
-                    info.MatchId = matchId;
-                    info.CustId = custId;
-                    info.TransIdList = transId.ToString();
+                    var info = new SuspiciousInfo
+                    {
+                        WorkflowId = workflowId,
+                        MatchId = matchId,
+                        CustId = custId,
+                        TransIdList = transId.ToString()
+                    };
 
                     suspiciousInfoList.Add(info);
                 }

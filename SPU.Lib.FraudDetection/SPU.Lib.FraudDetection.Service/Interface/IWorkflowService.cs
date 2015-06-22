@@ -12,8 +12,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using System.Collections.Generic;
     using Core;
     using DTO;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using Fanex.Data.Repository;    
 
     /// <summary>
     /// Workflow Service interface.
@@ -31,6 +31,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         IEnumerable<TaskInfo> GetTasks(ICriteria criteria);
 
         ICommandResult UpdateWorkflow(ICriteria criteria);
+
+        WorkflowInfo GetWorkflowById(ICriteria criteria);
 
         void Dispose();
     }
