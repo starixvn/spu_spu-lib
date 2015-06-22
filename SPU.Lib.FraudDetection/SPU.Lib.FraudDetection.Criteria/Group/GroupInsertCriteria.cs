@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.05.26">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.Criteria.Group
 {
     using Fanex.Data.Repository;
 
@@ -17,8 +17,11 @@ namespace SPU.Lib.FraudDetection.Criteria
     public class GroupInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
+
         public string GroupName { get; set; }
+
         public string GroupDesc { get; set; }
+
         public bool IsActive { get; set; }
 
         /// <summary>

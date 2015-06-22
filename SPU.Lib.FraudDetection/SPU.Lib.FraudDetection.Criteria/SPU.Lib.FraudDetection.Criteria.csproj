@@ -76,6 +76,8 @@
     <Compile Include="Config\ConfigSelectAllCriteria.cs" />
     <Compile Include="Event\EventSelectAllCriteria.cs" />
     <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
+    <Compile Include="Group\GroupGetByIdCriteria.cs" />
+    <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="SuspiciousStatistic\MarginCustomerSelectCriteria.cs" />

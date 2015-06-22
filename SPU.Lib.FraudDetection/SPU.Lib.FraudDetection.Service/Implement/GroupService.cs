@@ -9,9 +9,11 @@
 
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System.Linq;
     using Core;
     using DataAccess.Implement;
     using DataAccess.Interface;
+    using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
@@ -41,6 +43,13 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public DataCollection GetGroups(ICriteria criteria)
         {
             return _groupDataAccess.GetGroups(criteria);
+        }
+
+        public Group GetGroupById(ICriteria criteria)
+        {
+            var result = GetData<Group>(criteria);
+
+            return result.SingleOrDefault();
         }
 
         public ICommandResult UpdateGroup(ICriteria criteria)

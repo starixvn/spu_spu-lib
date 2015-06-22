@@ -7,23 +7,16 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-<<<<<<< HEAD
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
+    using Criteria.Group;
     using SPU.Lib.FraudDetection.Criteria;
     using SPU.Lib.FraudDetection.DTO;
     using SPU.Lib.FraudDetection.Service;
-=======
-using System;
-using System.Collections.Generic;
-using Fanex.NAP.Framework.Command;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service;
->>>>>>> unit-test-message-queue
+    using Service.Implement;
+    using Service.Interface;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
@@ -32,8 +25,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     /// </summary>
     public class ActionAssignGroup : BaseAction
     {
-        private List<SuspiciousInfo> _suspiciousList;
-        private int _nextActionTargetId = 0;
+        private readonly List<SuspiciousInfo> _suspiciousList;
+        private readonly int _nextActionTargetId;
 
         public ActionAssignGroup(List<SuspiciousInfo> suspiciousList, int nextActionTargetId)
         {
@@ -61,10 +54,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                     }
                 }
 
-                CustomerGroupAssignCriteria criteria = new CustomerGroupAssignCriteria();
-                criteria.CreatorId = 0;
-                criteria.GroupId = _nextActionTargetId;
-                criteria.CustIdList = string.Join(";", custIdList);
+                var criteria = new CustomerGroupAssignCriteria
+                {
+                    CreatorId = 0,
+                    GroupId = _nextActionTargetId,
+                    CustIdList = string.Join(";", custIdList)
+                };
 
                 ICommandResult result = groupService.AssignCustToGroup(criteria);
                 if (result.IsSuccessful == false)
