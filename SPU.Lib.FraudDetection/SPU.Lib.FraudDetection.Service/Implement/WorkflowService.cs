@@ -11,6 +11,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core;
     using DataAccess.Implement;
     using DataAccess.Interface;
@@ -63,7 +64,9 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
         public WorkflowInfo GetWorkflowById(ICriteria criteria)
         {
-            return Get<WorkflowInfo>(criteria);
+            var result = GetData<WorkflowInfo>(criteria);
+
+            return result.SingleOrDefault();
         }
 
         public void Dispose()

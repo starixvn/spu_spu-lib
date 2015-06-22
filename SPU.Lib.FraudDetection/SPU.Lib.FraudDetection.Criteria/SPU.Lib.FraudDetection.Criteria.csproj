@@ -85,7 +85,6 @@
     <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />
     <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
     <Compile Include="Group\GroupSelectAllCriteria.cs" />
-    <Compile Include="Group\GroupDeleteCriteria.cs" />
     <Compile Include="Group\GroupUpdateCriteria.cs" />
     <Compile Include="Group\CustomerGroupAssignCriteria.cs" />
     <Compile Include="Group\GroupInsertCriteria.cs" />
@@ -108,9 +107,9 @@
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
+    <Compile Include="Workflow\WorkflowUpdateStatusCriteria.cs" />
     <Compile Include="Workflow\WorkflowSelectByIdCriteria.cs" />
     <Compile Include="Workflow\WorkflowSelectAllCriteria.cs" />
-    <Compile Include="Workflow\WorkflowDeleteCriteria.cs" />
     <Compile Include="Workflow\WorkflowUpdateCriteria.cs" />
     <Compile Include="Workflow\WorkflowInsertCriteria.cs" />
   </ItemGroup>

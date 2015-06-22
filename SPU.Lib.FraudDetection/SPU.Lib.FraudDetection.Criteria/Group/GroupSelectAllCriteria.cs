@@ -17,8 +17,11 @@ namespace SPU.Lib.FraudDetection.Criteria.Group
     public class GroupSelectAllCriteria : CriteriaBase
     {
         public int PageSize { get; set; }
+
         public int PageIndex { get; set; }
+
         public int PageCount { get; set; }
+
         public int RowCount { get; set; }
 
         /// <summary>
