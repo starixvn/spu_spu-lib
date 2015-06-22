@@ -78,19 +78,19 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                 new SuspiciousInfo
                 {
                     CustId = 3293,
-                    MatchId = 13645510,
+                    MatchId = 13760671,
                     WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13659022,
+                    MatchId = 13760672,
                     WorkflowId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13675244,
+                    MatchId = 12768041,
                     WorkflowId = 4
                 },
             };

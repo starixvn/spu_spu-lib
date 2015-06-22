@@ -6,6 +6,11 @@ namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
     {
         public string Member { get; set; }
 
-        public IList<double?> Margins { get; set; }
+        public IList<decimal?> Margins { get; set; }
+
+        public MarginCustormer()
+        {
+            Margins = new List<decimal?>();
+        }
     }
 }

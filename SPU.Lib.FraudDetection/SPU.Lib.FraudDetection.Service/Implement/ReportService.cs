@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
 using SPU.Lib.FraudDetection.Criteria.Workflow;
@@ -10,14 +11,6 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 {
     public class ReportService : IReportService
     {
-        public ICustomerService CustomerService { get; set; }
-
-        public IMatchService MatchService { get; set; }
-
-        public IWorkflowService WorkflowService { get; set; }
-
-        public IBalanceUpDayService BalanceUpDayService { get; set; }
-
         public ReportService()
         {
             CustomerService = new CustomerService();
@@ -26,37 +19,32 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             BalanceUpDayService = new BalanceUpDayService();
         }
 
+        public IBalanceUpDayService BalanceUpDayService { get; set; }
+
+        public ICustomerService CustomerService { get; set; }
+
+        public IMatchService MatchService { get; set; }
+
+        public IWorkflowService WorkflowService { get; set; }
+
         public SuspiciousStatisticViewModel GetSuspiciousCustomerStatistics(IList<SuspiciousInfo> list)
         {
             var customers = GetDistinctCustomers(list);
 
             var matches = GetDistinctMatches(list);
 
-            //var margins = GetMarginCustomer(list);
+            var margins = GetMarginCustomer(list);
 
-            var model = BuildSuspiciousStatisticViewModel(list, matches, customers);
+            var model = BuildSuspiciousStatisticViewModel(list, matches, customers, margins);
 
             return model;
         }
 
-        private IList<object> GetMarginCustomer(IList<SuspiciousInfo> list)
-        {
-            var balanceUpDay = BalanceUpDayService.GetBalanceUpDay(new BalanceUpDaySelectCriteria()).BalanceUpDay;
+        #region Private methods
 
-            var criteria = new MarginCustomerSelectCriteria
-            {
-                BalanceUpDay = balanceUpDay,
-                ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
-            };
-
-            var margins = CustomerService.GetMarginCustomerByCustId(criteria);
-            var groupByCustId = margins.GroupBy(t => t.CustId);
-
-            return null;
-        }
-
-        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list, IList<MatchDetail> matches,
-            IDictionary<int, string> customers)
+        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list,
+            IList<MatchDetail> matches,
+            IDictionary<int, string> customers, IList<MarginCustormer> margins)
         {
             var model = new SuspiciousStatisticViewModel();
 
@@ -90,7 +78,21 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                 }
             }
 
+            model.MarginCustormers = margins;
+
             return model;
+        }
+
+        private IDictionary<int, string> GetDistinctCustomers(IList<SuspiciousInfo> list)
+        {
+            var distinctCustomers = list.Select(t => t.CustId).Distinct().ToList();
+
+            var customers = CustomerService.GetUsernameByCustId(new CustomerSelectCritiria
+            {
+                ListCustIds = string.Join(",", distinctCustomers)
+            });
+
+            return customers;
         }
 
         private IList<MatchDetail> GetDistinctMatches(IList<SuspiciousInfo> list)
@@ -105,25 +107,61 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
             var matches = MatchService.GetMatchDetails(criteria).ToList();
 
-            if (matches.Count != matchCount)
+            if (matches.Count < matchCount)
             {
                 criteria.IsDbArchieve = true;
-                matches = MatchService.GetMatchDetails(criteria).ToList();
+                matches.AddRange(MatchService.GetMatchDetails(criteria));
             }
 
             return matches;
         }
 
-        private IDictionary<int, string> GetDistinctCustomers(IList<SuspiciousInfo> list)
+        private List<DateTime> GetLast3Months()
         {
-            var distinctCustomers = list.Select(t => t.CustId).Distinct().ToList();
+            var last3Months = new List<DateTime>();
+            var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
-            var customers = CustomerService.GetUsernameByCustId(new CustomerSelectCritiria
+            for (int i = 2; i >= 0; i--)
             {
-                ListCustIds = string.Join(",", distinctCustomers)
-            });
-
-            return customers;
+                last3Months.Add(today.AddMonths(-i));
+            }
+            return last3Months;
         }
+
+        private IList<MarginCustormer> GetMarginCustomer(IList<SuspiciousInfo> list)
+        {
+            var balanceUpDay = BalanceUpDayService.GetBalanceUpDay(new BalanceUpDaySelectCriteria()).BalanceUpDay;
+
+            var criteria = new MarginCustomerSelectCriteria
+            {
+                BalanceUpDay = balanceUpDay,
+                ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
+            };
+
+            var last3Months = GetLast3Months();
+
+            var margins = CustomerService.GetMarginCustomerByCustId(criteria).OrderBy(t => t.Username);
+
+            var groupByCustId = margins.GroupBy(t => t.Username);
+
+            var marginList = new List<MarginCustormer>();
+
+            foreach (var group   in groupByCustId)
+            {
+                var margin = new MarginCustormer {Member = @group.Key};
+
+                foreach (var month in last3Months)
+                {
+                    var temp = group.SingleOrDefault(t => t.WinlostDate.Equals(month));
+                    margin.Margins.Add(temp == null ? null : temp.Margin);
+                }
+
+                marginList.Add(margin);
+            }
+
+            return marginList;
+        }
+
+        #endregion
     }
 }

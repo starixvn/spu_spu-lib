@@ -17,7 +17,7 @@ namespace SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic
         {
             if (IsDbArchieve)
             {
-                return "SPU_SelectMatchInfoFromDB02_Archive";
+                return "SPU_SelectMatchInfoFromDBArchive";
             }
 
             return "SPU_SelectMatchInfoFromDB02";
