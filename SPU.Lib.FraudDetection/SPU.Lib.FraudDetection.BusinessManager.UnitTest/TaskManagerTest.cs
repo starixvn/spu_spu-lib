@@ -18,20 +18,20 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Add_Task_Then_One_TaskTimer_Is_Created()
         {
             // --- Arrange ---
-            var task = new Task(GetSampleTask());
+            var task = GetSampleTask();
 
             // --- Act ---
             _sut.AddTask(task);
 
             // --- Assert ---
-            Assert.AreEqual(1, _sut.TaskTimers.Count);
+            Assert.AreEqual(1, _sut.TaskExecutors.Count);
         }
 
         [Test]
         public void When_Add_Two_Tasks_But_The_Same_Then_Only_One_TaskTimer_Is_Created()
         {
             // --- Arrange ---
-            var task = new Task(GetSampleTask());
+            var task = GetSampleTask();
 
             // --- Act ---
             _sut.AddTask(task);
@@ -39,25 +39,22 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             _sut.AddTask(task);
 
             // --- Assert ---
-            Assert.AreEqual(1, _sut.TaskTimers.Count);
+            Assert.AreEqual(1, _sut.TaskExecutors.Count);
         }
 
         [Test]
         public void When_Removed_Existed_Task_Then_TaskTimer_Count_Reduce_One()
         {
             // --- Arrange ---
-            var taskTimer = new TaskTimer(30)
-            {
-                TaskCode = "4-80"
-            };
+            var task = GetSampleTask();
 
-            _sut.TaskTimers.Add(taskTimer);
+            _sut.AddTask(task);
 
             // --- Act ---
-            _sut.RemoveTask(new Task(GetSampleTask()));
+            _sut.RemoveTask(task);
 
             // --- Assert ---
-            var actualCount = _sut.TaskTimers.Count;
+            var actualCount = _sut.TaskExecutors.Count;
 
             Assert.AreEqual(0, actualCount);
         }
@@ -66,18 +63,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Removed_Non_Existed_Task_Then_TaskTimer_Count_Does_Not_Reduce()
         {
             // --- Arrange ---
-            var taskTimer = new TaskTimer(30)
+            var task = GetSampleTask();
+
+            _sut.AddTask(task);
+
+            var nonExistTask = new Task
             {
-                TaskCode = "4-81"
+                WorkflowId = 5,
+                TaskId = 6
             };
-
-            _sut.TaskTimers.Add(taskTimer);
-
+            
             // --- Act ---
-            _sut.RemoveTask(new Task(GetSampleTask()));
+            _sut.RemoveTask(nonExistTask);
 
             // --- Assert ---
-            var actualCount = _sut.TaskTimers.Count;
+            var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(1, actualCount);
         }
 
@@ -85,45 +85,49 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Updated_Existed_Task_Then_TaskTimer_Count_Does_Not_Increase()
         {
             // --- Arrange ---
-            var task = new Task(GetSampleTask());
+            var task = GetSampleTask();
             _sut.AddTask(task);
 
             // --- Act ---
             const string taskName = "Task Demo";
-            task.TaskInfo.TaskName = taskName;
+            task.TaskName = taskName;
             _sut.UpdateTask(task);
 
             // --- Assert ---
-            var actualCount = _sut.TaskTimers.Count;
+            var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(1, actualCount);
-            Assert.AreEqual(taskName, _sut.TaskTimers[0].TimerName);
+            Assert.AreEqual(taskName, _sut.TaskExecutors[0].Task.TaskName);
         }
 
         [Test]
         public void When_Updated_Non_Existed_Task_Then_TaskTimer_Count_Increase_One()
         {
             // --- Arrange ---
-            var task = new Task(GetSampleTask());
+            var task = GetSampleTask();
             _sut.AddTask(task);
 
             // --- Act ---
-            const int workflowId = 9;
-            const int taskId = 99;
-            var taskCode = string.Format("{0}-{1}", workflowId, taskId);
-            task.TaskInfo.TaskId = taskId;
-            task.TaskInfo.WorkflowId = workflowId;
-            _sut.UpdateTask(task);
+            var nonExistTask = new Task
+            {
+                TaskName = "New Task",
+                WorkflowId = 9,
+                TaskId = 99,
+                Interval = 90,
+                IntervalType = "Second"
+            };
+
+            _sut.UpdateTask(nonExistTask);
 
             // --- Assert ---
-            var actualCount = _sut.TaskTimers.Count;
+            var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(2, actualCount);
-            Assert.AreEqual(taskCode, _sut.TaskTimers[1].TaskCode);
-            Assert.AreEqual(task.TaskInfo.TaskName, _sut.TaskTimers[1].TimerName);
+            Assert.AreEqual(nonExistTask.TaskCode, _sut.TaskExecutors[1].TaskCode);
+            Assert.AreEqual(nonExistTask.TaskName, _sut.TaskExecutors[1].Task.TaskName);
         }
 
-        private TaskInfo GetSampleTask()
+        private Task GetSampleTask()
         {
-            var sampleTask = new TaskInfo
+            var sampleTask = new Task
             {
                 EventId = 2,
                 Interval = 60,

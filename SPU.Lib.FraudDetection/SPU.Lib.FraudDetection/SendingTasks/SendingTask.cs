@@ -10,6 +10,7 @@
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
     using BusinessManager;
+    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     /// Sending Task.

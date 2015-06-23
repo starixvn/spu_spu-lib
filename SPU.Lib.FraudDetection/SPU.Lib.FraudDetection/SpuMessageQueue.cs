@@ -25,7 +25,7 @@ namespace SPU.Lib.FraudDetection
         {
             var queuePath = ConfigSettings.GetConfigStringByName("queuePath");
             _messageQueue = MessageQueue.Exists(queuePath) ? new MessageQueue(queuePath) : MessageQueue.Create(queuePath);
-            _messageQueue.Formatter = new XmlMessageFormatter(new[] { typeof(Task) });
+            _messageQueue.Formatter = new XmlMessageFormatter(new[] { typeof(TaskExecutor) });
         }
 
         public void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)

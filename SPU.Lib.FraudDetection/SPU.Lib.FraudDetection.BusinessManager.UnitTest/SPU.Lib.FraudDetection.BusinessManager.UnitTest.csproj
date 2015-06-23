@@ -179,6 +179,7 @@
     <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRenderTest.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousStatisticsTableRenderTest.cs" />
     <Compile Include="SuspiciousStatistic\CustomerServiceTest.cs" />
+    <Compile Include="TaskExecutorTest.cs" />
     <Compile Include="TaskManagerTest.cs" />
     <Compile Include="UpdatingTaskTest.cs" />
     <Compile Include="AddingTaskTest.cs" />

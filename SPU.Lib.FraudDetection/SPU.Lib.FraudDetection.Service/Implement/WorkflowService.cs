@@ -51,9 +51,9 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _workflowDataAccess.GetWorkflows(criteria);
         }
 
-        public IEnumerable<TaskInfo> GetTasks(ICriteria criteria)
+        public IEnumerable<Task> GetTasks(ICriteria criteria)
         {
-            return GetData<TaskInfo>(criteria);
+            return GetData<Task>(criteria);
         }
 
         public ICommandResult UpdateWorkflow(ICriteria criteria)

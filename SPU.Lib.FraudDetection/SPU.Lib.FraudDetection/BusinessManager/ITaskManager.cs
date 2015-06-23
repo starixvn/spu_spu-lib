@@ -10,10 +10,11 @@
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System.Collections.Generic;
+    using SPU.Lib.FraudDetection.DTO;
 
     public interface ITaskManager
     {
-        IList<TaskTimer> TaskTimers { get; set; }
+        IList<TaskExecutor> TaskExecutors { get; set; }
 
         /// <summary>
         /// Add and start a task in the thread pool.

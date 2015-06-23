@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         DataCollection GetWorkflows(ICriteria criteria);
 
-        IEnumerable<TaskInfo> GetTasks(ICriteria criteria);
+        IEnumerable<Task> GetTasks(ICriteria criteria);
 
         ICommandResult UpdateWorkflow(ICriteria criteria);
 

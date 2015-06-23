@@ -1,6 +1,7 @@
 ﻿using System;
 using Moq;
 using NUnit.Framework;
+using SPU.Lib.FraudDetection.DTO;
 using SPU.Lib.FraudDetection.SendingTasks;
 
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
@@ -19,7 +20,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         }
 
         [Test]
-        public void Send_Should_Called_Once_When_Adding_Not_Null_Task()
+        public void When_Adding_Not_Null_Task_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
             var task = new Task();
@@ -39,7 +40,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(null);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<Task>(),
+            _mockQueue.Verify(x => x.Send(It.IsAny<TaskExecutor>(),
                 It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(0));
             Assert.IsFalse(result);
         }

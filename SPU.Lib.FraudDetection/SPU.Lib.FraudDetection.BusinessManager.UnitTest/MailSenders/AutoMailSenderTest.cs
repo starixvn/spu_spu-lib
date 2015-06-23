@@ -84,7 +84,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                 new SuspiciousInfo
                 {
                     CustId = 1280,
-                    MatchId = 13760672,
+                    MatchId = 4032122,
                     WorkflowId = 4
                 },
                 new SuspiciousInfo

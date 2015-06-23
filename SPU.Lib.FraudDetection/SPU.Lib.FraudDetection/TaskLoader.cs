@@ -31,13 +31,13 @@ namespace SPU.Lib.FraudDetection
         {
             try
             {
-                var taskInfoList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+                var taskList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
 
-                foreach (TaskInfo taskInfo in taskInfoList)
+                foreach (var task in taskList)
                 {
-                    if (taskInfo.IsActive)
+                    if (task.IsActive)
                     {
-                        _sendingTask.Send(new Task(taskInfo));
+                        _sendingTask.Send(task);
                     }
                 }
             }

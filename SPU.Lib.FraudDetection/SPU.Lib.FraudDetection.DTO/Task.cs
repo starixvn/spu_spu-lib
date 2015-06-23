@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.DTO
     /// <summary>
     /// Task Info class.
     /// </summary>
-    public class TaskInfo
+    public class Task
     {
         public int TaskId { get; set; }
 
@@ -67,6 +67,15 @@ namespace SPU.Lib.FraudDetection.DTO
                     throw ex;
                 }
             }
+        }
+
+        public string TaskCode
+        {
+            get
+            {
+                return string.Format("{0}-{1}", WorkflowId, TaskId);
+            }
+            
         }
     }
 }

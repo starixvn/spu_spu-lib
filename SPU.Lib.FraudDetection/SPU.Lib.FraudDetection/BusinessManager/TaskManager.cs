@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
+using RazorEngine.Compilation.ImpromptuInterface.Optimization;
+using SPU.Lib.Core.Utilities;
+using SPU.Lib.FraudDetection.DTO;
 
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
@@ -9,11 +13,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     /// </summary>
     public class TaskManager : ITaskManager
     {
-        public IList<TaskTimer> TaskTimers { get; set; }
+        public IList<TaskExecutor> TaskExecutors { get; set; }
 
         public TaskManager()
         {
-            TaskTimers = new List<TaskTimer>();
+            TaskExecutors = new List<TaskExecutor>();
         }
 
         /// <summary>
@@ -27,16 +31,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 return;
             }
 
-            var threadTimer = new TaskTimer(task.TaskInfo.Timer)
-            {
-                TaskCode = task.TaskCode,
-                TimerName = task.TaskInfo.TaskName
-            };
+            var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
 
-            threadTimer.Elapsed += task.Scan;
-            threadTimer.Enabled = true;
-
-            TaskTimers.Add(threadTimer);
+            TaskExecutors.Add(taskExecutor);
         }
 
         /// <summary>
@@ -56,33 +53,53 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(Task task)
         {
-            var taskTimer = TaskTimers.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+            var taskExecutor = TaskExecutors.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
 
-            if (taskTimer == null)
+            if (taskExecutor == null)
             {
                 return;
             }
 
-            taskTimer.Stop();
-            taskTimer.Dispose();
-            TaskTimers.Remove(taskTimer);
+            taskExecutor.Stop();
+            TaskExecutors.Remove(taskExecutor);
         }
 
         public void ClearTasks()
         {
-            foreach (TaskTimer threadTimer in TaskTimers)
+            foreach (var taskExecutor in TaskExecutors)
             {
-                threadTimer.Stop();
-                threadTimer.Close();
-                threadTimer.Dispose();
+                taskExecutor.Stop();
             }
 
-            TaskTimers.Clear();
+            TaskExecutors.Clear();
         }
 
         public bool Exist(Task task)
         {
-            return TaskTimers.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+            
+            return TaskExecutors.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
         }
+    }
+
+    public class TaskExecutorFactory
+    {
+        public static TaskExecutor GetTaskExecutor(Task task)
+        {
+            var eventType = Utility.ParseEnum<EventType>(task.EventId.ToString());
+
+            switch (eventType)
+            {
+                
+                case EventType.ScanMatchAndFindTicket:
+                    return new ScanMatchTaskExecutor(task);
+                case EventType.CountSuspicionTimesByCustomer:
+                    return new CountSuspicionTimesByCustomerTaskExecutor(task);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+
+        }
+       
     }
 }

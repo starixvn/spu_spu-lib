@@ -7,6 +7,8 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
+using SPU.Lib.FraudDetection.Service.Interface;
+
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
@@ -19,17 +21,26 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     /// <summary>
     ///  Save suspicious info.
     /// </summary>
-    public class ActionSaveSuspiciousInfo : BaseAction
+    public class SavingSuspicion
     {
         private List<SuspiciousInfo> _suspiciousInfoList;
-        private string _matchIdList = string.Empty;
-        private int _workflowId = 0;
 
-        public ActionSaveSuspiciousInfo(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int workflowId)
+        private readonly string _matchIdList;
+
+        private readonly int _workflowId;
+
+        public IScannedMatchesService ScannedMatchesService { get; set; }
+
+        public ISuspiciousInfoService SuspiciousInfoService { get; set; }
+
+        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int workflowId)
         {
             _suspiciousInfoList = suspiciousInfoList;
             _matchIdList = matchIdList;
             _workflowId = workflowId;
+
+            ScannedMatchesService = new ScannedMatchesService();
+            SuspiciousInfoService = new SuspiciousInfoService();
         }
 
         public List<SuspiciousInfo> AssignGroupList
@@ -38,7 +49,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             set { _suspiciousInfoList = AssignGroupList; }
         }
 
-        public override void TakeAction()
+        public void TakeAction()
         {
             if (_suspiciousInfoList.Count > 0)
             {
@@ -46,11 +57,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 
                 t1.ContinueWith(task1 =>
                 {
-                    var t2 = new System.Threading.Tasks.Task(() => InsertSuspiciousInfo());
+                    var t2 = new System.Threading.Tasks.Task(() => InsertSuspicion());
                     System.Threading.Thread.Sleep(5000);
                     t2.Start();
                 });
-                t1.Start();                
+                t1.Start();
             }
         }
 
@@ -58,14 +69,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                var scannedMatchesService = new ScannedMatchesService();
-                var criteria = new MatchInsertCriteria();
-                criteria.CreatorId = 0;
-                criteria.MatchIdList = _matchIdList;
-                criteria.WorkflowId = _workflowId;
-                criteria.EventDate = DateTime.Now; // todo
+                var criteria = new MatchInsertCriteria
+                {
+                    CreatorId = 0,
+                    MatchIdList = _matchIdList,
+                    WorkflowId = _workflowId,
+                    EventDate = DateTime.Now
+                };
 
-                var result = scannedMatchesService.InsertScannedMatch(criteria);
+                var result = ScannedMatchesService.InsertScannedMatch(criteria);
+
                 if (result.IsSuccessful == false)
                 {
                     Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
@@ -79,11 +92,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             }
         }
 
-        private bool InsertSuspiciousInfo()
+        private bool InsertSuspicion()
         {
             try
             {
-                var suspiciousInfoService = new SuspiciousInfoService();
                 var criteria = new SuspiciousInfoInsertCriteria();
 
                 var custIdList = new List<int>();
@@ -105,7 +117,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                 criteria.WorkflowIdList = string.Join(";", workflowIdList);
                 criteria.GroupTransIdList = string.Join(";", groupTransIdList);
 
-                var result = suspiciousInfoService.InsertSuspiciousInfo(criteria);
+                var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
                 if (result.IsSuccessful == false)
                 {
                     Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);

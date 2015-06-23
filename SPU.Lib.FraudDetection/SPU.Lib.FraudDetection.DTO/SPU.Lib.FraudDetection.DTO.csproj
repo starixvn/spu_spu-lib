@@ -85,7 +85,7 @@
     <Compile Include="TablesForeignKey.cs" />
     <Compile Include="Sport.cs" />
     <Compile Include="WorkflowInfo.cs" />
-    <Compile Include="TaskInfo.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

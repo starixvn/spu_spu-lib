@@ -58,9 +58,9 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _taskDataAccess.UpdateTask(criteria);
         }
 
-        public IEnumerable<TaskInfo> LoadAllTasks(ICriteria criteria)
+        public IEnumerable<Task> LoadAllTasks(ICriteria criteria)
         {
-            return GetData<TaskInfo>(criteria);
+            return GetData<Task>(criteria);
         }
 
         public IEnumerable<Match> GetSuspiciousMatches(string query)
@@ -112,6 +112,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public IEnumerable<string> ExecutePrecondition(string sqlQueryString)
         {
             var listOfIDs = new List<string>();
+
             var dt = ExecuteReaderQueryInline(sqlQueryString);
 
             for (var i = 0; i < dt.Rows.Count; i++)

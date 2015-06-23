@@ -29,7 +29,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         ICommandResult UpdateTask(ICriteria criteria);
 
-        IEnumerable<TaskInfo> LoadAllTasks(ICriteria criteria);
+        IEnumerable<Task> LoadAllTasks(ICriteria criteria);
 
         IEnumerable<Match> GetSuspiciousMatches(string query);
 

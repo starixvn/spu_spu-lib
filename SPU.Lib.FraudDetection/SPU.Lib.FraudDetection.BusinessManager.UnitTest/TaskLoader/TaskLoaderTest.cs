@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
             //--- Arrange ---
             var sampleTask = GetSampleTask();
             sampleTask.IsActive = true;
-            var sampleTasks = new List<TaskInfo> { sampleTask };
+            var sampleTasks = new List<Task> { sampleTask };
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
             //--- Act ---
@@ -51,7 +51,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
             //--- Arrange ---
             var sampleTask = GetSampleTask();
             sampleTask.IsActive = false;
-            var sampleTasks = new List<TaskInfo> { sampleTask };
+            var sampleTasks = new List<Task> { sampleTask };
 
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
@@ -72,7 +72,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
             var sampleTask2 = GetSampleTask();
             sampleTask2.IsActive = true;
 
-            var sampleTasks = new List<TaskInfo> { sampleTask1, sampleTask2 };
+            var sampleTasks = new List<Task> { sampleTask1, sampleTask2 };
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
             //--- Act ---
@@ -110,9 +110,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
             _sut = new Lib.FraudDetection.TaskLoader(_mockTaskService.Object, _mockQueue.Object);
         }
 
-        private TaskInfo GetSampleTask()
+        private Task GetSampleTask()
         {
-            var sampleTask = new TaskInfo
+            var sampleTask = new Task
             {
                 EventId = 2,
                 Interval = 60,

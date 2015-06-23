@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     {
         #region Properties
 
-        private List<TaskInfo> _tasksInfo = new List<TaskInfo>();
+        private List<Task> _tasksInfo = new List<Task>();
 
         private IWorkflowService _workflowService = new WorkflowService();
 
@@ -44,41 +44,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         #endregion Constructor
 
-        #region Execute Methods
-
-        /// <summary>
-        /// Execute a workflow for a match.
-        /// </summary>
-        /// <param name="match">The match scanned.</param>
-        public void Run(Match match)
-        {
-            foreach (var taskInfo in GetTasks())
-            {
-                if (taskInfo.IsActive)
-                {
-                    var task = new Task(taskInfo);
-                    if (task.TaskInfo.IsBackgroundProcess)
-                    {
-                        AssignTaskToThreadPool(task, match);
-                    }
-                    else
-                    {
-                        task.Run(match);
-                    }
-                }
-            }
-        }
-
-        public void AssignTaskToThreadPool(Task task, Match match)
-        {
-            ThreadPool.AddTask(task);
-        }
-
-        #endregion Execute Methods
-
         #region Task Methods
 
-        public List<TaskInfo> GetTasks()
+        public List<Task> GetTasks()
         {
             if (_tasksInfo.Count == 0)
             {
@@ -90,12 +58,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             return _tasksInfo;
         }
 
-        public void InsertTask(TaskInfo task)
+        public void InsertTask(Task task)
         {
             _tasksInfo.Add(task);
         }
 
-        public void DeleteTask(TaskInfo task)
+        public void DeleteTask(Task task)
         {
             _tasksInfo.Remove(task);
         }

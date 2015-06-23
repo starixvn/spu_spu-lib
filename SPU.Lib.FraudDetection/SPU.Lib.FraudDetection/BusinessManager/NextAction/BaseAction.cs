@@ -14,14 +14,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     /// </summary>
     public abstract class BaseAction
     {
-        protected int ActionID { get; set; }
-
-        protected string ActionName { get; set; }
-
-        protected bool IsActive { get; set; }
-
-        protected int ActionTargetID { get; set; }
-
         public abstract void TakeAction();
     }
 }

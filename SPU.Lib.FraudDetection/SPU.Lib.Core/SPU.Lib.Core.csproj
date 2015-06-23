@@ -73,6 +73,7 @@
     <Compile Include="Utilities\Extentions.cs" />
     <Compile Include="Utilities\DataCollection.cs" />
     <Compile Include="Utilities\FanexGridHelper.cs" />
+    <Compile Include="Utilities\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

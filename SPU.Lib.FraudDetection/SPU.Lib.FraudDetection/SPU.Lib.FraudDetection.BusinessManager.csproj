@@ -98,7 +98,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessManager\CountSuspicionTimesByCustomerTaskExecutor.cs" />
+    <Compile Include="BusinessManager\EventType.cs" />
     <Compile Include="BusinessManager\ITaskManager.cs" />
+    <Compile Include="BusinessManager\ScanMatchTaskExecutor.cs" />
     <Compile Include="IReceivingMessageHandler.cs" />
     <Compile Include="MailMasterRenders\IMailMasterRender.cs" />
     <Compile Include="MailMasterRenders\IPlaceHolderFinder.cs" />
@@ -122,10 +125,9 @@
     <Compile Include="ReportTemplateRenders\TableRenders\TableRender.cs" />
     <Compile Include="ReportTemplateRenders\TemplateFileManager.cs" />
     <Compile Include="SendingTasks\AddingTask.cs" />
-    <Compile Include="BusinessManager\NextAction\ActionSaveSuspiciousInfo.cs" />
+    <Compile Include="BusinessManager\NextAction\SavingSuspicion.cs" />
     <Compile Include="BusinessManager\TaskManager.cs" />
     <Compile Include="BusinessManager\NextAction\ActionFactory.cs" />
-    <Compile Include="BusinessManager\ScannedMatches.cs" />
     <Compile Include="BusinessManager\NextAction\BaseAction.cs" />
     <Compile Include="BusinessManager\NextAction\ActionAssignGroup.cs" />
     <Compile Include="BusinessManager\NextAction\ActionSendEmail.cs" />
@@ -139,9 +141,8 @@
     <Compile Include="SendingTasks\SendingTaskFactory.cs" />
     <Compile Include="SendingTasks\SendingType.cs" />
     <Compile Include="SpuMessageQueue.cs" />
-    <Compile Include="FraudDetection.cs" />
     <Compile Include="BusinessManager\SupportedBettypes.cs" />
-    <Compile Include="BusinessManager\Task.cs" />
+    <Compile Include="BusinessManager\TaskExecutor.cs" />
     <Compile Include="BusinessManager\Workflow.cs" />
     <Compile Include="IMessageQueue.cs" />
     <Compile Include="ITaskLoader.cs" />
