@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         /// <param name="actionTargetId">Action Target ID.</param>
         /// <param name="suspiciousList">Suspicious List.</param>
         /// <returns>Base Action.</returns>
-        public static BaseAction GetAction(short actionId, int actionTargetId, List<SuspiciousInfo> suspiciousList)
+        public static BaseAction GetAction(short actionId, int actionTargetId, IList<SuspiciousInfo> suspiciousList)
         {
             switch (actionId)
             {

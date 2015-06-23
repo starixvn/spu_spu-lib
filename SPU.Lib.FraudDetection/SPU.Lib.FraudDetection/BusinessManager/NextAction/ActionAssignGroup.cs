@@ -21,10 +21,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     /// </summary>
     public class ActionAssignGroup : BaseAction
     {
-        private List<SuspiciousInfo> _suspiciousList;
+        private IList<SuspiciousInfo> _suspiciousList;
         private int _nextActionTargetId = 0;
 
-        public ActionAssignGroup(List<SuspiciousInfo> suspiciousList, int nextActionTargetId)
+        public ActionAssignGroup(IList<SuspiciousInfo> suspiciousList, int nextActionTargetId)
         {
             _suspiciousList = suspiciousList;
             _nextActionTargetId = nextActionTargetId;

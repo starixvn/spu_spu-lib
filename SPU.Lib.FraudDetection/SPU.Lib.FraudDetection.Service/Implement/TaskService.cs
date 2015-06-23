@@ -8,6 +8,8 @@
 //   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
+using System.Linq;
+
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
@@ -132,6 +134,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
         {
             var suspiciousInfoList = new List<SuspiciousInfo>();
+
             var dt = ExecuteReaderQueryInline(sqlQueryString);
             var custId = 0;
             var matchId = 0;
@@ -164,6 +167,29 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             }
 
             return suspiciousInfoList;
+        }
+
+        public IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int workflowId)
+        {
+            var suspiciousCustomers = new List<SuspiciousCustomer>();
+
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                suspiciousCustomers.Add(new SuspiciousCustomer
+                {
+                    CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                    WorkflowId = workflowId
+                });
+            }
+
+            return suspiciousCustomers;
+        }
+
+        public IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria)
+        {
+            return GetData<SuspiciousInfo>(criteria).ToList();
         }
 
         public void Dispose()

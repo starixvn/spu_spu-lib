@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.06.12">Created</change>
 // </history>
 
+using SPU.Lib.FraudDetection.Service.Implement;
+
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
@@ -72,5 +74,9 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Data table.</returns>
         DataTable ExecuteReaderQueryInline(string sqlQueryString);
+
+        IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int workflowId);
+
+        IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria);
     }
 }

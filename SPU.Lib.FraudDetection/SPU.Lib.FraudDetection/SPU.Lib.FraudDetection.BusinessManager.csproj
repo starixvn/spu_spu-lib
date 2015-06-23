@@ -102,6 +102,7 @@
     <Compile Include="BusinessManager\EventType.cs" />
     <Compile Include="BusinessManager\ITaskManager.cs" />
     <Compile Include="BusinessManager\ScanMatchTaskExecutor.cs" />
+    <Compile Include="BusinessManager\SuspiciousHistoryCriteria.cs" />
     <Compile Include="IReceivingMessageHandler.cs" />
     <Compile Include="MailMasterRenders\IMailMasterRender.cs" />
     <Compile Include="MailMasterRenders\IPlaceHolderFinder.cs" />

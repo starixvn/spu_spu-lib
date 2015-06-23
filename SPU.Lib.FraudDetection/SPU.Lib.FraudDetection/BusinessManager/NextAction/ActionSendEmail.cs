@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 
         public IReportService ReportService { get; set; }
 
-        public ActionSendEmail(List<SuspiciousInfo> suspiciousList, int mailMasterId)
+        public ActionSendEmail(IList<SuspiciousInfo> suspiciousList, int mailMasterId)
         {
             _suspiciousList = suspiciousList;
             _mailMasterId = mailMasterId;

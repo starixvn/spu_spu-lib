@@ -73,6 +73,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         public void Start()
         {
             Timer.Elapsed += Execute;
+            Timer.Start();
         }
 
         public void Stop()

@@ -74,7 +74,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                     CreatorId = 0,
                     MatchIdList = _matchIdList,
                     WorkflowId = _workflowId,
-                    EventDate = DateTime.Now
+                    EventDate = DateTime.Now // --> ScannedDate
                 };
 
                 var result = ScannedMatchesService.InsertScannedMatch(criteria);

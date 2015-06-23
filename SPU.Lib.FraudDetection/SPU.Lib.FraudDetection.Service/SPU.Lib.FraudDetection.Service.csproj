@@ -73,6 +73,7 @@
     <Compile Include="Implement\ConfigurationsService.cs" />
     <Compile Include="Implement\EventService.cs" />
     <Compile Include="Implement\CustomerService.cs" />
+    <Compile Include="Implement\SuspiciousCustomer.cs" />
     <Compile Include="Interface\IBalanceUpDayService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Interface\IEventService.cs" />

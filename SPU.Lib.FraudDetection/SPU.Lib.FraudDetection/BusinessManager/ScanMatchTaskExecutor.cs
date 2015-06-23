@@ -28,11 +28,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                if (!string.IsNullOrEmpty(Task.TaskPreconditions))
-                {
-                    var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.WorkflowId.ToString());
-                    MatchIds = TaskService.ExecutePrecondition(preConditionQuery).ToList();
-                }
+                var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.WorkflowId.ToString());
+                MatchIds = TaskService.ExecutePrecondition(preConditionQuery).ToList();
             }
             catch (Exception ex)
             {
@@ -54,6 +51,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 }
 
                 var matchIdList = string.Join(";", MatchIds);
+
                 var saveAction = new SavingSuspicion(SuspiciousInfoList, matchIdList, Task.WorkflowId);
                 saveAction.TakeAction();
             }
@@ -71,7 +69,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 {
                     var nextActionIdList = Task.NextActionIdList.Split(',');
                     var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
-
 
                     for (var i = 0; i < nextActionIdList.Count(); i++)
                     {
