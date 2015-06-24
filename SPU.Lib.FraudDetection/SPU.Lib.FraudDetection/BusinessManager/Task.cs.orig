@@ -8,18 +8,17 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-using SPU.Lib.FraudDetection.BusinessManager.NextAction;
-
 namespace SPU.Lib.FraudDetection.BusinessManager
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.Service;
+    using Core;
+    using DTO;
+    using NextAction;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
     /// Task Class.
@@ -34,7 +33,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public Task(TaskInfo taskInfo)
         {
-            this.TaskInfo = taskInfo;
+            TaskInfo = taskInfo;
         }
 
         #endregion Constructor
@@ -47,6 +46,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public List<SuspiciousInfo> SuspiciousInfoList { get; set; }
 
+        public string TaskCode
+        {
+            get { return string.Format("{0}-{1}", TaskInfo.WorkflowId, TaskInfo.TaskId); }
+        }
+
         #endregion Properties
 
         #region BuildTask
@@ -57,15 +61,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>The precondition string.</returns>
         public string BuildPreconditions()
         {
-            string sqlStr = string.Empty;
-            string strCond = string.Empty;
+            var sqlStr = string.Empty;
 
-            foreach (var preCond in TaskInfo.Preconditions)
+            /*foreach (var preCond in TaskInfo.Preconditions)
             {
                 // TO DO
                 // strCond = string.Join(" ", preCond.ConfigName, preCond.ConfigOperator, preCond.ConfigValue);
                 // sqlStr += string.Join(" AND ", strCond);
-            }
+            }*/
 
             return sqlStr;
         }
@@ -76,15 +79,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <returns>The rule string.</returns>
         public string BuildRules()
         {
-            string sqlStr = string.Empty;
-            string strRule = string.Empty;
+            var sqlStr = string.Empty;
 
-            foreach (var rule in TaskInfo.Rules)
+            /*foreach (var rule in TaskInfo.Rules)
             {
                 // TO DO
                 // strRule = string.Join(" ", rule.ConfigName, rule.ConfigOperator, rule.ConfigValue);
                 // sqlStr += string.Join(" AND ", strRule);
-            }
+            }*/
 
             return sqlStr;
         }
@@ -103,7 +105,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (CheckPreconditions(match))
                 {
-                    TaskService taskService = new TaskService();
+                    ITaskService taskService = new TaskService();
 
                     string rules = RetrieveRules(match);
 
@@ -120,15 +122,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool CheckPreconditions(Match match)
         {
-            string sqlStr = string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
+            var sqlStr = string.Empty; // string.Join("select top 1 matchid from matches where matchid = ", match.MatchId, " and ", TaskInfo.Preconditions);
 
-            TaskService taskService = new TaskService();
+            ITaskService taskService = new TaskService();
             return taskService.ExecuteReaderQueryInline(sqlStr).Rows.Count > 0;
         }
 
         public string RetrieveRules(Match match)
         {
-            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules); ////todo
+            return string.Join("select * from bettrans where matchid = ", match.MatchId, " and ", TaskInfo.TaskRules);
         }
 
         #endregion RunTask
@@ -138,43 +140,32 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         /// <summary>
         /// Scan suspicious tickets.
         /// </summary>
-<<<<<<< HEAD
         /// <param name="source">Source object.</param>
         /// <param name="e">Elapsed Event Arguments.</param>
-=======
->>>>>>> unit-test-message-queue
         public void Scan(object source, ElapsedEventArgs e)
         {
             try
             {
                 if (TaskInfo.IsActive)
                 {
-                    IEnumerable<IEnumerable<string>> preConGroups = ExecutePrecondition();
+                    var preConGroups = ExecutePrecondition();
                     if (preConGroups != null)
                     {
                         SuspiciousInfoList = ExecuteRule(preConGroups);
                     }
 
-                    if (TaskInfo.ActionId == 1)
+                    if (TaskInfo.EventId == 1)
                     {
-<<<<<<< HEAD
                         var saveAction = new ActionSaveSuspiciousInfo(SuspiciousInfoList, IdsList, TaskInfo.WorkflowId);
                         saveAction.TakeAction();
                     }
 
-                    TakeNextAction(SuspiciousInfoList);                                
-=======
-                        var saveAction = new ActionSaveSuspiciousInfo(suspiciousInfoList, IdsList, TaskInfo.WorkflowId);
-                        saveAction.TakeAction();
-                    }
-
-                    TakeNextAction(suspiciousInfoList);
->>>>>>> unit-test-message-queue
+                    TakeNextAction(SuspiciousInfoList);
                 }
             }
             catch (Exception ex)
             {
-                Fanex.Logging.Logger.Log.Error("Exception Task Scanning : " + ex.Message + " - " + ex.InnerException.Message);
+                Fanex.Logging.Logger.Log.Error("Scan : " + ex.Message);
             }
         }
 
@@ -186,15 +177,15 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                string preConditionQuery = string.Empty;
+                var preConditionQuery = string.Empty;
                 IEnumerable<IEnumerable<string>> preConGroups = null;
 
                 if (!string.IsNullOrEmpty(TaskInfo.TaskPreconditions))
                 {
-                    using (TaskService taskService = new TaskService())
+                    using (var taskService = new TaskService())
                     {
                         preConditionQuery = TaskInfo.TaskPreconditions.Replace("\r\n", " ").Replace("$param1$", TaskInfo.WorkflowId.ToString());
-                        IEnumerable<string> preConResult = taskService.ExecutePrecondition(preConditionQuery);
+                        var preConResult = taskService.ExecutePrecondition(preConditionQuery);
                         IdsList = string.Join(";", preConResult);
                         preConGroups = preConResult.Chunk<string>(5); // split into groups of 5 items due to the performance when querying
                     }
@@ -204,8 +195,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception ExecutePrecondition --", ex);
+                Fanex.Logging.Logger.Log.Error("ExecutePrecondition : " + ex);
             }
+
+            return new List<IEnumerable<string>> ();
         }
 
         /// <summary>
@@ -217,10 +210,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             try
             {
-                string ruleQuery = string.Empty;
-                List<SuspiciousInfo> suspiciousTickets = new List<SuspiciousInfo>();
+                var ruleQuery = string.Empty;
+                var suspiciousTickets = new List<SuspiciousInfo>();
 
-                using (TaskService taskService = new TaskService())
+                using (var taskService = new TaskService())
                 {
                     if (preConGroups != null)
                     {
@@ -236,8 +229,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception ExecuteRule --", ex);
+                WriteLog(ex);
             }
+
+            return new List<SuspiciousInfo>();
         }
 
         /// <summary>
@@ -250,22 +245,32 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             {
                 if (suspiciousInfoList.Count > 0)
                 {
-                    string[] nextActionIdList = TaskInfo.NextActionIdList.Split(',');
-                    string[] nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
-                    for (int i = 0; i < nextActionIdList.Count(); i++)
+                    var nextActionIdList = TaskInfo.NextActionIdList.Split(',');
+                    var nextActionTargetIdList = TaskInfo.NextActionTargetIdList.Split(',');
+
+                    
+                    for (var i = 0; i < nextActionIdList.Count(); i++)
                     {
-                        BaseAction nextAction = ActionFactory.GetAction(
-                                                                            short.Parse(nextActionIdList[i].ToString()),
-                                                                            int.Parse(nextActionTargetIdList[i].ToString()),
-                                                                            suspiciousInfoList);
+                        var nextAction = ActionFactory.GetAction(
+                                                                    short.Parse(nextActionIdList[i]),
+                                                                    int.Parse(nextActionTargetIdList[i]),
+                                                                    suspiciousInfoList);
                         nextAction.TakeAction();
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception TakeNextAction --", ex);
+                WriteLog(ex);
             }
+        }
+
+        private void WriteLog(Exception exception)
+        {
+            var message = "\r\nError:" + exception.Message +
+                          "\r\nStackTrace: " + exception.StackTrace;
+
+            Fanex.Logging.Logger.Log.Error(message);
         }
 
         #endregion Scan

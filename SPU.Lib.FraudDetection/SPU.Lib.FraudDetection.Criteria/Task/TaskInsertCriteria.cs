@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     TaskInsertCriteria Class.
+    /// TaskInsertCriteria Class.
     /// </summary>
     public class TaskInsertCriteria : CriteriaBase
     {
@@ -21,8 +21,12 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public string TaskDesc { get; set; }
         public string TaskPreconditions { get; set; }
         public string TaskPreconditionsOriginal { get; set; }
+        public string TaskPreconditionsFormatted { get; set; }
+
         public string TaskRules { get; set; }
         public string TaskRulesOriginal { get; set; }
+
+        public string TaskRulesFormatted { get; set; }
         public int WorkflowId { get; set; }
         public int Interval { get; set; }
         public string IntervalType { get; set; }

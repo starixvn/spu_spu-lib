@@ -11,7 +11,6 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     ///     Task Info class.
@@ -22,9 +21,13 @@ namespace SPU.Lib.FraudDetection.DTO
         public string TaskName { get; set; }
         public string TaskDesc { get; set; }
         public string TaskPreconditions { get; set; }
-        public List<Config> Preconditions { get; set; }
+        public string TaskPreconditionsOriginal { get; set; }
+
+        public string TaskPreconditionsFormatted { get; set; }
         public string TaskRules { get; set; }
-        public List<Config> Rules { get; set; }
+        public string TaskRulesOriginal { get; set; }
+
+        public string TaskRulesFormatted { get; set; }
         public int WorkflowId { get; set; }
         public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
         public int EventId { get; set; }
@@ -42,14 +45,10 @@ namespace SPU.Lib.FraudDetection.DTO
                 {
                     switch (IntervalType.ToLower())
                     {
-                        case "day":
-                            return Interval*24*3600*1000;
-                        case "hour":
-                            return Interval*3600*1000;
-                        case "minute":
-                            return Interval*60*1000;
-                        default:
-                            return Interval*1000; // second
+                        case "day": return Interval * 24 * 3600 * 1000;
+                        case "hour": return Interval * 3600 * 1000;
+                        case "minute": return Interval * 60 * 1000;
+                        default: return Interval * 1000; // second
                     }
                 }
                 catch (Exception ex)

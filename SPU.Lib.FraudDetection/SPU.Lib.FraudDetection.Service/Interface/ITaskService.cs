@@ -31,6 +31,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         IEnumerable<SuspiciousInfo> GetSuspiciousTickets(string query);
         IEnumerable<TablesForeignKey> GetTablesForeignKey(ICriteria criteria);
 
+        Task GetTaskInfoByTaskId(ICriteria criteria);
+
         /// <summary>
         ///     Collect Suspicious Info.
         /// </summary>

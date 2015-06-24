@@ -83,6 +83,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return GetData<TablesForeignKey>(criteria);
         }
 
+        public Task GetTaskInfoByTaskId(ICriteria criteria)
+        {
+            return Get<Task>(criteria);
+        }
+
         /// <summary>
         ///     Collect Suspicious Info.
         /// </summary>
