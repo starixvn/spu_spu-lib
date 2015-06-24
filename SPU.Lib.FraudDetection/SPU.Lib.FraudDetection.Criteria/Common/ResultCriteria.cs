@@ -12,12 +12,12 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// Result Criteria.
+    ///     Result Criteria.
     /// </summary>
     public class ResultCriteria : CriteriaBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResultCriteria"/> class.
+        ///     Initializes a new instance of the <see cref="ResultCriteria" /> class.
         /// </summary>
         public ResultCriteria()
         {
@@ -26,7 +26,6 @@ namespace SPU.Lib.FraudDetection.Criteria
         }
 
         public int ErrCode { get; set; }
-
         public string ErrMsg { get; set; }
     }
 }

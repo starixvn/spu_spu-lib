@@ -9,20 +9,17 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Configurations Data Access interface.
+    ///     Configurations Data Access interface.
     /// </summary>
     public interface IConfigurationsDataAccess
     {
         ICommandResult InsertConfig(ICriteria criteria);
-
         ICommandResult UpdateConfigs(ICriteria criteria);
-
         ICommandResult DeleteConfig(ICriteria criteria);
-
         ICommandResult UpdateConfigParameters(ICriteria criteria);
     }
 }

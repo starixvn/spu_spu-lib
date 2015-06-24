@@ -10,7 +10,7 @@
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     /// <summary>
-    /// BaseAction Class.
+    ///     BaseAction Class.
     /// </summary>
     public abstract class BaseAction
     {

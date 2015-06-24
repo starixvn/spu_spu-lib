@@ -1,14 +1,13 @@
-﻿using Fanex.Data.Repository;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.MailMasterRenders;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
 {
+    using DTO;
+    using Fanex.Data.Repository;
+    using FraudDetection.MailMasterRenders;
+    using FraudDetection.ReportTemplateRenders;
+    using Moq;
+    using NUnit.Framework;
+    using Service.Interface;
+
     [TestFixture]
     public class MailMasterRenderTest
     {
@@ -21,7 +20,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
             var mockMailTemplateRender = new Mock<IReportTemplateRender>();
             renderAbstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailTemplateRender.Object);
 
-            var sut = new MailMasterRender(mockMailMasterService.Object, renderAbstractFactory.Object, mockPlaceholderReplacer);
+            var sut = new MailMasterRender(mockMailMasterService.Object, renderAbstractFactory.Object,
+                mockPlaceholderReplacer);
 
             mockMailMasterService.Setup(x => x.GetMailById(It.IsAny<ICriteria>())).Returns(new MailMasterInfo
             {

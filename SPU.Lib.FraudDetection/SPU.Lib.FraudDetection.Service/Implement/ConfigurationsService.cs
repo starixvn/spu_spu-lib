@@ -13,16 +13,16 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Configurations Service.
+    ///     Configurations Service.
     /// </summary>
     public class ConfigurationsService : QueryService, IConfigurationsService
     {
-        private IConfigurationsDataAccess _configDataAccess;
+        private readonly IConfigurationsDataAccess _configDataAccess;
 
         public ConfigurationsService()
         {

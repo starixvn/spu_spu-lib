@@ -1,9 +1,9 @@
-﻿using Fanex.MailDelivery.Client.Handlers;
-using Fanex.MailDelivery.Client.Models;
-using SPU.Lib.FraudDetection.MailMasterRenders;
-
-namespace SPU.Lib.FraudDetection.MailSenders
+﻿namespace SPU.Lib.FraudDetection.MailSenders
 {
+    using Fanex.MailDelivery.Client.Handlers;
+    using Fanex.MailDelivery.Client.Models;
+    using MailMasterRenders;
+
     public class SpuMailSender : IMailSender
     {
         public IMailMasterRenderAbstractFactory MailMasterRenderAbstractFactory { get; set; }

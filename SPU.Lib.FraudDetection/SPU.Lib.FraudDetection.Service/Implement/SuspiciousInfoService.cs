@@ -11,21 +11,21 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using DataAccess.Implement;
     using DataAccess.Interface;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Suspicious Info Service.
+    ///     Suspicious Info Service.
     /// </summary>
     public class SuspiciousInfoService : QueryService, ISuspiciousInfoService
     {
-        private ISuspiciousInfoDataAccess _suspiciousDataAccess;
+        private readonly ISuspiciousInfoDataAccess _suspiciousDataAccess;
 
         public SuspiciousInfoService()
         {
             _suspiciousDataAccess = new SuspiciousInfoDataAccess();
-        }        
+        }
 
         public ICommandResult InsertSuspiciousInfo(ICriteria criteria)
         {

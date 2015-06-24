@@ -17,7 +17,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using Interface;
 
     /// <summary>
-    /// Event Service.
+    ///     Event Service.
     /// </summary>
     public class EventService : QueryService, IEventService
     {

@@ -1,19 +1,17 @@
-﻿using System;
-using Fanex.Logging;
-using SPU.Lib.FraudDetection.BusinessManager;
-using SPU.Lib.FraudDetection.Criteria.Task;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.SendingTasks;
-using SPU.Lib.FraudDetection.Service.Implement;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection
+﻿namespace SPU.Lib.FraudDetection
 {
+    using System;
+    using Criteria.Task;
+    using Fanex.Logging;
+    using QueueManagement;
+    using SendingTasks;
+    using Service.Implement;
+    using Service.Interface;
+
     public class TaskLoader : ITaskLoader
     {
+        private readonly ISendingTask _sendingTask;
         private readonly ITaskService _taskService;
-
-        private ISendingTask _sendingTask;
 
         public TaskLoader()
         {

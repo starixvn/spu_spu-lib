@@ -15,7 +15,6 @@ namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
         }
 
         public string Template { get; set; }
-
         public abstract string RenderTable();
     }
 }

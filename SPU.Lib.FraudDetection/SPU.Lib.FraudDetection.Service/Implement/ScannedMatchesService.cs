@@ -13,16 +13,16 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Scanned Matches Service.
+    ///     Scanned Matches Service.
     /// </summary>
     public class ScannedMatchesService : QueryService, IScannedMatchesService
     {
-        private IScannedMatchesDataAccess _scannedMatchesDataAccess;
+        private readonly IScannedMatchesDataAccess _scannedMatchesDataAccess;
 
         public ScannedMatchesService()
         {

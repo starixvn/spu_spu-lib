@@ -12,20 +12,17 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// GroupInsertCriteria Class.
+    ///     GroupInsertCriteria Class.
     /// </summary>
     public class GroupInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
-
         public string GroupName { get; set; }
-
         public string GroupDesc { get; set; }
-
-        public bool IsActive { get; set; }        
+        public bool IsActive { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
@@ -34,7 +31,7 @@ namespace SPU.Lib.FraudDetection.Criteria
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()

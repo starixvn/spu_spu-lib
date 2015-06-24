@@ -12,12 +12,12 @@ namespace SPU.Lib.Core
     using System.Configuration;
 
     /// <summary>
-    /// TODO: Update summary.
+    ///     TODO: Update summary.
     /// </summary>
     public static class ConfigSettings
     {
         /// <summary>
-        /// Get connection string.
+        ///     Get connection string.
         /// </summary>
         /// <param name="name">The key name.</param>
         /// <returns>The connection string.</returns>
@@ -27,7 +27,7 @@ namespace SPU.Lib.Core
             string returnValue = null;
 
             // Look for the name in the connectionStrings section.
-            ConnectionStringSettings settings =
+            var settings =
                 ConfigurationManager.ConnectionStrings[name];
 
             // If found, return the connection string. 

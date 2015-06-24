@@ -13,20 +13,17 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// MatchInsertCriteria Class.
+    ///     MatchInsertCriteria Class.
     /// </summary>
     public class MatchInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
-
         public string MatchIdList { get; set; } //// format: "1;2;3".
-
         public int WorkflowId { get; set; }
-             
         public DateTime EventDate { get; set; }
-        
+
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
@@ -35,12 +32,12 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
             return true;
-        }        
+        }
     }
 }

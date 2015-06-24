@@ -10,22 +10,16 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Mail master information.
+    ///     Mail master information.
     /// </summary>
     public class MailMasterInfo
     {
         public int MailId { get; set; }
-
         public int MailingListId { get; set; }
-
         public string MailCode { get; set; }
-
         public string MailDesc { get; set; }
-
         public string MailSubject { get; set; }
-
         public string MailContent { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Fanex.Data.Configuration;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.MailMasterRenders;
-using SPU.Lib.FraudDetection.MailSenders;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.Service.Implement;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
 {
+    using System.Collections.Generic;
+    using DTO;
+    using DTO.ReportTemplate;
+    using Fanex.Data.Configuration;
+    using FraudDetection.MailMasterRenders;
+    using FraudDetection.MailSenders;
+    using FraudDetection.ReportTemplateRenders;
+    using Moq;
+    using NUnit.Framework;
+    using Service.Implement;
+
     [TestFixture]
     public class SpuMailSenderTest
     {
@@ -35,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
             mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
             // --- Act --
-            var sut = new SpuMailSender()
+            var sut = new SpuMailSender
             {
                 MailMasterRenderAbstractFactory = mockMailRenderAbstractFactory.Object
             };
@@ -92,7 +91,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
                     CustId = 1280,
                     MatchId = 12768041,
                     WorkflowId = 4
-                },
+                }
             };
 
             return sut.GetSuspiciousCustomerStatistics(list);

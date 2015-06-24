@@ -16,24 +16,17 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Workflow Service interface.
+    ///     Workflow Service interface.
     /// </summary>
     public interface IWorkflowService
     {
         ICommandResult InsertWorkflow(ICriteria criteria);
-
         ICommandResult DeleteWorkflow(ICriteria criteria);
-
         IEnumerable<WorkflowInfo> LoadWorkflows(ICriteria criteria);
-
         DataCollection GetWorkflows(ICriteria criteria);
-
         IEnumerable<Task> GetTasks(ICriteria criteria);
-
         ICommandResult UpdateWorkflow(ICriteria criteria);
-
         WorkflowInfo GetWorkflowById(ICriteria criteria);
-
         void Dispose();
     }
 }

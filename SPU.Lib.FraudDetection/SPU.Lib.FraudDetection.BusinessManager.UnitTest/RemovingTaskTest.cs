@@ -10,10 +10,12 @@
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using System;
+    using DTO;
     using Moq;
     using NUnit.Framework;
-    using SPU.Lib.FraudDetection.DTO;
-    using SPU.Lib.FraudDetection.SendingTasks;
+    using QueueManagement;
+    using SendingTasks;
+    using TaskExecutors;
 
     [TestFixture]
     public class RemovingTaskTest
@@ -38,7 +40,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             //--- Assert ---
             _mockQueue.Verify(x => x.Send(
                 It.IsAny<Task>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(1));
+                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                Times.Exactly(1));
             Assert.IsTrue(result);
         }
 
@@ -50,7 +53,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 
             //--- Assert ---
             _mockQueue.Verify(x => x.Send(It.IsAny<TaskExecutor>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))), Times.Exactly(0));
+                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                Times.Exactly(0));
             Assert.IsFalse(result);
         }
     }

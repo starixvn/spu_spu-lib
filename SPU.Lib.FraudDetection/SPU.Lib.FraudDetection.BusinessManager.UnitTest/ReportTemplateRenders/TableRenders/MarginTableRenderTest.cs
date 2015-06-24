@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using DTO.ReportTemplate;
+    using FraudDetection.ReportTemplateRenders;
+    using FraudDetection.ReportTemplateRenders.TableRenders;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class MarginTableRenderTest
     {
@@ -75,13 +75,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
             var sampleCustomer1 = new MarginCustormer
             {
                 Member = "member03",
-                Margins = new List<decimal?> { 0.98m, 1.23m, 3.50m }
+                Margins = new List<decimal?> {0.98m, 1.23m, 3.50m}
             };
 
             var sampleCustomer2 = new MarginCustormer
             {
                 Member = "member04",
-                Margins = new List<decimal?> { 1.98m, 12.23m, 32.50m }
+                Margins = new List<decimal?> {1.98m, 12.23m, 32.50m}
             };
 
             var suspiciousCustomers = new List<MarginCustormer>

@@ -12,11 +12,11 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// The criteria to delete a supporting bet type.
+    ///     The criteria to delete a supporting bet type.
     /// </summary>
     public class BettypeDeleteCriteria : CriteriaBase
     {
-        public int BettypeId { get; set; }        
+        public int BettypeId { get; set; }
 
         public override string GetSettingKey()
         {

@@ -13,19 +13,18 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using Criteria;
     using DTO;
     using Fanex.NAP.Framework.Command;
-    using Service.Implement;   
+    using Service.Implement;
 
     /// <summary>
-    /// Configurations Class.
+    ///     Configurations Class.
     /// </summary>
     public class Configurations
     {
-        private Dictionary<string, Config> _configs = new Dictionary<string, Config>();
-
-        private ConfigurationsService _configService = new ConfigurationsService();      
+        private readonly Dictionary<string, Config> _configs = new Dictionary<string, Config>();
+        private readonly ConfigurationsService _configService = new ConfigurationsService();
 
         /// <summary>
-        /// Get configuration list.
+        ///     Get configuration list.
         /// </summary>
         /// <returns>The list of configurations.</returns>
         public Dictionary<string, Config> GetConfigs()
@@ -37,13 +36,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
                 foreach (var config in configs)
                 {
                     _configs.Add(
-                                            config.ConfigName,
-                                            new Config
-                                            {
-                                                ConfigName = config.ConfigName,
-                                                ConfigCategory = config.ConfigCategory,
-                                                ConfigControlType = config.ConfigControlType
-                                            });
+                        config.ConfigName,
+                        new Config
+                        {
+                            ConfigName = config.ConfigName,
+                            ConfigCategory = config.ConfigCategory,
+                            ConfigControlType = config.ConfigControlType
+                        });
                 }
             }
 
@@ -58,25 +57,27 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             criteria.ConfigName = config.ConfigName;
             criteria.ConfigCategory = config.ConfigCategory;
             criteria.ConfigControlType = config.ConfigControlType;
-           
+
             return _configService.InsertConfig(criteria);
-        }        
+        }
 
         /// <summary>
-        /// Update list of configurations.
+        ///     Update list of configurations.
         /// </summary>
         /// <returns>True if success.</returns>
         public bool UpdateConfigs()
         {
-            var tmpUpdate = " Update [dbo].[Configurations] Set ConfigCategory = {0}, ConfigControlType = {1} Where ConfigName = {2} ";
+            var tmpUpdate =
+                " Update [dbo].[Configurations] Set ConfigCategory = {0}, ConfigControlType = {1} Where ConfigName = {2} ";
             var sqlStr = string.Empty;
 
             foreach (var config in _configs)
             {
                 // if (config.Value.IsUpdate)
-                if (true) 
+                if (true)
                 {
-                    sqlStr += string.Format(tmpUpdate, config.Value.ConfigCategory, config.Value.ConfigControlType, config.Value.ConfigName);                    
+                    sqlStr += string.Format(tmpUpdate, config.Value.ConfigCategory, config.Value.ConfigControlType,
+                        config.Value.ConfigName);
                 }
             }
 

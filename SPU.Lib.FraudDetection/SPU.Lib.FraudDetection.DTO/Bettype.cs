@@ -10,12 +10,11 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Bet type Class.
+    ///     Bet type Class.
     /// </summary>
     public class Bettype
     {
         public int BettypeId { get; set; }
-
         public string BettypeName { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using DTO;
+    using NUnit.Framework;
+
     [TestFixture]
     public class TaskManagerTest
     {
@@ -72,7 +72,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
                 WorkflowId = 5,
                 TaskId = 6
             };
-            
+
             // --- Act ---
             _sut.RemoveTask(nonExistTask);
 

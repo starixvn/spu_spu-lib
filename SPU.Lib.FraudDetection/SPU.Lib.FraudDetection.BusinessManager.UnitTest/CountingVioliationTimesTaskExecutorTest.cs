@@ -1,11 +1,11 @@
-﻿using Fanex.Data.Configuration;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using DTO;
+    using Fanex.Data.Configuration;
+    using NUnit.Framework;
+
     [TestFixture]
-    public class CountSuspicionTimesByCustomerTaskExecutorTest
+    public class CountingVioliationTimesTaskExecutorTest
     {
         [SetUp]
         public void SetUp()
@@ -27,7 +27,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
                 IsActive = true,
                 IsBackgroundProcess = true,
                 NextActionIdList = "1,2",
-                TaskRules = "select susCust.custid from (select nfo.custid, COUNT(*) as violateCounter from dbo.SuspiciousInfo nfo with(nolock) where nfo.WorkflowId = $param1$ group by nfo.CustId)as susCust where susCust.violateCounter >= 3",
+                TaskRules =
+                    "select susCust.custid from (select nfo.custid, COUNT(*) as violateCounter from dbo.SuspiciousInfo nfo with(nolock) where nfo.WorkflowId = $param1$ group by nfo.CustId)as susCust where susCust.violateCounter >= 3",
                 TaskDesc = "It's background processing",
                 NextActionTargetIdList = "9,10"
             };
@@ -36,6 +37,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 
             // --- Action ---
             sut.Execute(null, null);
+
+            while (true)
+            {
+
+            }
 
             // --- Assert ---
         }

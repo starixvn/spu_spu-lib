@@ -13,12 +13,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     using DTO;
 
     /// <summary>
-    /// ActionFactory Class.
+    ///     ActionFactory Class.
     /// </summary>
     public static class ActionFactory
     {
         /// <summary>
-        /// Get An Action.
+        ///     Get An Action.
         /// </summary>
         /// <param name="actionId">Action ID.</param>
         /// <param name="actionTargetId">Action Target ID.</param>
@@ -32,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                     return new ActionAssignGroup(suspiciousList, actionTargetId);
 
                 case 2:
-                    return new ActionSendEmail(suspiciousList, 10);
+                    return new ActionSendEmail(suspiciousList, actionTargetId);
 
                 default:
                     return null;

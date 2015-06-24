@@ -12,12 +12,11 @@ namespace SPU.Lib.FraudDetection.DTO
     using System;
 
     /// <summary>
-    /// Match Class.
+    ///     Match Class.
     /// </summary>
     public class Match
     {
         public int MatchId { get; set; }
-
         public DateTime EventDate { get; set; }
     }
 }

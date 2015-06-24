@@ -1,8 +1,8 @@
-﻿using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
-using SPU.Lib.FraudDetection.Service.Implement;
-
-namespace SPU.Lib.FraudDetection.Service.Interface
+﻿namespace SPU.Lib.FraudDetection.Service.Interface
 {
+    using Criteria.SuspiciousStatistic;
+    using Implement;
+
     public interface IBalanceUpDayService
     {
         BalanceUpDayDTO GetBalanceUpDay(BalanceUpDaySelectCriteria criteria);

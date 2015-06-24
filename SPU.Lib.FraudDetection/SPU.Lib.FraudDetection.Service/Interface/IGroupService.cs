@@ -10,22 +10,18 @@
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using Core;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Group Service interface.
+    ///     Group Service interface.
     /// </summary>
     public interface IGroupService
     {
         ICommandResult InsertGroup(ICriteria criteria);
-
         ICommandResult DeleteGroup(ICriteria criteria);
-
         DataCollection GetGroups(ICriteria criteria);
-
         ICommandResult UpdateGroup(ICriteria criteria);
-
         ICommandResult AssignCustToGroup(ICriteria criteria);
     }
 }

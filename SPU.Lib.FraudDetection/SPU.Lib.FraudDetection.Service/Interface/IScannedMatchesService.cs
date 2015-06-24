@@ -11,16 +11,15 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Scanned Matches Service interface.
+    ///     Scanned Matches Service interface.
     /// </summary>
     public interface IScannedMatchesService
     {
         ICommandResult InsertScannedMatch(ICriteria criteria);
-
         IEnumerable<Match> GetScannedMatches(ICriteria criteria);
     }
 }

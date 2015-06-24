@@ -1,7 +1,7 @@
-﻿using SPU.Lib.FraudDetection.DTO;
-
-namespace SPU.Lib.FraudDetection.MailMasterRenders
+﻿namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using DTO;
+
     public interface IMailMasterRender
     {
         MailMasterInfo RenderContentOfMailMaster(int mailMasterId);

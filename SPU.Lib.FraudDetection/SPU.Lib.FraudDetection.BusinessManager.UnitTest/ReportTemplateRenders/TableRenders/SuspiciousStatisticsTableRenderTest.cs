@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using DTO.ReportTemplate;
+    using FraudDetection.ReportTemplateRenders.TableRenders;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class SuspiciousStatisticsTableRenderTest
     {
-        private const string TemplateFilePath = @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
+        private const string TemplateFilePath =
+            @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
 
         [Test]
         public void When_Call_RenderTable_Then_Method_Parse_Should_Be_Called()
@@ -72,7 +73,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
 
         private List<SuspiciousCustormer> GetSampleSuspiciousCustormers()
         {
-            var sampleCustomer1 = new SuspiciousCustormer()
+            var sampleCustomer1 = new SuspiciousCustormer
             {
                 Member = "member01",
                 Workflow = "WF01",
@@ -84,7 +85,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.
                 Event = "Manchester United vs Chelsea"
             };
 
-            var sampleCustomer2 = new SuspiciousCustormer()
+            var sampleCustomer2 = new SuspiciousCustormer
             {
                 Member = "member02",
                 Workflow = "WF01",

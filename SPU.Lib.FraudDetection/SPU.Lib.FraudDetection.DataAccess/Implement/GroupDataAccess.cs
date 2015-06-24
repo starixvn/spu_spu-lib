@@ -10,12 +10,12 @@
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
     using Core;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Group Data Access Implement.
+    ///     Group Data Access Implement.
     /// </summary>
     public class GroupDataAccess : BaseDataAccess, IGroupDataAccess
     {

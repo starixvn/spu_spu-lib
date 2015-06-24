@@ -10,22 +10,18 @@
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     using Core;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using Fanex.Data.Repository;    
 
     /// <summary>
-    /// Group Data Access Interface.
+    ///     Group Data Access Interface.
     /// </summary>
     public interface IGroupDataAccess
     {
         ICommandResult InsertGroup(ICriteria criteria);
-
         DataCollection GetGroups(ICriteria criteria);
-
         ICommandResult UpdateGroup(ICriteria criteria);
-
         ICommandResult DeleteGroup(ICriteria criteria);
-
         ICommandResult AssignCustToGroup(ICriteria criteria);
     }
 }

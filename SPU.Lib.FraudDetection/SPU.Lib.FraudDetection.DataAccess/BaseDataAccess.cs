@@ -11,21 +11,20 @@ namespace SPU.Lib.FraudDetection.DataAccess
 {
     using System;
     using System.Collections;
-    using System.Configuration;
     using System.Data;
     using System.Data.SqlClient;
+    using Core;
+    using Criteria;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
-    using SPU.Lib.Core;
-    using SPU.Lib.FraudDetection.Criteria;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Base Data Access.
+    ///     Base Data Access.
     /// </summary>
     public class BaseDataAccess
     {
-        private string _sqlConnectionString;
+        private readonly string _sqlConnectionString;
 
         public BaseDataAccess()
         {
@@ -33,14 +32,14 @@ namespace SPU.Lib.FraudDetection.DataAccess
         }
 
         /// <summary>
-        /// Execute non query.
+        ///     Execute non query.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Command result.</returns>
         public ICommandResult ExecuteNonQuery(ICriteria criteria)
         {
             // Prepare SP parameters
-            Hashtable hash = criteria.GetSpParams();
+            var hash = criteria.GetSpParams();
 
             hash = (new ResultCriteria()).AddSpParams(hash);
 
@@ -53,7 +52,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
         }
 
         /// <summary>
-        /// Execute data reader.
+        ///     Execute data reader.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Set of data.</returns>
@@ -71,15 +70,15 @@ namespace SPU.Lib.FraudDetection.DataAccess
         }
 
         /// <summary>
-        /// Execute Non Query Inline.
+        ///     Execute Non Query Inline.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Command result.</returns>
         public ICommandResult ExecuteNonQueryInline(string sqlQueryString)
         {
-            SqlConnection sqlConnection = new SqlConnection(_sqlConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
-            var result = (int)sqlCommand.ExecuteScalar();
+            var sqlConnection = new SqlConnection(_sqlConnectionString);
+            var sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
+            var result = (int) sqlCommand.ExecuteScalar();
 
             return new CommandResult
             {
@@ -89,23 +88,23 @@ namespace SPU.Lib.FraudDetection.DataAccess
         }
 
         /// <summary>
-        /// Execute Reader Query Inline.
+        ///     Execute Reader Query Inline.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Data table.</returns>
         public DataTable ExecuteReaderQueryInline(string sqlQueryString)
         {
-            SqlConnection sqlConnection = new SqlConnection(_sqlConnectionString);
-            SqlCommand sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
-            SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCommand);
-            DataTable sqlDt = new DataTable();
+            var sqlConnection = new SqlConnection(_sqlConnectionString);
+            var sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
+            var sqlDa = new SqlDataAdapter(sqlCommand);
+            var sqlDt = new DataTable();
             sqlDa.Fill(sqlDt);
 
             return sqlDt;
         }
 
         /// <summary>
-        /// Get Command Result.
+        ///     Get Command Result.
         /// </summary>
         /// <param name="hash">Input parameters.</param>
         /// <returns>Command result.</returns>
@@ -122,14 +121,14 @@ namespace SPU.Lib.FraudDetection.DataAccess
         }
 
         /// <summary>
-        /// Returns the data collection.
+        ///     Returns the data collection.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Data Collection.</returns>
         public DataCollection ReturnDataCollection(ICriteria criteria)
         {
             // prepare SP parameters
-            Hashtable hash = criteria.GetSpParams();
+            var hash = criteria.GetSpParams();
 
             // hash = (new ResultCriteria()).AddSpParams(hash);
             var results = new DataCollection();
@@ -138,7 +137,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
             {
                 db.AssignParamValues(hash);
                 results.Data = db.ExecuteDataSet();
-                results.TotalItem = (int)db.GetOuputParams()["rowcount"];
+                results.TotalItem = (int) db.GetOuputParams()["rowcount"];
 
                 return results;
             }

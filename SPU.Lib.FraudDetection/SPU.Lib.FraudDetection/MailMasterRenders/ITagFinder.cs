@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-
 namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using System.Collections.Generic;
+
     public interface ITagFinder
     {
-        string  Tag { get; set; }
-
+        string Tag { get; set; }
         IList<int> GetTagPositions(string content);
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Moq;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
 {
+    using System;
+    using System.Collections.Generic;
+    using DTO.ReportTemplate;
+    using FraudDetection.ReportTemplateRenders;
+    using NUnit.Framework;
+
     [TestFixture]
     public class SuspiciousStatisticReportRenderTest
     {
@@ -38,7 +34,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
         [Test]
         public void When_Detecting_Two_Suspicious_Customers_Then_Content_Of_Report_Should_Be_Contain_Them()
         {
-            var model = new SuspiciousStatisticViewModel()
+            var model = new SuspiciousStatisticViewModel
             {
                 MarginCustormers = GetSampleMarginCustormers(),
                 SuspiciousCustormers = GetSampleSuspiciousCustormers()
@@ -46,7 +42,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
 
             var renderFactory = new SuspiciousStatisticReporRenderAbstractFactory
             {
-                SuspiciousStatisticViewModel = model,
+                SuspiciousStatisticViewModel = model
             };
 
             var sut = renderFactory.GetReportTemplateRender();
@@ -75,7 +71,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
             var sampleCustomer2 = new MarginCustormer
             {
                 Member = "member04",
-                Margins = new List<decimal?> { 1.98m, 12.23m, 32.50m }
+                Margins = new List<decimal?> {1.98m, 12.23m, 32.50m}
             };
 
             var suspiciousCustomers = new List<MarginCustormer>
@@ -89,7 +85,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
 
         private List<SuspiciousCustormer> GetSampleSuspiciousCustormers()
         {
-            var sampleCustomer1 = new SuspiciousCustormer()
+            var sampleCustomer1 = new SuspiciousCustormer
             {
                 Member = "member01",
                 Workflow = "WF01",
@@ -101,7 +97,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
                 Event = "Manchester United vs Chelsea"
             };
 
-            var sampleCustomer2 = new SuspiciousCustormer()
+            var sampleCustomer2 = new SuspiciousCustormer
             {
                 Member = "member02",
                 Workflow = "WF01",

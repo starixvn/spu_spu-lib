@@ -9,11 +9,11 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Scanned Matches Data Access interface.
+    ///     Scanned Matches Data Access interface.
     /// </summary>
     public interface IScannedMatchesDataAccess
     {

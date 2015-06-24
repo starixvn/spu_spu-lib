@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders
+﻿namespace SPU.Lib.FraudDetection.ReportTemplateRenders
 {
+    using System.Collections.Generic;
+    using System.Text;
+    using TableRenders;
+
     public class SuspiciousStatisticReportRender : IReportTemplateRender
     {
         public IList<ITableRender> TableRenders { get; set; }
-        
+
         public string RenderContent()
         {
             var builder = new StringBuilder();

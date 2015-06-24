@@ -1,11 +1,10 @@
-﻿using SPU.Lib.FraudDetection.MailMasterRenders;
-
-namespace SPU.Lib.FraudDetection.MailSenders
+﻿namespace SPU.Lib.FraudDetection.MailSenders
 {
+    using MailMasterRenders;
+
     public interface IMailSender
     {
         IMailMasterRenderAbstractFactory MailMasterRenderAbstractFactory { get; set; }
-
         void SendMail(int mailMasterId);
     }
 }

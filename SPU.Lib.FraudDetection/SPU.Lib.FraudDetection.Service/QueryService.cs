@@ -14,11 +14,11 @@ namespace SPU.Lib.FraudDetection.Service
     using System.Data;
     using DataAccess;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Query Service.
+    ///     Query Service.
     /// </summary>
     public class QueryService
     {
@@ -45,7 +45,7 @@ namespace SPU.Lib.FraudDetection.Service
         }
 
         /// <summary>
-        /// Get Data by template.
+        ///     Get Data by template.
         /// </summary>
         /// <typeparam name="T">Delegate object.</typeparam>
         /// <param name="criteria">Input criteria.</param>
@@ -64,7 +64,7 @@ namespace SPU.Lib.FraudDetection.Service
         }
 
         /// <summary>
-        /// Execute Non Query Inline.
+        ///     Execute Non Query Inline.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Command result.</returns>
@@ -76,7 +76,7 @@ namespace SPU.Lib.FraudDetection.Service
         }
 
         /// <summary>
-        /// Execute Reader Query Inline.
+        ///     Execute Reader Query Inline.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>Data table.</returns>

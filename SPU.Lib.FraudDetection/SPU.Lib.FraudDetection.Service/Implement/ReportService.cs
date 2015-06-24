@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
-using SPU.Lib.FraudDetection.Criteria.Workflow;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection.Service.Implement
+﻿namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Criteria.SuspiciousStatistic;
+    using Criteria.Workflow;
+    using DTO;
+    using DTO.ReportTemplate;
+    using Interface;
+
     public class ReportService : IReportService
     {
         public ReportService()
@@ -20,11 +20,8 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         }
 
         public IBalanceUpDayService BalanceUpDayService { get; set; }
-
         public ICustomerService CustomerService { get; set; }
-
         public IMatchService MatchService { get; set; }
-
         public IWorkflowService WorkflowService { get; set; }
 
         public SuspiciousStatisticViewModel GetSuspiciousCustomerStatistics(IList<SuspiciousInfo> list)
@@ -48,7 +45,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             var model = new SuspiciousStatisticViewModel();
 
-            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria()
+            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
             {
                 WorkflowId = list[0].WorkflowId
             });
@@ -121,7 +118,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             var last3Months = new List<DateTime>();
             var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
-            for (int i = 2; i >= 0; i--)
+            for (var i = 2; i >= 0; i--)
             {
                 last3Months.Add(today.AddMonths(-i));
             }

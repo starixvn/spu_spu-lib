@@ -178,7 +178,7 @@
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRenderTest.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousStatisticsTableRenderTest.cs" />
-    <Compile Include="CountSuspicionTimesByCustomerTaskExecutorTest.cs" />
+    <Compile Include="CountingVioliationTimesTaskExecutorTest.cs" />
     <Compile Include="SuspiciousStatistic\CustomerServiceTest.cs" />
     <Compile Include="ScanMatchTaskExecutorTest.cs" />
     <Compile Include="TaskManagerTest.cs" />

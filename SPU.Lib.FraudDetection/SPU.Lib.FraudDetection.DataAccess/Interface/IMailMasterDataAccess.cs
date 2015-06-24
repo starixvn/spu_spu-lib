@@ -9,20 +9,16 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
-    using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
-    using SPU.Lib.FraudDetection.DTO;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Mail master Data Access interface.
+    ///     Mail master Data Access interface.
     /// </summary>
     public interface IMailMasterDataAccess
     {
         ICommandResult InsertMail(ICriteria criteria);
-
         ICommandResult UpdateMail(ICriteria criteria);
-
         ICommandResult DeleteMail(ICriteria criteria);
     }
 }

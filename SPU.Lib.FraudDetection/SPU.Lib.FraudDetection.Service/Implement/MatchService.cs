@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection.Service.Implement
+﻿namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System.Collections.Generic;
+    using Criteria.SuspiciousStatistic;
+    using DTO;
+    using Interface;
+
     public class MatchService : QueryService, IMatchService
     {
         public IEnumerable<MatchDetail> GetMatchDetails(MatchSelectCriteria criteria)

@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace SPU.Lib.Core.Utilities
+﻿namespace SPU.Lib.Core.Utilities
 {
+    using System;
+
     public class Utility
     {
         public static T ParseEnum<T>(string value)
         {
-            return (T)Enum.Parse(typeof(T), value, true);
+            return (T) Enum.Parse(typeof (T), value, true);
         }
     }
 }

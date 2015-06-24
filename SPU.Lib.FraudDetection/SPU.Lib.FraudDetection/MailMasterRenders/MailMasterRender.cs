@@ -1,19 +1,13 @@
-﻿using SPU.Lib.FraudDetection.Criteria.MailMaster;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.Service.Implement;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection.MailMasterRenders
+﻿namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using Criteria.MailMaster;
+    using DTO;
+    using ReportTemplateRenders;
+    using Service.Implement;
+    using Service.Interface;
+
     public class MailMasterRender : IMailMasterRender
     {
-        public IMailMasterService MailMasterService { get; set; }
-
-        public IReportRenderAbstractFactory ReportRenderAbstractFactory { get; set; }
-
-        public IPlaceholderReplacer PlaceholderReplacer { get; set; }
-
         public MailMasterRender(IReportRenderAbstractFactory renderAbstractFactory)
         {
             MailMasterService = new MailMasterService();
@@ -32,9 +26,13 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             ReportRenderAbstractFactory = renderAbstractFactory;
         }
 
+        public IMailMasterService MailMasterService { get; set; }
+        public IReportRenderAbstractFactory ReportRenderAbstractFactory { get; set; }
+        public IPlaceholderReplacer PlaceholderReplacer { get; set; }
+
         public MailMasterInfo RenderContentOfMailMaster(int mailMasterId)
         {
-            var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
+            var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria {MailId = mailMasterId});
 
             var render = ReportRenderAbstractFactory.GetReportTemplateRender();
 

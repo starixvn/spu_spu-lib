@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
     using Interface;
 
     /// <summary>
-    /// Event Data Access Implement.
+    ///     Event Data Access Implement.
     /// </summary>
     public class EventDataAccess : BaseDataAccess, IEventDataAccess
     {

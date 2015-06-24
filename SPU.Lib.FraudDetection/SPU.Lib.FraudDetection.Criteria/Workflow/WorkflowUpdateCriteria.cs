@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// WorkflowUpdateCriteria Class.
+    ///     WorkflowUpdateCriteria Class.
     /// </summary>
     public class WorkflowUpdateCriteria : CriteriaBase
     {

@@ -10,25 +10,20 @@
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
+    using DTO;
     using Fanex.Data.Repository;
-    using SPU.Lib.FraudDetection.DTO;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Mail master Service interface.
+    ///     Mail master Service interface.
     /// </summary>
     public interface IMailMasterService
     {
         ICommandResult InsertMail(ICriteria criteria);
-
         ICommandResult DeleteMail(ICriteria criteria);
-
         ICommandResult UpdateMail(ICriteria criteria);
-
         IEnumerable<MailMasterInfo> GetMails(ICriteria criteria);
-
         MailMasterInfo GetMailById(ICriteria criteria);
-
         MailMasterInfo GetMailByName(ICriteria criteria);
     }
 }

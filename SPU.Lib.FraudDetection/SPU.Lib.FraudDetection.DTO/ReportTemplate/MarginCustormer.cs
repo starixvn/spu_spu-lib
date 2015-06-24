@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-
-namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
+﻿namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
 {
+    using System.Collections.Generic;
+
     public class MarginCustormer
     {
-        public string Member { get; set; }
-
-        public IList<decimal?> Margins { get; set; }
-
         public MarginCustormer()
         {
             Margins = new List<decimal?>();
         }
+
+        public string Member { get; set; }
+        public IList<decimal?> Margins { get; set; }
     }
 }

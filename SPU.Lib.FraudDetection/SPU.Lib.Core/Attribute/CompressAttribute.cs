@@ -9,11 +9,12 @@
 
 namespace SPU.Lib.Core
 {
+    using System.IO.Compression;
     using System.Web;
     using System.Web.Mvc;
 
     /// <summary>
-    /// Class CompressAttribute.
+    ///     Class CompressAttribute.
     /// </summary>
     public class CompressAttribute : ActionFilterAttribute
     {
@@ -23,14 +24,14 @@ namespace SPU.Lib.Core
         }
 
         /// <summary>
-        /// Determines if GZip is supported.
+        ///     Determines if GZip is supported.
         /// </summary>
         /// <returns>Return true if success.</returns>
         private bool IsGZipSupported()
         {
-            string acceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+            var acceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
             if (!string.IsNullOrEmpty(acceptEncoding) &&
-                    (acceptEncoding.Contains("gzip") || acceptEncoding.Contains("deflate")))
+                (acceptEncoding.Contains("gzip") || acceptEncoding.Contains("deflate")))
             {
                 return true;
             }
@@ -39,26 +40,26 @@ namespace SPU.Lib.Core
         }
 
         /// <summary>
-        /// Sets up the current page or handler to use GZip through a Response.Filter
-        /// IMPORTANT:  
-        /// You have to call this method before any output is generated!.
+        ///     Sets up the current page or handler to use GZip through a Response.Filter
+        ///     IMPORTANT:
+        ///     You have to call this method before any output is generated!.
         /// </summary>
         private void GZipEncodePage()
         {
-            HttpResponse response = HttpContext.Current.Response;
+            var response = HttpContext.Current.Response;
 
             if (IsGZipSupported())
             {
-                string acceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
+                var acceptEncoding = HttpContext.Current.Request.Headers["Accept-Encoding"];
 
                 if (acceptEncoding.Contains("gzip"))
                 {
-                    response.Filter = new System.IO.Compression.GZipStream(response.Filter, System.IO.Compression.CompressionMode.Compress);                    
+                    response.Filter = new GZipStream(response.Filter, CompressionMode.Compress);
                     response.AppendHeader("Content-Encoding", "gzip");
                 }
                 else
                 {
-                    response.Filter = new System.IO.Compression.DeflateStream(response.Filter, System.IO.Compression.CompressionMode.Compress);                    
+                    response.Filter = new DeflateStream(response.Filter, CompressionMode.Compress);
                     response.AppendHeader("Content-Encoding", "deflate");
                 }
             }

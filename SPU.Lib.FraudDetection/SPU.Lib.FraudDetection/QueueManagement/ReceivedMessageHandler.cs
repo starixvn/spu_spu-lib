@@ -1,22 +1,13 @@
-// --------------------------------------------------------------------------
-// <copyright file="ReceivingMessageHandler.cs" company="Nexcel Solutions Vietnam">
-// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Long.Luu" date="2015.06.12">Created</change>
-// </history>
-
-namespace SPU.Lib.FraudDetection
+namespace SPU.Lib.FraudDetection.QueueManagement
 {
     using System;
     using System.Messaging;
     using BusinessManager;
+    using DTO;
     using SendingTasks;
-    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
-    /// Receiving Message Handler.
+    ///     Receiving Message Handler.
     /// </summary>
     public class ReceivingMessageHandler : IReceivingMessageHandler
     {

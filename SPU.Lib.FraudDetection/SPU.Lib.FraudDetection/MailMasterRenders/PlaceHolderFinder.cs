@@ -1,13 +1,9 @@
-using System.Collections.Generic;
-
 namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using System.Collections.Generic;
+
     public class PlaceHolderFinder : IPlaceHolderFinder
     {
-        public ITagFinder OpenTagFinder { get; set; }
-
-        public ITagFinder CloseTagFinder { get; set; }
-
         public PlaceHolderFinder()
         {
             OpenTagFinder = new TagFinder
@@ -21,6 +17,9 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             };
         }
 
+        public ITagFinder OpenTagFinder { get; set; }
+        public ITagFinder CloseTagFinder { get; set; }
+
         public IList<PlaceholderPosition> GetPlaceHolderPositions(string content)
         {
             var locations = new List<PlaceholderPosition>();
@@ -32,7 +31,7 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
                 return locations;
             }
 
-            for (int i = 0; i < openPositions.Count && i < closePositions.Count; i++)
+            for (var i = 0; i < openPositions.Count && i < closePositions.Count; i++)
             {
                 locations.Add(new PlaceholderPosition
                 {

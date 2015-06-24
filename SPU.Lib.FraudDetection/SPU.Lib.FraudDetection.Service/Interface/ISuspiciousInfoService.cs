@@ -9,11 +9,11 @@
 
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Suspicious Info Service interface.
+    ///     Suspicious Info Service interface.
     /// </summary>
     public interface ISuspiciousInfoService
     {

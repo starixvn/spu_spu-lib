@@ -12,16 +12,15 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// MailMasterDeleteCriteria Class.
+    ///     MailMasterDeleteCriteria Class.
     /// </summary>
     public class MailMasterDeleteCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
-
         public int MailId { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
@@ -30,7 +29,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()

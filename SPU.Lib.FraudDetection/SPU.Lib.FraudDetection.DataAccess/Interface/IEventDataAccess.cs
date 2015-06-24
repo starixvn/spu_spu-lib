@@ -10,9 +10,9 @@
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     /// <summary>
-    /// Event Data Access Interface.
+    ///     Event Data Access Interface.
     /// </summary>
     public interface IEventDataAccess
-    {        
+    {
     }
 }

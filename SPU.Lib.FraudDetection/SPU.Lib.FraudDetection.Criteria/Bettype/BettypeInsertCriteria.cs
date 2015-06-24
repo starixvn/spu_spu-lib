@@ -12,12 +12,11 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// The criteria to insert a supporting bet type.
+    ///     The criteria to insert a supporting bet type.
     /// </summary>
     public class BettypeInsertCriteria : CriteriaBase
     {
         public int BettypeId { get; set; }
-
         public string BettypeName { get; set; }
 
         public override string GetSettingKey()

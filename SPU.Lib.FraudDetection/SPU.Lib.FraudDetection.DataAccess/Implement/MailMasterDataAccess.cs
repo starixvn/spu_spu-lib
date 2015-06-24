@@ -9,23 +9,15 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using System.Collections.Generic;
-    using Fanex.Data;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
-    using SPU.Lib.FraudDetection.DataAccess.Interface;
-    using SPU.Lib.FraudDetection.DTO;
+    using Fanex.NAP.Framework.Command;
+    using Interface;
 
     /// <summary>
-    /// Mail master Data Access.
+    ///     Mail master Data Access.
     /// </summary>
     public class MailMasterDataAccess : BaseDataAccess, IMailMasterDataAccess
     {
-        public MailMasterDataAccess()
-            : base()
-        {
-        }
-
         public ICommandResult InsertMail(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);

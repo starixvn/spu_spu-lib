@@ -13,12 +13,12 @@ namespace SPU.Lib.Core
     using System.Linq;
 
     /// <summary>
-    /// TODO: Update summary.
+    ///     TODO: Update summary.
     /// </summary>
     public static class Extentions
     {
         /// <summary>
-        /// Break a list of items into chunks of a specific size.
+        ///     Break a list of items into chunks of a specific size.
         /// </summary>
         /// <typeparam name="T">Delegate object.</typeparam>
         /// <param name="source">Source object.</param>

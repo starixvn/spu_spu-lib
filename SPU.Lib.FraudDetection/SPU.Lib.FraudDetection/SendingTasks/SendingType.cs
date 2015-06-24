@@ -10,27 +10,27 @@
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
     /// <summary>
-    /// Sending Type.
+    ///     Sending Type.
     /// </summary>
     public enum SendingType
     {
         /// <summary>
-        /// No type here.
+        ///     No type here.
         /// </summary>
         None,
 
         /// <summary>
-        /// Adding Task.
+        ///     Adding Task.
         /// </summary>
         AddingTask,
 
         /// <summary>
-        /// Updating task.
+        ///     Updating task.
         /// </summary>
         UpdatingTask,
 
         /// <summary>
-        /// Removing task.
+        ///     Removing task.
         /// </summary>
         RemovingTask
     }

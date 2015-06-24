@@ -1,21 +1,12 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="SpuMessageQueue.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Thai.Tran" date="2015.05.21">Created</change>
-// </history>
-
-namespace SPU.Lib.FraudDetection
+﻿namespace SPU.Lib.FraudDetection.QueueManagement
 {
     using System;
     using System.Messaging;
-    using BusinessManager;
+    using BusinessManager.TaskExecutors;
     using Core;
 
     /// <summary>
-    /// SPU Message Queue.
+    ///     SPU Message Queue.
     /// </summary>
     public class SpuMessageQueue : IMessageQueue
     {
@@ -24,8 +15,10 @@ namespace SPU.Lib.FraudDetection
         public SpuMessageQueue()
         {
             var queuePath = ConfigSettings.GetConfigStringByName("queuePath");
-            _messageQueue = MessageQueue.Exists(queuePath) ? new MessageQueue(queuePath) : MessageQueue.Create(queuePath);
-            _messageQueue.Formatter = new XmlMessageFormatter(new[] { typeof(TaskExecutor) });
+            _messageQueue = MessageQueue.Exists(queuePath)
+                ? new MessageQueue(queuePath)
+                : MessageQueue.Create(queuePath);
+            _messageQueue.Formatter = new XmlMessageFormatter(new[] {typeof (TaskExecutor)});
         }
 
         public void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)

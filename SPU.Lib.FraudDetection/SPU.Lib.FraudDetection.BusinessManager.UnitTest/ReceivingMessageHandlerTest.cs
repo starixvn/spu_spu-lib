@@ -1,17 +1,15 @@
-﻿using System;
-using System.Messaging;
-using Moq;
-using NUnit.Framework;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using Moq;
+    using NUnit.Framework;
+    using QueueManagement;
+
     [TestFixture]
     public class ReceivingMessageHandlerTest
     {
-        private IReceivingMessageHandler _sut;
-
         private Mock<IMessageQueue> _mockQueue;
         private Mock<ITaskManager> _mockTaskManager;
+        private IReceivingMessageHandler _sut;
 
         [SetUp]
         public void SetUp()

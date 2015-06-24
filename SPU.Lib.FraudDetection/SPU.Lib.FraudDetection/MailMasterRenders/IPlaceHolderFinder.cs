@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-using System.Text;
-
 namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface IPlaceHolderFinder
     {
         ITagFinder OpenTagFinder { get; set; }
-
         ITagFinder CloseTagFinder { get; set; }
-
         IList<PlaceholderPosition> GetPlaceHolderPositions(string content);
     }
 
@@ -19,12 +17,12 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
 
     public class PlaceholderReplacer : IPlaceholderReplacer
     {
-        public IPlaceHolderFinder PlaceHolderFinder { get; set; }
-
         public PlaceholderReplacer()
         {
             PlaceHolderFinder = new PlaceHolderFinder();
         }
+
+        public IPlaceHolderFinder PlaceHolderFinder { get; set; }
 
         public string ReplacePlaceholder(string content, string placeHolderContent)
         {
@@ -50,7 +48,7 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
                 {
                     break;
                 }
-                    
+
                 tempContent = tempContent.Substring(offset);
             }
 

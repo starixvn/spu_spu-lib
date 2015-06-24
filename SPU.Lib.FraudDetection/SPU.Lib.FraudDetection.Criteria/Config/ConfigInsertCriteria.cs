@@ -12,14 +12,12 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// ConfigInsertCriteria Class.
+    ///     ConfigInsertCriteria Class.
     /// </summary>
     public class ConfigInsertCriteria : CriteriaBase
     {
         public string ConfigName { get; set; }
-
         public string ConfigCategory { get; set; }
-
         public string ConfigControlType { get; set; }
 
         public override string GetSettingKey()

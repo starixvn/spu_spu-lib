@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using Fanex.Data.Configuration;
-using NUnit.Framework;
-using SPU.Lib.FraudDetection.Criteria;
-using SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic;
-using SPU.Lib.FraudDetection.DataAccess.Interface;
-using SPU.Lib.FraudDetection.DTO;
-using SPU.Lib.FraudDetection.Service.Implement;
-using SPU.Lib.FraudDetection.Service.Interface;
-
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
 {
+    using System.Collections.Generic;
+    using Criteria.SuspiciousStatistic;
+    using DTO;
+    using Fanex.Data.Configuration;
+    using NUnit.Framework;
+    using Service.Implement;
+
     [TestFixture]
     public class CustomerServiceTest
     {
@@ -24,11 +21,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
         {
             var sut = new CustomerService();
 
-            var abao = sut.GetUsernameByCustId(new CustomerSelectCritiria()
+            var abao = sut.GetUsernameByCustId(new CustomerSelectCritiria
             {
                 ListCustIds = "1,2,3,4,5,6"
             });
-
         }
 
         [Test]
@@ -36,7 +32,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
         {
             var sut = new MatchService();
 
-            var abao = sut.GetMatchDetails(new MatchSelectCriteria()
+            var abao = sut.GetMatchDetails(new MatchSelectCriteria
             {
                 ListMatchIds = "9689236,9908275,9908536,11880163",
                 IsDbArchieve = true
@@ -48,7 +44,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
         {
             var sut = new ReportService();
 
-            IList<SuspiciousInfo> list = new List<SuspiciousInfo>()
+            IList<SuspiciousInfo> list = new List<SuspiciousInfo>
             {
                 new SuspiciousInfo
                 {
@@ -64,7 +60,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
                 {
                     CustId = 1280,
                     MatchId = 13675244
-                },
+                }
             };
 
             var abao = sut.GetSuspiciousCustomerStatistics(list);

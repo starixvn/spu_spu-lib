@@ -18,7 +18,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using Service.Interface;
 
     /// <summary>
-    /// Workflow Class.
+    ///     Workflow Class.
     /// </summary>
     public class Workflow
     {
@@ -26,9 +26,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         private List<Task> _tasksInfo = new List<Task>();
 
-        private IWorkflowService _workflowService = new WorkflowService();
+        private readonly IWorkflowService _workflowService = new WorkflowService();
 
-        private WorkflowInfo _workflowInfo;
+        private readonly WorkflowInfo _workflowInfo;
 
         #endregion Properties
 
@@ -50,7 +50,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         {
             if (_tasksInfo.Count == 0)
             {
-                var criteria = new TaskSelectAllByWorkflowIdCriteria() { WorkFlowId = _workflowInfo.WorkflowId };
+                var criteria = new TaskSelectAllByWorkflowIdCriteria {WorkFlowId = _workflowInfo.WorkflowId};
                 var tasks = _workflowService.GetTasks(criteria);
                 _tasksInfo = tasks.ToList();
             }

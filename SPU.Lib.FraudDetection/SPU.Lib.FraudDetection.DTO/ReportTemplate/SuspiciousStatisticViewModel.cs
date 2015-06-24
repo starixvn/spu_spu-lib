@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
+﻿namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
 {
+    using System.Collections.Generic;
+
     public class SuspiciousStatisticViewModel
     {
-        public IList<MarginCustormer> MarginCustormers { get; set; }
-
-        public IList<SuspiciousCustormer> SuspiciousCustormers { get; set; }
-
         public SuspiciousStatisticViewModel()
         {
             MarginCustormers = new List<MarginCustormer>();
             SuspiciousCustormers = new List<SuspiciousCustormer>();
         }
+
+        public IList<MarginCustormer> MarginCustormers { get; set; }
+        public IList<SuspiciousCustormer> SuspiciousCustormers { get; set; }
     }
 }

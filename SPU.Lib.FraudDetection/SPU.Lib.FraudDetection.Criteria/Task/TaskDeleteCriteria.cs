@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// TaskDeleteCriteria Class.
+    ///     TaskDeleteCriteria Class.
     /// </summary>
     public class TaskDeleteCriteria : CriteriaBase
     {

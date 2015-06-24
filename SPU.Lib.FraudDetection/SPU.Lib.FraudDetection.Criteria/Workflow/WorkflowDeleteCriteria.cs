@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// WorkflowDeleteCriteria Class.
+    ///     WorkflowDeleteCriteria Class.
     /// </summary>
     public class WorkflowDeleteCriteria : CriteriaBase
     {

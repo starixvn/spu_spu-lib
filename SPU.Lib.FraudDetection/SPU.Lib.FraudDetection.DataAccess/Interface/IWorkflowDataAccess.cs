@@ -10,20 +10,17 @@
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     using Core;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using Fanex.Data.Repository;    
 
     /// <summary>
-    /// Workflow Data Access interface.
+    ///     Workflow Data Access interface.
     /// </summary>
     public interface IWorkflowDataAccess
     {
         ICommandResult InsertWorkflow(ICriteria criteria);
-
         ICommandResult UpdateWorkflow(ICriteria criteria);
-
         ICommandResult DeleteWorkflow(ICriteria criteria);
-
         DataCollection GetWorkflows(ICriteria criteria);
     }
 }

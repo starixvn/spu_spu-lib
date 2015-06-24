@@ -13,16 +13,16 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Bet-type Service.
+    ///     Bet-type Service.
     /// </summary>
     public class BettypeService : QueryService, IBettypeService
     {
-        private IBettypeDataAccess _bettypeDataAccess;
+        private readonly IBettypeDataAccess _bettypeDataAccess;
 
         public BettypeService()
         {

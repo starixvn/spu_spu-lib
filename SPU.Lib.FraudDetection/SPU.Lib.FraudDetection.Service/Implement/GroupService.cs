@@ -12,16 +12,16 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using Core;
     using DataAccess.Implement;
     using DataAccess.Interface;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Group Service.
+    ///     Group Service.
     /// </summary>
     public class GroupService : QueryService, IGroupService
     {
-        private IGroupDataAccess _groupDataAccess;
+        private readonly IGroupDataAccess _groupDataAccess;
 
         public GroupService()
         {

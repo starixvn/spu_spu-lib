@@ -1,20 +1,26 @@
-using System;
-using System.Collections.Generic;
-
 namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using System;
+    using System.Collections.Generic;
+
     public class TagFinder : ITagFinder
     {
         private readonly IList<int> _tagPositions;
-
         private int _startIndex;
-
-        public string Tag { get; set; }
 
         public TagFinder()
         {
             _tagPositions = new List<int>();
             _startIndex = 0;
+        }
+
+        public string Tag { get; set; }
+
+        public IList<int> GetTagPositions(string content)
+        {
+            FindTagsPositions(content);
+
+            return _tagPositions;
         }
 
         private void FindTagsPositions(string content)
@@ -36,13 +42,6 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             }
 
             FindTagsPositions(content);
-        }
-
-        public IList<int> GetTagPositions(string content)
-        {
-            FindTagsPositions(content);
-
-            return _tagPositions;
         }
     }
 }

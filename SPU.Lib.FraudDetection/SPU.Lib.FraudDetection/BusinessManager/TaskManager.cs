@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Timers;
-using RazorEngine.Compilation.ImpromptuInterface.Optimization;
-using SPU.Lib.Core.Utilities;
-using SPU.Lib.FraudDetection.DTO;
-
-namespace SPU.Lib.FraudDetection.BusinessManager
+﻿namespace SPU.Lib.FraudDetection.BusinessManager
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Core.Utilities;
+    using DTO;
+    using TaskExecutors;
+
     /// <summary>
-    /// Workflow Class.
+    ///     Workflow Class.
     /// </summary>
     public class TaskManager : ITaskManager
     {
-        public IList<TaskExecutor> TaskExecutors { get; set; }
-
         public TaskManager()
         {
             TaskExecutors = new List<TaskExecutor>();
         }
 
+        public IList<TaskExecutor> TaskExecutors { get; set; }
+
         /// <summary>
-        /// Add and start a task in the thread pool.
+        ///     Add and start a task in the thread pool.
         /// </summary>
         /// <param name="task">The task to execute.</param>
         public void AddTask(Task task)
@@ -34,10 +33,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
 
             TaskExecutors.Add(taskExecutor);
+
+            taskExecutor.Start();
         }
 
         /// <summary>
-        /// Update a task.
+        ///     Update a task.
         /// </summary>
         /// <param name="task">The task to update.</param>
         public void UpdateTask(Task task)
@@ -47,13 +48,14 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         }
 
         /// <summary>
-        /// Remove a task out the thread pool.
+        ///     Remove a task out the thread pool.
         /// </summary>
         /// <param name="task">The task name.</param>
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(Task task)
         {
-            var taskExecutor = TaskExecutors.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+            var taskExecutor =
+                TaskExecutors.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
 
             if (taskExecutor == null)
             {
@@ -76,7 +78,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public bool Exist(Task task)
         {
-            
             return TaskExecutors.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
         }
     }
@@ -89,17 +90,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
             switch (eventType)
             {
-                
                 case EventType.ScanMatchAndFindTicket:
                     return new ScanMatchTaskExecutor(task);
                 case EventType.CountSuspicionTimesByCustomer:
-                    return new CountSuspicionTimesByCustomerTaskExecutor(task);
+                    return new CountingVioliationTimesTaskExecutor(task);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-
         }
-       
     }
 }

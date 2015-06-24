@@ -12,22 +12,22 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// ConfigSelectAllCriteria Class.
+    ///     ConfigSelectAllCriteria Class.
     /// </summary>
     public class ConfigSelectAllCriteria : CriteriaBase
-    {        
+    {
         public override string GetSettingKey()
         {
             return "SPU_ConfigurationSelectAll";
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
             return true;
-        } 
+        }
     }
 }

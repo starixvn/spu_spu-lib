@@ -15,16 +15,16 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Workflow Service.
+    ///     Workflow Service.
     /// </summary>
     public class WorkflowService : QueryService, IWorkflowService
     {
-        private IWorkflowDataAccess _workflowDataAccess;
+        private readonly IWorkflowDataAccess _workflowDataAccess;
 
         public WorkflowService()
         {
@@ -63,7 +63,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
         public WorkflowInfo GetWorkflowById(ICriteria criteria)
         {
-            return this.Get<WorkflowInfo>(criteria);
+            return Get<WorkflowInfo>(criteria);
         }
 
         public void Dispose()

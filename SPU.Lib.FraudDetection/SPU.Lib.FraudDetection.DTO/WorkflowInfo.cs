@@ -10,16 +10,13 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Workflow information.
+    ///     Workflow information.
     /// </summary>
     public class WorkflowInfo
     {
         public int WorkflowId { get; set; }
-
         public string WorkflowName { get; set; }
-
         public string WorkflowDesc { get; set; }
-
         public bool IsActive { get; set; }
     }
 }

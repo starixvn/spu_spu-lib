@@ -11,24 +11,19 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Configurations Service interface.
+    ///     Configurations Service interface.
     /// </summary>
     public interface IConfigurationsService
     {
         ICommandResult InsertConfig(ICriteria criteria);
-
         ICommandResult DeleteConfig(ICriteria criteria);
-
         IEnumerable<Config> GetConfigs(ICriteria criteria);
-
         IEnumerable<Parameter> GetParameters(ICriteria criteria);
-
         ICommandResult UpdateConfigs(ICriteria criteria);
-
         ICommandResult UpdateConfigParameters(ICriteria criteria);
     }
 }

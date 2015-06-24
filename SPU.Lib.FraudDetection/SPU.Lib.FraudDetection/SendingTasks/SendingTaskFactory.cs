@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.SendingTasks
     using System;
 
     /// <summary>
-    /// Sending Task Factory.
+    ///     Sending Task Factory.
     /// </summary>
     public class SendingTaskFactory
     {

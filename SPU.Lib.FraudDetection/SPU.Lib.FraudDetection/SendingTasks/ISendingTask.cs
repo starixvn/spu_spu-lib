@@ -9,16 +9,14 @@
 
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
-    using BusinessManager;
-    using SPU.Lib.FraudDetection.DTO;
+    using DTO;
 
     /// <summary>
-    /// Sending Task Interface.
+    ///     Sending Task Interface.
     /// </summary>
     public interface ISendingTask
     {
         SendingType Type { get; set; }
-
         bool Send(Task newTask);
     }
 }

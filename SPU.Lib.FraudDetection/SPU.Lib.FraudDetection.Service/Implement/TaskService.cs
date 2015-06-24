@@ -8,23 +8,22 @@
 //   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
-using System.Linq;
-
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using Core;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Task Service.
+    ///     Task Service.
     /// </summary>
     public class TaskService : QueryService, IDisposable, ITaskService
     {
@@ -38,6 +37,10 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public TaskService(ITaskDataAccess dataAccess)
         {
             _taskDataAccess = dataAccess;
+        }
+
+        public void Dispose()
+        {
         }
 
         public ICommandResult InsertTask(ICriteria criteria)
@@ -81,7 +84,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         }
 
         /// <summary>
-        /// Collect Suspicious Info.
+        ///     Collect Suspicious Info.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>
         /// <returns>List of suspicious information.</returns>
@@ -97,8 +100,8 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                     CustId = int.Parse(dataRow["custid"].ToString()),
                     MatchId = int.Parse(dataRow["matchid"].ToString()),
                     WorkflowId = string.IsNullOrEmpty(dataRow["workflowid"].ToString())
-                                    ? 0
-                                    : int.Parse(dataRow["workflowid"].ToString()),
+                        ? 0
+                        : int.Parse(dataRow["workflowid"].ToString()),
                     TransIdList = dataRow["listtransid"].ToString()
                 });
             }
@@ -107,7 +110,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         }
 
         /// <summary>
-        /// Return a list of ids.
+        ///     Return a list of ids.
         /// </summary>
         /// <param name="sqlQueryString">The query string.</param>
         /// <returns>List of ids.</returns>
@@ -126,7 +129,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         }
 
         /// <summary>
-        /// Execute Rule.
+        ///     Execute Rule.
         /// </summary>
         /// <param name="sqlQueryString">SQL Query String.</param>
         /// <param name="workflowId">Workflow ID.</param>
@@ -140,13 +143,15 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             var matchId = 0;
             long transId = 0;
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (var i = 0; i < dt.Rows.Count; i++)
             {
                 custId = int.Parse(dt.Rows[i]["custid"].ToString());
                 matchId = int.Parse(dt.Rows[i]["matchid"].ToString());
                 transId = long.Parse(dt.Rows[i]["transid"].ToString());
 
-                var currentInfo = suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
+                var currentInfo =
+                    suspiciousInfoList.Find(
+                        x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
 
                 if (currentInfo == null)
                 {
@@ -162,7 +167,9 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                 }
                 else
                 {
-                    suspiciousInfoList.Find(x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList += "," + transId;
+                    suspiciousInfoList.Find(
+                        x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList +=
+                        "," + transId;
                 }
             }
 
@@ -175,7 +182,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
             var dt = ExecuteReaderQueryInline(sqlQueryString);
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (var i = 0; i < dt.Rows.Count; i++)
             {
                 suspiciousCustomers.Add(new SuspiciousCustomer
                 {
@@ -190,10 +197,6 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria)
         {
             return GetData<SuspiciousInfo>(criteria).ToList();
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

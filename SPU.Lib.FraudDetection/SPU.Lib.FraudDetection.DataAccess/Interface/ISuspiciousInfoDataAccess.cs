@@ -9,15 +9,14 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Suspicious Info Data Access interface.
+    ///     Suspicious Info Data Access interface.
     /// </summary>
     public interface ISuspiciousInfoDataAccess
     {
-        
         ICommandResult InsertSuspiciousInfo(ICriteria criteria);
     }
 }

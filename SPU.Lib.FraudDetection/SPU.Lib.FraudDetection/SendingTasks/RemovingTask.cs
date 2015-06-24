@@ -9,8 +9,10 @@
 
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
+    using QueueManagement;
+
     /// <summary>
-    /// Removing Task.
+    ///     Removing Task.
     /// </summary>
     public class RemovingTask : SendingTask
     {

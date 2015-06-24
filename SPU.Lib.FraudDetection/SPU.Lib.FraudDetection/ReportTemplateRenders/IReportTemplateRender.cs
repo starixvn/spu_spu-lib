@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders
+﻿namespace SPU.Lib.FraudDetection.ReportTemplateRenders
 {
+    using System.Collections.Generic;
+    using TableRenders;
+
     public interface IReportTemplateRender
     {
         IList<ITableRender> TableRenders { get; set; }
-
         string RenderContent();
     }
 }

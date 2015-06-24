@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// ConfigDeleteCriteria Class.
+    ///     ConfigDeleteCriteria Class.
     /// </summary>
     public class ConfigDeleteCriteria : CriteriaBase
     {

@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// The criteria to select all supporting bet types.
+    ///     The criteria to select all supporting bet types.
     /// </summary>
     public class SportSelectAllCriteria : CriteriaBase
     {

@@ -9,12 +9,12 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Suspicious Info Data Access Implement.
+    ///     Suspicious Info Data Access Implement.
     /// </summary>
     public class SuspiciousInfoDataAccess : BaseDataAccess, ISuspiciousInfoDataAccess
     {

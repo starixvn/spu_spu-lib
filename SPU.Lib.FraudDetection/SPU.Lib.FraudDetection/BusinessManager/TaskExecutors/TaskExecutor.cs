@@ -8,18 +8,26 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
+namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
 {
     using System;
     using System.Timers;
     using DTO;
+    using Fanex.Logging;
     using Service.Implement;
     using Service.Interface;
 
+    public interface ITaskExecutor
+    {
+        void Start();
+        void Stop();
+        void Execute(object sender, ElapsedEventArgs elapsedEventArgs);
+    }
+
     /// <summary>
-    /// Task Class.
+    ///     Task Class.
     /// </summary>
-    public abstract class TaskExecutor
+    public abstract class TaskExecutor : ITaskExecutor
     {
         #region Constructor
 
@@ -72,37 +80,24 @@ namespace SPU.Lib.FraudDetection.BusinessManager
 
         public void Start()
         {
+            if (!Task.IsActive)
+            {
+                return;
+            }
+
             Timer.Elapsed += Execute;
             Timer.Start();
         }
 
         public void Stop()
         {
+            Timer.Elapsed -= Execute;
             Timer.Stop();
             Timer.Close();
             Timer.Dispose();
         }
 
-        public virtual void Execute(object sender, ElapsedEventArgs elapsedEventArgs)
-        {
-            try
-            {
-                if (Task.IsActive)
-                {
-                    ExecutePrecondition();
-                    
-                    ExecuteRule();
-
-                    TakeNextAction();
-                }
-            }
-            catch (Exception ex)
-            {
-                Fanex.Logging.Logger.Log.Error("Scan : " + ex.Message);
-            }
-        }
-
-        protected abstract void ExecutePrecondition();
+        public abstract void Execute(object sender, ElapsedEventArgs elapsedEventArgs);
 
         protected abstract void ExecuteRule();
 
@@ -113,7 +108,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             var message = "\r\nError:" + exception.Message +
                           "\r\nStackTrace: " + exception.StackTrace;
 
-            Fanex.Logging.Logger.Log.Error(message);
+            Logger.Log.Error(message);
         }
 
         #endregion Scan

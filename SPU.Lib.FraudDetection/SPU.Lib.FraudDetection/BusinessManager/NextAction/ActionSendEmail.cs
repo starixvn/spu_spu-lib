@@ -7,31 +7,23 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-using System.IO;
-using SPU.Lib.FraudDetection.MailMasterRenders;
-using SPU.Lib.FraudDetection.MailSenders;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-using SPU.Lib.FraudDetection.Service.Implement;
-using SPU.Lib.FraudDetection.Service.Interface;
-
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
-    using System;
     using System.Collections.Generic;
     using DTO;
+    using MailMasterRenders;
+    using MailSenders;
+    using ReportTemplateRenders;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
-    /// ActionSendEmail Class.
+    ///     ActionSendEmail Class.
     /// </summary>
     public class ActionSendEmail : BaseAction
     {
-        private readonly IList<SuspiciousInfo> _suspiciousList;
-
         private readonly int _mailMasterId;
-
-        public IMailSender MailSender { get; set; }
-
-        public IReportService ReportService { get; set; }
+        private readonly IList<SuspiciousInfo> _suspiciousList;
 
         public ActionSendEmail(IList<SuspiciousInfo> suspiciousList, int mailMasterId)
         {
@@ -40,6 +32,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             MailSender = new SpuMailSender();
             ReportService = new ReportService();
         }
+
+        public IMailSender MailSender { get; set; }
+        public IReportService ReportService { get; set; }
 
         public override void TakeAction()
         {
@@ -60,10 +55,6 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                 MailSender.MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory;
 
                 MailSender.SendMail(_mailMasterId);
-            }
-            else
-            {
-                
             }
         }
     }

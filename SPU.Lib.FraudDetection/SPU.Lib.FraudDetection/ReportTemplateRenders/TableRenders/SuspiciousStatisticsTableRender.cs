@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
+﻿namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
 {
+    using System.Collections.Generic;
+    using DTO.ReportTemplate;
+
     public class SuspiciousStatisticsTableRender : TableRender
     {
-        public IList<SuspiciousCustormer> Model { get; set; }
-
         public SuspiciousStatisticsTableRender()
         {
         }
@@ -15,6 +13,8 @@ namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
             : base(razor)
         {
         }
+
+        public IList<SuspiciousCustormer> Model { get; set; }
 
         public override string RenderTable()
         {

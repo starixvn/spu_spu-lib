@@ -10,12 +10,11 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Sport Class.
+    ///     Sport Class.
     /// </summary>
     public class Sport
     {
         public int SportId { get; set; }
-
         public string SportName { get; set; }
     }
 }

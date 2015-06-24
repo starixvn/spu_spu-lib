@@ -1,7 +1,7 @@
-﻿using RazorEngine;
-
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
+﻿namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
 {
+    using RazorEngine;
+
     public interface IRazor
     {
         string Parse(string template, object model);

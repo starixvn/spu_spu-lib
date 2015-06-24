@@ -12,12 +12,11 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// SuspiciousCustomer Class.
+    ///     SuspiciousCustomer Class.
     /// </summary>
     public class SuspiciousCustomerInsertCriteria : CriteriaBase
     {
         public int CustId { get; set; }
-
         public string CustName { get; set; }
     }
 }

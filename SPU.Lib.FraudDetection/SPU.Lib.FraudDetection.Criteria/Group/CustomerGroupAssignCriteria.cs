@@ -12,18 +12,16 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// CustomerGroupAssignCriteria Class.
+    ///     CustomerGroupAssignCriteria Class.
     /// </summary>
     public class CustomerGroupAssignCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
-
-        public string CustIdList { get; set; }  //// format: "1;2;3".
-        
+        public string CustIdList { get; set; } //// format: "1;2;3".
         public int GroupId { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
@@ -32,12 +30,12 @@ namespace SPU.Lib.FraudDetection.Criteria
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
             return true;
-        }        
+        }
     }
 }

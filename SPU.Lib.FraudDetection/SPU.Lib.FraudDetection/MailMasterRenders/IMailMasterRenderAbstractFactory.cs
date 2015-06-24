@@ -1,8 +1,7 @@
-﻿using System;
-using SPU.Lib.FraudDetection.ReportTemplateRenders;
-
-namespace SPU.Lib.FraudDetection.MailMasterRenders
+﻿namespace SPU.Lib.FraudDetection.MailMasterRenders
 {
+    using ReportTemplateRenders;
+
     public interface IMailMasterRenderAbstractFactory
     {
         IMailMasterRender GetMailMasterRender();

@@ -12,19 +12,19 @@ namespace SPU.Lib.Core
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using System.Text;    
+    using System.Text;
 
     /// <summary>
-    /// Generate data grid from data table.
-    /// </summary>    
+    ///     Generate data grid from data table.
+    /// </summary>
     [SuppressMessage(
-         "StyleCop.CSharp.Nexcel.NexcelCustomRules",
-         "SP2101:MethodMustNotContainMoreLinesThan",
-         Justification = "Reviewed. Suppression is OK here.")]
+        "StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
     public static class FanexGridHelper
     {
         /// <summary>
-        /// Data for FANEX grid.
+        ///     Data for FANEX grid.
         /// </summary>
         /// <param name="dr">The IDataReader.</param>
         /// <returns>Object System.String.</returns>
@@ -70,7 +70,7 @@ namespace SPU.Lib.Core
         }
 
         /// <summary>
-        /// Data for FANEX grid.
+        ///     Data for FANEX grid.
         /// </summary>
         /// <param name="col">The DataCollection.</param>
         /// <returns>Object System.String.</returns>
@@ -84,7 +84,7 @@ namespace SPU.Lib.Core
 
             if (col != null && col.Data != null && col.Data.Tables.Count > 0)
             {
-                var dt = col.Data.Tables[0];                
+                var dt = col.Data.Tables[0];
                 foreach (DataRow row in dt.Rows)
                 {
                     if (!flag)
@@ -120,7 +120,7 @@ namespace SPU.Lib.Core
                 if (dt.Rows.Count > 0)
                 {
                     builder.Remove(builder.Length - 1, 1);
-                }                
+                }
             }
 
             builder.Append("]");
@@ -139,7 +139,7 @@ namespace SPU.Lib.Core
         }
 
         /// <summary>
-        /// Data for FANEX grid_ prevent contain quote.
+        ///     Data for FANEX grid_ prevent contain quote.
         /// </summary>
         /// <param name="col">The DataCollection.</param>
         /// <returns>Object System.String.</returns>
@@ -153,7 +153,7 @@ namespace SPU.Lib.Core
 
             if (col != null && col.Data != null && col.Data.Tables.Count > 0)
             {
-                var dt = col.Data.Tables[0];               
+                var dt = col.Data.Tables[0];
                 foreach (DataRow row in dt.Rows)
                 {
                     if (!flag)
@@ -196,7 +196,7 @@ namespace SPU.Lib.Core
                 if (dt.Rows.Count > 0)
                 {
                     builder.Remove(builder.Length - 1, 1);
-                }                
+                }
             }
 
             builder.Append("]");
@@ -214,20 +214,20 @@ namespace SPU.Lib.Core
         }
 
         /// <summary>
-        /// Converts to string.
+        ///     Converts to string.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>Object System.String.</returns>
         public static string ConvertToString(this object obj)
         {
-            if (obj.GetType().Equals(typeof(DBNull)))
+            if (obj.GetType().Equals(typeof (DBNull)))
             {
                 return string.Empty;
             }
 
-            if (obj.GetType().Equals(typeof(DateTime)))
+            if (obj.GetType().Equals(typeof (DateTime)))
             {
-                return ((DateTime)obj).ToString("dd MMM yyyy HH:mm:ss");
+                return ((DateTime) obj).ToString("dd MMM yyyy HH:mm:ss");
             }
 
             return obj.ToString();

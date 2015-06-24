@@ -13,16 +13,17 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     using System.Collections.Generic;
     using Criteria;
     using DTO;
+    using Fanex.Logging;
     using Service.Implement;
-    using Service.Interface;   
+    using Service.Interface;
 
     /// <summary>
-    ///  Assign a suspicious customer to a customer group.
+    ///     Assign a suspicious customer to a customer group.
     /// </summary>
     public class ActionAssignGroup : BaseAction
     {
-        private IList<SuspiciousInfo> _suspiciousList;
-        private int _nextActionTargetId = 0;
+        private readonly int _nextActionTargetId;
+        private readonly IList<SuspiciousInfo> _suspiciousList;
 
         public ActionAssignGroup(IList<SuspiciousInfo> suspiciousList, int nextActionTargetId)
         {
@@ -58,7 +59,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                 var result = groupService.AssignCustToGroup(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
+                    Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
                 }
 
                 return result.IsSuccessful;

@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using SPU.Lib.FraudDetection.DTO.ReportTemplate;
-using SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders;
-
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders
+﻿namespace SPU.Lib.FraudDetection.ReportTemplateRenders
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using DTO.ReportTemplate;
+    using TableRenders;
+
     public class SuspiciousStatisticReporRenderAbstractFactory : IReportRenderAbstractFactory
     {
-        public SuspiciousStatisticViewModel SuspiciousStatisticViewModel { get; set; }
-
         public SuspiciousStatisticReporRenderAbstractFactory()
         {
-            SuspiciousStatisticViewModel =new SuspiciousStatisticViewModel();
+            SuspiciousStatisticViewModel = new SuspiciousStatisticViewModel();
         }
+
+        public SuspiciousStatisticViewModel SuspiciousStatisticViewModel { get; set; }
 
         public string CurrentDirectory
         {
-            get 
-            { 
-                return AppDomain.CurrentDomain.BaseDirectory;
-            }
+            get { return AppDomain.CurrentDomain.BaseDirectory; }
         }
 
         public IReportTemplateRender GetReportTemplateRender()

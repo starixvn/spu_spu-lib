@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// ConfigUpdateCriteria Class.
+    ///     ConfigUpdateCriteria Class.
     /// </summary>
     public class ConfigUpdateCriteria : CriteriaBase
     {

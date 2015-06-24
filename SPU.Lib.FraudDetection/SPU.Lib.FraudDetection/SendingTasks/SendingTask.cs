@@ -9,15 +9,15 @@
 
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
-    using BusinessManager;
-    using SPU.Lib.FraudDetection.DTO;
+    using DTO;
+    using QueueManagement;
 
     /// <summary>
-    /// Sending Task.
+    ///     Sending Task.
     /// </summary>
     public abstract class SendingTask : ISendingTask
     {
-        private IMessageQueue _messageQueue;
+        private readonly IMessageQueue _messageQueue;
 
         protected SendingTask()
         {

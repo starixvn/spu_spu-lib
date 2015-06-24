@@ -17,12 +17,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager
     using Service.Interface;
 
     /// <summary>
-    /// Supported Bet types Class.
+    ///     Supported Bet types Class.
     /// </summary>
     public class SupportedBettypes
     {
-        private readonly IBettypeService _bettypeService = new BettypeService(); 
-
+        private readonly IBettypeService _bettypeService = new BettypeService();
         private List<Bettype> _supportedBettypes = new List<Bettype>();
 
         public List<Bettype> GetSupportedBettypes()
@@ -39,7 +38,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
         public bool InsertSupportedBettype(Bettype bettype)
         {
             _supportedBettypes.Add(bettype);
-            
+
             var criteria = new BettypeInsertCriteria();
             return _bettypeService.InsertBettype(criteria).IsSuccessful;
         }
@@ -49,7 +48,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager
             _supportedBettypes.Remove(bettype);
 
             var criteria = new BettypeDeleteCriteria();
-            return _bettypeService.DeleteBettype(criteria).IsSuccessful;            
+            return _bettypeService.DeleteBettype(criteria).IsSuccessful;
         }
     }
 }

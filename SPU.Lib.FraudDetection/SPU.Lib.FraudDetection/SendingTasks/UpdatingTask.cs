@@ -1,5 +1,7 @@
 namespace SPU.Lib.FraudDetection.SendingTasks
 {
+    using QueueManagement;
+
     public class UpdatingTask : SendingTask
     {
         public UpdatingTask()

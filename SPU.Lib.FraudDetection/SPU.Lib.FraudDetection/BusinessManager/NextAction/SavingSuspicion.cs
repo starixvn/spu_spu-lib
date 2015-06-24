@@ -7,31 +7,27 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-using SPU.Lib.FraudDetection.Service.Interface;
-
 namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using Criteria;
     using Criteria.Match;
     using DTO;
+    using Fanex.Logging;
     using Service.Implement;
+    using Service.Interface;
+    using Task = System.Threading.Tasks.Task;
 
     /// <summary>
-    ///  Save suspicious info.
+    ///     Save suspicious info.
     /// </summary>
     public class SavingSuspicion
     {
-        private List<SuspiciousInfo> _suspiciousInfoList;
-
         private readonly string _matchIdList;
-
         private readonly int _workflowId;
-
-        public IScannedMatchesService ScannedMatchesService { get; set; }
-
-        public ISuspiciousInfoService SuspiciousInfoService { get; set; }
+        private List<SuspiciousInfo> _suspiciousInfoList;
 
         public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int workflowId)
         {
@@ -43,6 +39,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             SuspiciousInfoService = new SuspiciousInfoService();
         }
 
+        public IScannedMatchesService ScannedMatchesService { get; set; }
+        public ISuspiciousInfoService SuspiciousInfoService { get; set; }
+
         public List<SuspiciousInfo> AssignGroupList
         {
             get { return _suspiciousInfoList; }
@@ -53,12 +52,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             if (_suspiciousInfoList.Count > 0)
             {
-                var t1 = new System.Threading.Tasks.Task(() => UpdateScannedMatch());
+                var t1 = new Task(() => UpdateScannedMatch());
 
                 t1.ContinueWith(task1 =>
                 {
-                    var t2 = new System.Threading.Tasks.Task(() => InsertSuspicion());
-                    System.Threading.Thread.Sleep(5000);
+                    var t2 = new Task(() => InsertSuspicion());
+                    Thread.Sleep(5000);
                     t2.Start();
                 });
                 t1.Start();
@@ -81,7 +80,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
 
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
+                    Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
                 }
 
                 return result.IsSuccessful;
@@ -120,7 +119,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
                 var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
                 if (result.IsSuccessful == false)
                 {
-                    Fanex.Logging.Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
+                    Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
                 }
 
                 return result.IsSuccessful;

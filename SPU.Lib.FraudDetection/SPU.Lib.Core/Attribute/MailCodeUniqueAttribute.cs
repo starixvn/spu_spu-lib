@@ -14,12 +14,12 @@ namespace SPU.Lib.Core
     using Fanex.Data;
 
     /// <summary>
-    /// This class is to create a custom validation.
+    ///     This class is to create a custom validation.
     /// </summary>
     public class MailCodeUniqueAttribute : ValidationAttribute
     {
         /// <summary>
-        /// The override method.
+        ///     The override method.
         /// </summary>
         /// <param name="value">Value to be validated.</param>
         /// <param name="validationContext">The validationContext.</param>
@@ -32,7 +32,7 @@ namespace SPU.Lib.Core
             {
                 var result = db.Query<dynamic>();
 
-                int count = result.Where(x => x.MailCode.Equals(mailCode)).Count();
+                var count = result.Where(x => x.MailCode.Equals(mailCode)).Count();
 
                 if (count != 0)
                 {

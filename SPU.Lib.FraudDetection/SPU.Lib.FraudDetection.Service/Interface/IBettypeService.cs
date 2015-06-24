@@ -11,20 +11,17 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
     using DTO;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    /// Bet-type Service interface.
+    ///     Bet-type Service interface.
     /// </summary>
     public interface IBettypeService
     {
         ICommandResult InsertBettype(ICriteria criteria);
-
         ICommandResult DeleteBettype(ICriteria criteria);
-
         IEnumerable<Bettype> GetAllSBBettypes(ICriteria criteria);
-
         IEnumerable<Sport> GetAllSBSports(ICriteria criteria);
     }
 }

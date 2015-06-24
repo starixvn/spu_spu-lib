@@ -11,11 +11,11 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 {
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using Core;
     using Fanex.Data.Repository;
-    using SPU.Lib.Core;
 
     /// <summary>
-    /// MailMasterInsertCriteria Class.
+    ///     MailMasterInsertCriteria Class.
     /// </summary>
     public class MailMasterInsertCriteria : CriteriaBase
     {
@@ -37,11 +37,10 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         public string MailSubject { get; set; }
 
         public string MailContent { get; set; }
-
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
@@ -50,7 +49,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()

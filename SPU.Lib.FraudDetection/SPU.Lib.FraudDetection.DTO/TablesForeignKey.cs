@@ -10,14 +10,12 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Tables Foreign Key Class.
+    ///     Tables Foreign Key Class.
     /// </summary>
     public class TablesForeignKey
     {
         public string DBTable1 { get; set; }
-
         public string DBTable2 { get; set; }
-
         public string ForeignKey { get; set; }
     }
 }

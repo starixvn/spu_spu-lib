@@ -10,22 +10,16 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    /// Config Info Class.
+    ///     Config Info Class.
     /// </summary>
     public class Config
     {
         public int ConfigId { get; set; }
-
         public string ConfigName { get; set; }
-
         public string ConfigCategory { get; set; }
-
         public string ConfigControlType { get; set; }
-
         public string ConfigSQLTable { get; set; }
-
         public string ConfigSQLField { get; set; }
-
         public string ConfigSQLReturn { get; set; }
     }
 }

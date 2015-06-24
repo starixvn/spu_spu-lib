@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// Event Service interface.
+    ///     Event Service interface.
     /// </summary>
     public interface IEventService
     {

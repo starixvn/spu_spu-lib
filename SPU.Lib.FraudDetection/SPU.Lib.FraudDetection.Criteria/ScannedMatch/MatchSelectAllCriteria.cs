@@ -12,7 +12,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// MatchSelectAllCriteria Class.
+    ///     MatchSelectAllCriteria Class.
     /// </summary>
     public class MatchSelectAllCriteria : CriteriaBase
     {

@@ -9,17 +9,17 @@
 
 namespace SPU.Lib.FraudDetection.DataAccess.Implement
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
 
     /// <summary>
-    /// Bet-type Data Access Implement.
+    ///     Bet-type Data Access Implement.
     /// </summary>
     public class BettypeDataAccess : BaseDataAccess, IBettypeDataAccess
     {
         /// <summary>
-        /// Insert Bet-type.
+        ///     Insert Bet-type.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Command Result.</returns>
@@ -29,7 +29,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
         }
 
         /// <summary>
-        /// Delete Bet-type.
+        ///     Delete Bet-type.
         /// </summary>
         /// <param name="criteria">Input criteria.</param>
         /// <returns>Command Result.</returns>

@@ -1,7 +1,8 @@
-﻿using Fanex.Data.Repository;
-
-namespace SPU.Lib.FraudDetection.DataAccess.Interface
+﻿namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
+    using System;
+    using Fanex.Data.Repository;
+
     public interface IMatchDataAccess
     {
         object GetMatchList(ICriteria criteria);
@@ -11,7 +12,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     {
         public object GetMatchList(ICriteria criteria)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
