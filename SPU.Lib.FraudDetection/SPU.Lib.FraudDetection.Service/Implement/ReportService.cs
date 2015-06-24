@@ -59,7 +59,7 @@
             {
                 var match = matches.FirstOrDefault(t => t.MatchId == item.MatchId);
 
-                if (match != null)
+                if (match != null && customers.ContainsKey(item.CustId))
                 {
                     model.SuspiciousCustormers.Add(new SuspiciousCustormer
                     {

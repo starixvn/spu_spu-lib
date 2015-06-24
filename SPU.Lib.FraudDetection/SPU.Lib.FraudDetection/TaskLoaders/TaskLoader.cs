@@ -1,10 +1,10 @@
-﻿namespace SPU.Lib.FraudDetection
+﻿namespace SPU.Lib.FraudDetection.TaskLoaders
 {
     using System;
     using Criteria.Task;
     using Fanex.Logging;
     using QueueManagement;
-    using SendingTasks;
+    using QueueManagement.SendingTasks;
     using Service.Implement;
     using Service.Interface;
 

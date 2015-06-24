@@ -8,9 +8,10 @@
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
-    using SendingTasks;
+    using QueueManagement.SendingTasks;
     using Service.Interface;
-    using TaskLoader = FraudDetection.TaskLoader;
+    using TaskLoaders;
+    using TaskLoader = TaskLoaders.TaskLoader;
 
     public class TaskLoaderTest
     {

@@ -1,6 +1,7 @@
 ﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using DTO;
+    using FraudDetection.TaskExecutors;
     using NUnit.Framework;
 
     [TestFixture]

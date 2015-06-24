@@ -1,11 +1,11 @@
-namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
+namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using BusinessManager.NextAction;
     using DTO;
-    using NextAction;
     using Service.Interface;
 
     public class ScanMatchTaskExecutor : TaskExecutor
@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
         public ScanMatchTaskExecutor(Task task)
             : base(task)
         {
-            MatchIds = new List<string>();
+            MatchIdList = new List<string>();
             SuspiciousInfoList = new List<SuspiciousInfo>();
         }
 
@@ -22,7 +22,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
         {
         }
 
-        public IList<string> MatchIds { get; set; }
+        public IList<string> MatchIdList { get; set; }
         public List<SuspiciousInfo> SuspiciousInfoList { get; set; }
 
         public override void Execute(object sender, ElapsedEventArgs elapsedEventArgs)
@@ -44,12 +44,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
         protected virtual void ExecutePrecondition()
         {
             var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.WorkflowId.ToString());
-            MatchIds = TaskService.ExecutePrecondition(preConditionQuery).ToList();
+            MatchIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
         }
 
         protected override void ExecuteRule()
         {
-            var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", MatchIds));
+            var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", MatchIdList));
             SuspiciousInfoList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.WorkflowId));
 
             SaveSuspicious();
@@ -57,7 +57,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
 
         private void SaveSuspicious()
         {
-            var matchIdList = string.Join(";", MatchIds);
+            var matchIdList = string.Join(";", MatchIdList);
             var saveAction = new SavingSuspicion(SuspiciousInfoList, matchIdList, Task.WorkflowId);
             saveAction.TakeAction();
         }

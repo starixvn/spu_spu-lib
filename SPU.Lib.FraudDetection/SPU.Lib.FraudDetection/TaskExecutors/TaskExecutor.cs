@@ -8,7 +8,7 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
+namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
     using System.Timers;
@@ -84,6 +84,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
             {
                 return;
             }
+            
+            // Execute the task immediately.
+            Execute(null, null);
 
             Timer.Elapsed += Execute;
             Timer.Start();

@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection
+﻿namespace SPU.Lib.FraudDetection.TaskLoaders
 {
     public interface ITaskLoader
     {

@@ -1,4 +1,4 @@
-namespace SPU.Lib.FraudDetection.SendingTasks
+namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
 {
     using QueueManagement;
 

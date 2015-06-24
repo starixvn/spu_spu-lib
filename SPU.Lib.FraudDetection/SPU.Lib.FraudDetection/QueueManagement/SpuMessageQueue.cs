@@ -2,8 +2,8 @@
 {
     using System;
     using System.Messaging;
-    using BusinessManager.TaskExecutors;
     using Core;
+    using TaskExecutors;
 
     /// <summary>
     ///     SPU Message Queue.

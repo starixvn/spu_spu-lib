@@ -11,10 +11,11 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using System;
     using DTO;
+    using FraudDetection.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
-    using SendingTasks;
+    using QueueManagement.SendingTasks;
     using TaskExecutors;
 
     [TestFixture]

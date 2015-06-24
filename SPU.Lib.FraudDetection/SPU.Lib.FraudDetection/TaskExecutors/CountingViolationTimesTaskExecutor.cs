@@ -1,23 +1,23 @@
-namespace SPU.Lib.FraudDetection.BusinessManager.TaskExecutors
+namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using BusinessManager.NextAction;
     using Criteria.SuspiciousInfo;
     using DTO;
-    using NextAction;
     using Service.Implement;
     using Service.Interface;
 
-    public class CountingVioliationTimesTaskExecutor : TaskExecutor
+    public class CountingSuspicousTimesTaskExecutor : TaskExecutor
     {
-        public CountingVioliationTimesTaskExecutor(Task task)
+        public CountingSuspicousTimesTaskExecutor(Task task)
             : base(task)
         {
         }
 
-        public CountingVioliationTimesTaskExecutor(Task task, ITaskService taskService)
+        public CountingSuspicousTimesTaskExecutor(Task task, ITaskService taskService)
             : base(task, taskService)
         {
         }

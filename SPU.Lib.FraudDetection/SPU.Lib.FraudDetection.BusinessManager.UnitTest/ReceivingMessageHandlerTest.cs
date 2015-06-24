@@ -1,5 +1,6 @@
 ﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
+    using FraudDetection.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;

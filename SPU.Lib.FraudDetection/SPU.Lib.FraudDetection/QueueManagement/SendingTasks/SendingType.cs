@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="SendingType.cs" company="Nexcel Solutions Vietnam">
-// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Long.Luu" date="2015.06.12">Created</change>
-// </history>
-
-namespace SPU.Lib.FraudDetection.SendingTasks
+﻿namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
 {
     /// <summary>
     ///     Sending Type.

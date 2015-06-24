@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager
+﻿namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     public enum EventType
     {

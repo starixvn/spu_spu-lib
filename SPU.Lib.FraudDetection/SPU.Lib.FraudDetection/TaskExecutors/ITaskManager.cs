@@ -7,11 +7,10 @@
 //   <change who="Long.Luu" date="2015.06.12">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager
+namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System.Collections.Generic;
     using DTO;
-    using TaskExecutors;
 
     public interface ITaskManager
     {

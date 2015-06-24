@@ -1,11 +1,11 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager
+﻿namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BusinessManager;
     using Core.Utilities;
     using DTO;
-    using TaskExecutors;
 
     /// <summary>
     ///     Workflow Class.
@@ -93,7 +93,7 @@
                 case EventType.ScanMatchAndFindTicket:
                     return new ScanMatchTaskExecutor(task);
                 case EventType.CountSuspicionTimesByCustomer:
-                    return new CountingVioliationTimesTaskExecutor(task);
+                    return new CountingSuspicousTimesTaskExecutor(task);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
