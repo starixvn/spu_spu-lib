@@ -4,8 +4,9 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
-    using BusinessManager.NextAction;
+    using Core.Utilities;
     using DTO;
+    using NextActions;
     using Service.Interface;
 
     public class ScanMatchTaskExecutor : TaskExecutor
@@ -14,7 +15,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             : base(task)
         {
             MatchIdList = new List<string>();
-            SuspiciousInfoList = new List<SuspiciousInfo>();
+            SuspicionList = new List<SuspiciousInfo>();
         }
 
         public ScanMatchTaskExecutor(Task task, ITaskService taskService)
@@ -23,7 +24,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         }
 
         public IList<string> MatchIdList { get; set; }
-        public List<SuspiciousInfo> SuspiciousInfoList { get; set; }
+        public List<SuspiciousInfo> SuspicionList { get; set; }
 
         public override void Execute(object sender, ElapsedEventArgs elapsedEventArgs)
         {
@@ -43,28 +44,28 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         protected virtual void ExecutePrecondition()
         {
-            var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.WorkflowId.ToString());
+            var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.TaskId.ToString());
             MatchIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
         }
 
         protected override void ExecuteRule()
         {
             var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", MatchIdList));
-            SuspiciousInfoList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.WorkflowId));
+            SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.WorkflowId));
 
             SaveSuspicious();
         }
 
         private void SaveSuspicious()
         {
-            var matchIdList = string.Join(";", MatchIdList);
-            var saveAction = new SavingSuspicion(SuspiciousInfoList, matchIdList, Task.WorkflowId);
+            var matchIdList = string.Join(",", MatchIdList);
+            var saveAction = new SavingSuspicion(SuspicionList, matchIdList, Task.WorkflowId);
             saveAction.TakeAction();
         }
 
         protected override void TakeNextAction()
         {
-            if (SuspiciousInfoList.Count == 0)
+            if (SuspicionList.Count == 0)
             {
                 return;
             }
@@ -74,10 +75,10 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
             for (var i = 0; i < nextActionIdList.Count(); i++)
             {
-                var nextAction = ActionFactory.GetAction(
-                    short.Parse(nextActionIdList[i]),
-                    int.Parse(nextActionTargetIdList[i]),
-                    SuspiciousInfoList);
+                var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
+                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]));
+                nextAction.SuspicionList = SuspicionList;
+
                 nextAction.TakeAction();
             }
         }

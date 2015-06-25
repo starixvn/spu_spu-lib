@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using BusinessManager;
-    using Core.Utilities;
     using DTO;
 
     /// <summary>
@@ -79,24 +77,6 @@
         public bool Exist(Task task)
         {
             return TaskExecutors.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
-        }
-    }
-
-    public class TaskExecutorFactory
-    {
-        public static TaskExecutor GetTaskExecutor(Task task)
-        {
-            var eventType = Utility.ParseEnum<EventType>(task.EventId.ToString());
-
-            switch (eventType)
-            {
-                case EventType.ScanMatchAndFindTicket:
-                    return new ScanMatchTaskExecutor(task);
-                case EventType.CountSuspicionTimesByCustomer:
-                    return new CountingSuspicousTimesTaskExecutor(task);
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 }

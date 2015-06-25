@@ -45,9 +45,9 @@
         {
             var model = new SuspiciousStatisticViewModel();
 
-            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
+            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByTaskIdCriteria
             {
-                WorkflowId = list[0].WorkflowId
+                TaskId = list[0].TaskId
             });
 
             if (customers.Count == 0 || matches.Count == 0)

@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NextActions\NextActionType.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />
     <Compile Include="TaskExecutors\EventType.cs" />
     <Compile Include="TaskExecutors\ITaskManager.cs" />
@@ -126,11 +127,12 @@
     <Compile Include="ReportTemplateRenders\TemplateFileManager.cs" />
     <Compile Include="QueueManagement\SendingTasks\AddingTask.cs" />
     <Compile Include="NextActions\SavingSuspicion.cs" />
+    <Compile Include="TaskExecutors\TaskExecutorFactory.cs" />
     <Compile Include="TaskExecutors\TaskManager.cs" />
-    <Compile Include="NextActions\ActionFactory.cs" />
-    <Compile Include="NextActions\BaseAction.cs" />
-    <Compile Include="NextActions\ActionAssignGroup.cs" />
-    <Compile Include="NextActions\ActionSendEmail.cs" />
+    <Compile Include="NextActions\NextActionFactory.cs" />
+    <Compile Include="NextActions\INextAction.cs" />
+    <Compile Include="NextActions\AssigningGroupNextAction.cs" />
+    <Compile Include="NextActions\SendingEmailNextAction.cs" />
     <Compile Include="QueueManagement\SendingTasks\ISendingTask.cs" />
     <Compile Include="QueueManagement\SendingTasks\RemovingTask.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingTask.cs" />

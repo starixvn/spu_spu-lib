@@ -16,7 +16,8 @@ namespace SPU.Lib.FraudDetection.DTO
     {
         public int CustId { get; set; }
         public int MatchId { get; set; }
+        public int TaskId { get; set; }
+        public long TransId { get; set; }
         public int WorkflowId { get; set; }
-        public string TransIdList { get; set; }
     }
 }

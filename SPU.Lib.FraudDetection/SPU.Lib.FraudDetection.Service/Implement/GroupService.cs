@@ -48,7 +48,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _groupDataAccess.UpdateGroup(criteria);
         }
 
-        public ICommandResult AssignCustToGroup(ICriteria criteria)
+        public ICommandResult AssignCustomerToGroup(ICriteria criteria)
         {
             return _groupDataAccess.AssignCustToGroup(criteria);
         }

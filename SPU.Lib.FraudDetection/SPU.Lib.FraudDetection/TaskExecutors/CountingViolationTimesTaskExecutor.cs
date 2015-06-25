@@ -4,9 +4,10 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
-    using BusinessManager.NextAction;
+    using Core.Utilities;
     using Criteria.SuspiciousInfo;
     using DTO;
+    using NextActions;
     using Service.Implement;
     using Service.Interface;
 
@@ -41,7 +42,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         protected override void ExecuteRule()
         {
             var ruleQuery = Task.TaskRules.Replace("$param1$", Task.WorkflowId.ToString());
-            SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.WorkflowId);
+            SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 
         protected override void TakeNextAction()
@@ -57,16 +58,15 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
                 WorkflowId = Task.WorkflowId
             };
 
-            var suspiciousInfoList = TaskService.GetSuspiciousCustomerHistory(criteria);
+            var suspicionList = TaskService.GetSuspiciousCustomerHistory(criteria);
             var nextActionIdList = Task.NextActionIdList.Split(',');
             var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
 
             for (var i = 0; i < nextActionIdList.Count(); i++)
             {
-                var nextAction = ActionFactory.GetAction(
-                    short.Parse(nextActionIdList[i]),
-                    int.Parse(nextActionTargetIdList[i]),
-                    suspiciousInfoList);
+                var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
+                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]));
+                nextAction.SuspicionList = suspicionList;
 
                 nextAction.TakeAction();
             }

@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.Criteria.SuspiciousInfo
 {
     using Fanex.Data.Repository;
 
@@ -16,11 +16,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     /// </summary>
     public class SuspiciousInfoInsertCriteria : CriteriaBase
     {
-        public int CreatorId { get; set; }
-        public string CustIdList { get; set; } //// format: "1;2;3".
-        public string MatchIdList { get; set; } //// format: "1;2;3".
-        public string WorkflowIdList { get; set; } //// format: "1;2;3".
-        public string GroupTransIdList { get; set; } ////format: "1,2,3;  2,3,4; ".
+        public string SuspicionDoc { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

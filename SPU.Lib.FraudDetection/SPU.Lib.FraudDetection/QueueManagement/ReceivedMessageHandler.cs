@@ -2,7 +2,6 @@ namespace SPU.Lib.FraudDetection.QueueManagement
 {
     using System;
     using System.Messaging;
-    using BusinessManager;
     using DTO;
     using SendingTasks;
     using TaskExecutors;

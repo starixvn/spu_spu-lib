@@ -3,6 +3,6 @@
     public class SuspiciousCustomer
     {
         public int CustId { get; set; }
-        public int WorkflowId { get; set; }
+        public int TaskId { get; set; }
     }
 }

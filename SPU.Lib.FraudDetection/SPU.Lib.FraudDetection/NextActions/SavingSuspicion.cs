@@ -1,19 +1,15 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="ActionSaveSuspiciousInfo.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
-// </history>
-
-namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
+﻿namespace SPU.Lib.FraudDetection.NextActions
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using System.Threading;
+    using Core;
     using Criteria;
     using Criteria.Match;
+    using Criteria.ScannedMatch;
+    using Criteria.SuspiciousInfo;
     using DTO;
     using Fanex.Logging;
     using Service.Implement;
@@ -26,20 +22,21 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
     public class SavingSuspicion
     {
         private readonly string _matchIdList;
-        private readonly int _workflowId;
+        private readonly int _taskId;
         private List<SuspiciousInfo> _suspiciousInfoList;
 
-        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int workflowId)
+        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int taskId)
         {
             _suspiciousInfoList = suspiciousInfoList;
             _matchIdList = matchIdList;
-            _workflowId = workflowId;
+            _taskId = taskId;
 
             ScannedMatchesService = new ScannedMatchesService();
             SuspiciousInfoService = new SuspiciousInfoService();
         }
 
         public IScannedMatchesService ScannedMatchesService { get; set; }
+
         public ISuspiciousInfoService SuspiciousInfoService { get; set; }
 
         public List<SuspiciousInfo> AssignGroupList
@@ -70,10 +67,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
             {
                 var criteria = new MatchInsertCriteria
                 {
-                    CreatorId = 0,
                     MatchIdList = _matchIdList,
-                    WorkflowId = _workflowId,
-                    EventDate = DateTime.Now // --> ScannedDate
+                    TaskId = _taskId,
+                    ScannedDate = DateTime.Now
                 };
 
                 var result = ScannedMatchesService.InsertScannedMatch(criteria);
@@ -95,39 +91,56 @@ namespace SPU.Lib.FraudDetection.BusinessManager.NextAction
         {
             try
             {
-                var criteria = new SuspiciousInfoInsertCriteria();
+                var chunks = _suspiciousInfoList.Chunk(100);
 
-                var custIdList = new List<int>();
-                var matchIdList = new List<int>();
-                var workflowIdList = new List<int>();
-                var groupTransIdList = new List<string>();
-
-                foreach (var info in _suspiciousInfoList)
+                foreach (var chunk in chunks)
                 {
-                    custIdList.Add(info.CustId);
-                    matchIdList.Add(info.MatchId);
-                    workflowIdList.Add(info.WorkflowId);
-                    groupTransIdList.Add(info.TransIdList);
+                    var criteria = new SuspiciousInfoInsertCriteria
+                    {
+                        SuspicionDoc = CreateXmlParam(chunk)
+                    };
+
+                    var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
+
+                    if (result.IsSuccessful == false)
+                    {
+                        Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
+                    }
                 }
 
-                criteria.CreatorId = 0;
-                criteria.CustIdList = string.Join(";", custIdList);
-                criteria.MatchIdList = string.Join(";", matchIdList);
-                criteria.WorkflowIdList = string.Join(";", workflowIdList);
-                criteria.GroupTransIdList = string.Join(";", groupTransIdList);
-
-                var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
-                if (result.IsSuccessful == false)
-                {
-                    Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
-                }
-
-                return result.IsSuccessful;
+                
+                return true;
             }
             catch (Exception ex)
             {
                 throw new Exception("Exception InsertSuspiciousInfo --", ex);
             }
+        }
+
+        private string CreateXmlParam(IEnumerable<SuspiciousInfo> chunk)
+        {
+            var builder = new StringBuilder();
+            builder.Append("<Root>");
+
+            foreach (var suspiciousInfo in chunk)
+            {
+                builder.Append("<Row>");
+                builder.Append(GetElement("CustId", suspiciousInfo.CustId));
+                builder.Append(GetElement("MatchId", suspiciousInfo.MatchId));
+                builder.Append(GetElement("TransId", suspiciousInfo.TransId));
+                builder.Append(GetElement("TaskId", suspiciousInfo.TaskId));
+                builder.Append(GetElement("WorkflowId", suspiciousInfo.WorkflowId));
+                builder.Append("</Row>");
+            }
+
+            builder.Append("</Root>");
+
+            return builder.ToString();
+        }
+
+        private string GetElement(string tagName, object value)
+        {
+            return string.Format("<{0}>{1}</{0}>", tagName, value);
         }
     }
 }

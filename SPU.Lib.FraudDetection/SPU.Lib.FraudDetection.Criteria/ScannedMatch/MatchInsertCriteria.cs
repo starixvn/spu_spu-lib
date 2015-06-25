@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Match
+namespace SPU.Lib.FraudDetection.Criteria.ScannedMatch
 {
     using System;
     using Fanex.Data.Repository;
@@ -17,10 +17,11 @@ namespace SPU.Lib.FraudDetection.Criteria.Match
     /// </summary>
     public class MatchInsertCriteria : CriteriaBase
     {
-        public int CreatorId { get; set; }
-        public string MatchIdList { get; set; } //// format: "1;2;3".
-        public int WorkflowId { get; set; }
-        public DateTime EventDate { get; set; }
+        public string MatchIdList { get; set; } //// format: "1,2,3".
+
+        public int TaskId { get; set; }
+
+        public DateTime ScannedDate { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

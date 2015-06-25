@@ -22,6 +22,6 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult DeleteGroup(ICriteria criteria);
         DataCollection GetGroups(ICriteria criteria);
         ICommandResult UpdateGroup(ICriteria criteria);
-        ICommandResult AssignCustToGroup(ICriteria criteria);
+        ICommandResult AssignCustomerToGroup(ICriteria criteria);
     }
 }

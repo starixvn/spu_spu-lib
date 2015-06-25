@@ -88,30 +88,9 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return Get<Task>(criteria);
         }
 
-        /// <summary>
-        ///     Collect Suspicious Info.
-        /// </summary>
-        /// <param name="sqlQueryString">Query string.</param>
-        /// <returns>List of suspicious information.</returns>
         public IEnumerable<SuspiciousInfo> CollectSuspiciousInfo(string sqlQueryString)
         {
-            var suspiciousInfoList = new List<SuspiciousInfo>();
-            var suspiciousInfoDataTable = ExecuteReaderQueryInline(sqlQueryString);
-
-            foreach (DataRow dataRow in suspiciousInfoDataTable.Rows)
-            {
-                suspiciousInfoList.Add(new SuspiciousInfo
-                {
-                    CustId = int.Parse(dataRow["custid"].ToString()),
-                    MatchId = int.Parse(dataRow["matchid"].ToString()),
-                    WorkflowId = string.IsNullOrEmpty(dataRow["workflowid"].ToString())
-                        ? 0
-                        : int.Parse(dataRow["workflowid"].ToString()),
-                    TransIdList = dataRow["listtransid"].ToString()
-                });
-            }
-
-            return suspiciousInfoList;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -137,51 +116,30 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         ///     Execute Rule.
         /// </summary>
         /// <param name="sqlQueryString">SQL Query String.</param>
-        /// <param name="workflowId">Workflow ID.</param>
+        /// <param name="taskId">Workflow ID.</param>
         /// <returns>List of Suspicious Info.</returns>
-        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId)
+        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int worflowId)
         {
             var suspiciousInfoList = new List<SuspiciousInfo>();
 
             var dt = ExecuteReaderQueryInline(sqlQueryString);
-            var custId = 0;
-            var matchId = 0;
-            long transId = 0;
 
             for (var i = 0; i < dt.Rows.Count; i++)
             {
-                custId = int.Parse(dt.Rows[i]["custid"].ToString());
-                matchId = int.Parse(dt.Rows[i]["matchid"].ToString());
-                transId = long.Parse(dt.Rows[i]["transid"].ToString());
-
-                var currentInfo =
-                    suspiciousInfoList.Find(
-                        x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId);
-
-                if (currentInfo == null)
+                suspiciousInfoList.Add(new SuspiciousInfo
                 {
-                    var info = new SuspiciousInfo
-                    {
-                        WorkflowId = workflowId,
-                        MatchId = matchId,
-                        CustId = custId,
-                        TransIdList = transId.ToString()
-                    };
-
-                    suspiciousInfoList.Add(info);
-                }
-                else
-                {
-                    suspiciousInfoList.Find(
-                        x => x.CustId == custId && x.MatchId == matchId && x.WorkflowId == workflowId).TransIdList +=
-                        "," + transId;
-                }
+                    CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                    MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
+                    TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
+                    TaskId = taskId,
+                    WorkflowId = worflowId
+                });
             }
 
             return suspiciousInfoList;
         }
 
-        public IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int workflowId)
+        public IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int taskId)
         {
             var suspiciousCustomers = new List<SuspiciousCustomer>();
 
@@ -192,7 +150,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                 suspiciousCustomers.Add(new SuspiciousCustomer
                 {
                     CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
-                    WorkflowId = workflowId
+                    TaskId = taskId
                 });
             }
 

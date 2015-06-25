@@ -34,20 +34,13 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         Task GetTaskInfoByTaskId(ICriteria criteria);
 
         /// <summary>
-        ///     Collect Suspicious Info.
-        /// </summary>
-        /// <param name="sqlQueryString">Query string.</param>
-        /// <returns>List of suspicious information.</returns>
-        IEnumerable<SuspiciousInfo> CollectSuspiciousInfo(string sqlQueryString);
-
-        /// <summary>
         ///     Return a list of ids.
         /// </summary>
         /// <param name="sqlQueryString">The query string.</param>
         /// <returns>List of ids.</returns>
         IEnumerable<string> ExecutePrecondition(string sqlQueryString);
 
-        List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int workflowId);
+        List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int workflowId);
         IEnumerable<T> GetData<T>(ICriteria criteria);
         IEnumerable<T> GetData<T>(dynamic paramaters);
         IEnumerable<T> GetData<T>(ICriteria criteria, ref int totalPages);

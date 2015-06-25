@@ -17,7 +17,9 @@ namespace SPU.Lib.FraudDetection.Criteria
     public class CustomerGroupAssignCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
+
         public string CustIdList { get; set; } //// format: "1;2;3".
+
         public int GroupId { get; set; }
 
         /// <summary>
