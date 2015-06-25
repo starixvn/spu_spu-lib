@@ -71,9 +71,11 @@
     <Compile Include="Implement\BalanceUpDayDTO.cs" />
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\CustomerReportService.cs" />
     <Compile Include="Implement\EventService.cs" />
     <Compile Include="Implement\CustomerService.cs" />
     <Compile Include="Implement\SuspiciousCustomer.cs" />
+    <Compile Include="Interface\ICustomerReportService.cs" />
     <Compile Include="Interface\IBalanceUpDayService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />
     <Compile Include="Interface\IEventService.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Interface\IWorkflowService.cs" />
     <Compile Include="Implement\ReportService.cs" />
     <Compile Include="Implement\MatchService.cs" />
+    <Compile Include="Interface\RawMarginCustomer.cs" />
     <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implement\ScannedMatchesService.cs" />

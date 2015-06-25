@@ -9,10 +9,11 @@
 
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
+    using System.Collections.Generic;
     using Core;
+    using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using SPU.Lib.FraudDetection.DTO;
 
     /// <summary>
     ///     Group Service interface.
@@ -24,6 +25,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult DeleteGroup(ICriteria criteria);
 
         DataCollection GetGroups(ICriteria criteria);
+
+        IEnumerable<Group> GetAllGroups(ICriteria criteria);
 
         Group GetGroupById(ICriteria criteria);
 

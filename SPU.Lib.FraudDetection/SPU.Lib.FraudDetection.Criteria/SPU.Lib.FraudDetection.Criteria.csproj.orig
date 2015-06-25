@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SPU.Lib.FraudDetection.Criteria</RootNamespace>
+    <AssemblyName>SPU.Lib.FraudDetection.Criteria</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\packages\EnterpriseLibrary.Data.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bettype\BettypeInsertCriteria.cs" />
+    <Compile Include="Bettype\BettypeDeleteCriteria.cs" />
+    <Compile Include="Bettype\BettypeSelectAllCriteria.cs" />
+    <Compile Include="Bettype\SportSelectAllCriteria.cs" />
+    <Compile Include="Common\ResultCriteria.cs" />
+    <Compile Include="Config\ConfigInsertCriteria.cs" />
+    <Compile Include="Config\ConfigUpdateCriteria.cs" />
+    <Compile Include="Config\ConfigDeleteCriteria.cs" />
+    <Compile Include="Config\ConfigSelectAllCriteria.cs" />
+    <Compile Include="Event\EventSelectAllCriteria.cs" />
+    <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
+    <Compile Include="Group\GroupGetByIdCriteria.cs" />
+    <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
+<<<<<<< HEAD
+    <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
+=======
+    <Compile Include="Reports\SuspiciousCustomerReportGetAllCriteria.cs" />
+>>>>>>> #38312: Implement server side (report of suspicious customers)
+    <Compile Include="SuspiciousStatistic\MarginCustomerSelectCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\BalanceUpDaySelectCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />
+    <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
+    <Compile Include="Group\GroupSelectAllCriteria.cs" />
+    <Compile Include="Group\GroupUpdateCriteria.cs" />
+    <Compile Include="Group\CustomerGroupAssignCriteria.cs" />
+    <Compile Include="Group\GroupInsertCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetByNameCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetByIdCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterDeleteCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterInsertCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterGetAllCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterUpdateCriteria.cs" />
+    <Compile Include="ScannedMatch\MatchSelectAllCriteria.cs" />
+    <Compile Include="ScannedMatch\MatchInsertCriteria.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\CustomerSelectCritiria.cs" />
+    <Compile Include="Task\TaskInfoSelectCriteria.cs" />
+    <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
+    <Compile Include="Task\TaskSelectAllCriteria.cs" />
+    <Compile Include="Task\TaskSelectAllByWorkflowIdCriteria.cs" />
+    <Compile Include="Task\TaskDeleteCriteria.cs" />
+    <Compile Include="Task\TaskUpdateCriteria.cs" />
+    <Compile Include="Task\TaskInsertCriteria.cs" />
+    <Compile Include="Workflow\WorkflowUpdateStatusCriteria.cs" />
+    <Compile Include="Workflow\WorkflowSelectByIdCriteria.cs" />
+    <Compile Include="Workflow\WorkflowSelectAllCriteria.cs" />
+    <Compile Include="Workflow\WorkflowUpdateCriteria.cs" />
+    <Compile Include="Workflow\WorkflowInsertCriteria.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Name>SPU.Lib.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

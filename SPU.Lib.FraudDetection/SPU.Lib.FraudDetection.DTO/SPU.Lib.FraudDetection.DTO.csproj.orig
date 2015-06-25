@@ -37,8 +37,8 @@
     <Reference Include="Fanex.Data">
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
+    <Reference Include="IBCFile">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -57,6 +57,12 @@
     <Reference Include="Microsoft.Practices.Unity.Interception">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
     </Reference>
+    <Reference Include="RemotingRef">
+      <HintPath>..\packages\RemotingRef.1.0.0.2\lib\net40\RemotingRef.dll</HintPath>
+    </Reference>
+    <Reference Include="SPSRemoting">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -69,19 +75,20 @@
   <ItemGroup>
     <Compile Include="Bettype.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="MatchDetail.cs" />
     <Compile Include="Parameter.cs" />
-<<<<<<< HEAD
     <Compile Include="MailMasterInfo.cs" />
-=======
+    <Compile Include="RawMarginCustomer.cs" />
+    <Compile Include="Reports\SuspiciousCustomerReport.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousStatisticViewModel.cs" />
->>>>>>> #37459 - Render the content report from the report template.
     <Compile Include="TablesForeignKey.cs" />
     <Compile Include="Sport.cs" />
     <Compile Include="WorkflowInfo.cs" />
-    <Compile Include="TaskInfo.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +98,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

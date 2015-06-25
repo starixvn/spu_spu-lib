@@ -9,6 +9,7 @@
 
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Core;
     using DataAccess.Implement;
@@ -43,6 +44,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public DataCollection GetGroups(ICriteria criteria)
         {
             return _groupDataAccess.GetGroups(criteria);
+        }
+
+        public IEnumerable<Group> GetAllGroups(ICriteria criteria)
+        {
+            return GetData<Group>(criteria);
         }
 
         public Group GetGroupById(ICriteria criteria)
