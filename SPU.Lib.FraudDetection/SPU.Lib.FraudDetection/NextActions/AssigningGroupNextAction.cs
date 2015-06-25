@@ -1,9 +1,8 @@
 ﻿namespace SPU.Lib.FraudDetection.NextActions
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Criteria;
+    using Criteria.Group;
     using DTO;
     using Fanex.Logging;
     using Service.Implement;

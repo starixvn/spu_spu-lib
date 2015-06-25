@@ -61,7 +61,7 @@
                 {
                     model.SuspiciousCustormers.Add(new SuspiciousCustormer
                     {
-                        Member = customers.Single(t => t.CustId == item.CustId).Username,
+                        Member = customers.Single(t => t.CustId == item.CustId).CustName,
                         MatchId = match.MatchId,
                         MatchCode = match.MatchCode,
                         EventDate = match.EventDate,
