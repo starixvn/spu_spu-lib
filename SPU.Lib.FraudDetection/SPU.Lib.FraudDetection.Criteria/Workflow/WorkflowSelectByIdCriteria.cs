@@ -6,9 +6,9 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
     /// <summary>
     ///     WorkflowSelectAllCriteria Class.
     /// </summary>
-    public class WorkflowSelectByTaskIdCriteria : CriteriaBase
+    public class WorkflowSelectByIdCriteria : CriteriaBase
     {
-        public int TaskId { get; set; }
+        public int WorkflowId { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_WorkflowSelectByTaskId";
+            return "SPU_WorkflowSelectById";
         }
 
         /// <summary>

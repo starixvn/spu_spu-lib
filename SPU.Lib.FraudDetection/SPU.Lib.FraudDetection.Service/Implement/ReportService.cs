@@ -16,10 +16,8 @@
             CustomerService = new CustomerService();
             MatchService = new MatchService();
             WorkflowService = new WorkflowService();
-            BalanceUpDayService = new BalanceUpDayService();
         }
 
-        public IBalanceUpDayService BalanceUpDayService { get; set; }
         public ICustomerService CustomerService { get; set; }
         public IMatchService MatchService { get; set; }
         public IWorkflowService WorkflowService { get; set; }
@@ -41,13 +39,13 @@
 
         private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list,
             IList<MatchDetail> matches,
-            IDictionary<int, string> customers, IList<MarginCustormer> margins)
+            IList<Customer> customers, IList<MarginCustormer> margins)
         {
             var model = new SuspiciousStatisticViewModel();
 
-            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByTaskIdCriteria
+            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
             {
-                TaskId = list[0].TaskId
+                WorkflowId = list[0].TaskId
             });
 
             if (customers.Count == 0 || matches.Count == 0)
@@ -59,11 +57,11 @@
             {
                 var match = matches.FirstOrDefault(t => t.MatchId == item.MatchId);
 
-                if (match != null && customers.ContainsKey(item.CustId))
+                if (match != null && customers.Any(t => t.CustId == item.CustId))
                 {
                     model.SuspiciousCustormers.Add(new SuspiciousCustormer
                     {
-                        Member = customers[item.CustId],
+                        Member = customers.Single(t => t.CustId == item.CustId).Username,
                         MatchId = match.MatchId,
                         MatchCode = match.MatchCode,
                         EventDate = match.EventDate,
@@ -80,7 +78,7 @@
             return model;
         }
 
-        private IDictionary<int, string> GetDistinctCustomers(IList<SuspiciousInfo> list)
+        private IList<Customer> GetDistinctCustomers(IList<SuspiciousInfo> list)
         {
             var distinctCustomers = list.Select(t => t.CustId).Distinct().ToList();
 
@@ -127,11 +125,8 @@
 
         private IList<MarginCustormer> GetMarginCustomer(IList<SuspiciousInfo> list)
         {
-            var balanceUpDay = BalanceUpDayService.GetBalanceUpDay(new BalanceUpDaySelectCriteria()).BalanceUpDay;
-
             var criteria = new MarginCustomerSelectCriteria
             {
-                BalanceUpDay = balanceUpDay,
                 ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
             };
 
@@ -143,9 +138,9 @@
 
             var marginList = new List<MarginCustormer>();
 
-            foreach (var group   in groupByCustId)
+            foreach (var group in groupByCustId)
             {
-                var margin = new MarginCustormer {Member = @group.Key};
+                var margin = new MarginCustormer { Member = @group.Key };
 
                 foreach (var month in last3Months)
                 {

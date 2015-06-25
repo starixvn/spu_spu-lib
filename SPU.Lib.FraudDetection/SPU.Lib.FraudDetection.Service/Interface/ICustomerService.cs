@@ -6,7 +6,7 @@
 
     public interface ICustomerService
     {
-        IDictionary<int, string> GetUsernameByCustId(ICriteria criteria);
+        IList<Customer> GetUsernameByCustId(ICriteria criteria);
         IList<RawMarginCustomer> GetMarginCustomerByCustId(MarginCustomerSelectCriteria criteria);
     }
 }

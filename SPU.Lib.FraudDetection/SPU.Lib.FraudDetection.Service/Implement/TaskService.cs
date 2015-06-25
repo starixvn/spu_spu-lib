@@ -12,7 +12,6 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using Core;
     using DataAccess.Implement;
