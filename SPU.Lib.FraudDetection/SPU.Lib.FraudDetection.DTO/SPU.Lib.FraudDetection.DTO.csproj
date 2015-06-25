@@ -75,10 +75,12 @@
   <ItemGroup>
     <Compile Include="Bettype.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="MatchDetail.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="MailMasterInfo.cs" />
+    <Compile Include="RawMarginCustomer.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousStatisticViewModel.cs" />

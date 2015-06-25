@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Criteria.SuspiciousStatistic;
+    using DTO;
     using Fanex.Data.Repository;
 
     public interface ICustomerService

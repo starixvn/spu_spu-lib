@@ -45,7 +45,7 @@
 
             var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
             {
-                WorkflowId = list[0].TaskId
+                WorkflowId = list[0].WorkflowId
             });
 
             if (customers.Count == 0 || matches.Count == 0)

@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.Interface
+﻿namespace SPU.Lib.FraudDetection.DTO
 {
     public class Customer
     {

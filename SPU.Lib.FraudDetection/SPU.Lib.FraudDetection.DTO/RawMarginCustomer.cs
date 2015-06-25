@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.Interface
+﻿namespace SPU.Lib.FraudDetection.DTO
 {
     using System;
 
@@ -15,7 +15,7 @@
         public decimal? Margin
         {
             get
-            {
+            {   
                 if (!MemberWinlost.HasValue)
                     return null;
                 if (!Turnover.HasValue)
