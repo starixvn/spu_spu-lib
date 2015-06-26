@@ -26,7 +26,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List off suspicious customers.</returns>
-        public IEnumerable<SuspiciousCustomerReport> GetAllSuspiciousCustomerReport(ICriteria criteria)
+        public IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomersByGroup(ICriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {

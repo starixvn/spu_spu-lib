@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousCustomerReportGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomerGetByGroupCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,12 +12,10 @@ namespace SPU.Lib.FraudDetection.Criteria.Reports
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// SuspiciousCustomerReportGetAllCriteria Class.
+    /// SuspiciousCustomerGetByGroupCriteria Class.
     /// </summary>
-    public class SuspiciousCustomerReportGetAllCriteria : CriteriaBase
+    public class SuspiciousCustomerGetByGroupCriteria : CriteriaBase
     {
-        public string CustName { get; set; }
-
         public int GroupId { get; set; }
 
         /// <summary>
@@ -26,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Reports
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_SuspiciousCustomerReportGetAll";
+            return "SPU_SuspiciousCustomerGetByGroup";
         }
 
         /// <summary>

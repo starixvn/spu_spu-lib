@@ -81,6 +81,7 @@
     <Compile Include="Parameter.cs" />
     <Compile Include="MailMasterInfo.cs" />
     <Compile Include="RawMarginCustomer.cs" />
+    <Compile Include="Reports\SuspiciousCustomerTime.cs" />
     <Compile Include="Reports\SuspiciousCustomerReport.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />

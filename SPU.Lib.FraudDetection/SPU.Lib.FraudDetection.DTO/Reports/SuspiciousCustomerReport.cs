@@ -18,9 +18,9 @@ namespace SPU.Lib.FraudDetection.DTO.Reports
     {
         public SuspiciousCustomerReport()
         {
-            Margins = new List<double>();
+            Margins = new List<decimal>();
 
-            WinLoss = new List<double>();
+            WinLoss = new List<decimal>();
         }
 
         public Customer Customer { get; set; }
@@ -29,8 +29,8 @@ namespace SPU.Lib.FraudDetection.DTO.Reports
 
         public int SuspiciousTime { get; set; }
 
-        public IList<double> Margins { get; set; }
+        public IList<decimal> Margins { get; set; }
 
-        public IList<double> WinLoss { get; set; }
+        public IList<decimal> WinLoss { get; set; }
     }
 }

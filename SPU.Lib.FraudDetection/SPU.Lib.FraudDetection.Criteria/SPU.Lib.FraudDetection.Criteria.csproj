@@ -79,6 +79,8 @@
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
+    <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
+    <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerReportGetAllCriteria.cs" />
     <Compile Include="SuspiciousStatistic\MarginCustomerSelectCriteria.cs" />

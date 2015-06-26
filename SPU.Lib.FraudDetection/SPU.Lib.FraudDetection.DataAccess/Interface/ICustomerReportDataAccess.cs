@@ -10,14 +10,14 @@
 namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
     using System.Collections.Generic;
+    using DTO.Reports;
     using Fanex.Data.Repository;
-    using SPU.Lib.FraudDetection.DTO.Reports;
 
     /// <summary>
     /// Report Data Access interface.
     /// </summary>
     public interface ICustomerReportDataAccess
     {
-        IEnumerable<SuspiciousCustomerReport> GetAllSuspiciousCustomerReport(ICriteria criteria);
+        IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomersByGroup(ICriteria criteria);
     }
 }
