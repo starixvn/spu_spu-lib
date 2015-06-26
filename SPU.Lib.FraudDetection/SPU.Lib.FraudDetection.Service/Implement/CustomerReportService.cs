@@ -71,7 +71,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <returns>The bind data.</returns>
         private IEnumerable<SuspiciousCustomerReport> BindMarginData(
             IEnumerable<SuspiciousCustomerReport> customers,
-            IList<RawMarginCustomer> margins)
+            IEnumerable<RawMarginCustomer> margins)
         {
             var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
             for (var i = 0; i < 3; i++)
@@ -98,7 +98,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <param name="month">The month wanted to get.</param>
         /// <param name="margins">List Margins.</param>
         /// <returns>Margin of month.</returns>
-        private decimal GetMargin(int custId, DateTime month, IList<RawMarginCustomer> margins)
+        private decimal GetMargin(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
             foreach (var margin in margins)
             {
@@ -118,7 +118,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <param name="month">The month wanted to get.</param>
         /// <param name="margins">List Margins.</param>
         /// <returns>WinLoss of month.</returns>
-        private decimal GetWinLoss(int custId, DateTime month, IList<RawMarginCustomer> margins)
+        private decimal GetWinLoss(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
             foreach (var margin in margins)
             {
@@ -131,29 +131,52 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return 0;
         }
 
-        private IEnumerable<Customer> FilterCustomersByName(string custName, IList<Customer> customers)
+        private IEnumerable<Customer> FilterCustomersByName(string custName, IEnumerable<Customer> customers)
         {
             return from c in customers where c.CustName.ToLower().Contains(custName.ToLower()) select c;
         }
 
+        /// <summary>
+        /// Get suspicious time.
+        /// </summary>
+        /// <param name="listCustIds">List customer ID.</param>
+        /// <returns>The list suspicious time.</returns>
         private IEnumerable<SuspiciousCustomerTime> GetSuspiciousCustomerTime(string listCustIds)
         {
-            var criteria = new SuspiciousCustomerTimeGetAllCriteria()
+            var result = new List<SuspiciousCustomerTime>().AsEnumerable();
+            foreach (var customerIds in Split(listCustIds, 60))
             {
-                ListCustIds = listCustIds
-            };
+                var criteria = new SuspiciousCustomerTimeGetAllCriteria()
+                {
+                    ListCustIds = customerIds
+                };
 
-            return GetData<SuspiciousCustomerTime>(criteria);
+                result = result.Concat(GetData<SuspiciousCustomerTime>(criteria));
+            }
+
+            return result;
         }
 
-        private IList<RawMarginCustomer> GetSuspiciousCustomerMargin(string listCustIds)
+        /// <summary>
+        /// Get margin and win loss.
+        /// </summary>
+        /// <param name="listCustIds">List customer ID.</param>
+        /// <returns>The list margin and win loss.</returns>
+        private IEnumerable<RawMarginCustomer> GetSuspiciousCustomerMargin(string listCustIds)
         {
-            var marginCriteria = new MarginCustomerSelectCriteria()
-            {
-                ListCustIDs = listCustIds
-            };
+            var result = new List<RawMarginCustomer>().AsEnumerable();
 
-            return _customerService.GetMarginCustomerByCustId(marginCriteria);
+            foreach (var customerIds in Split(listCustIds, 60))
+            {
+                var marginCriteria = new MarginCustomerSelectCriteria()
+                {
+                    ListCustIDs = customerIds
+                };
+
+                result = result.Concat(_customerService.GetMarginCustomerByCustId(marginCriteria));
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -167,14 +190,17 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             IEnumerable<Customer> customers)
         {
             var result = new List<SuspiciousCustomerReport>();
-            foreach (var customer in customers)
+            foreach (var suspiciousCustomer in suspiciousCustomers)
             {
-                foreach (var suspiciousCustomer in suspiciousCustomers)
+                foreach (var customer in customers)
                 {
                     if (suspiciousCustomer.Customer.CustId == customer.CustId)
                     {
-                        suspiciousCustomer.Customer = customer;
+                        suspiciousCustomer.Customer.CustName = customer.CustName;
+
                         result.Add(suspiciousCustomer);
+
+                        break;
                     }
                 }
             }
@@ -192,20 +218,55 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _reportDataAccess.GetSuspiciousCustomersByGroup(suspiciousCustomerGetByGroupCriteria);
         }
 
-        private IList<Customer> GetCustomers(string listCustIds)
+        /// <summary>
+        /// Get customers from BODB02.
+        /// </summary>
+        /// <param name="listCustIds">The list of ID.</param>
+        /// <returns>List customers.</returns>
+        private IEnumerable<Customer> GetCustomers(string listCustIds)
         {
-            var customerSelectCritiria = new CustomerSelectCritiria
-            {
-                ListCustIds = listCustIds
-            };
+            var result = new List<Customer>().AsEnumerable();
 
-            return _customerService.GetUsernameByCustId(customerSelectCritiria);
+            foreach (var customerIds in Split(listCustIds, 60))
+            {
+                var customerSelectCritiria = new CustomerSelectCritiria
+                {
+                    ListCustIds = customerIds
+                };
+
+                result = result.Concat(_customerService.GetUsernameByCustId(customerSelectCritiria));
+            }
+
+            return result;
         }
 
         private string GetSuspiciousCustomerIds(IEnumerable<SuspiciousCustomerReport> customers)
         {
             var distinctCustomers = customers.Select(t => t.Customer.CustId).Distinct().ToList();
             var result = string.Join(",", distinctCustomers);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Split the data into small groups.
+        /// </summary>
+        /// <param name="source">The source data.</param>
+        /// <param name="size">The size of group.</param>
+        /// <returns>The result in list.</returns>
+        private IEnumerable<string> Split(string source, int size)
+        {
+            var result = new List<string>();
+            var newSource = source.Split(',').AsEnumerable();
+            var groups = newSource.Select((x, i) => new { Index = i, Value = x })
+                        .GroupBy(x => x.Index / size)
+                        .Select(x => x.Select(v => v.Value).ToList())
+                        .ToList();
+
+            foreach (var group in groups)
+            {
+                result.Add(string.Join(",", group));
+            }
 
             return result;
         }
