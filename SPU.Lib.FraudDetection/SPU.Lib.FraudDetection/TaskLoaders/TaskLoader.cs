@@ -27,21 +27,14 @@
 
         public void LoadTasks()
         {
-            try
-            {
-                var taskList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+            var taskList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
 
-                foreach (var task in taskList)
-                {
-                    if (task.IsActive)
-                    {
-                        _sendingTask.Send(task);
-                    }
-                }
-            }
-            catch (Exception ex)
+            foreach (var task in taskList)
             {
-                Logger.Log.Error("Exception LoadTasks: " + ex.Message);
+                if (task.IsActive)
+                {
+                    _sendingTask.Send(task);
+                }
             }
         }
     }

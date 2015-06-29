@@ -2,12 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
-    using System.Threading;
     using Core;
-    using Criteria;
-    using Criteria.Match;
     using Criteria.ScannedMatch;
     using Criteria.SuspiciousInfo;
     using DTO;
@@ -21,11 +17,12 @@
     /// </summary>
     public class SavingSuspicion
     {
-        private readonly string _matchIdList;
+        private readonly IList<string> _matchIdList;
         private readonly int _taskId;
         private List<SuspiciousInfo> _suspiciousInfoList;
+        protected const int ChunkSize = 60;
 
-        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, string matchIdList, int taskId)
+        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, IList<string> matchIdList, int taskId)
         {
             _suspiciousInfoList = suspiciousInfoList;
             _matchIdList = matchIdList;
@@ -47,27 +44,43 @@
 
         public void TakeAction()
         {
-            if (_suspiciousInfoList.Count > 0)
+            if (_suspiciousInfoList.Count <= 0)
             {
-                var t1 = new Task(() => UpdateScannedMatch());
+                return;
+            }
 
-                t1.ContinueWith(task1 =>
+            var tasks = new List<Task>();
+
+            var insertScannedMatchTask = Task.Factory.StartNew(InsertScannedMatch);
+
+            tasks.Add(insertScannedMatchTask);
+
+            var insertSuspicionTask = Task.Factory.StartNew(InsertSuspicion);
+
+            tasks.Add(insertSuspicionTask);
+
+            try
+            {
+                Task.WaitAll(tasks.ToArray());
+            }
+            catch (AggregateException ex)
+            {
+                foreach (var innerEx in ex.InnerExceptions)
                 {
-                    var t2 = new Task(() => InsertSuspicion());
-                    Thread.Sleep(5000);
-                    t2.Start();
-                });
-                t1.Start();
+                    Logger.Log.Error("Task.WaitAll(tasks.ToArray()); : " + ex);
+                }
             }
         }
 
-        private bool UpdateScannedMatch()
+        private void InsertScannedMatch()
         {
-            try
+            var matchChunks = _matchIdList.Chunk(ChunkSize);
+
+            foreach (var matchChunk in matchChunks)
             {
                 var criteria = new MatchInsertCriteria
                 {
-                    MatchIdList = _matchIdList,
+                    MatchIdList = string.Join(",", matchChunk),
                     TaskId = _taskId,
                     ScannedDate = DateTime.Now
                 };
@@ -78,42 +91,26 @@
                 {
                     Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
                 }
-
-                return result.IsSuccessful;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception UpdateScannedMatch --", ex);
             }
         }
 
-        private bool InsertSuspicion()
+        private void InsertSuspicion()
         {
-            try
-            {
-                var chunks = _suspiciousInfoList.Chunk(100);
+            var suspiciousChunks = _suspiciousInfoList.Chunk(ChunkSize);
 
-                foreach (var chunk in chunks)
+            foreach (var suspiciousChunk in suspiciousChunks)
+            {
+                var criteria = new SuspiciousInfoInsertCriteria
                 {
-                    var criteria = new SuspiciousInfoInsertCriteria
-                    {
-                        SuspicionDoc = CreateXmlParam(chunk)
-                    };
+                    SuspicionDoc = CreateXmlParam(suspiciousChunk)
+                };
 
-                    var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
+                var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);
 
-                    if (result.IsSuccessful == false)
-                    {
-                        Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
-                    }
+                if (result.IsSuccessful == false)
+                {
+                    Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
                 }
-
-                
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Exception InsertSuspiciousInfo --", ex);
             }
         }
 

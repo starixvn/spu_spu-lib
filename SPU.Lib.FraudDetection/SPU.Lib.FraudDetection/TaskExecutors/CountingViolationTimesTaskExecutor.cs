@@ -4,6 +4,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using Core;
     using Core.Utilities;
     using Criteria.SuspiciousInfo;
     using DTO;
@@ -52,13 +53,20 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
                 return;
             }
 
-            var criteria = new SuspiciousHistoryCriteria
-            {
-                CustIdList = string.Join(",", SuspiciousCustomers.Select(t => t.CustId)),
-                WorkflowId = Task.WorkflowId
-            };
+            var suspiciousCustomerChunks = SuspiciousCustomers.Chunk(ChunkSize);
+            var suspicionList = new List<SuspiciousInfo>();
 
-            var suspicionList = TaskService.GetSuspiciousCustomerHistory(criteria);
+            foreach (var suspiciousCustomerChunk in suspiciousCustomerChunks)
+            {
+                var criteria = new SuspiciousHistoryCriteria
+                {
+                    CustIdList = string.Join(",", suspiciousCustomerChunk.Select(t => t.CustId)),
+                    WorkflowId = Task.WorkflowId
+                };
+
+                suspicionList.AddRange(TaskService.GetSuspiciousCustomerHistory(criteria));
+            }
+
             var nextActionIdList = Task.NextActionIdList.Split(',');
             var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
 

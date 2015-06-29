@@ -4,6 +4,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using Core;
     using Core.Utilities;
     using DTO;
     using NextActions;
@@ -24,6 +25,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         }
 
         public IList<string> MatchIdList { get; set; }
+
         public List<SuspiciousInfo> SuspicionList { get; set; }
 
         public override void Execute(object sender, ElapsedEventArgs elapsedEventArgs)
@@ -50,16 +52,20 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         protected override void ExecuteRule()
         {
-            var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", MatchIdList));
-            SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.WorkflowId));
+            var matchChunks = MatchIdList.Chunk(ChunkSize);
 
-            SaveSuspicious();
+            foreach (var matchChunk in matchChunks)
+            {
+                var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", matchChunk));
+                SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.WorkflowId));
+            }
+
+            SaveSuspiciousCustomers();
         }
 
-        private void SaveSuspicious()
+        private void SaveSuspiciousCustomers()
         {
-            var matchIdList = string.Join(",", MatchIdList);
-            var saveAction = new SavingSuspicion(SuspicionList, matchIdList, Task.WorkflowId);
+            var saveAction = new SavingSuspicion(SuspicionList, MatchIdList, Task.TaskId);
             saveAction.TakeAction();
         }
 

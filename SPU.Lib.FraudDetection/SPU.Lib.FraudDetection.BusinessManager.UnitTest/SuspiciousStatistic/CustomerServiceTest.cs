@@ -1,6 +1,7 @@
 ﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
 {
     using System.Collections.Generic;
+    using System.Messaging;
     using Criteria.SuspiciousStatistic;
     using DTO;
     using Fanex.Data.Configuration;
@@ -16,7 +17,10 @@
             DbSettingProviderManager.Current.Start();
         }
 
+        
+
         [Test]
+        [Ignore("Ignore a fixture")]
         public void TestGetUsernameByCustId()
         {
             var sut = new CustomerService();

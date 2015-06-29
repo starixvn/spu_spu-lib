@@ -3,6 +3,8 @@
     using System;
     using System.Messaging;
     using Core;
+    using Fanex.Logging;
+    using SPU.Lib.FraudDetection.DTO;
     using TaskExecutors;
 
     /// <summary>
@@ -15,10 +17,15 @@
         public SpuMessageQueue()
         {
             var queuePath = ConfigSettings.GetConfigStringByName("queuePath");
-            _messageQueue = MessageQueue.Exists(queuePath)
-                ? new MessageQueue(queuePath)
-                : MessageQueue.Create(queuePath);
-            _messageQueue.Formatter = new XmlMessageFormatter(new[] {typeof (TaskExecutor)});
+
+            try
+            {
+                _messageQueue = new MessageQueue(queuePath) { Formatter = new XmlMessageFormatter(new[] { typeof(Task) }) };
+            }
+            catch (InvalidOperationException ex)
+            {
+                Logger.Log.Error("_messageQueue = MessageQueue.Exists(queuePath) .. : " + ex);
+            }
         }
 
         public void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)

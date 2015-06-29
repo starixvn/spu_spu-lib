@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core;
     using Criteria.SuspiciousStatistic;
     using Criteria.Workflow;
     using DTO;
@@ -53,13 +54,15 @@
                 return model;
             }
 
+            var suspiciousCustomer = new List<SuspiciousCustormer>();
+
             foreach (var item in list)
             {
                 var match = matches.FirstOrDefault(t => t.MatchId == item.MatchId);
 
                 if (match != null && customers.Any(t => t.CustId == item.CustId))
                 {
-                    model.SuspiciousCustormers.Add(new SuspiciousCustormer
+                    suspiciousCustomer.Add(new SuspiciousCustormer
                     {
                         Member = customers.Single(t => t.CustId == item.CustId).CustName,
                         MatchId = match.MatchId,
@@ -73,19 +76,28 @@
                 }
             }
 
+            model.SuspiciousCustormers = suspiciousCustomer.OrderBy(t => t.Member).ToList();
+
             model.MarginCustormers = margins;
 
             return model;
         }
 
+        protected int ChunkSize = 60;
+
         private IList<Customer> GetDistinctCustomers(IList<SuspiciousInfo> list)
         {
             var distinctCustomers = list.Select(t => t.CustId).Distinct().ToList();
+            var customerChunks = distinctCustomers.Chunk(ChunkSize);
+            var customers = new List<Customer>();
 
-            var customers = CustomerService.GetUsernameByCustId(new CustomerSelectCritiria
+            foreach (var customerChunk in customerChunks)
             {
-                ListCustIds = string.Join(",", distinctCustomers)
-            });
+                customers.AddRange(CustomerService.GetUsernameByCustId(new CustomerSelectCritiria
+                {
+                    ListCustIds = string.Join(",", customerChunk)
+                }));
+            }
 
             return customers;
         }
@@ -94,18 +106,32 @@
         {
             var distinctMatches = list.Select(t => t.MatchId).Distinct().ToList();
             var matchCount = distinctMatches.Count;
+            var matches = new List<MatchDetail>();
 
-            var criteria = new MatchSelectCriteria
-            {
-                ListMatchIds = string.Join(",", distinctMatches)
-            };
-
-            var matches = MatchService.GetMatchDetails(criteria).ToList();
+            matches.AddRange(GetMatchesFromBodb02(distinctMatches));
 
             if (matches.Count < matchCount)
             {
-                criteria.IsDbArchieve = true;
-                matches.AddRange(MatchService.GetMatchDetails(criteria));
+                matches.AddRange(GetMatchesFromBodb02(distinctMatches, true));
+            }
+
+            return matches;
+        }
+
+        private IList<MatchDetail> GetMatchesFromBodb02(IList<int> distinctMatches, bool IsDbArchive = false)
+        {
+            var matchChunks = distinctMatches.Chunk(ChunkSize);
+            var matches = new List<MatchDetail>();
+
+            foreach (var matchChunk in matchChunks)
+            {
+                var criteria = new MatchSelectCriteria
+                {
+                    IsDbArchieve = IsDbArchive,
+                    ListMatchIds = string.Join(",", distinctMatches)
+                };
+
+                matches.AddRange(MatchService.GetMatchDetails(criteria).ToList());
             }
 
             return matches;

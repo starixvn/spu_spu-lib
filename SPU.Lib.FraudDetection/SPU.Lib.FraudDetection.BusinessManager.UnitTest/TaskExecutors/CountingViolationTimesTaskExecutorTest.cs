@@ -15,6 +15,7 @@
         }
 
         [Test]
+        [Ignore("Ignore a fixture")]
         public void When_Then()
         {
             var task = new Task
@@ -38,11 +39,6 @@
 
             // --- Action ---
             sut.Execute(null, null);
-
-            while (true)
-            {
-
-            }
 
             // --- Assert ---
         }

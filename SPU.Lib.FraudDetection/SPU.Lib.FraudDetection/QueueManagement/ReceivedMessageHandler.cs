@@ -34,10 +34,14 @@ namespace SPU.Lib.FraudDetection.QueueManagement
             {
                 var task = msg.Body as Task;
 
-                if (string.IsNullOrEmpty(msg.Label))
+                if (string.IsNullOrEmpty(msg.Label) || task == null)
                 {
                     return;
                 }
+
+                #if DEBUG
+                Console.WriteLine("Receiving the tassk: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+                #endif
 
                 var type = ConvertLabelIntoSendingType(msg);
 

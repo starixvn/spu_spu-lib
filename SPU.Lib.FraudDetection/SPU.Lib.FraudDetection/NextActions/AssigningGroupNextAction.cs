@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Core;
     using Criteria.Group;
     using DTO;
     using Fanex.Logging;
@@ -13,6 +14,8 @@
     /// </summary>
     public class AssigningGroupNextAction : INextAction
     {
+        protected const int ChunkSize = 60;
+
         public int GroupId { get; set; }
 
         public IList<SuspiciousInfo> SuspicionList { get; set; }
@@ -42,17 +45,22 @@
         {
             var custIdList = SuspicionList.Select(t => t.CustId).Distinct().ToList();
 
-            var criteria = new CustomerGroupAssignCriteria
-            {
-                GroupId = GroupId,
-                CustIdList = string.Join(",", custIdList)
-            };
+            var custIdChunks = custIdList.Chunk(ChunkSize);
 
-            var result = GroupService.AssignCustomerToGroup(criteria);
-
-            if (result.IsSuccessful == false)
+            foreach (var custIdChunk in custIdChunks)
             {
-                Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
+                var criteria = new CustomerGroupAssignCriteria
+                {
+                    GroupId = GroupId,
+                    CustIdList = string.Join(",", custIdChunk)
+                };
+
+                var result = GroupService.AssignCustomerToGroup(criteria);
+
+                if (result.IsSuccessful == false)
+                {
+                    Logger.Log.Error("Error  AssignCustomerGroup : " + result.Message);
+                }
             }
         }
     }

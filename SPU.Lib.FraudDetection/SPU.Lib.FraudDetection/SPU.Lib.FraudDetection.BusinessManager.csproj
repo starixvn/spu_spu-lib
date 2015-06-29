@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NextActions\NextActionType.cs" />
+    <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />
     <Compile Include="TaskExecutors\EventType.cs" />
     <Compile Include="TaskExecutors\ITaskManager.cs" />

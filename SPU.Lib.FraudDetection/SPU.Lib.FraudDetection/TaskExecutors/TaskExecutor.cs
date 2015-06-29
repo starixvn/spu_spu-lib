@@ -36,34 +36,20 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         protected TaskExecutor(Task task)
         {
             Task = task;
-
-            Timer = new Timer
-            {
-                Interval = task.Timer,
-                AutoReset = true,
-                Enabled = true
-            };
-
             TaskService = new TaskService();
         }
 
         protected TaskExecutor(Task task, ITaskService taskService)
         {
             Task = task;
-
-            Timer = new Timer
-            {
-                Interval = task.Timer,
-                AutoReset = true,
-                Enabled = true
-            };
-
             TaskService = taskService;
         }
 
         #endregion Constructor
 
         #region Properties
+
+        protected const int ChunkSize = 60;
 
         public Task Task { get; set; }
 
@@ -84,6 +70,13 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             {
                 return;
             }
+
+            Timer = new Timer
+            {
+                Interval = Task.Timer,
+                AutoReset = true,
+                Enabled = true
+            };
             
             // Execute the task immediately.
             Execute(null, null);

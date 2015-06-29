@@ -110,6 +110,7 @@
             // --- Act ---
             var nonExistTask = new Task
             {
+                EventId = 1,
                 TaskName = "New Task",
                 WorkflowId = 9,
                 TaskId = 99,

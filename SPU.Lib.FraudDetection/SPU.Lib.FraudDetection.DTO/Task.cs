@@ -22,11 +22,9 @@ namespace SPU.Lib.FraudDetection.DTO
         public string TaskDesc { get; set; }
         public string TaskPreconditions { get; set; }
         public string TaskPreconditionsOriginal { get; set; }
-
         public string TaskPreconditionsFormatted { get; set; }
         public string TaskRules { get; set; }
         public string TaskRulesOriginal { get; set; }
-
         public string TaskRulesFormatted { get; set; }
         public int WorkflowId { get; set; }
         public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
