@@ -80,8 +80,8 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
                 foreach (var customer in customers)
                 {
-                    var margin = decimal.Round(GetMargin(customer.Customer.CustId, month, margins) * 100, 2);
-                    var winLoss = decimal.Round(GetWinLoss(customer.Customer.CustId, month, margins) * 100, 2);
+                    var margin = GetMargin(customer.Customer.CustId, month, margins);
+                    var winLoss = GetWinLoss(customer.Customer.CustId, month, margins);
 
                     customer.Margins.Add(margin);
                     customer.WinLoss.Add(winLoss);
