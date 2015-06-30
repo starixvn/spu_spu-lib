@@ -13,7 +13,7 @@
             var mailMasterRender = MailMasterRenderAbstractFactory.GetMailMasterRender();
             var mail = mailMasterRender.RenderContentOfMailMaster(mailMasterId);
 
-            FileWriter.WriteFile(mail.MailContent);
+            ////FileWriter.WriteFile(mail.MailContent);
 
             var newMail = new Mail
             {
