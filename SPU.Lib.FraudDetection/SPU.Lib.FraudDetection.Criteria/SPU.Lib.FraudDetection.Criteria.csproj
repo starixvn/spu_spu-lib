@@ -110,6 +110,7 @@
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
+    <Compile Include="Task\TaskUpdateStatusCriteria.cs" />
     <Compile Include="Workflow\WorkflowUpdateStatusCriteria.cs" />
     <Compile Include="Workflow\WorkflowSelectByIdCriteria.cs" />
     <Compile Include="Workflow\WorkflowSelectAllCriteria.cs" />
