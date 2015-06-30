@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MailSenders\FileWriter.cs" />
     <Compile Include="NextActions\NextActionType.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />

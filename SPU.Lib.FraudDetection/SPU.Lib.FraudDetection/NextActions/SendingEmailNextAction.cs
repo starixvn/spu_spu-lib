@@ -25,7 +25,7 @@
         {
             MailMasterId = mailMasterId;
             MailSender = new SpuMailSender();
-            ReportService = new ReportService();
+            ReportService = new SuspiciousStatisticsReportService();
         }
 
         public SendingEmailNextAction(int mailMasterId, IMailSender mailSender, IReportService reportService)

@@ -92,7 +92,7 @@
     <Compile Include="Interface\IScannedMatchesService.cs" />
     <Compile Include="Interface\ISuspiciousInfoService.cs" />
     <Compile Include="Interface\IWorkflowService.cs" />
-    <Compile Include="Implement\ReportService.cs" />
+    <Compile Include="Implement\SuspiciousStatisticsReportService.cs" />
     <Compile Include="Implement\MatchService.cs" />
     <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

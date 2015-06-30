@@ -11,6 +11,7 @@
 namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
+    using System.Diagnostics;
     using System.Timers;
     using DTO;
     using Fanex.Logging;
@@ -21,7 +22,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     {
         void Start();
         void Stop();
-        void Execute(object sender, ElapsedEventArgs elapsedEventArgs);
+        void Execute();
     }
 
     /// <summary>
@@ -31,12 +32,16 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     {
         #region Constructor
 
+        private bool IsRunning { get; set; }
+
         public Timer Timer { get; set; }
+        
 
         protected TaskExecutor(Task task)
         {
             Task = task;
             TaskService = new TaskService();
+            IsRunning = false;
         }
 
         protected TaskExecutor(Task task, ITaskService taskService)
@@ -77,23 +82,53 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
                 AutoReset = true,
                 Enabled = true
             };
-            
-            // Execute the task immediately.
-            Execute(null, null);
 
-            Timer.Elapsed += Execute;
+            Timer.Elapsed += PreExecute;
+
             Timer.Start();
+
+            // Execute the task immediately.
+
+            PreExecute(null, null);
         }
 
         public void Stop()
         {
-            Timer.Elapsed -= Execute;
+            Timer.Elapsed -= PreExecute;
             Timer.Stop();
             Timer.Close();
             Timer.Dispose();
         }
 
-        public abstract void Execute(object sender, ElapsedEventArgs elapsedEventArgs);
+        public virtual void PreExecute(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            if (IsRunning)
+            {
+                return;
+            }
+
+            #if DEBUG
+                Console.WriteLine("{0} - {1} - {2} is running", Task.WorkflowId, Task.TaskId, Task.TaskName);
+            #endif
+
+            var stopwatch = new Stopwatch();
+           
+            stopwatch.Start();
+
+            IsRunning = true;
+
+            Execute();
+
+            IsRunning = false;
+
+            stopwatch.Stop();
+
+            #if DEBUG
+                Console.WriteLine("{0} - {1} - {2} spent {3} running", Task.WorkflowId, Task.TaskId, Task.TaskName, stopwatch.Elapsed.ToString());
+            #endif
+        }
+
+        public abstract void Execute();
 
         protected abstract void ExecuteRule();
 

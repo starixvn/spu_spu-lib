@@ -26,7 +26,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public IList<SuspiciousCustomer> SuspiciousCustomers { get; set; }
 
-        public override void Execute(object sender, ElapsedEventArgs elapsedEventArgs)
+        public override void Execute()
         {
             try
             {

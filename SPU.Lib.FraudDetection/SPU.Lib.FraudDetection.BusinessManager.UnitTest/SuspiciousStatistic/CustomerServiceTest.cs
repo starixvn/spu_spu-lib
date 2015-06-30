@@ -46,7 +46,7 @@
         [Test]
         public void TestGetSuspiciousCustomerStatistics()
         {
-            var sut = new ReportService();
+            var sut = new SuspiciousStatisticsReportService();
 
             IList<SuspiciousInfo> list = new List<SuspiciousInfo>
             {

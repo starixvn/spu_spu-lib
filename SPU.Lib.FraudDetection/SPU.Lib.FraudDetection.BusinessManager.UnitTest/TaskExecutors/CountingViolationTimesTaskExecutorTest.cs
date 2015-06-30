@@ -38,7 +38,7 @@
             var sut = TaskExecutorFactory.GetTaskExecutor(task);
 
             // --- Action ---
-            sut.Execute(null, null);
+            sut.Execute();
 
             // --- Assert ---
         }

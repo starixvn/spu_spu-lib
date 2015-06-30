@@ -10,9 +10,9 @@
     using DTO.ReportTemplate;
     using Interface;
 
-    public class ReportService : IReportService
+    public class SuspiciousStatisticsReportService : IReportService
     {
-        public ReportService()
+        public SuspiciousStatisticsReportService()
         {
             CustomerService = new CustomerService();
             MatchService = new MatchService();
@@ -42,17 +42,17 @@
             IList<MatchDetail> matches,
             IList<Customer> customers, IList<MarginCustormer> margins)
         {
+            if (customers.Count == 0 || matches.Count == 0)
+            {
+                return new SuspiciousStatisticViewModel();
+            }
+
             var model = new SuspiciousStatisticViewModel();
 
             var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
             {
                 WorkflowId = list[0].WorkflowId
             });
-
-            if (customers.Count == 0 || matches.Count == 0)
-            {
-                return model;
-            }
 
             var suspiciousCustomer = new List<SuspiciousCustormer>();
 

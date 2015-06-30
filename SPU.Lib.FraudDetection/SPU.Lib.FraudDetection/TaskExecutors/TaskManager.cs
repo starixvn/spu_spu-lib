@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using DTO;
+    using Fanex.Logging;
 
     /// <summary>
     ///     Workflow Class.
@@ -23,16 +24,23 @@
         /// <param name="task">The task to execute.</param>
         public void AddTask(Task task)
         {
-            if (Exist(task))
+            try
             {
-                return;
+                if (Exist(task))
+                {
+                    return;
+                }
+
+                var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
+
+                TaskExecutors.Add(taskExecutor);
+
+                taskExecutor.Start();
             }
-
-            var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
-
-            TaskExecutors.Add(taskExecutor);
-
-            taskExecutor.Start();
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+            }
         }
 
         /// <summary>
@@ -52,16 +60,24 @@
         /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(Task task)
         {
-            var taskExecutor =
-                TaskExecutors.SingleOrDefault(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
-
-            if (taskExecutor == null)
+            try
             {
-                return;
-            }
+                var taskExecutor =
+                    TaskExecutors.SingleOrDefault(
+                        x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
 
-            taskExecutor.Stop();
-            TaskExecutors.Remove(taskExecutor);
+                if (taskExecutor == null)
+                {
+                    return;
+                }
+
+                taskExecutor.Stop();
+                TaskExecutors.Remove(taskExecutor);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+            }
         }
 
         public void ClearTasks()
@@ -77,6 +93,14 @@
         public bool Exist(Task task)
         {
             return TaskExecutors.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+        }
+
+        protected void WriteLog(Exception exception)
+        {
+            var message = "\r\nError:" + exception.Message +
+                          "\r\nStackTrace: " + exception.StackTrace;
+
+            Logger.Log.Error(message);
         }
     }
 }

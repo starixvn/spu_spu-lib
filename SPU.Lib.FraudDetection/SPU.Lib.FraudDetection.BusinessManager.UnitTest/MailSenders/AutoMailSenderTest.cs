@@ -39,7 +39,7 @@
                 MailMasterRenderAbstractFactory = mockMailRenderAbstractFactory.Object
             };
 
-            sut.SendMail(10);
+            sut.SendMail(1);
 
             // --- Assert --
             mockMailRender.Verify(x => x.RenderContent(), Times.Exactly(1));
@@ -70,7 +70,7 @@
 
         private SuspiciousStatisticViewModel GetSampleData()
         {
-            var sut = new ReportService();
+            var sut = new SuspiciousStatisticsReportService();
 
             var list = new List<SuspiciousInfo>
             {
@@ -102,7 +102,7 @@
 
         private SuspiciousStatisticViewModel GetSampleDataFromArchive()
         {
-            var sut = new ReportService();
+            var sut = new SuspiciousStatisticsReportService();
 
             var list = new List<SuspiciousInfo>
             {

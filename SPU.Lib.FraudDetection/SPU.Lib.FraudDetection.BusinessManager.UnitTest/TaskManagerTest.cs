@@ -48,6 +48,7 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
+            task.IsActive = true;
 
             _sut.AddTask(task);
 
