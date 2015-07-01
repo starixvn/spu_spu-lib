@@ -83,7 +83,7 @@
     <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerReportGetAllCriteria.cs" />
-    <Compile Include="SuspiciousStatistic\MarginCustomerSelectCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\CustomerWinlostSelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\BalanceUpDaySelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />
     <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />

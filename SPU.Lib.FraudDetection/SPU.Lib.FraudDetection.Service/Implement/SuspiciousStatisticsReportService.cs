@@ -151,7 +151,7 @@
 
         private IList<MarginCustormer> GetMarginCustomer(IList<SuspiciousInfo> list)
         {
-            var criteria = new MarginCustomerSelectCriteria
+            var criteria = new CustomerWinlostSelectCriteria
             {
                 ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
             };

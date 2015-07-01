@@ -102,7 +102,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             foreach (var margin in margins)
             {
-                if (margin.CustId == custId && new DateTime(margin.SuspiciousYear, margin.SuspiciousMonth, 1) == month)
+                if (margin.CustId == custId && margin.WinlostDate == month)
                 {
                     return margin.Margin != null ? (decimal)margin.Margin : 0;
                 }
@@ -122,7 +122,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             foreach (var margin in margins)
             {
-                if (margin.CustId == custId && new DateTime(margin.SuspiciousYear, margin.SuspiciousMonth, 1) == month)
+                if (margin.CustId == custId && margin.WinlostDate == month)
                 {
                     return margin.MemberWinlost != null ? (decimal)margin.MemberWinlost : 0;
                 }
@@ -168,7 +168,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
 
             foreach (var customerIds in Split(listCustIds, 60))
             {
-                var marginCriteria = new MarginCustomerSelectCriteria()
+                var marginCriteria = new CustomerWinlostSelectCriteria()
                 {
                     ListCustIDs = customerIds
                 };

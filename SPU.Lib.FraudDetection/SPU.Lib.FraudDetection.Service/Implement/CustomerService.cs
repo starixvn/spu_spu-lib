@@ -21,10 +21,8 @@
             return GetData<Customer>(criteria).ToList();
         }
 
-        public IList<RawMarginCustomer> GetMarginCustomerByCustId(MarginCustomerSelectCriteria criteria)
+        public IList<RawMarginCustomer> GetMarginCustomerByCustId(CustomerWinlostSelectCriteria criteria)
         {
-            criteria.BalanceUpDay = BalanceUpDayService.GetBalanceUpDay(new BalanceUpDaySelectCriteria()).BalanceUpDay;
-
             return GetData<RawMarginCustomer>(criteria).ToList();
         }
     }

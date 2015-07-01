@@ -39,23 +39,31 @@ namespace SPU.Lib.FraudDetection.QueueManagement
                     return;
                 }
 
-                #if DEBUG
-                Console.WriteLine("Receiving the tassk: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
-                #endif
-
                 var type = ConvertLabelIntoSendingType(msg);
 
                 switch (type)
                 {
                     case SendingType.AddingTask:
+#if DEBUG
+                        Console.WriteLine("AddingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+#endif
+
                         _taskManager.AddTask(task);
                         break;
 
                     case SendingType.UpdatingTask:
+#if DEBUG
+                        Console.WriteLine("UpdatingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+#endif
+
                         _taskManager.UpdateTask(task);
                         break;
 
                     case SendingType.RemovingTask:
+#if DEBUG
+                        Console.WriteLine("RemovingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+#endif
+
                         _taskManager.RemoveTask(task);
                         break;
 

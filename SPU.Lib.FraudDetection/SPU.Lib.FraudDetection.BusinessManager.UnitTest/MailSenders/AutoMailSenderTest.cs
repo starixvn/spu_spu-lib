@@ -46,6 +46,7 @@
         }
 
         [Test]
+        [Ignore("Ignore a fixture")]
         public void Test_Intergrating_Mail_Master_Into_System()
         {
             var model = GetSampleData();
@@ -65,7 +66,7 @@
                 MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory
             };
 
-            sut.SendMail(10);
+            sut.SendMail(1);
         }
 
         private SuspiciousStatisticViewModel GetSampleData()

@@ -3,10 +3,9 @@
     using System;
     using Fanex.Data.Repository;
 
-    public class MarginCustomerSelectCriteria : CriteriaBase
+    public class CustomerWinlostSelectCriteria : CriteriaBase
     {
         public string ListCustIDs { get; set; }
-        public DateTime BalanceUpDay { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -14,7 +13,7 @@
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_SuspiciousCustomerMargin";
+            return "SPU_CustomerWinlostSelect";
         }
 
         /// <summary>

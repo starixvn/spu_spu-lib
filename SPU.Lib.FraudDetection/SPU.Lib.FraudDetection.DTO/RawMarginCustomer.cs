@@ -15,23 +15,16 @@
         public decimal? Margin
         {
             get
-            {   
+            {
                 if (!MemberWinlost.HasValue)
                     return null;
                 if (!Turnover.HasValue)
                     return null;
 
-                return MemberWinlost.Value/Turnover.Value;
+                return MemberWinlost.Value / Turnover.Value;
             }
         }
 
-        public int SuspiciousMonth { get; set; }
-
-        public int SuspiciousYear { get; set; }
-
-        public DateTime WinlostDate
-        {
-            get { return new DateTime(SuspiciousYear, SuspiciousMonth, 1); }
-        }
+        public DateTime WinlostDate { get; set; }
     }
 }

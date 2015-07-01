@@ -8,6 +8,6 @@
     public interface ICustomerService
     {
         IList<Customer> GetUsernameByCustId(ICriteria criteria);
-        IList<RawMarginCustomer> GetMarginCustomerByCustId(MarginCustomerSelectCriteria criteria);
+        IList<RawMarginCustomer> GetMarginCustomerByCustId(CustomerWinlostSelectCriteria criteria);
     }
 }
