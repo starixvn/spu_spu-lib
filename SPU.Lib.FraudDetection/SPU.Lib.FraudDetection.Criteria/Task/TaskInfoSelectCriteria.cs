@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     /// </summary>
     public class TaskInfoSelectCriteria : CriteriaBase
     {
-        public string TaskId { get; set; }
+        public int TaskId { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return true;
+            return TaskId > 0;
         }
     }
 }
