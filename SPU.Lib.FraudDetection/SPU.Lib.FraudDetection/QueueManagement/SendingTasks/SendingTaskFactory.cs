@@ -20,6 +20,9 @@
                 case SendingType.RemovingTask:
                     return new RemovingTask();
 
+                case SendingType.DeactivateWorkflow:
+                    return new DeactivatingWorkflow();
+
                 default:
                     throw new ArgumentOutOfRangeException("type");
             }

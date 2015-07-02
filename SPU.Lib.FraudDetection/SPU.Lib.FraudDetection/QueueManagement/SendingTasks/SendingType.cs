@@ -23,6 +23,11 @@
         /// <summary>
         ///     Removing task.
         /// </summary>
-        RemovingTask
+        RemovingTask,
+
+        /// <summary>
+        ///     Deactivate workflow.
+        /// </summary>
+        DeactivateWorkflow
     }
 }
