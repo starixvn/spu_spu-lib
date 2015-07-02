@@ -16,8 +16,32 @@ namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
 
         public SendingType Type { get; set; }
 
-        public abstract bool Send(object message);
+        public virtual bool Send(object message)
+        {
+            if (!IsValidMessage(message))
+            {
+                return false;
+            }
 
-        protected abstract bool IsValidMessage(object message);
+            _messageQueue.Send(message, Type.ToString());
+
+            return true;
+        }
+
+        protected virtual bool IsValidMessage(object message)
+        {
+            if (message == null)
+            {
+                return false;
+            }
+
+            int id;
+            var result = int.TryParse(message.ToString(), out id);
+
+            if (!result)
+                return false;
+
+            return id > 0;
+        }
     }
 }

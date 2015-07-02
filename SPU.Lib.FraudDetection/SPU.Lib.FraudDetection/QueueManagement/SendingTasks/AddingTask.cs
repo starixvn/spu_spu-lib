@@ -1,8 +1,9 @@
 namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
 {
     using QueueManagement;
+    using Service.Interface;
 
-    public class AddingTask : SendingTask
+    public class AddingTask : SendingMessage
     {
         public AddingTask()
         {

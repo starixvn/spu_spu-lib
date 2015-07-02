@@ -60,9 +60,9 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public ITaskService TaskService { get; set; }
 
-        public string TaskCode
+        public int TaskId
         {
-            get { return Task.TaskCode; }
+            get { return Task.TaskId; }
         }
 
         #endregion Properties

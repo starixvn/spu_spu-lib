@@ -33,7 +33,7 @@
             {
                 if (task.IsActive)
                 {
-                    _sendingTask.Send(task);
+                    _sendingTask.Send(task.TaskId);
                 }
             }
         }

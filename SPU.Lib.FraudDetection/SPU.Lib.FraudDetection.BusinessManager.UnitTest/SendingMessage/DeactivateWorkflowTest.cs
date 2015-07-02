@@ -16,9 +16,10 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
     using NUnit.Framework;
     using QueueManagement;
     using QueueManagement.SendingTasks;
+    using QueueManagement.SendingWorklows;
 
     [TestFixture]
-    public class RemovingTaskTest
+    public class DeactivateWorkflowTest
     {
         private Mock<IMessageQueue> _mockQueue;
         private ISendingMessage _sut;
@@ -27,25 +28,27 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void Setup()
         {
             _mockQueue = new Mock<IMessageQueue>();
-            _sut = new RemovingTask(_mockQueue.Object);
+            _sut = new DeactivatingWorkflow();
         }
 
         [Test]
-        public void When_Removing_Not_Null_Task_Then_Send_Should_Called_Once_()
+        [Ignore("Ignore a fixture")]
+        public void When_Removing_Valid_WorkflowId_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
-            var task = new Task();
-            var result = _sut.Send(task);
+            const int worflowId = 1;
+            var result = _sut.Send(worflowId);
 
             //--- Assert ---
             _mockQueue.Verify(x => x.Send(
-                It.IsAny<Task>(),
+                It.IsAny<int>(),
                 It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                 Times.Exactly(1));
             Assert.IsTrue(result);
         }
 
         [Test]
+        [Ignore("Ignore a fixture")]
         public void Send_Should_Not_Be_Called_Once_When_Removing_Null_Task()
         {
             //--- Act ---

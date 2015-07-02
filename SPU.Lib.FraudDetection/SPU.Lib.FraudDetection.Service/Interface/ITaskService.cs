@@ -12,6 +12,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using System.Collections.Generic;
     using System.Data;
     using Core;
+    using Criteria.Task;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
@@ -25,6 +26,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult InsertTask(ICriteria criteria);
         ICommandResult DeleteTask(ICriteria criteria);
         DataCollection GetTasksByWorkflowId(ICriteria criteria);
+        IEnumerable<Task> GetTasksByWorkflowId(TaskSelectByWorkflowIdCriteria criteria);
+
         ICommandResult UpdateTask(ICriteria criteria);
         IEnumerable<Task> LoadAllTasks(ICriteria criteria);
         IEnumerable<Match> GetSuspiciousMatches(string query);

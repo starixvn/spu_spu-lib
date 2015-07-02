@@ -55,10 +55,5 @@ namespace SPU.Lib.FraudDetection.DTO
                 }
             }
         }
-
-        public string TaskCode
-        {
-            get { return string.Format("{0}-{1}", WorkflowId, TaskId); }
-        }
     }
 }

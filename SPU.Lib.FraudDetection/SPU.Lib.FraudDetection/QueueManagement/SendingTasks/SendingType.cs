@@ -28,6 +28,11 @@
         /// <summary>
         ///     Deactivate workflow.
         /// </summary>
-        DeactivateWorkflow
+        DeactivatingWorkflow,
+
+        /// <summary>
+        ///     Deactivate workflow.
+        /// </summary>
+        ActivatingWorkflow
     }
 }

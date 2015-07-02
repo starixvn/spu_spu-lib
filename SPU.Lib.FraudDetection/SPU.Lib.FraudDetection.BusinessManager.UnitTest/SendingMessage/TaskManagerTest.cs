@@ -1,18 +1,23 @@
 ﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using DTO;
+    using Fanex.Data.Repository;
     using FraudDetection.TaskExecutors;
+    using Moq;
     using NUnit.Framework;
+    using Service.Interface;
 
     [TestFixture]
     public class TaskManagerTest
     {
         private TaskManager _sut;
+        private Mock<ITaskService> _mockTaskService;
 
         [SetUp]
         public void SetUp()
         {
-            _sut = new TaskManager();
+            _mockTaskService = new Mock<ITaskService>();
+            _sut = new TaskManager(_mockTaskService.Object);
         }
 
         [Test]
@@ -20,10 +25,12 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
-            
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
 
             // --- Act ---
-            _sut.AddTask(task);
+            _sut.AddTask(1);
 
             // --- Assert ---
             Assert.AreEqual(1, _sut.TaskExecutors.Count);
@@ -35,10 +42,14 @@
             // --- Arrange ---
             var task = GetSampleTask();
 
-            // --- Act ---
-            _sut.AddTask(task);
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
 
-            _sut.AddTask(task);
+            // --- Act ---
+            _sut.AddTask(1);
+
+            _sut.AddTask(1);
 
             // --- Assert ---
             Assert.AreEqual(1, _sut.TaskExecutors.Count);
@@ -49,12 +60,15 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
-            task.IsActive = true;
+            
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
 
-            _sut.AddTask(task);
+            _sut.AddTask(80);
 
             // --- Act ---
-            _sut.RemoveTask(task);
+            _sut.RemoveTask(80);
 
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
@@ -67,9 +81,12 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
-            task.IsActive = true;
 
-            _sut.AddTask(task);
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
+
+            _sut.AddTask(1);
 
             var nonExistTask = new Task
             {
@@ -77,8 +94,12 @@
                 TaskId = 6
             };
 
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(nonExistTask);
+
             // --- Act ---
-            _sut.RemoveTask(nonExistTask);
+            _sut.RemoveTask(6);
 
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
@@ -90,12 +111,22 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
-            _sut.AddTask(task);
+
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
+
+            _sut.AddTask(1);
 
             // --- Act ---
             const string taskName = "Task Demo";
             task.TaskName = taskName;
-            _sut.UpdateTask(task);
+
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
+
+            _sut.UpdateTask(1);
 
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
@@ -108,9 +139,15 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
-            _sut.AddTask(task);
+
+            _mockTaskService
+                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Returns(task);
+
+            _sut.AddTask(1);
 
             // --- Act ---
+
             var nonExistTask = new Task
             {
                 EventId = 1,
@@ -122,12 +159,16 @@
                 IsActive = true
             };
 
-            _sut.UpdateTask(nonExistTask);
+            _mockTaskService
+               .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+               .Returns(nonExistTask);
+
+            _sut.UpdateTask(99);
 
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(2, actualCount);
-            Assert.AreEqual(nonExistTask.TaskCode, _sut.TaskExecutors[1].TaskCode);
+            Assert.AreEqual(nonExistTask.TaskId, _sut.TaskExecutors[1].TaskId);
             Assert.AreEqual(nonExistTask.TaskName, _sut.TaskExecutors[1].Task.TaskName);
         }
 

@@ -19,22 +19,24 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         /// <summary>
         ///     Add and start a task in the thread pool.
         /// </summary>
-        /// <param name="task">The task to execute.</param>
-        void AddTask(Task task);
+        /// <param name="taskId">The task to execute.</param>
+        void AddTask(int taskId);
 
         /// <summary>
         ///     Update a task.
         /// </summary>
         /// <param name="task">The task to update.</param>
-        void UpdateTask(Task task);
+        void UpdateTask(int task);
 
         /// <summary>
         ///     Remove a task out the thread pool.
         /// </summary>
         /// <param name="task">The task name.</param>
-        void RemoveTask(Task task);
+        void RemoveTask(int task);
 
         void RemoveTasksInWorkflow(int workflowId);
+
+        void AddTasksInWorkflow(int workflowId);
 
         void ClearTasks();
 

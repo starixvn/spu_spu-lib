@@ -1,6 +1,7 @@
 ﻿namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
 {
     using System;
+    using SendingWorklows;
 
     /// <summary>
     ///     Sending Task Factory.
@@ -20,8 +21,11 @@
                 case SendingType.RemovingTask:
                     return new RemovingTask();
 
-                case SendingType.DeactivateWorkflow:
+                case SendingType.DeactivatingWorkflow:
                     return new DeactivatingWorkflow();
+
+                case SendingType.ActivatingWorkflow:
+                    return new ActivatingWorkflow();
 
                 default:
                     throw new ArgumentOutOfRangeException("type");

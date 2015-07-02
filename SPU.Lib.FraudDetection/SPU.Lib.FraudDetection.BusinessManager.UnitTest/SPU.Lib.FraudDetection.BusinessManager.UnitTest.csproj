@@ -172,8 +172,9 @@
   <ItemGroup>
     <Compile Include="MailMasterRenders\MailMasterRenderTest.cs" />
     <Compile Include="MailSenders\AutoMailSenderTest.cs" />
-    <Compile Include="ReceivingMessageHandlerTest.cs" />
-    <Compile Include="RemovingTaskTest.cs" />
+    <Compile Include="SendingMessage\ReceivingMessageHandlerTest.cs" />
+    <Compile Include="SendingMessage\DeactivateWorkflowTest.cs" />
+    <Compile Include="SendingMessage\RemovingTaskTest.cs" />
     <Compile Include="ReportTemplateRenders\FakeSuspiciousStatisticReporRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRenderTest.cs" />
@@ -181,9 +182,9 @@
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutorTest.cs" />
     <Compile Include="SuspiciousStatistic\CustomerServiceTest.cs" />
     <Compile Include="TaskExecutors\ScanMatchTaskExecutorTest.cs" />
-    <Compile Include="TaskManagerTest.cs" />
-    <Compile Include="UpdatingTaskTest.cs" />
-    <Compile Include="AddingTaskTest.cs" />
+    <Compile Include="SendingMessage\TaskManagerTest.cs" />
+    <Compile Include="SendingMessage\UpdatingTaskTest.cs" />
+    <Compile Include="SendingMessage\AddingTaskTest.cs" />
     <Compile Include="TaskLoader\TaskLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

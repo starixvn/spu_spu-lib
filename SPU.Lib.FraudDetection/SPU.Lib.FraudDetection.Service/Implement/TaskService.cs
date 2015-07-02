@@ -14,6 +14,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System.Collections.Generic;
     using System.Linq;
     using Core;
+    using Criteria.Task;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
@@ -55,6 +56,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public DataCollection GetTasksByWorkflowId(ICriteria criteria)
         {
             return _taskDataAccess.GetTasksByWorkflowId(criteria);
+        }
+
+        public IEnumerable<Task> GetTasksByWorkflowId(TaskSelectByWorkflowIdCriteria criteria)
+        {
+            return GetData<Task>(criteria);
         }
 
         public ICommandResult UpdateTask(ICriteria criteria)

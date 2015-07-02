@@ -100,7 +100,8 @@
   <ItemGroup>
     <Compile Include="MailSenders\FileWriter.cs" />
     <Compile Include="NextActions\NextActionType.cs" />
-    <Compile Include="QueueManagement\SendingTasks\DeactivatingWorkflow.cs" />
+    <Compile Include="QueueManagement\SendingWorklows\ActivateWorkflow.cs" />
+    <Compile Include="QueueManagement\SendingWorklows\DeactivateWorkflow.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />
@@ -139,8 +140,7 @@
     <Compile Include="NextActions\SendingEmailNextAction.cs" />
     <Compile Include="QueueManagement\SendingTasks\ISendingMessage.cs" />
     <Compile Include="QueueManagement\SendingTasks\RemovingTask.cs" />
-    <Compile Include="QueueManagement\SendingTasks\SendingTask.cs" />
-    <Compile Include="QueueManagement\SendingTasks\SendingTaskFactory.cs" />
+    <Compile Include="QueueManagement\SendingTasks\SendingMessageFactory.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingType.cs" />
     <Compile Include="QueueManagement\SpuMessageQueue.cs" />
     <Compile Include="TaskExecutors\TaskExecutor.cs" />

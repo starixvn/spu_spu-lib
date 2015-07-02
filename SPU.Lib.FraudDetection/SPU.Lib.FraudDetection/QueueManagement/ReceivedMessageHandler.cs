@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.QueueManagement
             using (var msg = _queue.EndReceive(e.AsyncResult))
             {
                 var message = msg.Body;
-                var task = message as Task;
+                var id = (int)message;
 
                 if (string.IsNullOrEmpty(msg.Label))
                 {
@@ -46,34 +46,39 @@ namespace SPU.Lib.FraudDetection.QueueManagement
                 {
                     case SendingType.AddingTask:
 #if DEBUG
-                        Console.WriteLine("AddingTask: {0} - {1} - {2}. Status: {3}", task.WorkflowId, task.TaskId, task.TaskName, task.IsActive);
+                        Console.WriteLine("AddingTask: {0}", id);
 #endif
 
-                        _taskManager.AddTask(task);
+                        _taskManager.AddTask(id);
                         break;
 
                     case SendingType.UpdatingTask:
 #if DEBUG
-                        Console.WriteLine("UpdatingTask: {0} - {1} - {2}. Status: {3}", task.WorkflowId, task.TaskId, task.TaskName, task.IsActive);
+                        Console.WriteLine("UpdatingTask: {0}", id);
 #endif
 
-                        _taskManager.UpdateTask(task);
+                        _taskManager.UpdateTask(id);
                         break;
 
                     case SendingType.RemovingTask:
 #if DEBUG
-                        Console.WriteLine("RemovingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+                        Console.WriteLine("RemovingTask: {0}{0}", id);
 #endif
 
-                        _taskManager.RemoveTask(task);
+                        _taskManager.RemoveTask(id);
                         break;
 
-                    case SendingType.DeactivateWorkflow:
+                    case SendingType.DeactivatingWorkflow:
 #if DEBUG
-                        Console.WriteLine("DeactivateWorkflow: WorkflowId {0}", message);
+                        Console.WriteLine("DeactivateWorkflow: {0}", id);
 #endif
-                        var workflowId = int.Parse(message.ToString());
-                        _taskManager.RemoveTasksInWorkflow(workflowId);
+                        _taskManager.RemoveTasksInWorkflow(id);
+                        break;
+                    case SendingType.ActivatingWorkflow:
+#if DEBUG
+                        Console.WriteLine("ActivateWorkflow: {0}", id);
+#endif
+                        _taskManager.AddTasksInWorkflow(id);
                         break;
 
                     default:

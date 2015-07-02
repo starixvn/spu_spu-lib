@@ -11,11 +11,13 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using System;
     using DTO;
+    using Fanex.Data.Repository;
     using FraudDetection.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
     using QueueManagement.SendingTasks;
+    using Service.Interface;
     using TaskExecutors;
 
     [TestFixture]
@@ -35,13 +37,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Updating_Not_Null_Task_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
-            var task = new Task();
-            var result = _sut.Send(task);
+            var result = _sut.Send(1);
 
             //--- Assert ---
             _mockQueue.Verify(
                 x =>
-                    x.Send(It.IsAny<Task>(),
+                    x.Send(It.IsAny<object>(),
                         It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                 Times.Exactly(1));
             Assert.IsTrue(result);

@@ -3,17 +3,29 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Criteria.Task;
     using DTO;
     using Fanex.Logging;
+    using Service.Implement;
+    using Service.Interface;
 
     /// <summary>
     ///     Workflow Class.
     /// </summary>
     public class TaskManager : ITaskManager
     {
+        private readonly ITaskService _taskService;
+
         public TaskManager()
         {
             TaskExecutors = new List<TaskExecutor>();
+            _taskService = new TaskService();
+        }
+
+        public TaskManager(ITaskService taskService)
+        {
+            TaskExecutors = new List<TaskExecutor>();
+            _taskService = taskService;
         }
 
         public IList<TaskExecutor> TaskExecutors { get; set; }
@@ -21,21 +33,17 @@
         /// <summary>
         ///     Add and start a task in the thread pool.
         /// </summary>
-        /// <param name="task">The task to execute.</param>
-        public void AddTask(Task task)
+        /// <param name="taskId">The task to execute.</param>
+        public void AddTask(int taskId)
         {
             try
             {
-                if (!task.IsActive || Exist(task))
+                var task =_taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria()
                 {
-                    return;
-                }
+                    TaskId = taskId
+                });
 
-                var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
-
-                TaskExecutors.Add(taskExecutor);
-
-                taskExecutor.Start();
+                AddTask(task);
             }
             catch (Exception ex)
             {
@@ -43,40 +51,16 @@
             }
         }
 
-        /// <summary>
-        ///     Update a task.
-        /// </summary>
-        /// <param name="task">The task to update.</param>
-        public void UpdateTask(Task task)
+        public void AddTasksInWorkflow(int workflowId)
         {
-            RemoveTask(task);
-            AddTask(task);
-        }
-
-        /// <summary>
-        ///     Remove a task out the thread pool.
-        /// </summary>
-        /// <param name="task">The task name.</param>
-        /// <returns>True if item is successfully removed; otherwise, false.</returns>
-        public void RemoveTask(Task task)
-        {
-            try
+            var tasks = _taskService.GetTasksByWorkflowId(new TaskSelectByWorkflowIdCriteria()
             {
-                var taskExecutor =
-                    TaskExecutors.SingleOrDefault(
-                        x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+                WorkFlowId = workflowId
+            });
 
-                if (taskExecutor == null)
-                {
-                    return;
-                }
-
-                taskExecutor.Stop();
-                TaskExecutors.Remove(taskExecutor);
-            }
-            catch (Exception ex)
+            foreach (var task in tasks)
             {
-                WriteLog(ex);
+                AddTask(task);
             }
         }
 
@@ -92,15 +76,34 @@
 
         public bool Exist(Task task)
         {
-            return TaskExecutors.Any(x => x.TaskCode.Equals(task.TaskCode, StringComparison.OrdinalIgnoreCase));
+            return TaskExecutors.Any(x => x.TaskId == task.TaskId);
         }
 
-        protected void WriteLog(Exception exception)
+        /// <summary>
+        ///     Remove a task out the thread pool.
+        /// </summary>
+        /// <param name="taskId">The task name.</param>
+        /// <returns>True if item is successfully removed; otherwise, false.</returns>
+        public void RemoveTask(int taskId)
         {
-            var message = "\r\nError:" + exception.Message +
-                          "\r\nStackTrace: " + exception.StackTrace;
+            try
+            {
+                var taskExecutor =
+                    TaskExecutors.SingleOrDefault(
+                        x => x.Task.TaskId == taskId);
 
-            Logger.Log.Error(message);
+                if (taskExecutor == null)
+                {
+                    return;
+                }
+
+                taskExecutor.Stop();
+                TaskExecutors.Remove(taskExecutor);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+            }
         }
 
         public void RemoveTasksInWorkflow(int workflowId)
@@ -112,6 +115,39 @@
                 taskExecutor.Stop();
                 TaskExecutors.Remove(taskExecutor);
             }
+        }
+
+        /// <summary>
+        ///     Update a task.
+        /// </summary>
+        /// <param name="taskId">The task to update.</param>
+        public void UpdateTask(int taskId)
+        {
+            RemoveTask(taskId);
+
+            AddTask(taskId);
+        }
+
+        protected void WriteLog(Exception exception)
+        {
+            var message = "\r\nError:" + exception.Message +
+                          "\r\nStackTrace: " + exception.StackTrace;
+
+            Logger.Log.Error(message);
+        }
+
+        private void AddTask(Task task)
+        {
+            if (!task.IsActive || Exist(task))
+            {
+                return;
+            }
+
+            var taskExecutor = TaskExecutorFactory.GetTaskExecutor(task);
+
+            TaskExecutors.Add(taskExecutor);
+
+            taskExecutor.Start();
         }
     }
 }
