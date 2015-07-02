@@ -71,11 +71,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public void Start()
         {
-            if (!Task.IsActive)
-            {
-                return;
-            }
-
             Timer = new Timer
             {
                 Interval = Task.Timer,

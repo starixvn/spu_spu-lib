@@ -26,7 +26,7 @@
         {
             try
             {
-                if (Exist(task))
+                if (!task.IsActive || Exist(task))
                 {
                     return;
                 }
@@ -101,6 +101,17 @@
                           "\r\nStackTrace: " + exception.StackTrace;
 
             Logger.Log.Error(message);
+        }
+
+        public void DeactivateWorkflow(int workflowId)
+        {
+            var taskExecutorsForWorkflow = TaskExecutors.Where(t => t.Task.WorkflowId == workflowId);
+
+            foreach (var taskExecutor in taskExecutorsForWorkflow)
+            {
+                taskExecutor.Stop();
+                TaskExecutors.Remove(taskExecutor);
+            }
         }
     }
 }

@@ -24,10 +24,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         {
         }
 
-        private IList<string> _previousMatchIdList = new List<string>();
-
-        private List<SuspiciousInfo> _previousSuspicionList = new List<SuspiciousInfo>();
-
         public IList<string> MatchIdList { get; set; }
 
         public List<SuspiciousInfo> SuspicionList { get; set; }
@@ -69,13 +65,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         private void SaveSuspiciousCustomers()
         {
-            if (_previousMatchIdList.Count != MatchIdList.Count || _previousSuspicionList.Count != SuspicionList.Count)
-            {
-                _previousMatchIdList = MatchIdList;
-                _previousSuspicionList = SuspicionList;
-                var saveAction = new SavingSuspicion(SuspicionList, MatchIdList, Task.TaskId);
-                saveAction.TakeAction();
-            }
+            var saveAction = new SavingSuspicion(SuspicionList, MatchIdList, Task.TaskId);
+            saveAction.TakeAction();
         }
 
         protected override void TakeNextAction()

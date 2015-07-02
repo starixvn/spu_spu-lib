@@ -67,7 +67,7 @@
             {
                 foreach (var innerEx in ex.InnerExceptions)
                 {
-                    Logger.Log.Error("Task.WaitAll(tasks.ToArray()); : " + ex);
+                    Logger.Log.Error("Task.WaitAll(tasks.ToArray()); : " + innerEx);
                 }
             }
         }

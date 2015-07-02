@@ -45,7 +45,7 @@ namespace SPU.Lib.FraudDetection.QueueManagement
                 {
                     case SendingType.AddingTask:
 #if DEBUG
-                        Console.WriteLine("AddingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+                        Console.WriteLine("AddingTask: {0} - {1} - {2}. Status: {3}", task.WorkflowId, task.TaskId, task.TaskName, task.IsActive);
 #endif
 
                         _taskManager.AddTask(task);
@@ -53,7 +53,7 @@ namespace SPU.Lib.FraudDetection.QueueManagement
 
                     case SendingType.UpdatingTask:
 #if DEBUG
-                        Console.WriteLine("UpdatingTask: {0} - {1} - {2}", task.WorkflowId, task.TaskId, task.TaskName);
+                        Console.WriteLine("UpdatingTask: {0} - {1} - {2}. Status: {3}", task.WorkflowId, task.TaskId, task.TaskName, task.IsActive);
 #endif
 
                         _taskManager.UpdateTask(task);
