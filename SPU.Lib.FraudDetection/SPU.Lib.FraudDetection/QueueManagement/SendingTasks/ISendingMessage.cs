@@ -5,9 +5,10 @@
     /// <summary>
     ///     Sending Task Interface.
     /// </summary>
-    public interface ISendingTask
+    public interface ISendingMessage
     {
         SendingType Type { get; set; }
-        bool Send(Task newTask);
+
+        bool Send(object message);
     }
 }

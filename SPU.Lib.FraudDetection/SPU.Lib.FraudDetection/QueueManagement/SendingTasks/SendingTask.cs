@@ -6,30 +6,38 @@ namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
     /// <summary>
     ///     Sending Task.
     /// </summary>
-    public abstract class SendingTask : ISendingTask
+    public abstract class SendingTask : SendingMessage
     {
-        private readonly IMessageQueue _messageQueue;
-
         protected SendingTask()
+            : base()
         {
-            _messageQueue = new SpuMessageQueue();
         }
 
         protected SendingTask(IMessageQueue messageQueue)
+            : base(messageQueue)
         {
-            _messageQueue = messageQueue;
         }
 
-        public SendingType Type { get; set; }
-
-        public virtual bool Send(Task newTask)
+        public override bool Send(object message)
         {
-            if (newTask == null)
+            if (!IsValidMessage(message))
             {
                 return false;
             }
 
-            _messageQueue.Send(newTask, Type.ToString());
+            _messageQueue.Send(message, Type.ToString());
+
+            return true;
+        }
+
+        protected override bool IsValidMessage(object message)
+        {
+            var isTask = message is Task;
+
+            if (message == null || !isTask)
+            {
+                return false;
+            }
 
             return true;
         }

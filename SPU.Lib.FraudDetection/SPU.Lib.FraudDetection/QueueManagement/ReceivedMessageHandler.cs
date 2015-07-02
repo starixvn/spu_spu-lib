@@ -32,9 +32,10 @@ namespace SPU.Lib.FraudDetection.QueueManagement
         {
             using (var msg = _queue.EndReceive(e.AsyncResult))
             {
-                var task = msg.Body as Task;
+                var message = msg.Body;
+                var task = message as Task;
 
-                if (string.IsNullOrEmpty(msg.Label) || task == null)
+                if (string.IsNullOrEmpty(msg.Label))
                 {
                     return;
                 }
@@ -65,6 +66,14 @@ namespace SPU.Lib.FraudDetection.QueueManagement
 #endif
 
                         _taskManager.RemoveTask(task);
+                        break;
+
+                    case SendingType.DeactivateWorkflow:
+#if DEBUG
+                        Console.WriteLine("DeactivateWorkflow: WorkflowId {0}", message);
+#endif
+                        var workflowId = int.Parse(message.ToString());
+                        _taskManager.RemoveTasksInWorkflow(workflowId);
                         break;
 
                     default:

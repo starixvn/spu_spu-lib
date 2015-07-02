@@ -16,13 +16,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
     using NUnit.Framework;
     using QueueManagement;
     using QueueManagement.SendingTasks;
-    using TaskExecutors;
 
     [TestFixture]
     public class RemovingTaskTest
     {
         private Mock<IMessageQueue> _mockQueue;
-        private ISendingTask _sut;
+        private ISendingMessage _sut;
 
         [SetUp]
         public void Setup()

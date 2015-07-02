@@ -5,9 +5,9 @@
     /// <summary>
     ///     Sending Task Factory.
     /// </summary>
-    public class SendingTaskFactory
+    public class SendingMessageFactory
     {
-        public static ISendingTask GetSender(SendingType type)
+        public static ISendingMessage GetSender(SendingType type)
         {
             switch (type)
             {

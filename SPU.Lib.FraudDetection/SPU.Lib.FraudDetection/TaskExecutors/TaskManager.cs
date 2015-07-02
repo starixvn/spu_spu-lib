@@ -103,7 +103,7 @@
             Logger.Log.Error(message);
         }
 
-        public void DeactivateWorkflow(int workflowId)
+        public void RemoveTasksInWorkflow(int workflowId)
         {
             var taskExecutorsForWorkflow = TaskExecutors.Where(t => t.Task.WorkflowId == workflowId);
 

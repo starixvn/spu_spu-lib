@@ -10,7 +10,7 @@
 
     public class TaskLoader : ITaskLoader
     {
-        private readonly ISendingTask _sendingTask;
+        private readonly ISendingMessage _sendingTask;
         private readonly ITaskService _taskService;
 
         public TaskLoader()

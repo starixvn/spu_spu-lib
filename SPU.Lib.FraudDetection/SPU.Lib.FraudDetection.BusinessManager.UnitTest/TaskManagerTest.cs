@@ -20,6 +20,7 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
+            
 
             // --- Act ---
             _sut.AddTask(task);
@@ -66,6 +67,7 @@
         {
             // --- Arrange ---
             var task = GetSampleTask();
+            task.IsActive = true;
 
             _sut.AddTask(task);
 
@@ -116,7 +118,8 @@
                 WorkflowId = 9,
                 TaskId = 99,
                 Interval = 90,
-                IntervalType = "Second"
+                IntervalType = "Second",
+                IsActive = true
             };
 
             _sut.UpdateTask(nonExistTask);
@@ -142,7 +145,8 @@
                     "select ans.custid,ans.matchid,ans.transid from bodb02.dbo.match tch inner join bodb02.dbo.bettrans ans on tch.matchid = ans.matchid  where tch.matchid in ($param1$) and (ans.stake >= 300 AND ans.statusid = 112)",
                 WorkflowId = 4,
                 TaskName = "Scan Match - Find Ticket",
-                TaskId = 80
+                TaskId = 80,
+                IsActive = true
             };
 
             return sampleTask;
