@@ -49,27 +49,9 @@
                 return;
             }
 
-            var tasks = new List<Task>();
+            InsertScannedMatch();
 
-            var insertScannedMatchTask = Task.Factory.StartNew(InsertScannedMatch);
-
-            tasks.Add(insertScannedMatchTask);
-
-            var insertSuspicionTask = Task.Factory.StartNew(InsertSuspicion);
-
-            tasks.Add(insertSuspicionTask);
-
-            try
-            {
-                Task.WaitAll(tasks.ToArray());
-            }
-            catch (AggregateException ex)
-            {
-                foreach (var innerEx in ex.InnerExceptions)
-                {
-                    Logger.Log.Error("Task.WaitAll(tasks.ToArray()); : " + innerEx);
-                }
-            }
+            InsertSuspicion();
         }
 
         private void InsertScannedMatch()

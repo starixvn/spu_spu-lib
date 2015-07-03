@@ -34,7 +34,10 @@
     <Setting Key="SPU_SuspiciouCustomerSelect" SpName="SPU_SuspiciouCustomerSelect"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
 
+    <Setting Key="SPU_TaskInfoSelect" SpName="SPU_TaskInfoSelect" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_TaskSelectByWorkflowId" SpName="SPU_TaskSelectByWorkflowId"
+         DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_TaskSelectForExecuting" SpName="SPU_TaskSelectForExecuting"
          DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 

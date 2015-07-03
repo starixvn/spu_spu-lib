@@ -36,6 +36,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         Task GetTaskInfoByTaskId(ICriteria criteria);
 
+        Task GetTaskForExecuting(ICriteria criteria);
+
         /// <summary>
         ///     Return a list of ids.
         /// </summary>

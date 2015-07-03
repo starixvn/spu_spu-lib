@@ -38,7 +38,7 @@
         {
             try
             {
-                var task =_taskService.GetTaskInfoByTaskId(new TaskInfoSelectCriteria()
+                var task =_taskService.GetTaskForExecuting(new TaskSelectForExecutingCriteria()
                 {
                     TaskId = taskId
                 });
@@ -108,7 +108,7 @@
 
         public void RemoveTasksInWorkflow(int workflowId)
         {
-            var taskExecutorsForWorkflow = TaskExecutors.Where(t => t.Task.WorkflowId == workflowId);
+            var taskExecutorsForWorkflow = TaskExecutors.Where(t => t.Task.WorkflowId == workflowId).ToList();
 
             foreach (var taskExecutor in taskExecutorsForWorkflow)
             {

@@ -34,6 +34,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         private bool IsRunning { get; set; }
 
+        private bool IsStop { get; set; }
+
         public Timer Timer { get; set; }
         
 
@@ -89,6 +91,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public void Stop()
         {
+            IsStop = true;
             Timer.Elapsed -= PreExecute;
             Timer.Stop();
             Timer.Close();
@@ -97,7 +100,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public virtual void PreExecute(object sender, ElapsedEventArgs elapsedEventArgs)
         {
-            if (IsRunning)
+            if (IsRunning || IsStop)
             {
                 return;
             }

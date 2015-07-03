@@ -103,6 +103,7 @@
     <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerSelectCritiria.cs" />
+    <Compile Include="Task\TaskSelectForExecutingCriteria.cs" />
     <Compile Include="Task\TaskInfoSelectCriteria.cs" />
     <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
     <Compile Include="Task\TaskSelectByWorkflowIdCriteria.cs" />

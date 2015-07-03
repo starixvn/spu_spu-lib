@@ -20,7 +20,7 @@
 
             try
             {
-                _messageQueue = new MessageQueue(queuePath) { Formatter = new XmlMessageFormatter(new[] { typeof(Task) }) };
+                _messageQueue = new MessageQueue(queuePath) { Formatter = new XmlMessageFormatter(new[] { typeof(int) }) };
             }
             catch (InvalidOperationException ex)
             {

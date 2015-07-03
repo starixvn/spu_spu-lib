@@ -93,6 +93,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return Get<Task>(criteria);
         }
 
+        public Task GetTaskForExecuting(ICriteria criteria)
+        {
+            return Get<Task>(criteria);
+        }
+
         public IEnumerable<SuspiciousInfo> CollectSuspiciousInfo(string sqlQueryString)
         {
             throw new NotImplementedException();

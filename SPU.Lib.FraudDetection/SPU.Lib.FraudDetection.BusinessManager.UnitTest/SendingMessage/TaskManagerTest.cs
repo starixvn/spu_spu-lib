@@ -26,7 +26,7 @@
             // --- Arrange ---
             var task = GetSampleTask();
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             // --- Act ---
@@ -43,7 +43,7 @@
             var task = GetSampleTask();
 
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             // --- Act ---
@@ -62,7 +62,7 @@
             var task = GetSampleTask();
             
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             _sut.AddTask(80);
@@ -83,7 +83,7 @@
             var task = GetSampleTask();
 
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             _sut.AddTask(1);
@@ -113,7 +113,7 @@
             var task = GetSampleTask();
 
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             _sut.AddTask(1);
@@ -141,7 +141,7 @@
             var task = GetSampleTask();
 
             _mockTaskService
-                .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+                .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                 .Returns(task);
 
             _sut.AddTask(1);
@@ -160,7 +160,7 @@
             };
 
             _mockTaskService
-               .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
+               .Setup(x => x.GetTaskForExecuting(It.IsAny<ICriteria>()))
                .Returns(nonExistTask);
 
             _sut.UpdateTask(99);
