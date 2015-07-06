@@ -98,17 +98,17 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <param name="month">The month wanted to get.</param>
         /// <param name="margins">List Margins.</param>
         /// <returns>Margin of month.</returns>
-        private decimal GetMargin(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
+        private decimal? GetMargin(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
             foreach (var margin in margins)
             {
                 if (margin.CustId == custId && margin.WinlostDate == month)
                 {
-                    return margin.Margin != null ? (decimal)margin.Margin : 0;
+                    return margin.Margin;
                 }
             }
 
-            return 0;
+            return null;
         }
 
         /// <summary>
@@ -118,17 +118,17 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <param name="month">The month wanted to get.</param>
         /// <param name="margins">List Margins.</param>
         /// <returns>WinLoss of month.</returns>
-        private decimal GetWinLoss(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
+        private decimal? GetWinLoss(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
             foreach (var margin in margins)
             {
                 if (margin.CustId == custId && margin.WinlostDate == month)
                 {
-                    return margin.MemberWinlost != null ? (decimal)margin.MemberWinlost : 0;
+                    return margin.MemberWinlost;
                 }
             }
 
-            return 0;
+            return null;
         }
 
         private IEnumerable<Customer> FilterCustomersByName(string custName, IEnumerable<Customer> customers)
