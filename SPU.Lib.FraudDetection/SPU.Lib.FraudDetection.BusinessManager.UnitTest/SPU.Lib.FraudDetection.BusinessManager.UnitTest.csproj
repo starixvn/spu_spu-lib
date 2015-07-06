@@ -239,6 +239,7 @@
   <ItemGroup>
     <Content Include="App_Data\SpName.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Dependencies\SPU.Lib.FraudDetection.dll" />
     <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />

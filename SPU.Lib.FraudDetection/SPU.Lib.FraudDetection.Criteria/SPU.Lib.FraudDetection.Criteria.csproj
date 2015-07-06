@@ -108,7 +108,6 @@
     <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
     <Compile Include="Task\TaskSelectByWorkflowIdCriteria.cs" />
     <Compile Include="Task\TaskSelectAllCriteria.cs" />
-    <Compile Include="Task\TaskSelectAllByWorkflowIdCriteria.cs" />
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
