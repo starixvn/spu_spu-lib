@@ -172,6 +172,7 @@
   <ItemGroup>
     <Compile Include="MailMasterRenders\MailMasterRenderTest.cs" />
     <Compile Include="MailSenders\AutoMailSenderTest.cs" />
+    <Compile Include="Mock Objects\FakeMailClient.cs" />
     <Compile Include="SendingMessage\ReceivingMessageHandlerTest.cs" />
     <Compile Include="SendingMessage\DeactivateWorkflowTest.cs" />
     <Compile Include="SendingMessage\RemovingTaskTest.cs" />

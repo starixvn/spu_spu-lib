@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MailSenders\FileWriter.cs" />
+    <Compile Include="MailSenders\IMailClient.cs" />
     <Compile Include="NextActions\NextActionType.cs" />
     <Compile Include="QueueManagement\SendingWorklows\ActivateWorkflow.cs" />
     <Compile Include="QueueManagement\SendingWorklows\DeactivateWorkflow.cs" />

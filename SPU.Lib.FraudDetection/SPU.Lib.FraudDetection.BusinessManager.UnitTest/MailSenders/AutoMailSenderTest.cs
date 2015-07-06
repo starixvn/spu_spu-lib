@@ -7,6 +7,7 @@
     using FraudDetection.MailMasterRenders;
     using FraudDetection.MailSenders;
     using FraudDetection.ReportTemplateRenders;
+    using Mock_Objects;
     using Moq;
     using NUnit.Framework;
     using Service.Implement;
@@ -34,7 +35,7 @@
             mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
             // --- Act --
-            var sut = new SpuMailSender
+            var sut = new SpuMailSender(new FakeMailClient())
             {
                 MailMasterRenderAbstractFactory = mockMailRenderAbstractFactory.Object
             };
@@ -61,7 +62,7 @@
                 ReportRenderFactory = renderFactory
             };
 
-            var sut = new SpuMailSender
+            var sut = new SpuMailSender(new FakeMailClient())
             {
                 MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory
             };

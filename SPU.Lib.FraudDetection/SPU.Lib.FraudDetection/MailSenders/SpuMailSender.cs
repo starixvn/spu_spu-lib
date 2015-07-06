@@ -8,6 +8,18 @@
     {
         public IMailMasterRenderAbstractFactory MailMasterRenderAbstractFactory { get; set; }
 
+        public IMailClient MailClient { get; set; }
+
+        public SpuMailSender()
+        {
+            MailClient = new MailClient();
+        }
+
+        public SpuMailSender(IMailClient client)
+        {
+            MailClient = client;
+        }
+
         public void SendMail(int mailMasterId)
         {
             var mailMasterRender = MailMasterRenderAbstractFactory.GetMailMasterRender();
@@ -23,8 +35,7 @@
                 MailingListId = 80
             };
 
-            MailClientHandler.Start();
-            MailClientHandler.SendMail(newMail);
+            MailClient.Send(newMail);
         }
     }
 }
