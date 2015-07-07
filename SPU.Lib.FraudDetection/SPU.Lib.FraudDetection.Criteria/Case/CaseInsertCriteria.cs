@@ -1,24 +1,25 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowInsertCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseInsertCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Aaron.Cao" date="2015.07.07">Change to Case</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Workflow
+namespace SPU.Lib.FraudDetection.Criteria.Case
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     WorkflowInsertCriteria Class.
+    ///     CaseInsertCriteria Class.
     /// </summary>
-    public class WorkflowInsertCriteria : CriteriaBase
+    public class CaseInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
-        public string WorkflowName { get; set; }
-        public string WorkflowDesc { get; set; }
+        public string CaseName { get; set; }
+        public string CaseDesc { get; set; }
         public bool IsActive { get; set; }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_WorkflowIns";
+            return "SPU_CaseIns";
         }
 
         /// <summary>

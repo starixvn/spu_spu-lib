@@ -27,7 +27,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public string TaskRulesOriginal { get; set; }
 
         public string TaskRulesFormatted { get; set; }
-        public int WorkflowId { get; set; }
+        public int CaseId { get; set; }
         public int Interval { get; set; }
         public string IntervalType { get; set; }
         public bool IsActive { get; set; }

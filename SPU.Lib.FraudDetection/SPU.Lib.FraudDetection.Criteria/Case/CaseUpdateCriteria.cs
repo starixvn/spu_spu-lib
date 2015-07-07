@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -8,22 +8,22 @@
 //   <change who="Aaron.Cao" date="2015.06.22">Updated</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Workflow
+namespace SPU.Lib.FraudDetection.Criteria.Case
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     WorkflowUpdateCriteria Class.
+    ///     CaseUpdateCriteria Class.
     /// </summary>
-    public class WorkflowUpdateCriteria : CriteriaBase
+    public class CaseUpdateCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
 
-        public int WorkflowId { get; set; }
+        public int CaseId { get; set; }
 
-        public string WorkflowName { get; set; }
+        public string CaseName { get; set; }
 
-        public string WorkflowDesc { get; set; }
+        public string CaseDesc { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_WorkflowUpdate";
+            return "SPU_CaseUpdate";
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return WorkflowId > 0;
+            return CaseId > 0;
         }
     }
 }

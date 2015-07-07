@@ -19,7 +19,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
     using QueueManagement.SendingWorklows;
 
     [TestFixture]
-    public class DeactivateWorkflowTest
+    public class DeactivateCaseTest
     {
         private Mock<IMessageQueue> _mockQueue;
         private ISendingMessage _sut;
@@ -28,12 +28,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void Setup()
         {
             _mockQueue = new Mock<IMessageQueue>();
-            _sut = new DeactivatingWorkflow();
+            _sut = new DeactivatingCase();
         }
 
         [Test]
         [Ignore("Ignore a fixture")]
-        public void When_Removing_Valid_WorkflowId_Then_Send_Should_Called_Once_()
+        public void When_Removing_Valid_CaseId_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
             const int worflowId = 1;

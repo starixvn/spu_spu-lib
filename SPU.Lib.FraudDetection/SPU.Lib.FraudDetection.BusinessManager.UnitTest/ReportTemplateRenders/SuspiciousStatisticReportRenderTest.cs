@@ -92,7 +92,7 @@
             var sampleCustomer1 = new SuspiciousCustormer
             {
                 Member = "member01",
-                Workflow = "WF01",
+                Case = "WF01",
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,
@@ -104,7 +104,7 @@
             var sampleCustomer2 = new SuspiciousCustormer
             {
                 Member = "member02",
-                Workflow = "WF01",
+                Case = "WF01",
                 Sport = "Soccer",
                 League = "English Premier League",
                 MatchId = 123456,

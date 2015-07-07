@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IWorkflowDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ICaseDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    ///     Workflow Data Access interface.
+    ///     Case Data Access interface.
     /// </summary>
-    public interface IWorkflowDataAccess
+    public interface ICaseDataAccess
     {
-        ICommandResult InsertWorkflow(ICriteria criteria);
-        ICommandResult UpdateWorkflow(ICriteria criteria);
-        ICommandResult DeleteWorkflow(ICriteria criteria);
-        DataCollection GetWorkflows(ICriteria criteria);
+        ICommandResult InsertCase(ICriteria criteria);
+        ICommandResult UpdateCase(ICriteria criteria);
+        ICommandResult DeleteCase(ICriteria criteria);
+        DataCollection GetCases(ICriteria criteria);
     }
 }

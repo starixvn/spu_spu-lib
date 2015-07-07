@@ -34,9 +34,9 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         /// <param name="task">The task name.</param>
         void RemoveTask(int task);
 
-        void RemoveTasksInWorkflow(int workflowId);
+        void RemoveTasksInCase(int caseId);
 
-        void AddTasksInWorkflow(int workflowId);
+        void AddTasksInCase(int caseId);
 
         void ClearTasks();
 

@@ -1,43 +1,39 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowUpdateStatusCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskSelectAllByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Aaron.Cao" date="2015.06.22">Created</change>
+//   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Workflow
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// WorkflowUpdateStatusCriteria Class.
+    ///     TaskSelectAllByCaseIdCriteria Class.
     /// </summary>
-    public class WorkflowUpdateStatusCriteria : CriteriaBase
+    public class TaskSelectAllByCaseIdCriteria : CriteriaBase
     {
-        public int CreatorId { get; set; }
-
-        public int WorkflowId { get; set; }
-
-        public bool IsActive { get; set; }
+        public int CaseId { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_WorkflowUpdateStatus";
+            return "SPU_TaskSelectByCaseId";
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return WorkflowId > 0;
+            return true;
         }
     }
 }

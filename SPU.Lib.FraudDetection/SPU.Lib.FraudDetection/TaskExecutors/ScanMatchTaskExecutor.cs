@@ -57,7 +57,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             foreach (var matchChunk in matchChunks)
             {
                 var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", matchChunk));
-                SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.WorkflowId));
+                SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.CaseId));
             }
 
             SaveSuspiciousCustomers();

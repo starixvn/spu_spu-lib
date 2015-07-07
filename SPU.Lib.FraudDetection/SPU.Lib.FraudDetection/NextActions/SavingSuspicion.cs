@@ -108,7 +108,7 @@
                 builder.Append(GetElement("MatchId", suspiciousInfo.MatchId));
                 builder.Append(GetElement("TransId", suspiciousInfo.TransId));
                 builder.Append(GetElement("TaskId", suspiciousInfo.TaskId));
-                builder.Append(GetElement("WorkflowId", suspiciousInfo.WorkflowId));
+                builder.Append(GetElement("CaseId", suspiciousInfo.CaseId));
                 builder.Append("</Row>");
             }
 

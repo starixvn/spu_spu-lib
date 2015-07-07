@@ -1,14 +1,14 @@
 ﻿
-namespace SPU.Lib.FraudDetection.Criteria.Workflow
+namespace SPU.Lib.FraudDetection.Criteria.Case
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     WorkflowSelectAllCriteria Class.
+    ///     CaseSelectAllCriteria Class.
     /// </summary>
-    public class WorkflowSelectByIdCriteria : CriteriaBase
+    public class CaseSelectByIdCriteria : CriteriaBase
     {
-        public int WorkflowId { get; set; }
+        public int CaseId { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -16,7 +16,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Workflow
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_WorkflowSelectById";
+            return "SPU_CaseSelectById";
         }
 
         /// <summary>

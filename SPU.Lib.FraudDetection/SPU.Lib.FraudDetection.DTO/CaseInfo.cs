@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowInfo.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseInfo.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,13 +10,16 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     /// <summary>
-    ///     Workflow information.
+    ///     Case information.
     /// </summary>
-    public class WorkflowInfo
+    public class CaseInfo
     {
-        public int WorkflowId { get; set; }
-        public string WorkflowName { get; set; }
-        public string WorkflowDesc { get; set; }
+        public int CaseId { get; set; }
+
+        public string CaseName { get; set; }
+
+        public string CaseDesc { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

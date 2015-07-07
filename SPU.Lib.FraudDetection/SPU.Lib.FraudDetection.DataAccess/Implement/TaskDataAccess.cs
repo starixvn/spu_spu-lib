@@ -34,7 +34,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetTasksByWorkflowId(ICriteria criteria)
+        public DataCollection GetTasksByCaseId(ICriteria criteria)
         {
             return ReturnDataCollection(criteria);
         }

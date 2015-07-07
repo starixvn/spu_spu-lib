@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskSelectAllByWorkflowIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,16 +7,19 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Task
+namespace SPU.Lib.FraudDetection.Criteria.Case
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     TaskSelectAllByWorkflowIdCriteria Class.
+    ///     CaseSelectAllCriteria Class.
     /// </summary>
-    public class TaskSelectByWorkflowIdCriteria : CriteriaBase
+    public class CaseSelectAllCriteria : CriteriaBase
     {
-        public int WorkFlowId { get; set; }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
+        public int PageCount { get; set; }
+        public int RowCount { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -24,7 +27,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskSelectByWorkflowId";
+            return "SPU_CaseSelectAll";
         }
 
         /// <summary>

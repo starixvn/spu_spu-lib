@@ -106,7 +106,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             }
 
             #if DEBUG
-                Console.WriteLine("{0} - {1} - {2} is running", Task.WorkflowId, Task.TaskId, Task.TaskName);
+                Console.WriteLine("{0} - {1} - {2} is running", Task.CaseId, Task.TaskId, Task.TaskName);
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
             #endif
@@ -119,7 +119,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
             #if DEBUG
                 stopwatch.Stop();
-                Console.WriteLine("{0} - {1} - {2} spent {3} running", Task.WorkflowId, Task.TaskId, Task.TaskName, stopwatch.Elapsed.ToString());
+                Console.WriteLine("{0} - {1} - {2} spent {3} running", Task.CaseId, Task.TaskId, Task.TaskName, stopwatch.Elapsed.ToString());
             #endif
         }
 

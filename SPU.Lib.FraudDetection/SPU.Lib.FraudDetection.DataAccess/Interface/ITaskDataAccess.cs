@@ -21,6 +21,6 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
         ICommandResult InsertTask(ICriteria criteria);
         ICommandResult UpdateTask(ICriteria criteria);
         ICommandResult DeleteTask(ICriteria criteria);
-        DataCollection GetTasksByWorkflowId(ICriteria criteria);
+        DataCollection GetTasksByCaseId(ICriteria criteria);
     }
 }

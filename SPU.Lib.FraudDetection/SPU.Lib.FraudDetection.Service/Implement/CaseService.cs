@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -21,35 +21,35 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using Interface;
 
     /// <summary>
-    ///     Workflow Service.
+    ///     Case Service.
     /// </summary>
-    public class WorkflowService : QueryService, IWorkflowService
+    public class CaseService : QueryService, ICaseService
     {
-        private readonly IWorkflowDataAccess _workflowDataAccess;
+        private readonly ICaseDataAccess _caseDataAccess;
 
-        public WorkflowService()
+        public CaseService()
         {
-            _workflowDataAccess = new WorkflowDataAccess();
+            _caseDataAccess = new CaseDataAccess();
         }
 
-        public ICommandResult InsertWorkflow(ICriteria criteria)
+        public ICommandResult InsertCase(ICriteria criteria)
         {
-            return _workflowDataAccess.InsertWorkflow(criteria);
+            return _caseDataAccess.InsertCase(criteria);
         }
 
-        public ICommandResult DeleteWorkflow(ICriteria criteria)
+        public ICommandResult DeleteCase(ICriteria criteria)
         {
-            return _workflowDataAccess.DeleteWorkflow(criteria);
+            return _caseDataAccess.DeleteCase(criteria);
         }
 
-        public IEnumerable<WorkflowInfo> LoadWorkflows(ICriteria criteria)
+        public IEnumerable<CaseInfo> LoadCases(ICriteria criteria)
         {
-            return GetData<WorkflowInfo>(criteria);
+            return GetData<CaseInfo>(criteria);
         }
 
-        public DataCollection GetWorkflows(ICriteria criteria)
+        public DataCollection GetCases(ICriteria criteria)
         {
-            return _workflowDataAccess.GetWorkflows(criteria);
+            return _caseDataAccess.GetCases(criteria);
         }
 
         public IEnumerable<Task> GetTasks(ICriteria criteria)
@@ -57,14 +57,14 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return GetData<Task>(criteria);
         }
 
-        public ICommandResult UpdateWorkflow(ICriteria criteria)
+        public ICommandResult UpdateCase(ICriteria criteria)
         {
-            return _workflowDataAccess.UpdateWorkflow(criteria);
+            return _caseDataAccess.UpdateCase(criteria);
         }
 
-        public WorkflowInfo GetWorkflowById(ICriteria criteria)
+        public CaseInfo GetCaseById(ICriteria criteria)
         {
-            var result = GetData<WorkflowInfo>(criteria);
+            var result = GetData<CaseInfo>(criteria);
 
             return result.SingleOrDefault();
         }

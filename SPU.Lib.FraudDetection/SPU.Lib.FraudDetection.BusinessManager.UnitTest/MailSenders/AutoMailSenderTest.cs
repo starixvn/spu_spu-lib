@@ -80,21 +80,21 @@
                 {
                     CustId = 3293,
                     MatchId = 13760671,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
                     MatchId = 4032122,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
                     MatchId = 12768041,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 }
             };
@@ -112,21 +112,21 @@
                 {
                     CustId = 1280,
                     MatchId = 13606626,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
                     MatchId = 13659022,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 },
                 new SuspiciousInfo
                 {
                     CustId = 1280,
                     MatchId = 13675244,
-                    WorkflowId = 4,
+                    CaseId = 4,
                     TaskId = 4
                 }
             };

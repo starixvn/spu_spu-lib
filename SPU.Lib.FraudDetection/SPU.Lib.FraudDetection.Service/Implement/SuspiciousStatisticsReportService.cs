@@ -5,7 +5,7 @@
     using System.Linq;
     using Core;
     using Criteria.SuspiciousStatistic;
-    using Criteria.Workflow;
+    using Criteria.Case;
     using DTO;
     using DTO.ReportTemplate;
     using Interface;
@@ -16,12 +16,12 @@
         {
             CustomerService = new CustomerService();
             MatchService = new MatchService();
-            WorkflowService = new WorkflowService();
+            CaseService = new CaseService();
         }
 
         public ICustomerService CustomerService { get; set; }
         public IMatchService MatchService { get; set; }
-        public IWorkflowService WorkflowService { get; set; }
+        public ICaseService CaseService { get; set; }
 
         public SuspiciousStatisticViewModel GetSuspiciousCustomerStatistics(IList<SuspiciousInfo> list)
         {
@@ -49,9 +49,9 @@
 
             var model = new SuspiciousStatisticViewModel();
 
-            var workflow = WorkflowService.GetWorkflowById(new WorkflowSelectByIdCriteria
+            var caseSpu = CaseService.GetCaseById(new CaseSelectByIdCriteria
             {
-                WorkflowId = list[0].WorkflowId
+                CaseId = list[0].CaseId
             });
 
             var suspiciousCustomer = new List<SuspiciousCustormer>();
@@ -70,7 +70,7 @@
                         EventDate = match.EventDate,
                         League = match.LeagueName,
                         Sport = match.SportName,
-                        Workflow = workflow.WorkflowName,
+                        Case = caseSpu.CaseName,
                         Event = string.Format("{0} -vs- {1}", match.HomeName, match.AwayName)
                     });
                 }

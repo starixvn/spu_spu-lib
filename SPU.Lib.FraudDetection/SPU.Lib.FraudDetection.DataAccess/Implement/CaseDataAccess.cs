@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="WorkflowDataAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CaseDataAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -15,26 +15,26 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
     using Interface;
 
     /// <summary>
-    ///     Workflow Data Access Implement.
+    ///     Case Data Access Implement.
     /// </summary>
-    public class WorkflowDataAccess : BaseDataAccess, IWorkflowDataAccess
+    public class CaseDataAccess : BaseDataAccess, ICaseDataAccess
     {
-        public ICommandResult InsertWorkflow(ICriteria criteria)
+        public ICommandResult InsertCase(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult UpdateWorkflow(ICriteria criteria)
+        public ICommandResult UpdateCase(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult DeleteWorkflow(ICriteria criteria)
+        public ICommandResult DeleteCase(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetWorkflows(ICriteria criteria)
+        public DataCollection GetCases(ICriteria criteria)
         {
             return ReturnDataCollection(criteria);
         }

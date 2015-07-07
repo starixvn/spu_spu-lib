@@ -68,17 +68,17 @@ namespace SPU.Lib.FraudDetection.QueueManagement
                         _taskManager.RemoveTask(id);
                         break;
 
-                    case SendingType.DeactivatingWorkflow:
+                    case SendingType.DeactivatingCase:
 #if DEBUG
-                        Console.WriteLine("DeactivateWorkflow: {0}", id);
+                        Console.WriteLine("DeactivateCase: {0}", id);
 #endif
-                        _taskManager.RemoveTasksInWorkflow(id);
+                        _taskManager.RemoveTasksInCase(id);
                         break;
-                    case SendingType.ActivatingWorkflow:
+                    case SendingType.ActivatingCase:
 #if DEBUG
-                        Console.WriteLine("ActivateWorkflow: {0}", id);
+                        Console.WriteLine("ActivateCase: {0}", id);
 #endif
-                        _taskManager.AddTasksInWorkflow(id);
+                        _taskManager.AddTasksInCase(id);
                         break;
 
                     default:

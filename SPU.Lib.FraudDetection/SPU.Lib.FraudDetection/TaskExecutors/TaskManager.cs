@@ -10,7 +10,7 @@
     using Service.Interface;
 
     /// <summary>
-    ///     Workflow Class.
+    ///     Case Class.
     /// </summary>
     public class TaskManager : ITaskManager
     {
@@ -51,11 +51,11 @@
             }
         }
 
-        public void AddTasksInWorkflow(int workflowId)
+        public void AddTasksInCase(int caseId)
         {
-            var tasks = _taskService.GetTasksByWorkflowId(new TaskSelectByWorkflowIdCriteria()
+            var tasks = _taskService.GetTasksByCaseId(new TaskSelectAllByCaseIdCriteria()
             {
-                WorkFlowId = workflowId
+                CaseId = caseId
             });
 
             foreach (var task in tasks)
@@ -106,11 +106,11 @@
             }
         }
 
-        public void RemoveTasksInWorkflow(int workflowId)
+        public void RemoveTasksInCase(int caseId)
         {
-            var taskExecutorsForWorkflow = TaskExecutors.Where(t => t.Task.WorkflowId == workflowId).ToList();
+            var taskExecutorsForCase = TaskExecutors.Where(t => t.Task.CaseId == caseId).ToList();
 
-            foreach (var taskExecutor in taskExecutorsForWorkflow)
+            foreach (var taskExecutor in taskExecutorsForCase)
             {
                 taskExecutor.Stop();
                 TaskExecutors.Remove(taskExecutor);

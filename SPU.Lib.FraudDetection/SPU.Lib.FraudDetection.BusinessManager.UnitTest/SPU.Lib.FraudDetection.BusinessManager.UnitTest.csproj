@@ -174,7 +174,7 @@
     <Compile Include="MailSenders\AutoMailSenderTest.cs" />
     <Compile Include="Mock Objects\FakeMailClient.cs" />
     <Compile Include="SendingMessage\ReceivingMessageHandlerTest.cs" />
-    <Compile Include="SendingMessage\DeactivateWorkflowTest.cs" />
+    <Compile Include="SendingMessage\DeactivateCaseTest.cs" />
     <Compile Include="SendingMessage\RemovingTaskTest.cs" />
     <Compile Include="ReportTemplateRenders\FakeSuspiciousStatisticReporRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />

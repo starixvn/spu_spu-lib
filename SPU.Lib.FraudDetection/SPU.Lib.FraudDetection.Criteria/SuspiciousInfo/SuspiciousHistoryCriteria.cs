@@ -5,7 +5,7 @@
     public class SuspiciousHistoryCriteria : CriteriaBase
     {
         public string CustIdList { get; set; }
-        public int WorkflowId { get; set; }
+        public int CaseId { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

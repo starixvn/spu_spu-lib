@@ -23,14 +23,14 @@
                 EventId = 2,
                 Interval = 30,
                 IntervalType = "Second",
-                WorkflowId = 10,
+                CaseId = 10,
                 TaskId = 81,
                 TaskName = "Count suspicion times by customer",
                 IsActive = true,
                 IsBackgroundProcess = true,
                 NextActionIdList = "1,2",
                 TaskRules =
-                    "select susCust.custid from (select nfo.custid, COUNT(*) as violateCounter from dbo.SuspiciousInfo nfo with(nolock) where nfo.WorkflowId = $param1$ group by nfo.CustId)as susCust where susCust.violateCounter >= 3",
+                    "select susCust.custid from (select nfo.custid, COUNT(*) as violateCounter from dbo.SuspiciousInfo nfo with(nolock) where nfo.CaseId = $param1$ group by nfo.CustId)as susCust where susCust.violateCounter >= 3",
                 TaskDesc = "It's background processing",
                 NextActionTargetIdList = "9,10"
             };

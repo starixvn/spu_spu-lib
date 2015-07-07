@@ -26,13 +26,13 @@
         RemovingTask,
 
         /// <summary>
-        ///     Deactivate workflow.
+        ///     Deactivate case.
         /// </summary>
-        DeactivatingWorkflow,
+        DeactivatingCase,
 
         /// <summary>
-        ///     Deactivate workflow.
+        ///     Deactivate case.
         /// </summary>
-        ActivatingWorkflow
+        ActivatingCase
     }
 }

@@ -101,8 +101,8 @@
     <Compile Include="MailSenders\FileWriter.cs" />
     <Compile Include="MailSenders\IMailClient.cs" />
     <Compile Include="NextActions\NextActionType.cs" />
-    <Compile Include="QueueManagement\SendingWorklows\ActivateWorkflow.cs" />
-    <Compile Include="QueueManagement\SendingWorklows\DeactivateWorkflow.cs" />
+    <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />
+    <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />

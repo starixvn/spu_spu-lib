@@ -87,11 +87,11 @@
     <Compile Include="Interface\IMatchService.cs" />
     <Compile Include="Interface\IReportService.cs" />
     <Compile Include="Interface\ITaskService.cs" />
-    <Compile Include="Implement\WorkflowService.cs" />
+    <Compile Include="Implement\CaseService.cs" />
     <Compile Include="Implement\GroupService.cs" />
     <Compile Include="Interface\IScannedMatchesService.cs" />
     <Compile Include="Interface\ISuspiciousInfoService.cs" />
-    <Compile Include="Interface\IWorkflowService.cs" />
+    <Compile Include="Interface\ICaseService.cs" />
     <Compile Include="Implement\SuspiciousStatisticsReportService.cs" />
     <Compile Include="Implement\MatchService.cs" />
     <Compile Include="QueryService.cs" />

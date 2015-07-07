@@ -42,7 +42,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         protected override void ExecuteRule()
         {
-            var ruleQuery = Task.TaskRules.Replace("$param1$", Task.WorkflowId.ToString());
+            var ruleQuery = Task.TaskRules.Replace("$param1$", Task.CaseId.ToString());
             SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 
@@ -61,7 +61,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
                 var criteria = new SuspiciousHistoryCriteria
                 {
                     CustIdList = string.Join(",", suspiciousCustomerChunk.Select(t => t.CustId)),
-                    WorkflowId = Task.WorkflowId
+                    CaseId = Task.CaseId
                 };
 
                 suspicionList.AddRange(TaskService.GetSuspiciousCustomerHistory(criteria));

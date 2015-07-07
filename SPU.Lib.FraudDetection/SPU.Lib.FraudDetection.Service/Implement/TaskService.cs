@@ -53,12 +53,12 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _taskDataAccess.DeleteTask(criteria);
         }
 
-        public DataCollection GetTasksByWorkflowId(ICriteria criteria)
+        public DataCollection GetTasksByCaseId(ICriteria criteria)
         {
-            return _taskDataAccess.GetTasksByWorkflowId(criteria);
+            return _taskDataAccess.GetTasksByCaseId(criteria);
         }
 
-        public IEnumerable<Task> GetTasksByWorkflowId(TaskSelectByWorkflowIdCriteria criteria)
+        public IEnumerable<Task> GetTasksByCaseId(TaskSelectAllByCaseIdCriteria criteria)
         {
             return GetData<Task>(criteria);
         }
@@ -126,7 +126,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         ///     Execute Rule.
         /// </summary>
         /// <param name="sqlQueryString">SQL Query String.</param>
-        /// <param name="taskId">Workflow ID.</param>
+        /// <param name="taskId">Case ID.</param>
         /// <returns>List of Suspicious Info.</returns>
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int worflowId)
         {
@@ -142,7 +142,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
                     MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
                     TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
                     TaskId = taskId,
-                    WorkflowId = worflowId
+                    CaseId = worflowId
                 });
             }
 

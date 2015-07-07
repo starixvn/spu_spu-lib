@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IWorkflowService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ICaseService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,17 +16,17 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    ///     Workflow Service interface.
+    ///     Case Service interface.
     /// </summary>
-    public interface IWorkflowService
+    public interface ICaseService
     {
-        ICommandResult InsertWorkflow(ICriteria criteria);
-        ICommandResult DeleteWorkflow(ICriteria criteria);
-        IEnumerable<WorkflowInfo> LoadWorkflows(ICriteria criteria);
-        DataCollection GetWorkflows(ICriteria criteria);
+        ICommandResult InsertCase(ICriteria criteria);
+        ICommandResult DeleteCase(ICriteria criteria);
+        IEnumerable<CaseInfo> LoadCases(ICriteria criteria);
+        DataCollection GetCases(ICriteria criteria);
         IEnumerable<Task> GetTasks(ICriteria criteria);
-        ICommandResult UpdateWorkflow(ICriteria criteria);
-        WorkflowInfo GetWorkflowById(ICriteria criteria);
+        ICommandResult UpdateCase(ICriteria criteria);
+        CaseInfo GetCaseById(ICriteria criteria);
         void Dispose();
     }
 }

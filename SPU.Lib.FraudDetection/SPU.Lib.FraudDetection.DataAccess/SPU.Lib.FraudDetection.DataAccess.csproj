@@ -79,7 +79,7 @@
     <Compile Include="Interface\ICustomerReportDataAccess.cs" />
     <Compile Include="Implement\SuspiciousInfoDataAccess.cs" />
     <Compile Include="Implement\TaskDataAccess.cs" />
-    <Compile Include="Implement\WorkflowDataAccess.cs" />
+    <Compile Include="Implement\CaseDataAccess.cs" />
     <Compile Include="Interface\IEventDataAccess.cs" />
     <Compile Include="Interface\IBettypeDataAccess.cs" />
     <Compile Include="Interface\IConfigurationsDataAccess.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="Interface\IScannedMatchesDataAccess.cs" />
     <Compile Include="Interface\ISuspiciousInfoDataAccess.cs" />
     <Compile Include="Interface\ITaskDataAccess.cs" />
-    <Compile Include="Interface\IWorkflowDataAccess.cs" />
+    <Compile Include="Interface\ICaseDataAccess.cs" />
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

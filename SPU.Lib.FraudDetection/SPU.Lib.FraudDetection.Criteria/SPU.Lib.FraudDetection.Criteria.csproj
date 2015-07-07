@@ -106,17 +106,17 @@
     <Compile Include="Task\TaskSelectForExecutingCriteria.cs" />
     <Compile Include="Task\TaskInfoSelectCriteria.cs" />
     <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
-    <Compile Include="Task\TaskSelectByWorkflowIdCriteria.cs" />
+    <Compile Include="Task\TaskSelectAllByCaseIdCriteria.cs" />
     <Compile Include="Task\TaskSelectAllCriteria.cs" />
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
     <Compile Include="Task\TaskUpdateStatusCriteria.cs" />
-    <Compile Include="Workflow\WorkflowUpdateStatusCriteria.cs" />
-    <Compile Include="Workflow\WorkflowSelectByIdCriteria.cs" />
-    <Compile Include="Workflow\WorkflowSelectAllCriteria.cs" />
-    <Compile Include="Workflow\WorkflowUpdateCriteria.cs" />
-    <Compile Include="Workflow\WorkflowInsertCriteria.cs" />
+    <Compile Include="Case\CaseUpdateStatusCriteria.cs" />
+    <Compile Include="Case\CaseSelectByIdCriteria.cs" />
+    <Compile Include="Case\CaseSelectAllCriteria.cs" />
+    <Compile Include="Case\CaseUpdateCriteria.cs" />
+    <Compile Include="Case\CaseInsertCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
