@@ -53,7 +53,7 @@
 
         public void AddTasksInCase(int caseId)
         {
-            var tasks = _taskService.GetTasksByCaseId(new TaskSelectAllByCaseIdCriteria()
+            var tasks = _taskService.GetTasksByCaseId(new TaskSelectByCaseIdCriteria()
             {
                 CaseId = caseId
             });

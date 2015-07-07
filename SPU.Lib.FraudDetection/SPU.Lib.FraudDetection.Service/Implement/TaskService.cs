@@ -53,12 +53,12 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _taskDataAccess.DeleteTask(criteria);
         }
 
-        public DataCollection GetTasksByCaseId(ICriteria criteria)
+        public DataCollection GetTasksByCaseId(TaskSelectAllByCaseIdCriteria criteria)
         {
             return _taskDataAccess.GetTasksByCaseId(criteria);
         }
 
-        public IEnumerable<Task> GetTasksByCaseId(TaskSelectAllByCaseIdCriteria criteria)
+        public IEnumerable<Task> GetTasksByCaseId(TaskSelectByCaseIdCriteria criteria)
         {
             return GetData<Task>(criteria);
         }

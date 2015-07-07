@@ -107,7 +107,7 @@
     <Compile Include="Task\TaskSelectForExecutingCriteria.cs" />
     <Compile Include="Task\TaskInfoSelectCriteria.cs" />
     <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
-    <Compile Include="Task\TaskSelectAllByCaseIdCriteria.cs" />
+    <Compile Include="Task\TaskSelectByCaseIdCriteria.cs" />
     <Compile Include="Task\TaskSelectAllCriteria.cs" />
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />

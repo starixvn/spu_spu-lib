@@ -14,13 +14,18 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     /// <summary>
     ///     TaskSelectAllByWorkflowIdCriteria Class.
     /// </summary>
-    public class TaskSelectAllByWorkflowIdCriteria : CriteriaBase
+    public class TaskSelectAllByCaseIdCriteria : CriteriaBase
     {
-        public int WorkFlowId { get; set; }
+        public int CaseId { get; set; }
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
         public int PageCount { get; set; }
         public int RowCount { get; set; }
+
+        public TaskSelectAllByCaseIdCriteria()
+        {
+            PageIndex = 1;
+        }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -28,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskSelectAllByWorkflowId";
+            return "SPU_TaskSelectAllByCaseId";
         }
 
         /// <summary>

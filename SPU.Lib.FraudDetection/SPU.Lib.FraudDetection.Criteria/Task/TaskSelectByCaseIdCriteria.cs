@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     /// <summary>
     ///     TaskSelectAllByCaseIdCriteria Class.
     /// </summary>
-    public class TaskSelectAllByCaseIdCriteria : CriteriaBase
+    public class TaskSelectByCaseIdCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
 
