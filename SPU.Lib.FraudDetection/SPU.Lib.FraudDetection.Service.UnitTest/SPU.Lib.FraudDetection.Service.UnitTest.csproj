@@ -132,9 +132,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CaseGroupServiceIntergrationTest.cs" />
     <Compile Include="CaseGroupServiceUnitTest.cs" />
-    <Compile Include="FakeCaseGroupDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

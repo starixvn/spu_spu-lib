@@ -1,0 +1,9 @@
+namespace SPU.Lib.FraudDetection.DTO
+{
+    public class CaseGroup
+    {
+        public int CaseId { get; set; }
+
+        public int GroupId { get; set; }
+    }
+}

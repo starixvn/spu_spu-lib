@@ -8,7 +8,7 @@
     {
         ICommandResult InsertCaseGroup(CaseGroupInsertCriteria criteria);
 
-        ICommandResult RemoveCaseGroup(CaseGroupRemoveCriteria criteria);
+        ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria);
     }
 
     public class CaseGroupService : QueryService, ICaseGroupService
@@ -30,7 +30,7 @@
             return _caseGroupDataAccess.InsertCaseGroup(criteria);
         }
 
-        public ICommandResult RemoveCaseGroup(CaseGroupRemoveCriteria criteria)
+        public ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria)
         {
             return _caseGroupDataAccess.DeleteCaseGroup(criteria);
         }

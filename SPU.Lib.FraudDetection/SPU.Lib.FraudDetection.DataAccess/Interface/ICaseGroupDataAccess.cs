@@ -1,5 +1,6 @@
 ﻿namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
+    using Criteria.CaseGroup;
     using DataAccess;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
@@ -9,19 +10,19 @@
     {
         ICommandResult InsertCaseGroup(CaseGroupInsertCriteria criteria);
 
-        ICommandResult DeleteCaseGroup(ICriteria criteria);
+        ICommandResult DeleteCaseGroup(CaseGroupDeleteCriteria criteria);
     }
 
     public class CaseGroupDataAccess : BaseDataAccess, ICaseGroupDataAccess
     {
         public ICommandResult InsertCaseGroup(CaseGroupInsertCriteria criteria)
         {
-            throw new System.NotImplementedException();
+            return ExecuteNonQuery(criteria);
         }
 
-        public ICommandResult DeleteCaseGroup(ICriteria criteria)
+        public ICommandResult DeleteCaseGroup(CaseGroupDeleteCriteria criteria)
         {
-            throw new System.NotImplementedException();
+            return ExecuteNonQuery(criteria);
         }
     }
 }

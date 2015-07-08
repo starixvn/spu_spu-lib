@@ -2,7 +2,7 @@
 {
     using Fanex.Data.Repository;
 
-    public class CaseGroupRemoveCriteria : CriteriaBase
+    public class CaseGroupDeleteCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
 
