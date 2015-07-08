@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
-
+    
     /// <summary>
     ///     Task Data Access Implement.
     /// </summary>
