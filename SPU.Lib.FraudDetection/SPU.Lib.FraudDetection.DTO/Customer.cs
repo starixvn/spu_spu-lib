@@ -17,5 +17,7 @@ namespace SPU.Lib.FraudDetection.DTO
         public int CustId { get; set; }
 
         public string CustName { get; set; }
+
+        public Currency Currency { get; set; }
     }
 }

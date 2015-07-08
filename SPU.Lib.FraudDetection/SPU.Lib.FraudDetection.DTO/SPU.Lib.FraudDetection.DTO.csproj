@@ -81,6 +81,8 @@
     <Compile Include="Bettype.cs" />
     <Compile Include="CaseGroup.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Currency.cs" />
+    <Compile Include="CustomerBettingGroup.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="MatchDetail.cs" />
