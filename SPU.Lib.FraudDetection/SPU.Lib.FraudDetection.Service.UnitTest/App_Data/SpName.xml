@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Functions>
+  <Function Name="CaseGroup">
+    <Setting Key="SPU_CaseGroupIns" SpName="SPU_CaseGroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupDel" SpName="SPU_CaseGroupDel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupSel" SpName="SPU_CaseGroupSel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
+</Functions>

@@ -1,7 +1,10 @@
 ﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using Criteria.CaseGroup;
     using DataAccess.Interface;
+    using DTO;
     using Fanex.NAP.Framework.Command;
 
     public interface ICaseGroupService
@@ -33,6 +36,11 @@
         public ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria)
         {
             return _caseGroupDataAccess.DeleteCaseGroup(criteria);
+        }
+
+        public IList<CaseGroup> SelectCaseGroup(CaseGroupSelectCriteria criteria)
+        {
+            return GetData<CaseGroup>(criteria).ToList();
         }
     }
 }

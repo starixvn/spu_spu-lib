@@ -1,5 +1,6 @@
 ﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
 {
+    using Criteria.CaseGroup;
     using DataAccess.Interface;
     using Moq;
     using NUnit.Framework;
@@ -21,6 +22,22 @@
             });
 
             mockCaseGroupDataAccess.Verify(x => x.InsertCaseGroup(It.IsAny<CaseGroupInsertCriteria>()), Times.Exactly(1));
+        }
+
+        [Test]
+        public void When_Delete_CaseGroup_Then_Method_DeleteCaseGroup_Should_Be_Called()
+        {
+            var mockCaseGroupDataAccess = new Mock<ICaseGroupDataAccess>();
+
+            var sut = new CaseGroupService(mockCaseGroupDataAccess.Object);
+
+            sut.RemoveCaseGroup(new CaseGroupDeleteCriteria
+            {
+                CaseId = 1,
+                GroupId = 1
+            });
+
+            mockCaseGroupDataAccess.Verify(x => x.DeleteCaseGroup(It.IsAny<CaseGroupDeleteCriteria>()), Times.Exactly(1));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace SPU.Lib.FraudDetection.DataAccess.UnitTest
 {
+    using Core;
     using Criteria.CaseGroup;
     using Fanex.Data.Configuration;
     using Interface;
@@ -7,14 +8,8 @@
     using Service.UnitTest;
 
     [TestFixture]
-    public class CaseGroupDataAccessIntergrationTest
+    public class CaseGroupDataAccessIntergrationTest : IntegrationTest
     {
-        [SetUp]
-        public void SetUp()
-        {
-            DbSettingProviderManager.Current.Start();
-        }
-
         [Test]
         [Ignore]
         public void When_Insert_New_CaseGroup_Then_Should_Return_True()
@@ -45,7 +40,6 @@
             Assert.IsFalse(result.IsSuccessful);
         }
 
-
         [Test]
         [Ignore]
         public void When_Delete_Existed_CaseGroup_Which_Group_Containing_No_Suspicious_Customer_Then_Should_Return_True()
@@ -75,5 +69,7 @@
 
             Assert.IsFalse(result.IsSuccessful);
         }
+
+        
     }
 }

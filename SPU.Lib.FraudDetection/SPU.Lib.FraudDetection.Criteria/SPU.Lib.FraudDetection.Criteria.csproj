@@ -74,6 +74,7 @@
     <Compile Include="Bettype\BettypeDeleteCriteria.cs" />
     <Compile Include="Bettype\BettypeSelectAllCriteria.cs" />
     <Compile Include="Bettype\SportSelectAllCriteria.cs" />
+    <Compile Include="CaseGroup\CaseGroupSelectCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />

@@ -1,8 +1,9 @@
 ﻿namespace SPU.Lib.FraudDetection.DataAccess.Interface
 {
+    using System.Collections.Generic;
     using Criteria.CaseGroup;
     using DataAccess;
-    using Fanex.Data.Repository;
+    using DTO;
     using Fanex.NAP.Framework.Command;
     using Service.UnitTest;
 
