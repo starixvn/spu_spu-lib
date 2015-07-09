@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implement\CustomerBettingGroupDataAccess.cs" />
     <Compile Include="Implement\CustomerReportDataAccess.cs" />
     <Compile Include="Implement\EventDataAccess.cs" />
     <Compile Include="Implement\BettypeDataAccess.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Implement\GroupDataAccess.cs" />
     <Compile Include="Implement\MailMasterDataAccess.cs" />
     <Compile Include="Implement\ScannedMatchesDataAccess.cs" />
+    <Compile Include="Interface\ICustomerBettingGroupDataAccess.cs" />
     <Compile Include="Interface\ICaseGroupDataAccess.cs" />
     <Compile Include="Interface\IMailMasterDataAccess.cs" />
     <Compile Include="Interface\ICustomerReportDataAccess.cs" />

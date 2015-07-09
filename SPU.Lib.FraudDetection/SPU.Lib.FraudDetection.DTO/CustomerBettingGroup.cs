@@ -10,6 +10,7 @@
 namespace SPU.Lib.FraudDetection.DTO
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     ///     CustomerBettingGroup Class.
@@ -27,8 +28,17 @@ namespace SPU.Lib.FraudDetection.DTO
 
         public string Description { get; set; }
 
-        public string Currencies { get; set; }
+        public string Currencies
+        {
+            get
+            {
+                var distinctCurrencies = Customers.Select(t => t.Currency.CurrencyName).Distinct().ToList();
+                var currencies = string.Join(",", distinctCurrencies);
 
-        public IEnumerable<Customer> Customers { get; set; }
+                return currencies;
+            }
+        }
+
+        public List<Customer> Customers { get; set; }
     }
 }

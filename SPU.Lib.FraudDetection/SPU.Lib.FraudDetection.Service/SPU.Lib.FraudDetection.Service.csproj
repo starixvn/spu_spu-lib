@@ -76,12 +76,14 @@
     <Compile Include="Implement\BalanceUpDayDTO.cs" />
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\CustomerBettingGroupService.cs" />
     <Compile Include="Implement\CustomerReportService.cs" />
     <Compile Include="Implement\EventService.cs" />
     <Compile Include="Implement\CustomerService.cs" />
     <Compile Include="Implement\SuspiciousCustomer.cs" />
     <Compile Include="Implement\CaseGroupService.cs" />
     <Compile Include="Interface\ICaseGroupService.cs" />
+    <Compile Include="Interface\ICustomerBettingGroupService.cs" />
     <Compile Include="Interface\ICustomerReportService.cs" />
     <Compile Include="Interface\IBalanceUpDayService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />

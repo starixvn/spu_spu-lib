@@ -82,6 +82,12 @@
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Config\ConfigDeleteCriteria.cs" />
     <Compile Include="Config\ConfigSelectAllCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCustomerCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetByIdCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetAllCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupUpdateCriteria.cs" />
     <Compile Include="Event\EventSelectAllCriteria.cs" />
     <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
@@ -137,6 +143,7 @@
       <Name>SPU.Lib.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
