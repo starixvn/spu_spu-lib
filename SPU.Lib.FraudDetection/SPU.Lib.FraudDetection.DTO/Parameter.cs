@@ -15,9 +15,15 @@ namespace SPU.Lib.FraudDetection.DTO
     public class Parameter
     {
         public int ParamId { get; set; }
+
         public string ParamName { get; set; }
+
         public string ParamDesc { get; set; }
+
         public string ParamDisplayName { get; set; }
+
         public int ParamValue { get; set; }
+
+        public string ParamUnit { get; set; }
     }
 }
