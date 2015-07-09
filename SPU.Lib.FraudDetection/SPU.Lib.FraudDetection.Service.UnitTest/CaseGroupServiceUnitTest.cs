@@ -2,6 +2,7 @@
 {
     using Criteria.CaseGroup;
     using DataAccess.Interface;
+    using Implement;
     using Moq;
     using NUnit.Framework;
 

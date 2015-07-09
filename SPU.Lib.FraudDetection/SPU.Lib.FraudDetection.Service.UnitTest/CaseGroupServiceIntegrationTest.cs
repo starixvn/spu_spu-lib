@@ -2,6 +2,7 @@
 {
     using Core;
     using Criteria.CaseGroup;
+    using Implement;
     using NUnit.Framework;
 
     [TestFixture]

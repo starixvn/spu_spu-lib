@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
+﻿namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,13 +6,8 @@
     using DataAccess.Interface;
     using DTO;
     using Fanex.NAP.Framework.Command;
-
-    public interface ICaseGroupService
-    {
-        ICommandResult InsertCaseGroup(CaseGroupInsertCriteria criteria);
-
-        ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria);
-    }
+    using Interface;
+    using UnitTest;
 
     public class CaseGroupService : QueryService, ICaseGroupService
     {

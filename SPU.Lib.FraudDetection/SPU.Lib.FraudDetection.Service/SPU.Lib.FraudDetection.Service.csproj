@@ -80,7 +80,8 @@
     <Compile Include="Implement\EventService.cs" />
     <Compile Include="Implement\CustomerService.cs" />
     <Compile Include="Implement\SuspiciousCustomer.cs" />
-    <Compile Include="Interface\CaseGroupService.cs" />
+    <Compile Include="Implement\CaseGroupService.cs" />
+    <Compile Include="Interface\ICaseGroupService.cs" />
     <Compile Include="Interface\ICustomerReportService.cs" />
     <Compile Include="Interface\IBalanceUpDayService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />

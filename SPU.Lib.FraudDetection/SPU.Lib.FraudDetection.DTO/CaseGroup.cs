@@ -7,5 +7,7 @@ namespace SPU.Lib.FraudDetection.DTO
         public int GroupId { get; set; }
 
         public string GroupName { get; set; }
+
+        public string GroupDescription { get; set; }
     }
 }
