@@ -32,5 +32,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult InsertCustomer(ICriteria criteria);
 
         ICommandResult DeleteCustomer(ICriteria criteria);
+
+        Customer GetCustomerByName(ICriteria criteria);
     }
 }

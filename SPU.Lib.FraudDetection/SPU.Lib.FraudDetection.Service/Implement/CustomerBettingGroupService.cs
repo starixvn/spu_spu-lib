@@ -63,5 +63,10 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             return _customerBettingGroupDataAccess.DeleteCustomer(criteria);
         }
+
+        public Customer GetCustomerByName(ICriteria criteria)
+        {
+            return _customerBettingGroupDataAccess.GetCustomerByName(criteria);
+        }
     }
 }

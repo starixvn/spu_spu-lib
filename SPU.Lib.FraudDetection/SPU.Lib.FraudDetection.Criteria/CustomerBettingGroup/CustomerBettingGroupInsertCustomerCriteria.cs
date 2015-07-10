@@ -20,9 +20,9 @@ namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
 
         public int GroupId { get; set; }
 
-        public int CustomerId { get; set; }
+        public int CustId { get; set; }
 
-        public string CustomerName { get; set; }
+        public string CustName { get; set; }
 
         public int CurrencyId { get; set; }
 
@@ -43,7 +43,7 @@ namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return GroupId > 0 && CustomerId > 0 && CurrencyId > 0;
+            return GroupId > 0 && CustId > 0 && CurrencyId > 0;
         }
     }
 }

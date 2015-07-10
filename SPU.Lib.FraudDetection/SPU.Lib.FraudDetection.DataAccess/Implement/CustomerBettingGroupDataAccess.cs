@@ -52,6 +52,24 @@ namespace SPU.Lib.FraudDetection.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
+        public Customer GetCustomerByName(ICriteria criteria)
+        {
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var customers = db.Query<Customer, Currency, Customer>(
+                    (cust, curr) =>
+                    {
+                        cust.Currency = curr;
+
+                        return cust;
+                    },
+                    "CurrencyId",
+                    criteria.GetSpParams());
+
+                return customers.FirstOrDefault();
+            }
+        }
+
         /// <summary>
         /// Get all groups.
         /// </summary>

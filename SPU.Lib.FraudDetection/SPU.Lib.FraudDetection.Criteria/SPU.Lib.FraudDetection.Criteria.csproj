@@ -82,6 +82,8 @@
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Config\ConfigDeleteCriteria.cs" />
     <Compile Include="Config\ConfigSelectAllCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCustomerCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetCustomerByNameCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCustomerCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetByIdCriteria.cs" />

@@ -32,5 +32,7 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
         ICommandResult UpdateGroup(ICriteria criteria);
 
         ICommandResult DeleteGroup(ICriteria criteria);
+
+        Customer GetCustomerByName(ICriteria criteria);
     }
 }
