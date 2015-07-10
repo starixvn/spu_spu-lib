@@ -18,22 +18,26 @@
 
         public int GroupId { get; set; }
 
+        public int CaseId { get; set; }
+
         public IList<SuspiciousInfo> SuspicionList { get; set; }
 
-        public IGroupService GroupService { get; set; }
+        public ICustomerGroupService CustomerGroupService { get; set; }
 
-        public AssigningGroupNextAction(int groupId)
+        public AssigningGroupNextAction(int groupId, int caseId)
         {
+            CaseId = caseId;
             GroupId = groupId;
             SuspicionList = new List<SuspiciousInfo>();
-            GroupService = new GroupService();
+            CustomerGroupService = new CustomerGroupService();
         }
 
-        public AssigningGroupNextAction(int groupId, IGroupService groupService)
+        public AssigningGroupNextAction(int groupId, int caseId, ICustomerGroupService groupService)
         {
+            CaseId = caseId;
             GroupId = groupId;
             SuspicionList = new List<SuspiciousInfo>();
-            GroupService = groupService;
+            CustomerGroupService = groupService;
         }
 
         public void TakeAction()
@@ -49,13 +53,14 @@
 
             foreach (var custIdChunk in custIdChunks)
             {
-                var criteria = new CustomerGroupAssignCriteria
+                var criteria = new CustomerGroupInsertCriteria
                 {
+                    CaseId = CaseId,
                     GroupId = GroupId,
                     CustIdList = string.Join(",", custIdChunk)
                 };
 
-                var result = GroupService.AssignCustomerToGroup(criteria);
+                var result = CustomerGroupService.InsertCustomerGroup(criteria);
 
                 if (result.IsSuccessful == false)
                 {

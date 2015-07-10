@@ -27,24 +27,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         public IList<string> MatchIdList { get; set; }
 
         public List<SuspiciousInfo> SuspicionList { get; set; }
-
-        public override void Execute()
-        {
-            try
-            {
-                ExecutePrecondition();
-
-                ExecuteRule();
-
-                TakeNextAction();
-            }
-            catch (Exception ex)
-            {
-                WriteLog(ex);
-            }
-        }
-
-        protected virtual void ExecutePrecondition()
+        
+        protected override void ExecutePrecondition()
         {
             var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.TaskId.ToString());
             MatchIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
@@ -82,7 +66,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             for (var i = 0; i < nextActionIdList.Count(); i++)
             {
                 var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
-                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]));
+                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]), Task.CaseId);
                 nextAction.SuspicionList = SuspicionList;
 
                 nextAction.TakeAction();

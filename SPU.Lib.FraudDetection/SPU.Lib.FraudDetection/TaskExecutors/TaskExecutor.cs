@@ -123,7 +123,23 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             #endif
         }
 
-        public abstract void Execute();
+        public virtual void Execute()
+        {
+            try
+            {
+                ExecutePrecondition();
+
+                ExecuteRule();
+
+                TakeNextAction();
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+            }
+        }
+
+        protected abstract void ExecutePrecondition();
 
         protected abstract void ExecuteRule();
 

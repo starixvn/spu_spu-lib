@@ -28,22 +28,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public IList<SuspiciousCustomer> SuspiciousCustomers { get; set; }
 
-        public override void Execute()
-        {
-            try
-            {
-                ExecutePrecondition();
-
-                ExecuteRule();
-
-                TakeNextAction();
-            }
-            catch (Exception ex)
-            {
-                WriteLog(ex);
-            }
-        }
-
         protected virtual void ExecutePrecondition()
         {            
             var preConditionQuery = Task.TaskPreconditions;

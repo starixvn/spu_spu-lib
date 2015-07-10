@@ -9,14 +9,13 @@
 
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Core;
+    using Criteria.Group;
     using DataAccess.Implement;
     using DataAccess.Interface;
-<<<<<<< HEAD
-=======
     using DTO;
->>>>>>> #38307: Implement server side (Edit Group)
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
@@ -48,6 +47,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _groupDataAccess.GetGroups(criteria);
         }
 
+        public IEnumerable<Group> GetAllGroups(ICriteria criteria)
+        {
+            return GetData<Group>(criteria);
+        }
+
         public Group GetGroupById(ICriteria criteria)
         {
             var result = GetData<Group>(criteria);
@@ -59,10 +63,18 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             return _groupDataAccess.UpdateGroup(criteria);
         }
+<<<<<<< HEAD
 
         public ICommandResult AssignCustomerToGroup(ICriteria criteria)
         {
             return _groupDataAccess.AssignCustToGroup(criteria);
         }
+
+        public IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria)
+        {
+            return GetData<Group>(criteria);
+        }
+=======
+>>>>>>> #39207 -  Update the sp which assign customers to group.
     }
 }

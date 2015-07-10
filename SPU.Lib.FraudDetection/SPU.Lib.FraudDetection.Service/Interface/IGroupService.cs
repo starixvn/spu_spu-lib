@@ -32,8 +32,6 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         Group GetGroupById(ICriteria criteria);
 
         ICommandResult UpdateGroup(ICriteria criteria);
-        
-        ICommandResult AssignCustomerToGroup(ICriteria criteria);
 
         IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria);
         

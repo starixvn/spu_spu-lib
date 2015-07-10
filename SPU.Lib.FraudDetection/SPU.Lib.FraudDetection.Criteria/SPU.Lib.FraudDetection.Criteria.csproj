@@ -106,7 +106,7 @@
     <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
     <Compile Include="Group\GroupSelectAllCriteria.cs" />
     <Compile Include="Group\GroupUpdateCriteria.cs" />
-    <Compile Include="Group\CustomerGroupAssignCriteria.cs" />
+    <Compile Include="Group\CustomerGroupInsertCriteria.cs" />
     <Compile Include="Group\GroupInsertCriteria.cs" />
     <Compile Include="MailMaster\MailMasterGetByNameCriteria.cs" />
     <Compile Include="MailMaster\MailMasterGetByIdCriteria.cs" />

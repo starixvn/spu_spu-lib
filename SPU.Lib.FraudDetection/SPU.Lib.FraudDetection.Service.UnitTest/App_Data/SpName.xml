@@ -6,4 +6,9 @@
     <Setting Key="SPU_CaseGroupDel" SpName="SPU_CaseGroupDel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_CaseGroupSel" SpName="SPU_CaseGroupSel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
+
+  <Function Name="CaseGroup">
+    <Setting Key="SPU_CustomerGroupInsert" SpName="SPU_CustomerGroupInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CustomerGroupUpdate" SpName="SPU_CustomerGroupUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+  </Function>
 </Functions>

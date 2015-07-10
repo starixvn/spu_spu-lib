@@ -14,14 +14,16 @@ namespace SPU.Lib.FraudDetection.Criteria.Group
     /// <summary>
     ///     CustomerGroupAssignCriteria Class.
     /// </summary>
-    public class CustomerGroupAssignCriteria : CriteriaBase
+    public class CustomerGroupInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
 
-        public string CustIdList { get; set; } //// format: "1;2;3".
+        public string CustIdList { get; set; }
 
         public int GroupId { get; set; }
 
+        public int CaseId { get; set; }
+       
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>

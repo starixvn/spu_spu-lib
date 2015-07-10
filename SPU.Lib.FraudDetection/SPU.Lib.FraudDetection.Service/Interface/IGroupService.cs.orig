@@ -9,13 +9,12 @@
 
 namespace SPU.Lib.FraudDetection.Service.Interface
 {
+    using System.Collections.Generic;
     using Core;
+    using Criteria.Group;
+    using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-<<<<<<< HEAD
-=======
-    using SPU.Lib.FraudDetection.DTO;
->>>>>>> #38307: Implement server side (Edit Group)
 
     /// <summary>
     ///     Group Service interface.
@@ -23,15 +22,23 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface IGroupService
     {
         ICommandResult InsertGroup(ICriteria criteria);
+
         ICommandResult DeleteGroup(ICriteria criteria);
+
         DataCollection GetGroups(ICriteria criteria);
-<<<<<<< HEAD
-=======
+
+        IEnumerable<Group> GetAllGroups(ICriteria criteria);
 
         Group GetGroupById(ICriteria criteria);
 
->>>>>>> #38307: Implement server side (Edit Group)
         ICommandResult UpdateGroup(ICriteria criteria);
+<<<<<<< HEAD
+        
         ICommandResult AssignCustomerToGroup(ICriteria criteria);
+
+        IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria);
+        
+=======
+>>>>>>> #39207 -  Update the sp which assign customers to group.
     }
 }

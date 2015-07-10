@@ -7,12 +7,12 @@
     /// </summary>
     public static class NextActionFactory
     {
-        public static INextAction GetNextAction(NextActionType actionType, int targetId)
+        public static INextAction GetNextAction(NextActionType actionType, int targetId, int caseId)
         {
             switch (actionType)
             {
                 case NextActionType.AssigningGroup:
-                    return new AssigningGroupNextAction(targetId);
+                    return new AssigningGroupNextAction(targetId, caseId);
 
                 case NextActionType.SendingEmail:
                     return new SendingEmailNextAction(targetId);
