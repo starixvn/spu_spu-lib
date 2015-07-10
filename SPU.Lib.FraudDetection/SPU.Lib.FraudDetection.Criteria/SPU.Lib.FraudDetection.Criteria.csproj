@@ -93,6 +93,7 @@
     <Compile Include="Event\EventSelectAllCriteria.cs" />
     <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
+    <Compile Include="Group\GroupNotInGivenCaseSelectAllCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />

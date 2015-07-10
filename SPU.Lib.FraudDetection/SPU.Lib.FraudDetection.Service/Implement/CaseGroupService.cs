@@ -7,7 +7,6 @@
     using DTO;
     using Fanex.NAP.Framework.Command;
     using Interface;
-    using UnitTest;
 
     public class CaseGroupService : QueryService, ICaseGroupService
     {

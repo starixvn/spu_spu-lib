@@ -19,7 +19,7 @@
             sut.InsertCaseGroup(new CaseGroupInsertCriteria
             {
                 CaseId = 1,
-                GroupId = 1
+                GroupIds = "1"
             });
 
             mockCaseGroupDataAccess.Verify(x => x.InsertCaseGroup(It.IsAny<CaseGroupInsertCriteria>()), Times.Exactly(1));

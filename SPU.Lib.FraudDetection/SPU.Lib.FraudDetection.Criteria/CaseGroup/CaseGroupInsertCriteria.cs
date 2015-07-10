@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
+﻿namespace SPU.Lib.FraudDetection.Criteria.CaseGroup
 {
     using Fanex.Data.Repository;
 
@@ -6,7 +6,7 @@
     {
         public int CaseId { get; set; }
 
-        public int GroupId { get; set; }
+        public string GroupIds { get; set; }
         
         public override string GetSettingKey()
         {
@@ -15,7 +15,7 @@
         
         public override bool IsValid()
         {
-            return CaseId > 0 && GroupId > 0;
+            return CaseId > 0 && !string.IsNullOrEmpty(GroupIds);
         }
     }
 }

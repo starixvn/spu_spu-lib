@@ -24,12 +24,16 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         {
         }
 
+        public IList<int> CustomerIdList { get; set; }
+
         public IList<SuspiciousCustomer> SuspiciousCustomers { get; set; }
 
         public override void Execute()
         {
             try
             {
+                ExecutePrecondition();
+
                 ExecuteRule();
 
                 TakeNextAction();
@@ -40,9 +44,18 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             }
         }
 
+        protected virtual void ExecutePrecondition()
+        {
+            CustomerIdList = new List<int>(); // TODO: more.
+            //var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.TaskId.ToString());
+            //CustomerIdList = new List<int>();
+            //TaskService.ExecutePrecondition(preConditionQuery).ToList());
+        }
+
         protected override void ExecuteRule()
         {
-            var ruleQuery = Task.TaskRules.Replace("$param1$", Task.CaseId.ToString());
+            var taskRule = Task.TaskRules + " AND susCust.CustId in ($param1$)";
+            var ruleQuery = taskRule.Replace("$param1$", string.Join(",", CustomerIdList));
             SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 

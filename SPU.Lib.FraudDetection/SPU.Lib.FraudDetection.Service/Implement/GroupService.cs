@@ -12,6 +12,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System.Collections.Generic;
     using System.Linq;
     using Core;
+    using Criteria.Group;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
@@ -66,6 +67,11 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public ICommandResult AssignCustomerToGroup(ICriteria criteria)
         {
             return _groupDataAccess.AssignCustToGroup(criteria);
+        }
+
+        public IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria)
+        {
+            return GetData<Group>(criteria);
         }
     }
 }

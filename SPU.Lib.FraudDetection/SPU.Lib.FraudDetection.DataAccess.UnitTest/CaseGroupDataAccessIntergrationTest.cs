@@ -2,24 +2,22 @@
 {
     using Core;
     using Criteria.CaseGroup;
-    using Fanex.Data.Configuration;
     using Interface;
     using NUnit.Framework;
-    using Service.UnitTest;
 
     [TestFixture]
     public class CaseGroupDataAccessIntergrationTest : IntegrationTest
     {
         [Test]
-        [Ignore]
+        //[Ignore]
         public void When_Insert_New_CaseGroup_Then_Should_Return_True()
         {
             var dataAccess = new CaseGroupDataAccess();
 
             var result = dataAccess.InsertCaseGroup(new CaseGroupInsertCriteria
             {
-                GroupId = 3,
-                CaseId = 3
+                GroupIds = "3,4,5",
+                CaseId = 1
             });
 
             Assert.IsTrue(result.IsSuccessful);
@@ -33,7 +31,7 @@
 
             var result = dataAccess.InsertCaseGroup(new CaseGroupInsertCriteria
             {
-                GroupId = 1,
+                GroupIds = "1",
                 CaseId = 1
             });
 
@@ -69,7 +67,5 @@
 
             Assert.IsFalse(result.IsSuccessful);
         }
-
-        
     }
 }

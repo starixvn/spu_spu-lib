@@ -11,6 +11,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 {
     using System.Collections.Generic;
     using Core;
+    using Criteria.Group;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
@@ -33,5 +34,8 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult UpdateGroup(ICriteria criteria);
         
         ICommandResult AssignCustomerToGroup(ICriteria criteria);
+
+        IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria);
+        
     }
 }

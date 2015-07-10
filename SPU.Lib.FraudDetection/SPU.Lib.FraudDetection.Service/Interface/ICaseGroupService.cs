@@ -4,7 +4,6 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     using Criteria.CaseGroup;
     using DTO;
     using Fanex.NAP.Framework.Command;
-    using UnitTest;
 
     public interface ICaseGroupService
     {

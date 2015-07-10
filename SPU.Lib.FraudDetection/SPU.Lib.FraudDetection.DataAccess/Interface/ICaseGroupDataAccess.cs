@@ -5,7 +5,6 @@
     using DataAccess;
     using DTO;
     using Fanex.NAP.Framework.Command;
-    using Service.UnitTest;
 
     public interface ICaseGroupDataAccess
     {
