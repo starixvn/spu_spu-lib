@@ -35,7 +35,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public string NextActionIdList { get; set; }
         public string NextActionTargetIdList { get; set; }
 
-        /// <summary>
+        /// <summary>do
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
