@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         public IList<SuspiciousCustomer> SuspiciousCustomers { get; set; }
 
-        protected virtual void ExecutePrecondition()
+        protected override void ExecutePrecondition()
         {            
             var preConditionQuery = Task.TaskPreconditions;
             CustomerIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
@@ -68,7 +68,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             for (var i = 0; i < nextActionIdList.Count(); i++)
             {
                 var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
-                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]));
+                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]), Task.CaseId);
                 nextAction.SuspicionList = suspicionList;
 
                 nextAction.TakeAction();
