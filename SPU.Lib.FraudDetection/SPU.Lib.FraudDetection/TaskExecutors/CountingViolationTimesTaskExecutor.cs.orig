@@ -31,6 +31,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         protected override void ExecutePrecondition()
         {
 <<<<<<< HEAD
+            throw new NotImplementedException();
+=======
             try
             {
                 ExecutePrecondition();
@@ -43,9 +45,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             {
                 WriteLog(ex);
             }
-=======
-            throw new NotImplementedException();
->>>>>>> #39207 -  Update the sp which assign customers to group.
+>>>>>>> origin/master_backup
         }
 
         protected virtual void ExecutePrecondition()

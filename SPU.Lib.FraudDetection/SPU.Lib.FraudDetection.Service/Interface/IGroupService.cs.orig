@@ -33,12 +33,12 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         ICommandResult UpdateGroup(ICriteria criteria);
 <<<<<<< HEAD
+=======
         
         ICommandResult AssignCustomerToGroup(ICriteria criteria);
 
         IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria);
         
-=======
->>>>>>> #39207 -  Update the sp which assign customers to group.
+>>>>>>> origin/master_backup
     }
 }

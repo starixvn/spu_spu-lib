@@ -85,10 +85,10 @@
     <Compile Include="Implement\CustomerGroupService.cs" />
     <Compile Include="Interface\ICaseGroupService.cs" />
 <<<<<<< HEAD
-    <Compile Include="Interface\ICustomerBettingGroupService.cs" />
-=======
     <Compile Include="Interface\ICustomerGroupService.cs" />
->>>>>>> #39207 -  Update the sp which assign customers to group.
+=======
+    <Compile Include="Interface\ICustomerBettingGroupService.cs" />
+>>>>>>> origin/master_backup
     <Compile Include="Interface\ICustomerReportService.cs" />
     <Compile Include="Interface\IBalanceUpDayService.cs" />
     <Compile Include="Interface\ICustomerService.cs" />

@@ -64,6 +64,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _groupDataAccess.UpdateGroup(criteria);
         }
 <<<<<<< HEAD
+=======
 
         public ICommandResult AssignCustomerToGroup(ICriteria criteria)
         {
@@ -74,7 +75,6 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         {
             return GetData<Group>(criteria);
         }
-=======
->>>>>>> #39207 -  Update the sp which assign customers to group.
+>>>>>>> origin/master_backup
     }
 }
