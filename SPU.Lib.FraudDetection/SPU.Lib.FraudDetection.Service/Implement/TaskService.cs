@@ -13,6 +13,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using Core;
     using Criteria.Task;
     using DataAccess.Implement;
@@ -128,22 +129,38 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         /// <param name="sqlQueryString">SQL Query String.</param>
         /// <param name="taskId">Case ID.</param>
         /// <returns>List of Suspicious Info.</returns>
-        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int worflowId)
+        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId)
         {
             var suspiciousInfoList = new List<SuspiciousInfo>();
 
             var dt = ExecuteReaderQueryInline(sqlQueryString);
 
+            var customerList = new List<dynamic>();
+
             for (var i = 0; i < dt.Rows.Count; i++)
             {
-                suspiciousInfoList.Add(new SuspiciousInfo
+                customerList.Add(new
                 {
                     CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
                     MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
-                    TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
-                    TaskId = taskId,
-                    CaseId = worflowId
+                    TransId = long.Parse(dt.Rows[i]["transid"].ToString())
                 });
+            }
+
+            var groups = customerList.GroupBy(t => new { t.CustId, t.MatchId });
+
+            foreach (var group in groups)
+            {
+                var suspicion = new SuspiciousInfo
+                {
+                    CustId = group.Key.CustId,
+                    MatchId = group.Key.MatchId,
+                    TransId = string.Join(",", group.Select(t => t.TransId)),
+                    CaseId = caseId,
+                    TaskId = taskId
+                };
+
+                suspiciousInfoList.Add(suspicion);
             }
 
             return suspiciousInfoList;
