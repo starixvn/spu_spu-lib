@@ -9,7 +9,7 @@
     public class CaseGroupDataAccessIntergrationTest : IntegrationTest
     {
         [Test]
-        //[Ignore]
+        [Ignore]
         public void When_Insert_New_CaseGroup_Then_Should_Return_True()
         {
             var dataAccess = new CaseGroupDataAccess();

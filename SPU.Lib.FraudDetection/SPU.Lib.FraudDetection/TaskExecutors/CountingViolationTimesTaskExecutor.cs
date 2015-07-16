@@ -36,8 +36,14 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         protected override void ExecuteRule()
         {
-            var taskRule = Task.TaskRules + " AND susCust.CustId in ($param1$)";
-            var ruleQuery = taskRule.Replace("$param1$", string.Join(",", CustomerIdList));
+            var ruleQuery = Task.TaskRules;
+
+            if (CustomerIdList.Any())
+            {
+                var taskRule = Task.TaskRules + " AND susCust.CustId in ($param1$)";
+                ruleQuery = taskRule.Replace("$param1$", string.Join(",", CustomerIdList));
+            }
+           
             SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 
