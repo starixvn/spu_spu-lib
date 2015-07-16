@@ -12,36 +12,44 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
     public class ScanMatchTaskExecutor : TaskExecutor
     {
+        private IList<string> _matchIdList;
+
+        private readonly List<SuspiciousInfo> _suspicionList;
+
         public ScanMatchTaskExecutor(Task task)
             : base(task)
         {
-            MatchIdList = new List<string>();
-            SuspicionList = new List<SuspiciousInfo>();
+            _matchIdList = new List<string>();
+            _suspicionList = new List<SuspiciousInfo>();
         }
 
         public ScanMatchTaskExecutor(Task task, ITaskService taskService)
             : base(task, taskService)
         {
+            _matchIdList = new List<string>();
+            _suspicionList = new List<SuspiciousInfo>();
         }
 
-        public IList<string> MatchIdList { get; set; }
+        protected override void ClearOldResult()
+        {
+            _matchIdList.Clear();
+            _suspicionList.Clear();
+        }
 
-        public List<SuspiciousInfo> SuspicionList { get; set; }
-        
         protected override void ExecutePrecondition()
         {
             var preConditionQuery = Task.TaskPreconditions.Replace("$param1$", Task.TaskId.ToString());
-            MatchIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
+            _matchIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
         }
 
         protected override void ExecuteRule()
         {
-            var matchChunks = MatchIdList.Chunk(ChunkSize);
+            var matchChunks = _matchIdList.Chunk(ChunkSize);
 
             foreach (var matchChunk in matchChunks)
             {
                 var ruleQuery = Task.TaskRules.Replace("$param1$", string.Join(",", matchChunk));
-                SuspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.CaseId));
+                _suspicionList.AddRange(TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.CaseId));
             }
 
             SaveSuspiciousCustomers();
@@ -49,13 +57,13 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
         private void SaveSuspiciousCustomers()
         {
-            var saveAction = new SavingSuspicion(SuspicionList, MatchIdList, Task.TaskId);
+            var saveAction = new SavingSuspicion(_suspicionList, _matchIdList, Task.TaskId);
             saveAction.TakeAction();
         }
 
         protected override void TakeNextAction()
         {
-            if (SuspicionList.Count == 0)
+            if (_suspicionList.Count == 0)
             {
                 return;
             }
@@ -67,7 +75,7 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             {
                 var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
                 var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]), Task.CaseId);
-                nextAction.SuspicionList = SuspicionList;
+                nextAction.SuspicionList = _suspicionList;
 
                 nextAction.TakeAction();
             }

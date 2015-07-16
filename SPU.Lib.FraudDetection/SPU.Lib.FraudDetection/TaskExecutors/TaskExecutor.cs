@@ -127,6 +127,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
         {
             try
             {
+                ClearOldResult();
+
                 ExecutePrecondition();
 
                 ExecuteRule();
@@ -138,6 +140,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
                 WriteLog(ex);
             }
         }
+
+        protected abstract void ClearOldResult();
 
         protected abstract void ExecutePrecondition();
 

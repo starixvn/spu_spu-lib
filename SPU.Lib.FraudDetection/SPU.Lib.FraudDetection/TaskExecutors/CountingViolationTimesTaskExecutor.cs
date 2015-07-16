@@ -1,9 +1,7 @@
 namespace SPU.Lib.FraudDetection.TaskExecutors
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Timers;
     using Core;
     using Core.Utilities;
     using Criteria.SuspiciousInfo;
@@ -14,47 +12,57 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
     public class CountingSuspicousTimesTaskExecutor : TaskExecutor
     {
+        private IList<string> _customerIdList;
+
+        private IList<SuspiciousCustomer> _suspiciousCustomers;
+
         public CountingSuspicousTimesTaskExecutor(Task task)
             : base(task)
         {
+            _customerIdList = new List<string>();
+            _suspiciousCustomers = new List<SuspiciousCustomer>();
         }
 
         public CountingSuspicousTimesTaskExecutor(Task task, ITaskService taskService)
             : base(task, taskService)
         {
+            _customerIdList = new List<string>();
+            _suspiciousCustomers = new List<SuspiciousCustomer>();
         }
 
-        public IList<string> CustomerIdList { get; set; }
-
-        public IList<SuspiciousCustomer> SuspiciousCustomers { get; set; }
+        protected override void ClearOldResult()
+        {
+            _customerIdList.Clear();
+            _suspiciousCustomers.Clear();
+        }
 
         protected override void ExecutePrecondition()
-        {            
+        {
             var preConditionQuery = Task.TaskPreconditions;
-            CustomerIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
+            _customerIdList = TaskService.ExecutePrecondition(preConditionQuery).ToList();
         }
 
         protected override void ExecuteRule()
         {
             var ruleQuery = Task.TaskRules;
 
-            if (CustomerIdList.Any())
+            if (_customerIdList.Any())
             {
                 var taskRule = Task.TaskRules + " AND susCust.CustId in ($param1$)";
-                ruleQuery = taskRule.Replace("$param1$", string.Join(",", CustomerIdList));
+                ruleQuery = taskRule.Replace("$param1$", string.Join(",", _customerIdList));
             }
-           
-            SuspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
+
+            _suspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 
         protected override void TakeNextAction()
         {
-            if (SuspiciousCustomers.Count == 0)
+            if (_suspiciousCustomers.Count == 0)
             {
                 return;
             }
 
-            var suspiciousCustomerChunks = SuspiciousCustomers.Chunk(ChunkSize);
+            var suspiciousCustomerChunks = _suspiciousCustomers.Chunk(ChunkSize);
             var suspicionList = new List<SuspiciousInfo>();
 
             foreach (var suspiciousCustomerChunk in suspiciousCustomerChunks)
