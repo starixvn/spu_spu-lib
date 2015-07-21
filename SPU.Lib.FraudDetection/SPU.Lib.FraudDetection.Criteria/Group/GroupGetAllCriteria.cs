@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskInfoSelectCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,33 +7,39 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Task
+namespace SPU.Lib.FraudDetection.Criteria.Group
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// TaskInfoSelectCriteria Class.
+    ///     GroupGetAllCriteria Class.
     /// </summary>
-    public class TaskInfoSelectCriteria : CriteriaBase
+    public class GroupGetAllCriteria : CriteriaBase
     {
-        public int TaskId { get; set; }
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
+
+        public int PageCount { get; set; }
+
+        public int RowCount { get; set; }
 
         /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
+        ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskInfoSelect";
+            return "SPU_GroupGetAll";
         }
 
         /// <summary>
-        /// Check data's constrains.
+        ///     Check data's constrains.
         /// </summary>
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return TaskId > 0;
+            return true;
         }
     }
 }

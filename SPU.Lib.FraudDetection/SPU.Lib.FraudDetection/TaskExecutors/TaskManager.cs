@@ -38,7 +38,7 @@
         {
             try
             {
-                var task =_taskService.GetTaskForExecuting(new TaskSelectForExecutingCriteria()
+                var task =_taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria()
                 {
                     TaskId = taskId
                 });
@@ -53,7 +53,7 @@
 
         public void AddTasksInCase(int caseId)
         {
-            var tasks = _taskService.GetTasksByCaseId(new TaskSelectByCaseIdCriteria()
+            var tasks = _taskService.GetTasksByCaseId(new TaskGetByCaseIdCriteria()
             {
                 CaseId = caseId
             });

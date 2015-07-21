@@ -27,7 +27,7 @@
 
         public void LoadTasks()
         {
-            var taskList = _taskService.LoadAllTasks(new TaskSelectAllCriteria());
+            var taskList = _taskService.LoadAllTasks(new TaskGetAllCriteria());
 
             foreach (var task in taskList)
             {

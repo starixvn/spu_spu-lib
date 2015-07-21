@@ -1,26 +1,24 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BettypeDeleteCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SportGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.Criteria.Bettype
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     The criteria to delete a supporting bet type.
+    ///     The criteria to get all supporting bet types.
     /// </summary>
-    public class BettypeDeleteCriteria : CriteriaBase
+    public class SportGetAllCriteria : CriteriaBase
     {
-        public int BettypeId { get; set; }
-
         public override string GetSettingKey()
         {
-            return string.Empty;
+            return "SPU_SBSportGetAll";
         }
     }
 }

@@ -1,37 +1,28 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupInsertCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Long.Luu" date="2015.05.26">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Group
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     GroupInsertCriteria Class.
+    ///     TaskGetAllCriteria Class.
     /// </summary>
-    public class GroupInsertCriteria : CriteriaBase
+    public class TaskGetAllCriteria : CriteriaBase
     {
-        public int CreatorId { get; set; }
-        public string GroupName { get; set; }
-        public string GroupDesc { get; set; }
-<<<<<<< HEAD
-=======
-
->>>>>>> #38307: Implement server side (Edit Group)
-        public bool IsActive { get; set; }
-
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_GroupIns";
+            return "SPU_TaskGetAll";
         }
 
         /// <summary>

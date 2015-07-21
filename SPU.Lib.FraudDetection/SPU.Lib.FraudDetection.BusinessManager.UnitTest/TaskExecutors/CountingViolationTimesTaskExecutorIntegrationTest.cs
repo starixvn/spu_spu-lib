@@ -15,7 +15,7 @@
         public void Run_Task_Count_Suspicious_Times()
         {
             var taskService = new TaskService();
-            var task = taskService.GetTaskForExecuting(new TaskSelectForExecutingCriteria()
+            var task = taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria()
             {
                 TaskId = 2
             });

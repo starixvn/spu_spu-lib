@@ -13,7 +13,7 @@
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_SuspiciouCustomerSelect";
+            return "SPU_SuspiciouCustomerGetAll";
         }
 
         /// <summary>

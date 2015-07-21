@@ -11,6 +11,6 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria);
 
-        IList<CaseGroup> SelectCaseGroup(CaseGroupSelectCriteria criteria);
+        IList<CaseGroup> SelectCaseGroup(CaseGroupGetAllCriteria criteria);
     }
 }

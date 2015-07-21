@@ -16,7 +16,7 @@
         {
             var taskService = new TaskService();
 
-            var task = taskService.GetTaskForExecuting(new TaskSelectForExecutingCriteria()
+            var task = taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria()
             {
                 TaskId = 1
             });

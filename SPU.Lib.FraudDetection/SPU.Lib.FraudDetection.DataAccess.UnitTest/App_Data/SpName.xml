@@ -2,8 +2,8 @@
 
 <Functions>
   <Function Name="CaseGroup">
-    <Setting Key="SPU_CaseGroupIns" SpName="SPU_CaseGroupIns" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_CaseGroupDel" SpName="SPU_CaseGroupDel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_CaseGroupSel" SpName="SPU_CaseGroupSel" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupInsert" SpName="SPU_CaseGroupInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupDelete" SpName="SPU_CaseGroupDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="SPU_CaseGroupGetAll" SpName="SPU_CaseGroupGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 </Functions>

@@ -2,13 +2,13 @@
 {
     using Fanex.Data.Repository;
 
-    public class CaseGroupSelectCriteria : CriteriaBase
+    public class CaseGroupGetAllCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
 
         public override string GetSettingKey()
         {
-            return "SPU_CaseGroupSel";
+            return "SPU_CaseGroupGetAll";
         }
         
         public override bool IsValid()

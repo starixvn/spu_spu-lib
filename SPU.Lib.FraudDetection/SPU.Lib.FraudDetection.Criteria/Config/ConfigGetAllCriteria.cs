@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConfigGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,30 +7,18 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Group
+namespace SPU.Lib.FraudDetection.Criteria.Config
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     GroupSelectAllCriteria Class.
+    ///     ConfigGetAllCriteria Class.
     /// </summary>
-    public class GroupSelectAllCriteria : CriteriaBase
+    public class ConfigGetAllCriteria : CriteriaBase
     {
-        public int PageSize { get; set; }
-
-        public int PageIndex { get; set; }
-
-        public int PageCount { get; set; }
-
-        public int RowCount { get; set; }
-
-        /// <summary>
-        ///     Get the reference SP's Name which is specified in Config file.
-        /// </summary>
-        /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_GroupSelectAll";
+            return "SPU_ConfigGetAll";
         }
 
         /// <summary>

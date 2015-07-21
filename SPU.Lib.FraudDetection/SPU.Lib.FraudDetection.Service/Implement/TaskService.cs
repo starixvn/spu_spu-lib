@@ -59,7 +59,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _taskDataAccess.GetTasksByCaseId(criteria);
         }
 
-        public IEnumerable<Task> GetTasksByCaseId(TaskSelectByCaseIdCriteria criteria)
+        public IEnumerable<Task> GetTasksByCaseId(TaskGetByCaseIdCriteria criteria)
         {
             return GetData<Task>(criteria);
         }

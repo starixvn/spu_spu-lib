@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BettypeSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BettypeGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,18 +7,18 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.Criteria.Bettype
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     The criteria to select all supporting bet types.
+    ///     The criteria to get all supporting bet types.
     /// </summary>
-    public class BettypeSelectAllCriteria : CriteriaBase
+    public class BettypeGetAllCriteria : CriteriaBase
     {
         public override string GetSettingKey()
         {
-            return "SPU_SBBettypeSelectAll";
+            return "SPU_SBBettypeGetAll";
         }
     }
 }

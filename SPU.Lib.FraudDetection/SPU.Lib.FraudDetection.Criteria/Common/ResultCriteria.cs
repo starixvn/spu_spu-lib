@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria
+namespace SPU.Lib.FraudDetection.Criteria.Common
 {
     using Fanex.Data.Repository;
 
@@ -16,9 +16,6 @@ namespace SPU.Lib.FraudDetection.Criteria
     /// </summary>
     public class ResultCriteria : CriteriaBase
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ResultCriteria" /> class.
-        /// </summary>
         public ResultCriteria()
         {
             ErrCode = 0;
@@ -26,6 +23,7 @@ namespace SPU.Lib.FraudDetection.Criteria
         }
 
         public int ErrCode { get; set; }
+
         public string ErrMsg { get; set; }
     }
 }

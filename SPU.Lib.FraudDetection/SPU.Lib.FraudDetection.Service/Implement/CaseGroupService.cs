@@ -32,7 +32,7 @@
             return _caseGroupDataAccess.DeleteCaseGroup(criteria);
         }
 
-        public IList<CaseGroup> SelectCaseGroup(CaseGroupSelectCriteria criteria)
+        public IList<CaseGroup> SelectCaseGroup(CaseGroupGetAllCriteria criteria)
         {
             return GetData<CaseGroup>(criteria).ToList();
         }

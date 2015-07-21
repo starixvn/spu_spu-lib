@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
 
         ICommandResult UpdateGroup(ICriteria criteria);
 
-        IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria);
+        IEnumerable<Group> GetGroupsNotInGivenCase(GroupGetAvailableGroupForCaseCriteria criteria);
         
     }
 }

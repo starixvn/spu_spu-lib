@@ -49,7 +49,7 @@
 
             var model = new SuspiciousStatisticViewModel();
 
-            var caseSpu = CaseService.GetCaseById(new CaseSelectByIdCriteria
+            var caseSpu = CaseService.GetCaseById(new CaseGetByIdCriteria
             {
                 CaseId = list[0].CaseId
             });

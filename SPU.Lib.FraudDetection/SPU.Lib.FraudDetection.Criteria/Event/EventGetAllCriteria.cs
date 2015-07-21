@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupSelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="EventGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,31 +7,18 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Group
+namespace SPU.Lib.FraudDetection.Criteria.Event
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     GroupSelectAllCriteria Class.
+    ///     EventSelectAllCriteria Class.
     /// </summary>
-    public class GroupSelectAllCriteria : CriteriaBase
+    public class EventGetAllCriteria : CriteriaBase
     {
-        public int PageSize { get; set; }
-        public int PageIndex { get; set; }
-        public int PageCount { get; set; }
-<<<<<<< HEAD
-=======
-
->>>>>>> #38310: Implement server side (Edit Workflow)
-        public int RowCount { get; set; }
-
-        /// <summary>
-        ///     Get the reference SP's Name which is specified in Config file.
-        /// </summary>
-        /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_GroupSelectAll";
+            return "SPU_EventGetAll";
         }
 
         /// <summary>

@@ -18,8 +18,11 @@ namespace SPU.Lib.FraudDetection.Criteria.Case
     public class CaseInsertCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
+
         public string CaseName { get; set; }
+
         public string CaseDesc { get; set; }
+
         public bool IsActive { get; set; }
 
         /// <summary>
@@ -28,7 +31,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Case
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_CaseIns";
+            return "SPU_CaseInsert";
         }
 
         /// <summary>

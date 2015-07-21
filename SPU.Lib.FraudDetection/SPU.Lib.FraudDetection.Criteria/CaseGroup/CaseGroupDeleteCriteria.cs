@@ -10,7 +10,7 @@
 
         public override string GetSettingKey()
         {
-            return "SPU_CaseGroupDel";
+            return "SPU_CaseGroupDelete";
         }
 
         public override bool IsValid()

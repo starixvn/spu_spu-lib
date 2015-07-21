@@ -1,24 +1,22 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="MailMasterActivateCriteria.cs.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskGetByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Aaron.Cao" date="2015.06.16">Created</change>
+//   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.MailMaster
+namespace SPU.Lib.FraudDetection.Criteria.Task
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     MailMasterActivateCriteria Class.
+    ///     TaskGetByCaseIdCriteria Class.
     /// </summary>
-    public class MailMasterActivateCriteria : CriteriaBase
+    public class TaskGetByCaseIdCriteria : CriteriaBase
     {
-        public int CreatorId { get; set; }
-        public int MailId { get; set; }
-        public bool IsActive { get; set; }
+        public int CaseId { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -26,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_MailMasterActivate";
+            return "SPU_TaskSelectByCaseId";
         }
 
         /// <summary>
@@ -35,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return MailId > 0;
+            return true;
         }
     }
 }

@@ -1,22 +1,30 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskSelectAllByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupGetAvailableGroupForCaseCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Thai.Tran" date="2015.03.25">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Task
+namespace SPU.Lib.FraudDetection.Criteria.Group
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     TaskSelectAllByCaseIdCriteria Class.
+    ///     GroupGetAvailableGroupForCaseCriteria Class.
     /// </summary>
-    public class TaskSelectByCaseIdCriteria : CriteriaBase
+    public class GroupGetAvailableGroupForCaseCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
+
+        public int PageCount { get; set; }
+
+        public int RowCount { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -24,7 +32,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskSelectByCaseId";
+            return "SPU_GroupGetAvailableGroupForCase";
         }
 
         /// <summary>
@@ -33,7 +41,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return true;
+            return CaseId > 0;
         }
     }
 }

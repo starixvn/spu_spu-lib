@@ -64,7 +64,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _groupDataAccess.UpdateGroup(criteria);
         }
 
-        public IEnumerable<Group> GetGroupsNotInGivenCase(GroupNotInGivenCaseSelectAllCriteria criteria)
+        public IEnumerable<Group> GetGroupsNotInGivenCase(GroupGetAvailableGroupForCaseCriteria criteria)
         {
             return GetData<Group>(criteria);
         }

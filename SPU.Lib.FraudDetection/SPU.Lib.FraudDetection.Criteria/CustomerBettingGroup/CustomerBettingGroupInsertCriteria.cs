@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_CustomerBettingGroupIns";
+            return "SPU_CustomerBettingGroupInsert";
         }
 
         /// <summary>

@@ -70,18 +70,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bettype\BettypeInsertCriteria.cs" />
-    <Compile Include="Bettype\BettypeDeleteCriteria.cs" />
-    <Compile Include="Bettype\BettypeSelectAllCriteria.cs" />
-    <Compile Include="Bettype\SportSelectAllCriteria.cs" />
-    <Compile Include="CaseGroup\CaseGroupSelectCriteria.cs" />
+    <Compile Include="Bettype\BettypeGetAllCriteria.cs" />
+    <Compile Include="Bettype\SportGetAllCriteria.cs" />
+    <Compile Include="CaseGroup\CaseGroupGetAllCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
-    <Compile Include="Config\ConfigInsertCriteria.cs" />
-    <Compile Include="Config\ConfigUpdateCriteria.cs" />
-    <Compile Include="Config\ConfigDeleteCriteria.cs" />
-    <Compile Include="Config\ConfigSelectAllCriteria.cs" />
+    <Compile Include="Config\ConfigGetAllCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCustomerCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetCustomerByNameCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
@@ -90,12 +85,12 @@
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetAllCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupUpdateCriteria.cs" />
-    <Compile Include="Event\EventSelectAllCriteria.cs" />
-    <Compile Include="Config\ConfigParameterUpdateCriteria.cs" />
+    <Compile Include="Event\EventGetAllCriteria.cs" />
+    <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
-    <Compile Include="Group\GroupNotInGivenCaseSelectAllCriteria.cs" />
+    <Compile Include="Group\GroupGetAvailableGroupForCaseCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
-    <Compile Include="MailMaster\MailMasterActivateCriteria.cs" />
+    <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
@@ -103,8 +98,8 @@
     <Compile Include="SuspiciousStatistic\CustomerWinlostSelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\BalanceUpDaySelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />
-    <Compile Include="Parameter\ParameterSelectAllCriteria.cs" />
-    <Compile Include="Group\GroupSelectAllCriteria.cs" />
+    <Compile Include="Parameter\ParameterGetAllCriteria.cs" />
+    <Compile Include="Group\GroupGetAllCriteria.cs" />
     <Compile Include="Group\GroupUpdateCriteria.cs" />
     <Compile Include="Group\CustomerGroupInsertCriteria.cs" />
     <Compile Include="Group\GroupInsertCriteria.cs" />
@@ -122,18 +117,18 @@
     <Compile Include="SuspiciousStatistic\CustomerSelectCritiria.cs" />
     <Compile Include="Task\TaskInfoCriteria.cs" />
     <Compile Include="Task\TaskSelectAllByWorkflowIdCriteria.cs" />
-    <Compile Include="Task\TaskSelectForExecutingCriteria.cs" />
-    <Compile Include="Task\TaskInfoSelectCriteria.cs" />
-    <Compile Include="Task\TablesForeignKeySelectAllCriteria.cs" />
-    <Compile Include="Task\TaskSelectByCaseIdCriteria.cs" />
-    <Compile Include="Task\TaskSelectAllCriteria.cs" />
+    <Compile Include="Task\TaskGetForExecutingCriteria.cs" />
+    <Compile Include="Task\TaskInfoGetCriteria.cs" />
+    <Compile Include="Task\TablesForeignKeyGetAllCriteria.cs" />
+    <Compile Include="Task\TaskGetByCaseIdCriteria.cs" />
+    <Compile Include="Task\TaskGetAllCriteria.cs" />
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
     <Compile Include="Task\TaskUpdateStatusCriteria.cs" />
     <Compile Include="Case\CaseUpdateStatusCriteria.cs" />
-    <Compile Include="Case\CaseSelectByIdCriteria.cs" />
-    <Compile Include="Case\CaseSelectAllCriteria.cs" />
+    <Compile Include="Case\CaseGetByIdCriteria.cs" />
+    <Compile Include="Case\CaseGetAllCriteria.cs" />
     <Compile Include="Case\CaseUpdateCriteria.cs" />
     <Compile Include="Case\CaseInsertCriteria.cs" />
   </ItemGroup>

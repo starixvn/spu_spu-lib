@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskInfoSelectCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskInfoGetCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,9 +12,9 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// TaskInfoSelectCriteria Class.
+    /// TaskInfoGetCriteria Class.
     /// </summary>
-    public class TaskSelectForExecutingCriteria : CriteriaBase
+    public class TaskInfoGetCriteria : CriteriaBase
     {
         public int TaskId { get; set; }
 
@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskSelectForExecuting";
+            return "SPU_TaskInfoGet";
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         ICommandResult InsertTask(ICriteria criteria);
         ICommandResult DeleteTask(ICriteria criteria);
         DataCollection GetTasksByCaseId(TaskSelectAllByCaseIdCriteria criteria);
-        IEnumerable<Task> GetTasksByCaseId(TaskSelectByCaseIdCriteria criteria);
+        IEnumerable<Task> GetTasksByCaseId(TaskGetByCaseIdCriteria criteria);
 
         ICommandResult UpdateTask(ICriteria criteria);
         IEnumerable<Task> LoadAllTasks(ICriteria criteria);

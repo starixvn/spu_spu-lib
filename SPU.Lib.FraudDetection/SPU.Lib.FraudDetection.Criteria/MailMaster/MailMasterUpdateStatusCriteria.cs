@@ -1,29 +1,32 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TablesForeignKeySelectAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="MailMasterUpdateStatusCriteria.cs.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Long.Luu" date="2015.03.25">Created</change>
+//   <change who="Aaron.Cao" date="2015.06.16">Created</change>
 // </history>
 
-
-namespace SPU.Lib.FraudDetection.Criteria.Task
+namespace SPU.Lib.FraudDetection.Criteria.MailMaster
 {
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     TablesForeignKeySelectAllCriteria Class.
+    ///     MailMasterUpdateStatusCriteria Class.
     /// </summary>
-    public class TablesForeignKeySelectAllCriteria : CriteriaBase
+    public class MailMasterUpdateStatusCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+        public int MailId { get; set; }
+        public bool IsActive { get; set; }
+
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TablesForeignKeySelectAll";
+            return "SPU_MailMasterUpdateStatus";
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
-            return true;
+            return MailId > 0;
         }
     }
 }
