@@ -9,31 +9,12 @@
 
 namespace SPU.Lib.FraudDetection.Criteria.Task
 {
-    using Fanex.Data.Repository;
-
     /// <summary>
     /// TaskInsertCriteria Class.
     /// </summary>
-    public class TaskInsertCriteria : CriteriaBase
+    public class TaskInsertCriteria : TaskInfoCriteria
     {
-        public int CreatorId { get; set; }
-        public string TaskName { get; set; }
-        public string TaskDesc { get; set; }
-        public string TaskPreconditions { get; set; }
-        public string TaskPreconditionsOriginal { get; set; }
-        public string TaskPreconditionsFormatted { get; set; }
-
-        public string TaskRules { get; set; }
-        public string TaskRulesOriginal { get; set; }
-
-        public string TaskRulesFormatted { get; set; }
         public int CaseId { get; set; }
-        public int Interval { get; set; }
-        public string IntervalType { get; set; }
-        public bool IsActive { get; set; }
-        public int EventId { get; set; }
-        public string NextActionIdList { get; set; }
-        public string NextActionTargetIdList { get; set; }
 
         /// <summary>do
         ///     Get the reference SP's Name which is specified in Config file.

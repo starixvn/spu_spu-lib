@@ -10,6 +10,7 @@
 namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System.Collections.Generic;
+    using System.Linq;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
@@ -42,6 +43,15 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         public IEnumerable<Config> GetConfigs(ICriteria criteria)
         {
             return GetData<Config>(criteria);
+        }
+
+        public List<Config> GetFormattedConfigs(ICriteria criteria, int caseId)
+        {
+            var configs = GetData<Config>(criteria).ToList();
+            var counterTableSQLString = configs.SingleOrDefault(l => l.ConfigName == "Suspicious Time").ConfigSQLTable;
+            configs.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId.ToString());
+            
+            return configs;
         }
 
         public IEnumerable<Parameter> GetParameters(ICriteria criteria)

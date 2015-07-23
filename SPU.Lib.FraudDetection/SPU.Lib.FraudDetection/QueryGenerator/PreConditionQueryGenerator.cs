@@ -1,0 +1,82 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="PreConditionQueryGenerator.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.QueryGenerator
+{
+    using System.Linq;
+
+    /// <summary>
+    /// General Pre-Condition Query Generator.
+    /// </summary>
+    public class PreConditionQueryGenerator : QueryGenerator
+    {
+        private bool IsCountSuspiciousTime { get; set; }
+
+        private bool IsCheckNotScanned { get; set; }
+
+        private int ChunkOfSelection { get; set; }
+
+        public PreConditionQueryGenerator(
+            int fraudCaseId,
+            bool isCountSuspiciousTime,
+            bool isCheckNotScanned,
+            int chunkOfSelection)
+        {
+            IsCountSuspiciousTime = isCountSuspiciousTime;
+            IsCheckNotScanned = isCheckNotScanned;
+            ChunkOfSelection = chunkOfSelection;
+            GetConfigsInfo(fraudCaseId);
+        }
+
+        /// <summary>
+        /// Generate the WHOLE SQL statement.
+        /// </summary>
+        /// <returns>SQL string.</returns>
+        public override string GenerateQuery()
+        {
+            var queryPreconString = !IsCountSuspiciousTime
+                ? "select distinct top " + ChunkOfSelection + " {0} from {1} where {2}"
+                : "select distinct {0} from {1} where {2}";
+
+            return string.Format(
+                queryPreconString,
+                GenerateSelectSql(),
+                GenerateFromSql(),
+                GenerateWhereSql()
+                );
+        }
+
+        /// <summary>
+        /// Generate the WHERE statement. This should be done by descendants.
+        /// </summary>
+        /// <returns>WHERE SQL string.</returns>
+        protected override string GenerateWhereSql()
+        {
+            var isSelectScanningState = OriginalFormula.Contains("Match State");
+            var sqlForNotScanned = Configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
+            var configIds = RelevantConfigIds.Split('#');
+            foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))
+            {
+                OriginalFormula = OriginalFormula.Replace(config.ConfigName, config.ConfigSQLField);
+            }
+
+            if (IsCountSuspiciousTime)
+            {
+                return OriginalFormula;
+            }
+
+            var sqlWhereString = "tch.sporttype between 1 and 99 and tch.matchid not in ($param1$) and (" + OriginalFormula + ")";
+            sqlWhereString = (isSelectScanningState && IsCheckNotScanned)
+                ? sqlWhereString.Replace("$param1$", sqlForNotScanned)
+                : "tch.sporttype between 1 and 99 and " + OriginalFormula;
+
+            return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
+        }
+    }
+}
