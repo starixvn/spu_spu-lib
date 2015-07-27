@@ -17,6 +17,7 @@ namespace SPU.Lib.FraudDetection.Criteria
     public class SuspiciousCustomerInsertCriteria : CriteriaBase
     {
         public int CustId { get; set; }
+
         public string CustName { get; set; }
     }
 }
