@@ -37,7 +37,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "FD_TaskGetByCaseId";
+            return "FD_TaskGetAllByCaseId";
         }
 
         /// <summary>

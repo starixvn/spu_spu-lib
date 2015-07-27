@@ -1,0 +1,33 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="BettypeGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.Criteria.Bettype
+{
+    using Fanex.Data.Repository;
+
+    /// <summary>
+    ///     The criteria to get all supporting bet types.
+    /// </summary>
+    public class BettypeGetAllCriteria : CriteriaBase
+    {
+<<<<<<< HEAD:SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/Bettype/BettypeGetAllCriteria.cs
+=======
+        public string ConfigName { get; set; }
+
+        public string ConfigCategory { get; set; }
+
+        public string ConfigControlType { get; set; }
+
+>>>>>>> #40150 - fix stylecop:SPU.Lib.FraudDetection/SPU.Lib.FraudDetection.Criteria/Config/ConfigInsertCriteria.cs
+        public override string GetSettingKey()
+        {
+            return "FD_SBBettypeGetAll";
+        }
+    }
+}
