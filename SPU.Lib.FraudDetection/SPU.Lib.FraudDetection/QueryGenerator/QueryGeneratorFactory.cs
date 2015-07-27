@@ -10,31 +10,27 @@
 namespace SPU.Lib.FraudDetection.QueryGenerator
 {   
     using System;
+    using Criteria.Task;
 
     /// <summary>
     /// Query Generator Factory.
     /// </summary>
     public class QueryGeneratorFactory
     {
-        private const int CheckBettingHistory = 2;
 
         private int FraudCaseId { get; set; }
 
-        private int EventId { get; set; }
-
-        private bool IsCheckNotScanned { get; set; }
+        private TaskInfoCriteria Criteria { get; set; }
 
         private int ChunkOfSelection { get; set; }
 
         public QueryGeneratorFactory(
             int fraudCaseId,
-            int eventId,
-            bool isCheckNotScanned,
+            TaskInfoCriteria taskInfoCriteria,
             int chunkOfSelection)
         {
             FraudCaseId = fraudCaseId;
-            EventId = eventId;
-            IsCheckNotScanned = isCheckNotScanned;
+            Criteria = taskInfoCriteria;
             ChunkOfSelection = chunkOfSelection;
         }
 
@@ -51,12 +47,11 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
                 case QueryGeneratorType.PreCondition:
                     return new PreConditionQueryGenerator(
                         FraudCaseId,
-                        EventId == CheckBettingHistory,
-                        IsCheckNotScanned,
+                        Criteria,
                         ChunkOfSelection);
 
                 case QueryGeneratorType.Rule:
-                    return new RuleQueryGenerator(FraudCaseId);
+                    return new RuleQueryGenerator(FraudCaseId, Criteria);
 
                 default:
                     throw new ArgumentOutOfRangeException();

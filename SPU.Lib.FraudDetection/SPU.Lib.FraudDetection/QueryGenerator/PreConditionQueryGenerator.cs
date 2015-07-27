@@ -10,27 +10,30 @@
 namespace SPU.Lib.FraudDetection.QueryGenerator
 {
     using System.Linq;
+    using Criteria.Task;
 
     /// <summary>
     /// General Pre-Condition Query Generator.
     /// </summary>
     public class PreConditionQueryGenerator : QueryGenerator
     {
-        private bool IsCountSuspiciousTime { get; set; }
-
         private bool IsCheckNotScanned { get; set; }
 
         private int ChunkOfSelection { get; set; }
 
+        private string PreConditionRawFormula { get; set; }
+
         public PreConditionQueryGenerator(
             int fraudCaseId,
-            bool isCountSuspiciousTime,
-            bool isCheckNotScanned,
+            TaskInfoCriteria criteria,
             int chunkOfSelection)
         {
-            IsCountSuspiciousTime = isCountSuspiciousTime;
-            IsCheckNotScanned = isCheckNotScanned;
+            IsCountSuspiciousTime = criteria.EventId == CheckBettingHistory;
+            IsCheckNotScanned = criteria.IsCheckNotScanned;
             ChunkOfSelection = chunkOfSelection;
+            OriginalFormula = criteria.TaskPreconditions;
+            PreConditionRawFormula = criteria.TaskPreconditionsOriginal;
+            RelevantConfigIds = criteria.PreconConfigs;
             GetConfigsInfo(fraudCaseId);
         }
 
@@ -58,7 +61,7 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         /// <returns>WHERE SQL string.</returns>
         protected override string GenerateWhereSql()
         {
-            var isSelectScanningState = OriginalFormula.Contains("Match State");
+            var isSelectScanningState = PreConditionRawFormula.Contains("Match State");
             var sqlForNotScanned = Configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
             var configIds = RelevantConfigIds.Split('#');
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))

@@ -45,5 +45,15 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public string NextActionIdList { get; set; }
 
         public string NextActionTargetIdList { get; set; }
+
+        // Additional info of a Task
+        [SpParam(Ignored = true)]
+        public string PreconConfigs { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string RuleConfigs { get; set; }
+
+        [SpParam(Ignored = true)]
+        public bool IsCheckNotScanned { get; set; }
     }
 }

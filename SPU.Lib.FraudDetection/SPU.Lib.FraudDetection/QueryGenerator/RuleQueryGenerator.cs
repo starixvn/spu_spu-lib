@@ -10,14 +10,18 @@
 namespace SPU.Lib.FraudDetection.QueryGenerator
 {
     using System.Linq;
+    using Criteria.Task;
 
     /// <summary>
     /// General Rule Query Generator.
     /// </summary>
     public class RuleQueryGenerator : QueryGenerator
     {
-        public RuleQueryGenerator(int fraudCaseId)
+        public RuleQueryGenerator(int fraudCaseId, TaskInfoCriteria criteria)
         {
+            IsCountSuspiciousTime = criteria.EventId == CheckBettingHistory;
+            OriginalFormula = criteria.TaskRules;
+            RelevantConfigIds = criteria.RuleConfigs;
             GetConfigsInfo(fraudCaseId);
         }
 
@@ -47,6 +51,11 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))
             {
                 OriginalFormula = OriginalFormula.Replace(config.ConfigName, config.ConfigSQLField);
+            }
+            
+            if (IsCountSuspiciousTime)
+            {
+                return OriginalFormula;
             }
 
             var dangerPeriodSql = Configs.Single(l => l.ConfigName.ToLower() == "in danger period").ConfigSQLField;

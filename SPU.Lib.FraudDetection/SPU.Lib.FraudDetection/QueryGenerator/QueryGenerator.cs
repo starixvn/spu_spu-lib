@@ -21,6 +21,8 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
     /// </summary>
     public abstract class QueryGenerator
     {
+        protected const int CheckBettingHistory = 2;
+
         protected string OriginalFormula { get; set; }
 
         protected string RelevantConfigIds { get; set; }
@@ -28,6 +30,8 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         protected List<Config> Configs { get; set; }
 
         protected List<TablesForeignKey> TablesForeignKey { get; set; }
+
+        protected bool IsCountSuspiciousTime { get; set; }
 
         /// <summary>
         /// Get Configs Information.
