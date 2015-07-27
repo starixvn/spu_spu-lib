@@ -6,7 +6,9 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
     public interface IPlaceHolderFinder
     {
         ITagFinder OpenTagFinder { get; set; }
+
         ITagFinder CloseTagFinder { get; set; }
+
         IList<PlaceholderPosition> GetPlaceHolderPositions(string content);
     }
 
@@ -29,7 +31,9 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
             var locations = PlaceHolderFinder.GetPlaceHolderPositions(content);
 
             if (locations.Count == 0)
+            {    
                 return content;
+            }
 
             var tempContent = content;
 

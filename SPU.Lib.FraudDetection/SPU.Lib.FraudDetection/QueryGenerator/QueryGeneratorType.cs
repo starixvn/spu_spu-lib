@@ -14,8 +14,19 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
     /// </summary>
     public enum QueryGeneratorType
     {
+        /// <summary>
+        /// No Query Generator type.
+        /// </summary>
         None = 0,
+
+        /// <summary>
+        /// Generating Pre-Condition.
+        /// </summary>
         PreCondition = 1,
+
+        /// <summary>
+        /// Generating Rules.
+        /// </summary>
         Rule = 2
     }
 }

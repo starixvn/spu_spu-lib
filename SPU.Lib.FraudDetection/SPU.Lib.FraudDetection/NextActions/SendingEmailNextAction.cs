@@ -13,14 +13,6 @@
     /// </summary>
     public class SendingEmailNextAction : INextAction
     {
-        public int MailMasterId { get; set; }
-
-        public IList<SuspiciousInfo> SuspicionList { get; set; }
-
-        public IMailSender MailSender { get; set; }
-
-        public IReportService ReportService { get; set; }
-
         public SendingEmailNextAction(int mailMasterId)
         {
             MailMasterId = mailMasterId;
@@ -34,6 +26,14 @@
             MailSender = mailSender;
             ReportService = reportService;
         }
+
+        public int MailMasterId { get; set; }
+
+        public IList<SuspiciousInfo> SuspicionList { get; set; }
+
+        public IMailSender MailSender { get; set; }
+
+        public IReportService ReportService { get; set; }
 
         public void TakeAction()
         {

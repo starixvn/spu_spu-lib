@@ -83,7 +83,6 @@
         ///     Remove a task out the thread pool.
         /// </summary>
         /// <param name="taskId">The task name.</param>
-        /// <returns>True if item is successfully removed; otherwise, false.</returns>
         public void RemoveTask(int taskId)
         {
             try

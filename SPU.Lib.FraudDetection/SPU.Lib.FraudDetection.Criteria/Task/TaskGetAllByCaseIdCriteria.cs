@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------
-// <copyright file="TaskSelectAllByWorkflowIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskSelectAllByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -17,9 +17,13 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     public class TaskGetAllByCaseIdCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
+
         public int PageSize { get; set; }
+
         public int PageIndex { get; set; }
+
         public int PageCount { get; set; }
+
         public int RowCount { get; set; }
 
         public TaskGetAllByCaseIdCriteria()

@@ -16,5 +16,4 @@
             return CaseId > 0;
         }
     }
-    
 }

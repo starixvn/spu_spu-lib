@@ -6,6 +6,7 @@
     public interface IReportTemplateRender
     {
         IList<ITableRender> TableRenders { get; set; }
+
         string RenderContent();
     }
 }

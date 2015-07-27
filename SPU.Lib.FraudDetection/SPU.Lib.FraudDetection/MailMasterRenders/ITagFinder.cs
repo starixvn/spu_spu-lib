@@ -5,6 +5,7 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
     public interface ITagFinder
     {
         string Tag { get; set; }
+
         IList<int> GetTagPositions(string content);
     }
 }

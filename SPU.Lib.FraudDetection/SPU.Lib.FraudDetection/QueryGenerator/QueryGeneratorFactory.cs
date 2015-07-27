@@ -17,13 +17,6 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
     /// </summary>
     public class QueryGeneratorFactory
     {
-
-        private int FraudCaseId { get; set; }
-
-        private TaskInfoCriteria Criteria { get; set; }
-
-        private int ChunkOfSelection { get; set; }
-
         public QueryGeneratorFactory(
             int fraudCaseId,
             TaskInfoCriteria taskInfoCriteria,
@@ -33,6 +26,12 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
             Criteria = taskInfoCriteria;
             ChunkOfSelection = chunkOfSelection;
         }
+
+        private int FraudCaseId { get; set; }
+
+        private TaskInfoCriteria Criteria { get; set; }
+
+        private int ChunkOfSelection { get; set; }
 
         /// <summary>
         /// Get Query Generator.

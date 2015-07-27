@@ -18,8 +18,7 @@
         public MailMasterRender(
             IMailMasterService mailMasterService,
             IReportRenderAbstractFactory renderAbstractFactory,
-            IPlaceholderReplacer placeholderReplacer
-            )
+            IPlaceholderReplacer placeholderReplacer)
         {
             MailMasterService = mailMasterService;
             PlaceholderReplacer = placeholderReplacer;
@@ -27,12 +26,14 @@
         }
 
         public IMailMasterService MailMasterService { get; set; }
+
         public IReportRenderAbstractFactory ReportRenderAbstractFactory { get; set; }
+
         public IPlaceholderReplacer PlaceholderReplacer { get; set; }
 
         public MailMasterInfo RenderContentOfMailMaster(int mailMasterId)
         {
-            var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria {MailId = mailMasterId});
+            var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
 
             var render = ReportRenderAbstractFactory.GetReportTemplateRender();
 

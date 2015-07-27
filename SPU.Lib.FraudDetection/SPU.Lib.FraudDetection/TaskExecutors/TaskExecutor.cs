@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Task.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ITaskExecutor.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -21,7 +21,9 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     public interface ITaskExecutor
     {
         void Start();
+
         void Stop();
+
         void Execute();
     }
 
@@ -31,13 +33,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     public abstract class TaskExecutor : ITaskExecutor
     {
         #region Constructor
-
-        private bool IsRunning { get; set; }
-
-        private bool IsStop { get; set; }
-
-        public Timer Timer { get; set; }
-        
 
         protected TaskExecutor(Task task)
         {
@@ -52,6 +47,12 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             TaskService = taskService;
         }
 
+        public Timer Timer { get; set; }
+
+        private bool IsRunning { get; set; }
+
+        private bool IsStop { get; set; }
+        
         #endregion Constructor
 
         #region Properties
@@ -85,7 +86,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             Timer.Start();
 
             // Execute the task immediately.
-
             PreExecute(null, null);
         }
 

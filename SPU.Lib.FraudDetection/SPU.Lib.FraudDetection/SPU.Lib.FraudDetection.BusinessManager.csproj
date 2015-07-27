@@ -114,6 +114,7 @@
     <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />
     <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />
+    <Compile Include="ReportTemplateRenders\TableRenders\ReportTemplateType.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />
     <Compile Include="TaskExecutors\EventType.cs" />

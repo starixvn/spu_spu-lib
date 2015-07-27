@@ -3,6 +3,7 @@
     public interface ITableRender
     {
         string Template { get; set; }
+
         string RenderTable();
     }
 }

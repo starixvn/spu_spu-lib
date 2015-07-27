@@ -10,17 +10,19 @@
     using Fanex.Logging;
     using Service.Implement;
     using Service.Interface;
-    using Task = System.Threading.Tasks.Task;
 
     /// <summary>
-    ///     Save suspicious info.
+    /// Save suspicious info.
     /// </summary>
     public class SavingSuspicion
     {
-        private readonly IList<string> _matchIdList;
-        private readonly int _taskId;
-        private List<SuspiciousInfo> _suspiciousInfoList;
         protected const int ChunkSize = 60;
+
+        private readonly IList<string> _matchIdList;
+
+        private readonly int _taskId;
+
+        private List<SuspiciousInfo> _suspiciousInfoList;
 
         public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, IList<string> matchIdList, int taskId)
         {

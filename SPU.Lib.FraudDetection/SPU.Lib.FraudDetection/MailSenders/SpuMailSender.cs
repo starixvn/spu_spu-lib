@@ -1,15 +1,10 @@
 ﻿namespace SPU.Lib.FraudDetection.MailSenders
 {
-    using Fanex.MailDelivery.Client.Handlers;
     using Fanex.MailDelivery.Client.Models;
     using MailMasterRenders;
 
     public class SpuMailSender : IMailSender
     {
-        public IMailMasterRenderAbstractFactory MailMasterRenderAbstractFactory { get; set; }
-
-        public IMailClient MailClient { get; set; }
-
         public SpuMailSender()
         {
             MailClient = new MailClient();
@@ -19,6 +14,10 @@
         {
             MailClient = client;
         }
+
+        public IMailMasterRenderAbstractFactory MailMasterRenderAbstractFactory { get; set; }
+
+        public IMailClient MailClient { get; set; }
 
         public void SendMail(int mailMasterId)
         {

@@ -15,7 +15,7 @@
                 case EventType.ScanMatchAndFindTicket:
                     return new ScanMatchTaskExecutor(task);
 
-                case EventType.CountSuspicionTimesByCustomer:
+                case EventType.CountSuspiciousTimesByCustomer:
                     return new CountingSuspicousTimesTaskExecutor(task);
 
                 default:

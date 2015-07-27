@@ -31,14 +31,13 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         /// <returns>SQL string.</returns>
         public override string GenerateQuery()
         {
-            const string queryRuleString = "select distinct {0} from {1} where {2}";
+            const string QueryRuleString = "select distinct {0} from {1} where {2}";
 
             return string.Format(
-                queryRuleString,
+                QueryRuleString,
                 GenerateSelectSql(),
                 GenerateFromSql(),
-                GenerateWhereSql()
-                );
+                GenerateWhereSql());
         }
 
         /// <summary>

@@ -17,12 +17,6 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
     /// </summary>
     public class PreConditionQueryGenerator : QueryGenerator
     {
-        private bool IsCheckNotScanned { get; set; }
-
-        private int ChunkOfSelection { get; set; }
-
-        private string PreConditionRawFormula { get; set; }
-
         public PreConditionQueryGenerator(
             int fraudCaseId,
             TaskInfoCriteria criteria,
@@ -36,6 +30,12 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
             RelevantConfigIds = criteria.PreconConfigs;
             GetConfigsInfo(fraudCaseId);
         }
+
+        private bool IsCheckNotScanned { get; set; }
+
+        private int ChunkOfSelection { get; set; }
+
+        private string PreConditionRawFormula { get; set; }
 
         /// <summary>
         /// Generate the WHOLE SQL statement.
@@ -51,8 +51,7 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
                 queryPreconString,
                 GenerateSelectSql(),
                 GenerateFromSql(),
-                GenerateWhereSql()
-                );
+                GenerateWhereSql());
         }
 
         /// <summary>

@@ -39,7 +39,9 @@ namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
             var result = int.TryParse(message.ToString(), out id);
 
             if (!result)
+            {
                 return false;
+            }
 
             return id > 0;
         }

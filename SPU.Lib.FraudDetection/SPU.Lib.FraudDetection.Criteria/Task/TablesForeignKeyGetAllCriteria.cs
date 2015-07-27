@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     FD_TablesForeignKeyGetAll Class.
+    ///     TablesForeignKeyGetAll Class.
     /// </summary>
     public class TablesForeignKeyGetAllCriteria : CriteriaBase
     {

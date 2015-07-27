@@ -34,7 +34,13 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         protected bool IsCountSuspiciousTime { get; set; }
 
         /// <summary>
-        /// Get Configs Information.
+        /// Generate the WHOLE SQL statement.
+        /// </summary>
+        /// <returns>SQL string.</returns>
+        public abstract string GenerateQuery();
+
+        /// <summary>
+        /// Get Configurations Information.
         /// </summary>
         /// <param name="caseId">Fraud case ID.</param>
         protected void GetConfigsInfo(int caseId)
@@ -45,12 +51,6 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
             var configurationService = new ConfigurationsService();
             Configs = configurationService.GetFormattedConfigs(new ConfigGetAllCriteria(), caseId);
         }
-
-        /// <summary>
-        /// Generate the WHOLE SQL statement.
-        /// </summary>
-        /// <returns>SQL string.</returns>
-        public abstract string GenerateQuery();
 
         /// <summary>
         /// Generate the SELECT statement.
@@ -136,8 +136,8 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         /// <returns>Trimmed string.</returns>
         protected string RemoveAllRedundantSpaces(string originalString)
         {
-            const System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
-            var regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", options);
+            const System.Text.RegularExpressions.RegexOptions Options = System.Text.RegularExpressions.RegexOptions.None;
+            var regex = new System.Text.RegularExpressions.Regex(@"[ ]{2,}", Options);
             originalString = regex.Replace(originalString, @" ");
 
             return originalString;

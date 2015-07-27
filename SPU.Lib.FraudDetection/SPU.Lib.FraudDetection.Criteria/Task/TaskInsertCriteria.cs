@@ -16,8 +16,8 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     {
         public int CaseId { get; set; }
 
-        /// <summary>do
-        ///     Get the reference SP's Name which is specified in Config file.
+        /// <summary>
+        /// Get the reference SP's Name which is specified in Config file.
         /// </summary>
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()

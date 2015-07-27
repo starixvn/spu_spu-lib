@@ -24,10 +24,4 @@
             return result;
         }
     }
-
-    public enum ReportTemplateType
-    {
-        SuspiciousStatistic,
-        FakeSuspiciousStatistic
-    }
 }

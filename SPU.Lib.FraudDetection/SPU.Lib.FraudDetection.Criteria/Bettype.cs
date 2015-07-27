@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Bettype.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BettypeInsertCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,15 +9,20 @@
 
 namespace SPU.Lib.FraudDetection.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
-    /// Bet type Class.
+    ///     The criteria to insert a supporting bet type.
     /// </summary>
-    public class Bettype : CriteriaBase
+    public class BettypeInsertCriteria : CriteriaBase
     {
         public int BettypeId { get; set; }
 
         public string BettypeName { get; set; }
+
+        public override string GetSettingKey()
+        {
+            return string.Empty;
+        }
     }
 }

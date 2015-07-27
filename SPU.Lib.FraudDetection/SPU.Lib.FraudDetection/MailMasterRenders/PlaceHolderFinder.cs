@@ -18,6 +18,7 @@ namespace SPU.Lib.FraudDetection.MailMasterRenders
         }
 
         public ITagFinder OpenTagFinder { get; set; }
+
         public ITagFinder CloseTagFinder { get; set; }
 
         public IList<PlaceholderPosition> GetPlaceHolderPositions(string content)
