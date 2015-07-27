@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Group
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_GroupUpdateStatus";
+            return "FD_GroupUpdateStatus";
         }
 
         /// <summary>

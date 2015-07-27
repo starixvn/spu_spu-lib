@@ -12,9 +12,9 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     TaskSelectAllByWorkflowIdCriteria Class.
+    ///     TaskGetAllByCaseIdCriteria Class.
     /// </summary>
-    public class TaskSelectAllByCaseIdCriteria : CriteriaBase
+    public class TaskGetAllByCaseIdCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
         public int PageSize { get; set; }
@@ -22,7 +22,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public int PageCount { get; set; }
         public int RowCount { get; set; }
 
-        public TaskSelectAllByCaseIdCriteria()
+        public TaskGetAllByCaseIdCriteria()
         {
             PageIndex = 1;
         }
@@ -33,7 +33,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskGetAllByCaseId";
+            return "FD_TaskGetByCaseId";
         }
 
         /// <summary>

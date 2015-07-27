@@ -2,52 +2,52 @@
 
 <Functions>
   <Function Name="SPU_FraudDetection">
-    <Setting Key="SPU_TaskGetAll" SpName="SPU_TaskGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MatchInsert" SpName="SPU_MatchInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_SuspiciousInfoInsert" SpName="SPU_SuspiciousInfoInsert"
+    <Setting Key="FD_TaskGetAll" SpName="FD_TaskGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MatchInsert" SpName="FD_MatchInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_SuspiciousInfoInsert" SpName="FD_SuspiciousInfoInsert"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_CustomerGroupInsert" SpName="SPU_CustomerGroupInsert"
+    <Setting Key="FD_CustomerGroupInsert" SpName="FD_CustomerGroupInsert"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
-  <Function Name="SPU_MailMaster">
-    <Setting Key="SPU_MailMasterGetAll" SpName="SPU_MailMasterGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterDelete" SpName="SPU_MailMasterDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterGetById" SpName="SPU_MailMasterGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterGetByName" SpName="SPU_MailMasterGetByName"
+  <Function Name="FD_MailMaster">
+    <Setting Key="FD_MailMasterGetAll" SpName="FD_MailMasterGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterDelete" SpName="FD_MailMasterDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterGetById" SpName="FD_MailMasterGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterGetByName" SpName="FD_MailMasterGetByName"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterInsert" SpName="SPU_MailMasterInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterUpdate" SpName="SPU_MailMasterUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_MailMasterUpdateStatus" SpName="SPU_MailMasterUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterInsert" SpName="FD_MailMasterInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterUpdate" SpName="FD_MailMasterUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_MailMasterUpdateStatus" SpName="FD_MailMasterUpdateStatus" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
-  <Function Name="SPU_Task">
-    <Setting Key="SPU_EventGetAll" SpName="SPU_EventGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_ConfigGetAll" SpName="SPU_ConfigGetAll"
+  <Function Name="FD_Task">
+    <Setting Key="FD_EventGetAll" SpName="FD_EventGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_ConfigGetAll" SpName="FD_ConfigGetAll"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_SBSportGetAll" SpName="SPU_SBSportGetAll" DbName="DBSPU.bodb02.bodbSPUNet" />
-    <Setting Key="SPU_SBBettypeGetAll" SpName="SPU_SBBettypeGetAll" DbName="DBSPU.bodb02.bodbSPUNet" />
-    <Setting Key="SPU_TaskInsert" SpName="SPU_TaskInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_TablesForeignKeyGetAll" SpName="SPU_TablesForeignKeyGetAll"
+    <Setting Key="FD_SBSportGetAll" SpName="FD_SBSportGetAll" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_SBBettypeGetAll" SpName="FD_SBBettypeGetAll" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_TaskInsert" SpName="FD_TaskInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_TablesForeignKeyGetAll" SpName="FD_TablesForeignKeyGetAll"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_CaseGetById" SpName="SPU_CaseGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGetById" SpName="FD_CaseGetById" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
     <Setting Key="SPU_SuspiciouCustomerGetAll" SpName="SPU_SuspiciouCustomerGetAll"
              DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
 
-    <Setting Key="SPU_TaskInfoGet" SpName="SPU_TaskInfoGet" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_TaskSelectByCaseId" SpName="SPU_TaskSelectByCaseId"
+    <Setting Key="FD_TaskInfoGet" SpName="FD_TaskInfoGet" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_TaskSelectByCaseId" SpName="FD_TaskSelectByCaseId"
          DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="SPU_TaskGetForExecuting" SpName="SPU_TaskGetForExecuting"
+    <Setting Key="FD_TaskGetForExecuting" SpName="FD_TaskGetForExecuting"
          DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
   </Function>
 
-  <Function Name="SPU_Suspicious_Customer">
-    <Setting Key="SPU_SelectUsernameByCustId" SpName="SPU_SelectUsernameByCustId" DbName="DBSPU.bodb02.bodbSPUNet" />
-    <Setting Key="SPU_SelectMatchInfoFromDB02" SpName="SPU_SelectMatchInfoFromDB02" DbName="DBSPU.bodb02.bodbSPUNet" />
-    <Setting Key="SPU_SelectMatchInfoFromDBArchive" SpName="SPU_SelectMatchInfoFromDBArchive"
+  <Function Name="FD_Suspicious_Customer">
+    <Setting Key="FD_GetUsernameByCustId" SpName="FD_GetUsernameByCustId" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_GetMatchInfoFromDB02" SpName="FD_GetMatchInfoFromDB02" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_GetMatchInfoFromDBArchive" SpName="FD_GetMatchInfoFromDBArchive"
              DbName="DBSPU.bodb_Archive.bodbSPUNet" />
     <Setting Key="SPU_SelBalanceUpDay" SpName="SPU_SelBalanceUpDay" DbName="DBSPU.bodb02.bodbSPUNet" />
-    <Setting Key="SPU_CustomerWinlostSelect" SpName="SPU_CustomerWinlostSelect" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_CustomerWinlostGetByIds" SpName="FD_CustomerWinlostGetByIds" DbName="DBSPU.bodb02.bodbSPUNet" />
   </Function>
 
 </Functions>

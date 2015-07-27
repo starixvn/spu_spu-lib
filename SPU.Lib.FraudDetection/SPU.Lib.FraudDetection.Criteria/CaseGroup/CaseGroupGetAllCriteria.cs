@@ -8,7 +8,7 @@
 
         public override string GetSettingKey()
         {
-            return "SPU_CaseGroupGetAll";
+            return "FD_CaseGroupGetAll";
         }
         
         public override bool IsValid()

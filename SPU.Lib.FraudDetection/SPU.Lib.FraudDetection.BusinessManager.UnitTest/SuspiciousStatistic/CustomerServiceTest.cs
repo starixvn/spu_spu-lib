@@ -32,7 +32,7 @@
         }
 
         [Test]
-        public void TestSPU_SelectMatchInfoFromDB02()
+        public void TestFD_GetMatchInfoFromDB02()
         {
             var sut = new MatchService();
 

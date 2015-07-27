@@ -14,7 +14,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
     using System.Data;
     using System.Data.SqlClient;
     using Core;
-    using Criteria;
+    using Criteria.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;

@@ -18,7 +18,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Bettype
     {
         public override string GetSettingKey()
         {
-            return "SPU_SBBettypeGetAll";
+            return "FD_SBBettypeGetAll";
         }
     }
 }

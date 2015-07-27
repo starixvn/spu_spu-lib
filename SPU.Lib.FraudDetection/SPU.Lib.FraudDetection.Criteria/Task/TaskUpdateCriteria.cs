@@ -22,7 +22,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TaskUpdate";
+            return "FD_TaskUpdate";
         }
 
         /// <summary>

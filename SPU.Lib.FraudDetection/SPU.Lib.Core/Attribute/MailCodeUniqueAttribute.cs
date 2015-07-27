@@ -28,7 +28,7 @@ namespace SPU.Lib.Core
         {
             var mailCode = value != null ? value.ToString() : string.Empty;
 
-            using (var db = new ObjectDb("SPU_MailMasterGetAll"))
+            using (var db = new ObjectDb("FD_MailMasterGetAll"))
             {
                 var result = db.Query<dynamic>();
 

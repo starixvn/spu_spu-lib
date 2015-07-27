@@ -28,7 +28,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Config
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_ConfigUpdate";
+            return "FD_ConfigUpdate";
         }
 
         /// <summary>

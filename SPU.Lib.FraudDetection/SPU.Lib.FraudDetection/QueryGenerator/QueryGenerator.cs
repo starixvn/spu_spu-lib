@@ -11,7 +11,7 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Criteria;
+    using Criteria.Config;
     using Criteria.Task;
     using DTO;
     using Service.Implement;
@@ -40,10 +40,10 @@ namespace SPU.Lib.FraudDetection.QueryGenerator
         protected void GetConfigsInfo(int caseId)
         {
             var taskService = new TaskService();
-            TablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeySelectAllCriteria()).ToList();
+            TablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeyGetAllCriteria()).ToList();
 
             var configurationService = new ConfigurationsService();
-            Configs = configurationService.GetFormattedConfigs(new ConfigSelectAllCriteria(), caseId);
+            Configs = configurationService.GetFormattedConfigs(new ConfigGetAllCriteria(), caseId);
         }
 
         /// <summary>

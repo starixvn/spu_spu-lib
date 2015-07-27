@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Reports
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_SuspiciousCustomerGetCount";
+            return "FD_SuspiciousCustomerGetCount";
         }
 
         /// <summary>

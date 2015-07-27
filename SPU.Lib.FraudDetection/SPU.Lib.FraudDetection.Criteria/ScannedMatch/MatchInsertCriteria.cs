@@ -29,7 +29,7 @@ namespace SPU.Lib.FraudDetection.Criteria.ScannedMatch
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_MatchInsert";
+            return "FD_MatchInsert";
         }
 
         /// <summary>

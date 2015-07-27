@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_MailMasterGetById";
+            return "FD_MailMasterGetById";
         }
 
         /// <summary>

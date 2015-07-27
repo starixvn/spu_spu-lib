@@ -18,7 +18,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Event
     {
         public override string GetSettingKey()
         {
-            return "SPU_EventGetAll";
+            return "FD_EventGetAll";
         }
 
         /// <summary>

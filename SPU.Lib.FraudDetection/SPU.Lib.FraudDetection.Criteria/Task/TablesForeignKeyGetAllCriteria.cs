@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SPU_TablesForeignKeyGetAll.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FD_TablesForeignKeyGetAll.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     SPU_TablesForeignKeyGetAll Class.
+    ///     FD_TablesForeignKeyGetAll Class.
     /// </summary>
     public class TablesForeignKeyGetAllCriteria : CriteriaBase
     {
@@ -23,7 +23,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_TablesForeignKeyGetAll";
+            return "FD_TablesForeignKeyGetAll";
         }
 
         /// <summary>

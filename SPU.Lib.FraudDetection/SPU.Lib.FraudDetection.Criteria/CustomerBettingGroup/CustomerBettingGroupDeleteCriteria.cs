@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CustomerBettingGroupGetByIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CustomerBettingGroupDeleteCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,10 +12,12 @@ namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// CustomerBettingGroupGetByIdCriteria Class.
+    /// CustomerBettingGroupDeleteCriteria Class.
     /// </summary>
-    public class CustomerBettingGroupGetByIdCriteria : CriteriaBase
+    public class CustomerBettingGroupDeleteCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+
         public int GroupId { get; set; }
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_CustomerBettingGroupGetById";
+            return "FD_CustomerBettingGroupDelete";
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace SPU.Lib.FraudDetection.Criteria.Case
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_CaseGetById";
+            return "FD_CaseGetById";
         }
 
         /// <summary>

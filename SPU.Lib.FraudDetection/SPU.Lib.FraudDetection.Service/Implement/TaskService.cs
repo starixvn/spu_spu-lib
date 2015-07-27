@@ -13,7 +13,6 @@ namespace SPU.Lib.FraudDetection.Service.Implement
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using Core;
     using Criteria.Task;
     using DataAccess.Implement;
@@ -54,7 +53,7 @@ namespace SPU.Lib.FraudDetection.Service.Implement
             return _taskDataAccess.DeleteTask(criteria);
         }
 
-        public DataCollection GetTasksByCaseId(TaskSelectAllByCaseIdCriteria criteria)
+        public DataCollection GetTasksByCaseId(TaskGetAllByCaseIdCriteria criteria)
         {
             return _taskDataAccess.GetTasksByCaseId(criteria);
         }

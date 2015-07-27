@@ -17,10 +17,10 @@
         {
             if (IsDbArchieve)
             {
-                return "SPU_SelectMatchInfoFromDBArchive";
+                return "FD_GetMatchInfoFromDBArchive";
             }
 
-            return "SPU_SelectMatchInfoFromDB02";
+            return "FD_GetMatchInfoFromDB02";
         }
 
         /// <summary>

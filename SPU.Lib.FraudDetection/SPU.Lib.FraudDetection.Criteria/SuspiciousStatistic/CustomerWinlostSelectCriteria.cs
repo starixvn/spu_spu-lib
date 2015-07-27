@@ -1,6 +1,5 @@
 ﻿namespace SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic
 {
-    using System;
     using Fanex.Data.Repository;
 
     public class CustomerWinlostSelectCriteria : CriteriaBase
@@ -13,7 +12,7 @@
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_CustomerWinlostSelect";
+            return "FD_CustomerWinlostGetByIds";
         }
 
         /// <summary>
