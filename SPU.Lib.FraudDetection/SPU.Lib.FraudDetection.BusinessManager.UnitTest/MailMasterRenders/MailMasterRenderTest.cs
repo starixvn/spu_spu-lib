@@ -20,7 +20,9 @@
             var mockMailTemplateRender = new Mock<IReportTemplateRender>();
             renderAbstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailTemplateRender.Object);
 
-            var sut = new MailMasterRender(mockMailMasterService.Object, renderAbstractFactory.Object,
+            var sut = new MailMasterRender(
+                mockMailMasterService.Object, 
+                renderAbstractFactory.Object,
                 mockPlaceholderReplacer);
 
             mockMailMasterService.Setup(x => x.GetMailById(It.IsAny<ICriteria>())).Returns(new MailMasterInfo

@@ -1,4 +1,13 @@
-﻿namespace SPU.Lib.FraudDetection.NextActions
+﻿// --------------------------------------------------------------------------
+// <copyright file="AssigningGroupNextAction.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.NextActions
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -16,14 +25,6 @@
     {
         protected const int ChunkSize = 60;
 
-        public int GroupId { get; set; }
-
-        public int CaseId { get; set; }
-
-        public IList<SuspiciousInfo> SuspicionList { get; set; }
-
-        public ICustomerGroupService CustomerGroupService { get; set; }
-
         public AssigningGroupNextAction(int groupId, int caseId)
         {
             CaseId = caseId;
@@ -39,6 +40,14 @@
             SuspicionList = new List<SuspiciousInfo>();
             CustomerGroupService = groupService;
         }
+
+        public int GroupId { get; set; }
+
+        public int CaseId { get; set; }
+
+        public IList<SuspiciousInfo> SuspicionList { get; set; }
+
+        public ICustomerGroupService CustomerGroupService { get; set; }
 
         public void TakeAction()
         {

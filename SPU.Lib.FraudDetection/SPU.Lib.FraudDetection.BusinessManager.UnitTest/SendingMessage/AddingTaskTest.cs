@@ -1,15 +1,11 @@
 ﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using System;
-    using DTO;
-    using Fanex.Data.Repository;
     using FraudDetection.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
     using QueueManagement.SendingTasks;
-    using Service.Interface;
-    using TaskExecutors;
 
     [TestFixture]
     public class AddingTaskTest
@@ -30,11 +26,12 @@
             var result = _sut.Send(1);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(
-                It.IsAny<object>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(1));
-            Assert.IsTrue(result);
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<object>(),
+                    It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(1));
+                Assert.IsTrue(result);
         }
 
         [Test]
@@ -44,10 +41,12 @@
             var result = _sut.Send(0);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<TaskExecutor>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(0));
-            Assert.IsFalse(result);
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<TaskExecutor>(),
+                    It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(0));
+                Assert.IsFalse(result);
         }
     }
 }

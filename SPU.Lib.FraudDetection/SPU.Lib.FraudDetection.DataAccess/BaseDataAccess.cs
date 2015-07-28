@@ -78,7 +78,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
         {
             var sqlConnection = new SqlConnection(_sqlConnectionString);
             var sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
-            var result = (int) sqlCommand.ExecuteScalar();
+            var result = (int)sqlCommand.ExecuteScalar();
 
             return new CommandResult
             {
@@ -137,7 +137,7 @@ namespace SPU.Lib.FraudDetection.DataAccess
             {
                 db.AssignParamValues(hash);
                 results.Data = db.ExecuteDataSet();
-                results.TotalItem = (int) db.GetOuputParams()["rowcount"];
+                results.TotalItem = (int)db.GetOuputParams()["rowcount"];
 
                 return results;
             }

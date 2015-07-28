@@ -1,11 +1,18 @@
-﻿namespace SPU.Lib.FraudDetection.QueueManagement
+﻿// --------------------------------------------------------------------------
+// <copyright file="SpuMessageQueue.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.QueueManagement
 {
     using System;
     using System.Messaging;
     using Core;
     using Fanex.Logging;
-    using SPU.Lib.FraudDetection.DTO;
-    using TaskExecutors;
 
     /// <summary>
     ///     SPU Message Queue.

@@ -8,8 +8,8 @@
     <ProjectGuid>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPU.Lib.FraudDetection.DTO</RootNamespace>
-    <AssemblyName>SPU.Lib.FraudDetection.DTO</AssemblyName>
+    <RootNamespace>FraudDetection.Lib.DTO</RootNamespace>
+    <AssemblyName>FraudDetection.Lib.DTO</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

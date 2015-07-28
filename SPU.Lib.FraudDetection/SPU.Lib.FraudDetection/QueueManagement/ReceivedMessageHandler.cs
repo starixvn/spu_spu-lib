@@ -1,8 +1,17 @@
+// --------------------------------------------------------------------------
+// <copyright file="ReceivingMessageHandler.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
 namespace SPU.Lib.FraudDetection.QueueManagement
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Messaging;
-    using DTO;
     using SendingTasks;
     using TaskExecutors;
 
@@ -28,6 +37,10 @@ namespace SPU.Lib.FraudDetection.QueueManagement
             _queue.AttachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
+        [SuppressMessage(
+              "StyleCop.CSharp.Nexcel.NexcelCustomRules",
+              "SP2101:MethodMustNotContainMoreLinesThan",
+              Justification = "Reviewed. Suppression is OK here.")]
         public void HandleReceivedMessage(object sender, ReceiveCompletedEventArgs e)
         {
             using (var msg = _queue.EndReceive(e.AsyncResult))

@@ -19,9 +19,13 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     public interface IGroupDataAccess
     {
         ICommandResult InsertGroup(ICriteria criteria);
+
         DataCollection GetGroups(ICriteria criteria);
+
         ICommandResult UpdateGroup(ICriteria criteria);
+
         ICommandResult DeleteGroup(ICriteria criteria);
+
         ICommandResult AssignCustToGroup(ICriteria criteria);
     }
 }

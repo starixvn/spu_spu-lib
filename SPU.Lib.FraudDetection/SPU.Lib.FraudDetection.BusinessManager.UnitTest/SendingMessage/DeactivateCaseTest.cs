@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="RemovingTaskTest.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DeactivateCaseTest.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,7 +10,6 @@
 namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
 {
     using System;
-    using DTO;
     using FraudDetection.TaskExecutors;
     using Moq;
     using NUnit.Framework;
@@ -36,15 +35,16 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Removing_Valid_CaseId_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
-            const int worflowId = 1;
-            var result = _sut.Send(worflowId);
+            const int WorflowId = 1;
+            var result = _sut.Send(WorflowId);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(
-                It.IsAny<int>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(1));
-            Assert.IsTrue(result);
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<int>(),
+                    It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(1));
+                Assert.IsTrue(result);
         }
 
         [Test]
@@ -55,10 +55,12 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(null);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<TaskExecutor>(),
-                It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(0));
-            Assert.IsFalse(result);
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<TaskExecutor>(),
+                    It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(0));
+                Assert.IsFalse(result);
         }
     }
 }

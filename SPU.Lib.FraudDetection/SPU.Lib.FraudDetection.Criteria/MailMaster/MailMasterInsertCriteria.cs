@@ -37,6 +37,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         public string MailSubject { get; set; }
 
         public string MailContent { get; set; }
+
         public bool IsActive { get; set; }
 
         /// <summary>

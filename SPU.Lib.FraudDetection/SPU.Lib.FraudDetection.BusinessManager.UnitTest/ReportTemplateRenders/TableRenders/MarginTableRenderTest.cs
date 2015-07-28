@@ -75,13 +75,13 @@
             var sampleCustomer1 = new MarginCustormer
             {
                 Member = "member03",
-                Margins = new List<decimal?> {0.98m, 1.23m, 3.50m}
+                Margins = new List<decimal?> { 0.98m, 1.23m, 3.50m }
             };
 
             var sampleCustomer2 = new MarginCustormer
             {
                 Member = "member04",
-                Margins = new List<decimal?> {1.98m, 12.23m, 32.50m}
+                Margins = new List<decimal?> { 1.98m, 12.23m, 32.50m }
             };
 
             var suspiciousCustomers = new List<MarginCustormer>

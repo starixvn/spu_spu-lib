@@ -20,6 +20,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface IScannedMatchesService
     {
         ICommandResult InsertScannedMatch(ICriteria criteria);
+
         IEnumerable<Match> GetScannedMatches(ICriteria criteria);
     }
 }

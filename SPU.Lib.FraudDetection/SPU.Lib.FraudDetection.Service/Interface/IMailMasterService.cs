@@ -20,10 +20,15 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface IMailMasterService
     {
         ICommandResult InsertMail(ICriteria criteria);
+
         ICommandResult DeleteMail(ICriteria criteria);
+
         ICommandResult UpdateMail(ICriteria criteria);
+
         IEnumerable<MailMasterInfo> GetMails(ICriteria criteria);
+
         MailMasterInfo GetMailById(ICriteria criteria);
+
         MailMasterInfo GetMailByName(ICriteria criteria);
     }
 }

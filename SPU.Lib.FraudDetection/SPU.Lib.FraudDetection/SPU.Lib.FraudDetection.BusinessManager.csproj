@@ -8,8 +8,8 @@
     <ProjectGuid>{1B2147AC-1A2B-462A-BB70-73786617AD6B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPU.Lib.FraudDetection</RootNamespace>
-    <AssemblyName>SPU.Lib.FraudDetection</AssemblyName>
+    <RootNamespace>FraudDetection.Lib.BusinessManager</RootNamespace>
+    <AssemblyName>FraudDetection.Lib.BusinessManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -143,7 +143,7 @@
     <Compile Include="ReportTemplateRenders\TableRenders\TableRender.cs" />
     <Compile Include="ReportTemplateRenders\TemplateFileManager.cs" />
     <Compile Include="QueueManagement\SendingTasks\AddingTask.cs" />
-    <Compile Include="NextActions\SavingSuspicion.cs" />
+    <Compile Include="NextActions\SavingSuspicious.cs" />
     <Compile Include="TaskExecutors\TaskExecutorFactory.cs" />
     <Compile Include="TaskExecutors\TaskManager.cs" />
     <Compile Include="NextActions\NextActionFactory.cs" />

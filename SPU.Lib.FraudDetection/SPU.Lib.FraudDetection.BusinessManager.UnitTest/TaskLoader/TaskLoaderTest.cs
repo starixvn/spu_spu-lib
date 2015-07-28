@@ -28,7 +28,7 @@
             _sut = new TaskLoader(_mockTaskService.Object, _mockQueue.Object);
         }
 
-        private Task GetSampleTask()
+        public Task GetSampleTask()
         {
             var sampleTask = new Task
             {
@@ -66,16 +66,18 @@
             //--- Arrange ---
             var sampleTask = GetSampleTask();
             sampleTask.IsActive = true;
-            var sampleTasks = new List<Task> {sampleTask};
+            var sampleTasks = new List<Task> { sampleTask };
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
             //--- Act ---
             _sut.LoadTasks();
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<object>(),
-                It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(1));
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<object>(),
+                    It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(1));
         }
 
         [Test]
@@ -84,7 +86,7 @@
             //--- Arrange ---
             var sampleTask = GetSampleTask();
             sampleTask.IsActive = false;
-            var sampleTasks = new List<Task> {sampleTask};
+            var sampleTasks = new List<Task> { sampleTask };
 
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
@@ -105,19 +107,20 @@
             var sampleTask2 = GetSampleTask();
             sampleTask2.IsActive = true;
 
-            var sampleTasks = new List<Task> {sampleTask1, sampleTask2};
+            var sampleTasks = new List<Task> { sampleTask1, sampleTask2 };
             _mockTaskService.Setup(x => x.LoadAllTasks(It.IsAny<ICriteria>())).Returns(sampleTasks);
 
             //--- Act ---
             _sut.LoadTasks();
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<object>(),
-                It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))),
-                Times.Exactly(2));
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<object>(),
+                    It.Is<string>(t => t.Equals(SendingType.AddingTask.ToString(), StringComparison.OrdinalIgnoreCase))),
+                    Times.Exactly(2));
         }
 
-        //[Test]
         public void Real_Send_Should_Called_Twice_When_Two_Active_Tasks()
         {
             //--- Arrange ---
@@ -129,7 +132,7 @@
             //--- Act ---
             sut.LoadTasks();
 
-            while (true) ;
+            // while (true) {}
         }
 
         #endregion Tests For Calling LoadTasks

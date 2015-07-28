@@ -220,14 +220,14 @@ namespace SPU.Lib.Core
         /// <returns>Object System.String.</returns>
         public static string ConvertToString(this object obj)
         {
-            if (obj.GetType().Equals(typeof (DBNull)))
+            if (obj.GetType().Equals(typeof(DBNull)))
             {
                 return string.Empty;
             }
 
-            if (obj.GetType().Equals(typeof (DateTime)))
+            if (obj.GetType().Equals(typeof(DateTime)))
             {
-                return ((DateTime) obj).ToString("dd MMM yyyy HH:mm:ss");
+                return ((DateTime)obj).ToString("dd MMM yyyy HH:mm:ss");
             }
 
             return obj.ToString();

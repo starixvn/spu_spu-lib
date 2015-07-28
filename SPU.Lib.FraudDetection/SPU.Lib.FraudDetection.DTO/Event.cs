@@ -15,8 +15,11 @@ namespace SPU.Lib.FraudDetection.DTO
     public class Event
     {
         public int EventId { get; set; }
+
         public string EventName { get; set; }
+
         public string EventDesc { get; set; }
+
         public bool IsBackgroundProcess { get; set; }
     }
 }

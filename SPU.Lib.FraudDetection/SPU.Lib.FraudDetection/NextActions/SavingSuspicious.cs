@@ -1,4 +1,13 @@
-﻿namespace SPU.Lib.FraudDetection.NextActions
+﻿// --------------------------------------------------------------------------
+// <copyright file="SavingSuspicious.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.NextActions
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +23,7 @@
     /// <summary>
     /// Save suspicious info.
     /// </summary>
-    public class SavingSuspicion
+    public class SavingSuspicious
     {
         protected const int ChunkSize = 60;
 
@@ -24,7 +33,7 @@
 
         private List<SuspiciousInfo> _suspiciousInfoList;
 
-        public SavingSuspicion(List<SuspiciousInfo> suspiciousInfoList, IList<string> matchIdList, int taskId)
+        public SavingSuspicious(List<SuspiciousInfo> suspiciousInfoList, IList<string> matchIdList, int taskId)
         {
             _suspiciousInfoList = suspiciousInfoList;
             _matchIdList = matchIdList;

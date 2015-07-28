@@ -19,6 +19,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
     public class MailMasterUpdateCriteria : CriteriaBase
     {
         public int CreatorId { get; set; }
+
         public int MailId { get; set; }
 
         [DisplayName("Mailing List")]
@@ -36,6 +37,7 @@ namespace SPU.Lib.FraudDetection.Criteria.MailMaster
         public string MailSubject { get; set; }
 
         public string MailContent { get; set; }
+
         public bool IsActive { get; set; }
 
         /// <summary>

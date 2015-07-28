@@ -11,7 +11,6 @@
     public class ScanMatchTaskExecutorIntegrationTest : IntegrationTest
     {
         [Test]
-        //[Ignore("Ignore a fixture")]
         public void Run_Task_Scan_Match()
         {
             var taskService = new TaskService();

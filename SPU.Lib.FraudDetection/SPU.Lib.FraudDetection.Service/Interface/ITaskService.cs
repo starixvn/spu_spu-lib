@@ -24,14 +24,21 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface ITaskService
     {
         ICommandResult InsertTask(ICriteria criteria);
+
         ICommandResult DeleteTask(ICriteria criteria);
+
         DataCollection GetTasksByCaseId(TaskGetAllByCaseIdCriteria criteria);
+
         IEnumerable<Task> GetTasksByCaseId(TaskGetByCaseIdCriteria criteria);
 
         ICommandResult UpdateTask(ICriteria criteria);
+
         IEnumerable<Task> LoadAllTasks(ICriteria criteria);
+
         IEnumerable<Match> GetSuspiciousMatches(string query);
+
         IEnumerable<SuspiciousInfo> GetSuspiciousTickets(string query);
+
         IEnumerable<TablesForeignKey> GetTablesForeignKey(ICriteria criteria);
 
         Task GetTaskInfoByTaskId(ICriteria criteria);
@@ -46,8 +53,11 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         IEnumerable<string> ExecutePrecondition(string sqlQueryString);
 
         List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId);
+
         IEnumerable<T> GetData<T>(ICriteria criteria);
+
         IEnumerable<T> GetData<T>(dynamic paramaters);
+
         IEnumerable<T> GetData<T>(ICriteria criteria, ref int totalPages);
 
         /// <summary>
@@ -65,6 +75,7 @@ namespace SPU.Lib.FraudDetection.Service.Interface
         DataTable ExecuteReaderQueryInline(string sqlQueryString);
 
         IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int caseId);
+
         IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria);
     }
 }

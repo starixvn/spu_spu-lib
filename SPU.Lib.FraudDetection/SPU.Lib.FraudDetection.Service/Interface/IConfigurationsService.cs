@@ -20,10 +20,15 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface IConfigurationsService
     {
         ICommandResult InsertConfig(ICriteria criteria);
+
         ICommandResult DeleteConfig(ICriteria criteria);
+
         IEnumerable<Config> GetConfigs(ICriteria criteria);
+
         IEnumerable<Parameter> GetParameters(ICriteria criteria);
+
         ICommandResult UpdateConfigs(ICriteria criteria);
+
         ICommandResult UpdateConfigParameters(ICriteria criteria);
     }
 }

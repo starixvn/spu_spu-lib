@@ -1,17 +1,28 @@
-﻿namespace SPU.Lib.FraudDetection.Service.Implement
+﻿// --------------------------------------------------------------------------
+// <copyright file="SuspiciousStatisticsReportService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.Service.Implement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Core;
-    using Criteria.SuspiciousStatistic;
     using Criteria.Case;
+    using Criteria.SuspiciousStatistic;
     using DTO;
     using DTO.ReportTemplate;
     using Interface;
 
     public class SuspiciousStatisticsReportService : IReportService
     {
+        private const int ChunkSize = 60;
+
         public SuspiciousStatisticsReportService()
         {
             CustomerService = new CustomerService();
@@ -20,17 +31,16 @@
         }
 
         public ICustomerService CustomerService { get; set; }
+
         public IMatchService MatchService { get; set; }
+
         public ICaseService CaseService { get; set; }
 
         public SuspiciousStatisticViewModel GetSuspiciousCustomerStatistics(IList<SuspiciousInfo> list)
         {
             var customers = GetDistinctCustomers(list);
-
             var matches = GetDistinctMatches(list);
-
             var margins = GetMarginCustomer(list);
-
             var model = BuildSuspiciousStatisticViewModel(list, matches, customers, margins);
 
             return model;
@@ -38,9 +48,11 @@
 
         #region Private methods
 
-        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(IList<SuspiciousInfo> list,
+        private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(
+            IList<SuspiciousInfo> list,
             IList<MatchDetail> matches,
-            IList<Customer> customers, IList<MarginCustormer> margins)
+            IList<Customer> customers, 
+            IList<MarginCustormer> margins)
         {
             if (customers.Count == 0 || matches.Count == 0)
             {
@@ -83,8 +95,6 @@
             return model;
         }
 
-        protected int ChunkSize = 60;
-
         private IList<Customer> GetDistinctCustomers(IList<SuspiciousInfo> list)
         {
             var distinctCustomers = list.Select(t => t.CustId).Distinct().ToList();
@@ -118,19 +128,17 @@
             return matches;
         }
 
-        private IList<MatchDetail> GetMatchesFromBodb02(IList<int> distinctMatches, bool IsDbArchive = false)
+        private IList<MatchDetail> GetMatchesFromBodb02(IList<int> distinctMatches, bool isDbArchive = false)
         {
             var matchChunks = distinctMatches.Chunk(ChunkSize);
             var matches = new List<MatchDetail>();
 
-            foreach (var matchChunk in matchChunks)
-            {
-                var criteria = new MatchSelectCriteria
+            foreach (var criteria in matchChunks.Select(matchChunk => new MatchSelectCriteria
                 {
-                    IsDbArchieve = IsDbArchive,
+                    IsDbArchieve = isDbArchive,
                     ListMatchIds = string.Join(",", distinctMatches)
-                };
-
+                }))
+            {
                 matches.AddRange(MatchService.GetMatchDetails(criteria).ToList());
             }
 
@@ -146,6 +154,7 @@
             {
                 last3Months.Add(today.AddMonths(-i));
             }
+
             return last3Months;
         }
 

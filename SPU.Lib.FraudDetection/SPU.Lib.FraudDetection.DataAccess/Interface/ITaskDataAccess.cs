@@ -19,8 +19,11 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     public interface ITaskDataAccess
     {
         ICommandResult InsertTask(ICriteria criteria);
+
         ICommandResult UpdateTask(ICriteria criteria);
+
         ICommandResult DeleteTask(ICriteria criteria);
+
         DataCollection GetTasksByCaseId(ICriteria criteria);
     }
 }

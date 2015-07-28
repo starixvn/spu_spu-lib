@@ -119,8 +119,8 @@
             _sut.AddTask(1);
 
             // --- Act ---
-            const string taskName = "Task Demo";
-            task.TaskName = taskName;
+            const string TaskName = "Task Demo";
+            task.TaskName = TaskName;
 
             _mockTaskService
                 .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
@@ -131,7 +131,7 @@
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(1, actualCount);
-            Assert.AreEqual(taskName, _sut.TaskExecutors[0].Task.TaskName);
+            Assert.AreEqual(TaskName, _sut.TaskExecutors[0].Task.TaskName);
         }
 
         [Test]
@@ -147,7 +147,6 @@
             _sut.AddTask(1);
 
             // --- Act ---
-
             var nonExistTask = new Task
             {
                 EventId = 1,

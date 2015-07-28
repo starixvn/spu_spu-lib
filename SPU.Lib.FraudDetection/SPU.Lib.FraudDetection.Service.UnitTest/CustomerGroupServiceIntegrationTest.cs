@@ -1,7 +1,6 @@
 ﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
 {
     using Core;
-    using Criteria.CaseGroup;
     using Criteria.Group;
     using Implement;
     using NUnit.Framework;
@@ -24,7 +23,5 @@
 
             Assert.IsTrue(result.IsSuccessful);
         }
-
-       
     }
 }

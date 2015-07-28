@@ -16,9 +16,7 @@
         {
             DbSettingProviderManager.Current.Start();
         }
-
         
-
         [Test]
         [Ignore("Ignore a fixture")]
         public void TestGetUsernameByCustId()

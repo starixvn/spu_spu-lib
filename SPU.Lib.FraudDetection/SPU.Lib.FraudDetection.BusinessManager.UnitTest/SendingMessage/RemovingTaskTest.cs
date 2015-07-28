@@ -38,7 +38,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(1);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(
+            _mockQueue.Verify(
+                x => x.Send(
                 It.IsAny<object>(),
                 It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                 Times.Exactly(1));
@@ -52,7 +53,9 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
             var result = _sut.Send(null);
 
             //--- Assert ---
-            _mockQueue.Verify(x => x.Send(It.IsAny<TaskExecutor>(),
+            _mockQueue.Verify(
+                x => x.Send(
+                    It.IsAny<TaskExecutor>(),
                 It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                 Times.Exactly(0));
             Assert.IsFalse(result);

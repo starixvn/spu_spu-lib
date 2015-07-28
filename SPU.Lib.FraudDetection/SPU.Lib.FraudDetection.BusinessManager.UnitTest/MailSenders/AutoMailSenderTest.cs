@@ -25,14 +25,14 @@
         public void When_Calling_Send_Mail_Then_RenderContent_Should_Be_Called()
         {
             // --- Arrange --
-            const string partialContent = "Suspicious Statistic Table and Margin Table";
+            const string PartialContent = "Suspicious Statistic Table and Margin Table";
             var reporRenderAbstractFactory = new Mock<IReportRenderAbstractFactory>();
             var mockMailRender = new Mock<IReportTemplateRender>();
             var mockMailRenderAbstractFactory = new Mock<IMailMasterRenderAbstractFactory>();
             var mockMailMasterRender = new MailMasterRender(reporRenderAbstractFactory.Object);
             reporRenderAbstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailRender.Object);
             mockMailRenderAbstractFactory.Setup(x => x.GetMailMasterRender()).Returns(mockMailMasterRender);
-            mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
+            mockMailRender.Setup(x => x.RenderContent()).Returns(PartialContent);
 
             // --- Act --
             var sut = new SpuMailSender(new FakeMailClient())

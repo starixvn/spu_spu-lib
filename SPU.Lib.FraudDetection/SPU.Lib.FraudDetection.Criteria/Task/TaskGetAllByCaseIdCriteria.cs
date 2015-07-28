@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------
-// <copyright file="TaskSelectAllByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskGetAllByCaseIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,6 +16,11 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
     /// </summary>
     public class TaskGetAllByCaseIdCriteria : CriteriaBase
     {
+        public TaskGetAllByCaseIdCriteria()
+        {
+            PageIndex = 1;
+        }
+
         public int CaseId { get; set; }
 
         public int PageSize { get; set; }
@@ -25,11 +30,6 @@ namespace SPU.Lib.FraudDetection.Criteria.Task
         public int PageCount { get; set; }
 
         public int RowCount { get; set; }
-
-        public TaskGetAllByCaseIdCriteria()
-        {
-            PageIndex = 1;
-        }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

@@ -18,8 +18,11 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     public interface IConfigurationsDataAccess
     {
         ICommandResult InsertConfig(ICriteria criteria);
+
         ICommandResult UpdateConfigs(ICriteria criteria);
+
         ICommandResult DeleteConfig(ICriteria criteria);
+
         ICommandResult UpdateConfigParameters(ICriteria criteria);
     }
 }

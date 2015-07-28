@@ -19,8 +19,11 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     public interface ICaseDataAccess
     {
         ICommandResult InsertCase(ICriteria criteria);
+
         ICommandResult UpdateCase(ICriteria criteria);
+
         ICommandResult DeleteCase(ICriteria criteria);
+
         DataCollection GetCases(ICriteria criteria);
     }
 }

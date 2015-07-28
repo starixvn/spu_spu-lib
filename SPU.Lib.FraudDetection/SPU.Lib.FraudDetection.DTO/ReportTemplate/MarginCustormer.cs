@@ -1,4 +1,13 @@
-﻿namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
+﻿// --------------------------------------------------------------------------
+// <copyright file="MarginCustormer.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.DTO.ReportTemplate
 {
     using System.Collections.Generic;
 
@@ -10,6 +19,7 @@
         }
 
         public string Member { get; set; }
+
         public IList<decimal?> Margins { get; set; }
     }
 }

@@ -18,7 +18,9 @@ namespace SPU.Lib.FraudDetection.DataAccess.Interface
     public interface IMailMasterDataAccess
     {
         ICommandResult InsertMail(ICriteria criteria);
+
         ICommandResult UpdateMail(ICriteria criteria);
+
         ICommandResult DeleteMail(ICriteria criteria);
     }
 }

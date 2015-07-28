@@ -8,8 +8,8 @@
     <ProjectGuid>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPU.Lib.FraudDetection.Criteria</RootNamespace>
-    <AssemblyName>SPU.Lib.FraudDetection.Criteria</AssemblyName>
+    <RootNamespace>FraudDetection.Lib.Criteria</RootNamespace>
+    <AssemblyName>FraudDetection.Lib.Criteria</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

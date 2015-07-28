@@ -15,9 +15,13 @@ namespace SPU.Lib.FraudDetection.DTO
     public class SuspiciousInfo
     {
         public int CustId { get; set; }
+
         public int MatchId { get; set; }
+
         public int TaskId { get; set; }
+
         public string TransId { get; set; }
+
         public int CaseId { get; set; }
     }
 }

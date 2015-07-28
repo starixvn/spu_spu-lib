@@ -32,6 +32,8 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
     /// </summary>
     public abstract class TaskExecutor : ITaskExecutor
     {
+        protected const int ChunkSize = 60;
+
         #region Constructor
 
         protected TaskExecutor(Task task)
@@ -47,27 +49,25 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             TaskService = taskService;
         }
 
-        public Timer Timer { get; set; }
-
-        private bool IsRunning { get; set; }
-
-        private bool IsStop { get; set; }
-        
         #endregion Constructor
 
         #region Properties
 
-        protected const int ChunkSize = 60;
-
         public Task Task { get; set; }
 
         public ITaskService TaskService { get; set; }
+
+        public Timer Timer { get; set; }
 
         public int TaskId
         {
             get { return Task.TaskId; }
         }
 
+        private bool IsRunning { get; set; }
+
+        private bool IsStop { get; set; }
+        
         #endregion Properties
 
         #region Execute task

@@ -20,8 +20,11 @@ namespace SPU.Lib.FraudDetection.DTO
         }
 
         public int MatchId { get; set; }
+
         public string MatchCode { get; set; }
+
         public DateTime EventDate { get; set; }
+
         public int HomeId { get; set; }
 
         public string HomeName

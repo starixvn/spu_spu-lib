@@ -11,7 +11,6 @@
     public class CountingViolationTimesTaskExecutorIntegrationTest : IntegrationTest
     {
         [Test]
-        //[Ignore("Run_Task_Count_Suspicious_Times")]
         public void Run_Task_Count_Suspicious_Times()
         {
             var taskService = new TaskService();

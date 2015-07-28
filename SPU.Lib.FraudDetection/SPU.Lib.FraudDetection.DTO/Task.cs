@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="TaskInfo.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Task.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -18,21 +18,37 @@ namespace SPU.Lib.FraudDetection.DTO
     public class Task
     {
         public int TaskId { get; set; }
+
         public string TaskName { get; set; }
+
         public string TaskDesc { get; set; }
+
         public string TaskPreconditions { get; set; }
+
         public string TaskPreconditionsOriginal { get; set; }
+
         public string TaskPreconditionsFormatted { get; set; }
+
         public string TaskRules { get; set; }
+
         public string TaskRulesOriginal { get; set; }
+
         public string TaskRulesFormatted { get; set; }
+
         public int CaseId { get; set; }
+
         public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
+
         public int EventId { get; set; }
+
         public string NextActionIdList { get; set; }
+
         public string NextActionTargetIdList { get; set; }
+
         public int Interval { get; set; }
+
         public string IntervalType { get; set; } // day, hour, min, second
+
         public bool IsActive { get; set; }
 
         public int Timer

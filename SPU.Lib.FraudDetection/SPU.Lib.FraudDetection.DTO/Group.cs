@@ -15,8 +15,11 @@ namespace SPU.Lib.FraudDetection.DTO
     public class Group
     {
         public int GroupId { get; set; }
+
         public string GroupName { get; set; }
+
         public string GroupDesc { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

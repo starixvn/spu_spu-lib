@@ -20,8 +20,11 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface IBettypeService
     {
         ICommandResult InsertBettype(ICriteria criteria);
+
         ICommandResult DeleteBettype(ICriteria criteria);
+
         IEnumerable<Bettype> GetAllSBBettypes(ICriteria criteria);
+
         IEnumerable<Sport> GetAllSBSports(ICriteria criteria);
     }
 }

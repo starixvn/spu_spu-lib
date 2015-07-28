@@ -1,4 +1,13 @@
-﻿namespace SPU.Lib.FraudDetection.TaskExecutors
+﻿// --------------------------------------------------------------------------
+// <copyright file="TaskManager.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
+namespace SPU.Lib.FraudDetection.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +19,7 @@
     using Service.Interface;
 
     /// <summary>
-    ///     Case Class.
+    ///     TaskManager Class.
     /// </summary>
     public class TaskManager : ITaskManager
     {
@@ -38,7 +47,7 @@
         {
             try
             {
-                var task =_taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria()
+                var task = _taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria()
                 {
                     TaskId = taskId
                 });

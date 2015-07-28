@@ -1,9 +1,16 @@
+// --------------------------------------------------------------------------
+// <copyright file="ScanMatchTaskExecutor.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.07.23">Created</change>
+// </history>
+
 namespace SPU.Lib.FraudDetection.TaskExecutors
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Timers;
     using Core;
     using Core.Utilities;
     using DTO;
@@ -12,9 +19,9 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
     public class ScanMatchTaskExecutor : TaskExecutor
     {
-        private IList<string> _matchIdList;
-
         private readonly List<SuspiciousInfo> _suspicionList;
+
+        private IList<string> _matchIdList;
 
         public ScanMatchTaskExecutor(Task task)
             : base(task)
@@ -55,12 +62,6 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
             SaveSuspiciousCustomers();
         }
 
-        private void SaveSuspiciousCustomers()
-        {
-            var saveAction = new SavingSuspicion(_suspicionList, _matchIdList, Task.TaskId);
-            saveAction.TakeAction();
-        }
-
         protected override void TakeNextAction()
         {
             if (_suspicionList.Count == 0)
@@ -79,6 +80,12 @@ namespace SPU.Lib.FraudDetection.TaskExecutors
 
                 nextAction.TakeAction();
             }
+        }
+
+        private void SaveSuspiciousCustomers()
+        {
+            var saveAction = new SavingSuspicious(_suspicionList, _matchIdList, Task.TaskId);
+            saveAction.TakeAction();
         }
     }
 }

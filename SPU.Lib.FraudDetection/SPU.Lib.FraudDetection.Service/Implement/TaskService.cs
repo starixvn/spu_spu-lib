@@ -126,7 +126,8 @@ namespace SPU.Lib.FraudDetection.Service.Implement
         ///     Execute Rule.
         /// </summary>
         /// <param name="sqlQueryString">SQL Query String.</param>
-        /// <param name="taskId">Case ID.</param>
+        /// <param name="taskId">Parameter Task ID.</param>
+        /// <param name="caseId">Parameter Case ID.</param>
         /// <returns>List of Suspicious Info.</returns>
         public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId)
         {

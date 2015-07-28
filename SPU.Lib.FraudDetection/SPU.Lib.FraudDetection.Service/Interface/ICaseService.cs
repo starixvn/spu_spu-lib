@@ -21,12 +21,19 @@ namespace SPU.Lib.FraudDetection.Service.Interface
     public interface ICaseService
     {
         ICommandResult InsertCase(ICriteria criteria);
+
         ICommandResult DeleteCase(ICriteria criteria);
+
         IEnumerable<CaseInfo> LoadCases(ICriteria criteria);
+
         DataCollection GetCases(ICriteria criteria);
+
         IEnumerable<Task> GetTasks(ICriteria criteria);
+
         ICommandResult UpdateCase(ICriteria criteria);
+
         CaseInfo GetCaseById(ICriteria criteria);
+
         void Dispose();
     }
 }

@@ -5,6 +5,7 @@
     public class SuspiciousHistoryCriteria : CriteriaBase
     {
         public string CustIdList { get; set; }
+
         public int CaseId { get; set; }
 
         /// <summary>

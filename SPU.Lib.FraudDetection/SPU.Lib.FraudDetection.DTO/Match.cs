@@ -17,6 +17,7 @@ namespace SPU.Lib.FraudDetection.DTO
     public class Match
     {
         public int MatchId { get; set; }
+
         public DateTime EventDate { get; set; }
     }
 }

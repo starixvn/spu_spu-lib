@@ -12,11 +12,12 @@ namespace SPU.Lib.Core
     using System.Data;
 
     /// <summary>
-    ///     TODO: Update summary.
+    /// Data Collection.
     /// </summary>
     public class DataCollection
     {
         public DataSet Data { get; set; }
+
         public int TotalItem { get; set; }
     }
 }
