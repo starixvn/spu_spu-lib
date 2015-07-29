@@ -64,7 +64,7 @@ namespace FD.Lib.Service.Implement
             return _groupDataAccess.UpdateGroup(criteria);
         }
 
-        public IEnumerable<Group> GetGroupsNotInGivenCase(GroupGetAvailableGroupForCaseCriteria criteria)
+        public IEnumerable<Group> GetAvailableGroupsForCase(GroupGetAvailableGroupsForCaseCriteria criteria)
         {
             return GetData<Group>(criteria);
         }

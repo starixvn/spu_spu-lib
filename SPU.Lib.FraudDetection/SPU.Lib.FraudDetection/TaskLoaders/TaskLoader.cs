@@ -23,7 +23,7 @@ namespace FD.Lib.TaskLoaders
         public TaskLoader()
         {
             _taskService = new TaskService();
-            _sendingTask = new AddingTask(new SpuMessageQueue());
+            _sendingTask = new AddingTask(new FDMessageQueue());
         }
 
         public TaskLoader(ITaskService taskService, IMessageQueue messageQueue)

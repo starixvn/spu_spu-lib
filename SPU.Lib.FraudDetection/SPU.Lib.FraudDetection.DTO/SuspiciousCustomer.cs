@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace FD.Lib.Service.Implement
+namespace FD.Lib.DTO
 {
     public class SuspiciousCustomer
     {

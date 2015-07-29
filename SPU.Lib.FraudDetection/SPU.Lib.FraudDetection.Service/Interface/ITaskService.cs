@@ -16,7 +16,6 @@ namespace FD.Lib.Service.Interface
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using Implement;
 
     /// <summary>
     ///     Task Service interface.

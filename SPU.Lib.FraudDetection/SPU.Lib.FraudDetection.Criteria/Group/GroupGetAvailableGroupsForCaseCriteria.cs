@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupGetAvailableGroupForCaseCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupGetAvailableGroupsForCaseCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,9 +12,9 @@ namespace FD.Lib.Criteria.Group
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     GroupGetAvailableGroupForCaseCriteria Class.
+    ///     GroupGetAvailableGroupsForCaseCriteria Class.
     /// </summary>
-    public class GroupGetAvailableGroupForCaseCriteria : CriteriaBase
+    public class GroupGetAvailableGroupsForCaseCriteria : CriteriaBase
     {
         public int CaseId { get; set; }
 

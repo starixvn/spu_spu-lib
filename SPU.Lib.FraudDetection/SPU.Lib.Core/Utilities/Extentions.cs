@@ -13,7 +13,7 @@ namespace FD.Lib.Core.Utilities
     using System.Linq;
 
     /// <summary>
-    ///     TODO: Update summary.
+    /// Extentions class.
     /// </summary>
     public static class Extentions
     {

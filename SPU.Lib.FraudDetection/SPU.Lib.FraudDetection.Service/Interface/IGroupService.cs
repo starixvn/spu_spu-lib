@@ -33,6 +33,6 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult UpdateGroup(ICriteria criteria);
 
-        IEnumerable<Group> GetGroupsNotInGivenCase(GroupGetAvailableGroupForCaseCriteria criteria);
+        IEnumerable<Group> GetAvailableGroupsForCase(GroupGetAvailableGroupsForCaseCriteria criteria);
     }
 }

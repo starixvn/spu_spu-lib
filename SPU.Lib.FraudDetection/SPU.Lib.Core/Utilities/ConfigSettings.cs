@@ -12,7 +12,7 @@ namespace FD.Lib.Core.Utilities
     using System.Configuration;
 
     /// <summary>
-    ///     TODO: Update summary.
+    /// Configuration Settings class.
     /// </summary>
     public static class ConfigSettings
     {

@@ -1,4 +1,13 @@
-﻿namespace FD.Lib.Service.Implement
+﻿// --------------------------------------------------------------------------
+// <copyright file="CaseGroupService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -27,12 +36,12 @@
             return _caseGroupDataAccess.InsertCaseGroup(criteria);
         }
 
-        public ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria)
+        public ICommandResult DeleteCaseGroup(CaseGroupDeleteCriteria criteria)
         {
             return _caseGroupDataAccess.DeleteCaseGroup(criteria);
         }
 
-        public IList<CaseGroup> SelectCaseGroup(CaseGroupGetAllCriteria criteria)
+        public IList<CaseGroup> GetCaseGroup(CaseGroupGetAllCriteria criteria)
         {
             return GetData<CaseGroup>(criteria).ToList();
         }

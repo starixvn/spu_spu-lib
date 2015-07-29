@@ -42,7 +42,7 @@ namespace FD.Lib.Service.Implement
             return _caseDataAccess.DeleteCase(criteria);
         }
 
-        public IEnumerable<CaseInfo> LoadCases(ICriteria criteria)
+        public IEnumerable<CaseInfo> GetCaseInfo(ICriteria criteria)
         {
             return GetData<CaseInfo>(criteria);
         }

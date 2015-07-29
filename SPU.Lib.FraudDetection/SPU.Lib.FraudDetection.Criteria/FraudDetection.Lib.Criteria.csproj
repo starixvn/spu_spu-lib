@@ -88,7 +88,7 @@
     <Compile Include="Event\EventGetAllCriteria.cs" />
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
-    <Compile Include="Group\GroupGetAvailableGroupForCaseCriteria.cs" />
+    <Compile Include="Group\GroupGetAvailableGroupsForCaseCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
-    <Compile Include="SuspiciousStatistic\CustomerSelectCritiria.cs" />
+    <Compile Include="SuspiciousStatistic\CustomerSelectCriteria.cs" />
     <Compile Include="Task\TaskInfoCriteria.cs" />
     <Compile Include="Task\TaskGetAllByCaseIdCriteria.cs" />
     <Compile Include="Task\TaskGetForExecutingCriteria.cs" />

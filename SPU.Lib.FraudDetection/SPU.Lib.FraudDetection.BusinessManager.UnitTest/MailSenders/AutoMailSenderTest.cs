@@ -35,7 +35,7 @@
             mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
             // --- Act --
-            var sut = new SpuMailSender(new FakeMailClient())
+            var sut = new FDMailSender(new FakeMailClient())
             {
                 MailMasterRenderAbstractFactory = mockMailRenderAbstractFactory.Object
             };
@@ -62,7 +62,7 @@
                 ReportRenderFactory = renderFactory
             };
 
-            var sut = new SpuMailSender(new FakeMailClient())
+            var sut = new FDMailSender(new FakeMailClient())
             {
                 MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory
             };

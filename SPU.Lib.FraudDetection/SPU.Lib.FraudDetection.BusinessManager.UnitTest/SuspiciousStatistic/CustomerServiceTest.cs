@@ -23,7 +23,7 @@
         {
             var sut = new CustomerService();
 
-            var abao = sut.GetUsernameByCustId(new CustomerSelectCritiria
+            var abao = sut.GetUsernameByCustId(new CustomerSelectCriteria
             {
                 ListCustIds = "1,2,3,4,5,6"
             });

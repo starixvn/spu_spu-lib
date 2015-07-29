@@ -15,7 +15,7 @@ namespace FD.Lib.QueueManagement.SendingTasks
 
         protected SendingMessage()
         {
-            _messageQueue = new SpuMessageQueue();
+            _messageQueue = new FDMessageQueue();
         }
 
         protected SendingMessage(IMessageQueue messageQueue)

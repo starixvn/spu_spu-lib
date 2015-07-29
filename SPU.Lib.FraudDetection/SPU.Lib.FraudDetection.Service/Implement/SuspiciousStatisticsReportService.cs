@@ -103,7 +103,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var customerChunk in customerChunks)
             {
-                customers.AddRange(CustomerService.GetUsernameByCustId(new CustomerSelectCritiria
+                customers.AddRange(CustomerService.GetUsernameByCustId(new CustomerSelectCriteria
                 {
                     ListCustIds = string.Join(",", customerChunk)
                 }));
@@ -145,7 +145,7 @@ namespace FD.Lib.Service.Implement
             return matches;
         }
 
-        private List<DateTime> GetLast3Months()
+        private List<DateTime> GetLastThreeMonths()
         {
             var last3Months = new List<DateTime>();
             var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -165,7 +165,7 @@ namespace FD.Lib.Service.Implement
                 ListCustIDs = string.Join(",", list.Select(t => t.CustId).Distinct().ToList())
             };
 
-            var last3Months = GetLast3Months();
+            var last3Months = GetLastThreeMonths();
 
             var margins = CustomerService.GetMarginCustomerByCustId(criteria).OrderBy(t => t.Username);
 

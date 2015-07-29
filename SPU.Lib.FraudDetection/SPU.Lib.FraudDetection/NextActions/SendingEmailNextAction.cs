@@ -25,7 +25,7 @@ namespace FD.Lib.NextActions
         public SendingEmailNextAction(int mailMasterId)
         {
             MailMasterId = mailMasterId;
-            MailSender = new SpuMailSender();
+            MailSender = new FDMailSender();
             ReportService = new SuspiciousStatisticsReportService();
         }
 
@@ -64,7 +64,6 @@ namespace FD.Lib.NextActions
             };
 
             MailSender.MailMasterRenderAbstractFactory = mailMasterRenderAbstractFactory;
-
             MailSender.SendMail(MailMasterId);
         }
     }

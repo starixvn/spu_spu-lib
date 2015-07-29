@@ -37,13 +37,13 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The list of Suspicious Customers.</returns>
-        public IEnumerable<SuspiciousCustomerReport> GetAllSuspiciousCustomerReport(SuspiciousCustomerReportGetAllCriteria criteria)
+        public IEnumerable<SuspiciousCustomerReport> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
         {
-            var suspiciousCustomers = GetSuspiciousCustomerByGroup(criteria.GroupId);
+            var suspiciousCustomers = GetSuspiciousCustomersByGroup(criteria.GroupId);
             var customers = GetCustomers(GetSuspiciousCustomerIds(suspiciousCustomers));
             var filteredCustomers = FilterCustomersByName(criteria.CustName, customers);
             var filteredSuspiciousCustomers = GetFilteredSuspiciousCustomers(suspiciousCustomers, filteredCustomers);
-            var suspiciousCustomerTime = GetSuspiciousCustomerTime(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
+            var suspiciousCustomerTime = GetSuspiciousTime(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
 
             foreach (var filteredCuspiciousCustomer in filteredSuspiciousCustomers)
             {
@@ -56,8 +56,7 @@ namespace FD.Lib.Service.Implement
                 }
             }
 
-            var marginCustomers = GetSuspiciousCustomerMargin(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
-
+            var marginCustomers = GetSuspiciousCustomerMargins(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
             var result = BindMarginData(filteredSuspiciousCustomers, marginCustomers);
 
             return result;
@@ -100,12 +99,9 @@ namespace FD.Lib.Service.Implement
         /// <returns>Margin of month.</returns>
         private decimal? GetMargin(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
-            foreach (var margin in margins)
+            foreach (var margin in margins.Where(margin => margin.CustId == custId && margin.WinlostDate == month))
             {
-                if (margin.CustId == custId && margin.WinlostDate == month)
-                {
-                    return margin.Margin;
-                }
+                return margin.Margin;
             }
 
             return null;
@@ -120,12 +116,9 @@ namespace FD.Lib.Service.Implement
         /// <returns>WinLoss of month.</returns>
         private decimal? GetWinLoss(int custId, DateTime month, IEnumerable<RawMarginCustomer> margins)
         {
-            foreach (var margin in margins)
+            foreach (var margin in margins.Where(margin => margin.CustId == custId && margin.WinlostDate == month))
             {
-                if (margin.CustId == custId && margin.WinlostDate == month)
-                {
-                    return margin.MemberWinlost;
-                }
+                return margin.MemberWinlost;
             }
 
             return null;
@@ -141,7 +134,7 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="listCustIds">List customer ID.</param>
         /// <returns>The list suspicious time.</returns>
-        private IEnumerable<SuspiciousCustomerTime> GetSuspiciousCustomerTime(string listCustIds)
+        private IEnumerable<SuspiciousCustomerTime> GetSuspiciousTime(string listCustIds)
         {
             var result = new List<SuspiciousCustomerTime>().AsEnumerable();
             foreach (var customerIds in Split(listCustIds, 60))
@@ -162,7 +155,7 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="listCustIds">List customer ID.</param>
         /// <returns>The list margin and win loss.</returns>
-        private IEnumerable<RawMarginCustomer> GetSuspiciousCustomerMargin(string listCustIds)
+        private IEnumerable<RawMarginCustomer> GetSuspiciousCustomerMargins(string listCustIds)
         {
             var result = new List<RawMarginCustomer>().AsEnumerable();
 
@@ -208,7 +201,7 @@ namespace FD.Lib.Service.Implement
             return result;
         }
 
-        private IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomerByGroup(int groupId)
+        private IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomersByGroup(int groupId)
         {
             var suspiciousCustomerGetByGroupCriteria = new SuspiciousCustomerGetByGroupCriteria
             {
@@ -229,7 +222,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var customerIds in Split(listCustIds, 60))
             {
-                var customerSelectCritiria = new CustomerSelectCritiria
+                var customerSelectCritiria = new CustomerSelectCriteria
                 {
                     ListCustIds = customerIds
                 };

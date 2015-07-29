@@ -16,7 +16,7 @@ namespace FD.Lib.Criteria.SuspiciousInfo
     /// </summary>
     public class SuspiciousInfoInsertCriteria : CriteriaBase
     {
-        public string SuspicionDoc { get; set; }
+        public string SuspiciousDoc { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

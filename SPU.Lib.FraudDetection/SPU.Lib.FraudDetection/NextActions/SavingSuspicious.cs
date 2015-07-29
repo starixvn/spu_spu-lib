@@ -62,7 +62,7 @@ namespace FD.Lib.NextActions
 
             InsertScannedMatch();
 
-            InsertSuspicion();
+            InsertSuspicious();
         }
 
         private void InsertScannedMatch()
@@ -87,7 +87,7 @@ namespace FD.Lib.NextActions
             }
         }
 
-        private void InsertSuspicion()
+        private void InsertSuspicious()
         {
             var suspiciousChunks = _suspiciousInfoList.Chunk(ChunkSize);
 
@@ -95,7 +95,7 @@ namespace FD.Lib.NextActions
             {
                 var criteria = new SuspiciousInfoInsertCriteria
                 {
-                    SuspicionDoc = CreateXmlParam(suspiciousChunk)
+                    SuspiciousDoc = CreateXmlParam(suspiciousChunk)
                 };
 
                 var result = SuspiciousInfoService.InsertSuspiciousInfo(criteria);

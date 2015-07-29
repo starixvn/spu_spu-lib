@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BalanceUpDayDTO.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="MoveBetsBalanceUp.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,11 +7,11 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace FD.Lib.Service.Implement
+namespace FD.Lib.DTO
 {
     using System;
 
-    public class BalanceUpDayDTO
+    public class MoveBetsBalanceUp
     {
         public DateTime BalanceUpDay { get; set; }
 

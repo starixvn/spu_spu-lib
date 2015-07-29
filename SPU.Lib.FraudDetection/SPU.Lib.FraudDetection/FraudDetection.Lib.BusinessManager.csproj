@@ -115,7 +115,8 @@
     <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />
     <Compile Include="ReportTemplateRenders\TableRenders\ReportTemplateType.cs" />
-    <Compile Include="ReportTemplateRenders\TableRenders\SpuRazor.cs" />
+    <Compile Include="ReportTemplateRenders\TableRenders\FDRazor.cs" />
+    <Compile Include="TaskExecutors\ITaskExecutor.cs" />
     <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutor.cs" />
     <Compile Include="TaskExecutors\EventType.cs" />
     <Compile Include="TaskExecutors\ITaskManager.cs" />
@@ -130,7 +131,7 @@
     <Compile Include="MailMasterRenders\MailMasterRender.cs" />
     <Compile Include="MailMasterRenders\IMailMasterRenderAbstractFactory.cs" />
     <Compile Include="MailSenders\IMailSender.cs" />
-    <Compile Include="MailSenders\SpuMailSender.cs" />
+    <Compile Include="MailSenders\FDMailSender.cs" />
     <Compile Include="QueueManagement\ReceivedMessageHandler.cs" />
     <Compile Include="ReportTemplateRenders\IReportRenderAbstractFactory.cs" />
     <Compile Include="ReportTemplateRenders\IReportTemplateRender.cs" />
@@ -154,7 +155,7 @@
     <Compile Include="QueueManagement\SendingTasks\RemovingTask.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessageFactory.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingType.cs" />
-    <Compile Include="QueueManagement\SpuMessageQueue.cs" />
+    <Compile Include="QueueManagement\FDMessageQueue.cs" />
     <Compile Include="TaskExecutors\TaskExecutor.cs" />
     <Compile Include="QueueManagement\IMessageQueue.cs" />
     <Compile Include="TaskLoaders\ITaskLoader.cs" />

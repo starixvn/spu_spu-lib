@@ -32,7 +32,7 @@
 
             var sut = new CaseGroupService(mockCaseGroupDataAccess.Object);
 
-            sut.RemoveCaseGroup(new CaseGroupDeleteCriteria
+            sut.DeleteCaseGroup(new CaseGroupDeleteCriteria
             {
                 CaseId = 1,
                 GroupId = 1

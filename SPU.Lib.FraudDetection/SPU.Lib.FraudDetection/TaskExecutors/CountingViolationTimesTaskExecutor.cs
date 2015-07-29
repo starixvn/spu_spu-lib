@@ -15,7 +15,6 @@ namespace FD.Lib.TaskExecutors
     using Criteria.SuspiciousInfo;
     using DTO;
     using NextActions;
-    using Service.Implement;
     using Service.Interface;
 
     public class CountingSuspicousTimesTaskExecutor : TaskExecutor

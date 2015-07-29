@@ -10,8 +10,6 @@
 namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
-    using DataAccess.Implement;
-    using DataAccess.Interface;
     using DTO;
     using Fanex.Data.Repository;
     using Interface;
@@ -21,13 +19,6 @@ namespace FD.Lib.Service.Implement
     /// </summary>
     public class EventService : QueryService, IEventService
     {
-        private IEventDataAccess _actionDataAccess;
-
-        public EventService()
-        {
-            _actionDataAccess = new EventDataAccess();
-        }
-
         public IEnumerable<Event> GetEvents(ICriteria criteria)
         {
             return GetData<Event>(criteria);

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SpuMessageQueue.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FDMessageQueue.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -17,11 +17,11 @@ namespace FD.Lib.QueueManagement
     /// <summary>
     ///     SPU Message Queue.
     /// </summary>
-    public class SpuMessageQueue : IMessageQueue
+    public class FDMessageQueue : IMessageQueue
     {
         private readonly MessageQueue _messageQueue;
 
-        public SpuMessageQueue()
+        public FDMessageQueue()
         {
             var queuePath = ConfigSettings.GetConfigStringByName("queuePath");
 

@@ -24,7 +24,7 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult DeleteCase(ICriteria criteria);
 
-        IEnumerable<CaseInfo> LoadCases(ICriteria criteria);
+        IEnumerable<CaseInfo> GetCaseInfo(ICriteria criteria);
 
         DataCollection GetCases(ICriteria criteria);
 

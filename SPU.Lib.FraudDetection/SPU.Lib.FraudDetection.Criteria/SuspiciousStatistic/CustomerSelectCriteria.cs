@@ -1,8 +1,17 @@
-﻿namespace FD.Lib.Criteria.SuspiciousStatistic
+﻿// --------------------------------------------------------------------------
+// <copyright file="CustomerSelectCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace FD.Lib.Criteria.SuspiciousStatistic
 {
     using Fanex.Data.Repository;
 
-    public class CustomerSelectCritiria : CriteriaBase
+    public class CustomerSelectCriteria : CriteriaBase
     {
         public string ListCustIds { get; set; }
 

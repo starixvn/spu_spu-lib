@@ -1,4 +1,13 @@
-﻿namespace FD.Lib.Criteria.SuspiciousStatistic
+﻿// --------------------------------------------------------------------------
+// <copyright file="MatchSelectCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace FD.Lib.Criteria.SuspiciousStatistic
 {
     using Fanex.Data.Repository;
 
@@ -15,12 +24,7 @@
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            if (IsDbArchieve)
-            {
-                return "FD_GetMatchInfoFromDBArchive";
-            }
-
-            return "FD_GetMatchInfoFromDB02";
+            return IsDbArchieve ? "FD_GetMatchInfoFromDBArchive" : "FD_GetMatchInfoFromDB02";
         }
 
         /// <summary>

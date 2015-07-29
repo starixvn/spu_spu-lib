@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="" date="">Created</change>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
 namespace FD.Lib.Criteria.Case

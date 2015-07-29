@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ITaskExecutor.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="TaskExecutor.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -17,15 +17,6 @@ namespace FD.Lib.TaskExecutors
     using Fanex.Logging;
     using Service.Implement;
     using Service.Interface;
-
-    public interface ITaskExecutor
-    {
-        void Start();
-
-        void Stop();
-
-        void Execute();
-    }
 
     /// <summary>
     ///     Task Class.

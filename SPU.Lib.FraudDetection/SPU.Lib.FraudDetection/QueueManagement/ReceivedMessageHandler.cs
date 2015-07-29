@@ -26,7 +26,7 @@ namespace FD.Lib.QueueManagement
         public ReceivingMessageHandler()
         {
             _taskManager = new TaskManager();
-            _queue = new SpuMessageQueue();
+            _queue = new FDMessageQueue();
             _queue.AttachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 

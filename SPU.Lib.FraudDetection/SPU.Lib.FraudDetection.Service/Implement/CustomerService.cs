@@ -1,4 +1,13 @@
-﻿namespace FD.Lib.Service.Implement
+﻿// --------------------------------------------------------------------------
+// <copyright file="CustomerService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
+namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -11,10 +20,10 @@
     {
         public CustomerService()
         {
-            BalanceUpDayService = new BalanceUpDayService();
+            BalanceUpDayService = new MoveBetsBalanceUpService();
         }
 
-        public IBalanceUpDayService BalanceUpDayService { get; set; }
+        public IMoveBetsBalanceUpService BalanceUpDayService { get; set; }
 
         public IList<Customer> GetUsernameByCustId(ICriteria criteria)
         {

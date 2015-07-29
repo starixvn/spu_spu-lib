@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SpuMailSender.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FDMailSender.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,14 +12,14 @@ namespace FD.Lib.MailSenders
     using Fanex.MailDelivery.Client.Models;
     using MailMasterRenders;
 
-    public class SpuMailSender : IMailSender
+    public class FDMailSender : IMailSender
     {
-        public SpuMailSender()
+        public FDMailSender()
         {
             MailClient = new MailClient();
         }
 
-        public SpuMailSender(IMailClient client)
+        public FDMailSender(IMailClient client)
         {
             MailClient = client;
         }

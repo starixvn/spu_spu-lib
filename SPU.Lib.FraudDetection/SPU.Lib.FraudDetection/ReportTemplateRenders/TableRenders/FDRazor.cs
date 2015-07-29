@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SpuRazor.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FDRazor.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,7 +11,7 @@ namespace FD.Lib.ReportTemplateRenders.TableRenders
 {
     using RazorEngine;
 
-    public class SpuRazor : IRazor
+    public class FDRazor : IRazor
     {
         public string Parse(string template, object model)
         {

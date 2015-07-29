@@ -65,9 +65,9 @@ namespace FD.Lib.DTO
                         default: return Interval * 1000; // second
                     }
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    throw ex;
+                    throw exception;
                 }
             }
         }

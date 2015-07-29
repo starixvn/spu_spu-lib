@@ -126,7 +126,7 @@
             //--- Arrange ---
             var sut = new TaskLoader();
 
-            var queue = new SpuMessageQueue();
+            var queue = new FDMessageQueue();
             queue.Clear();
 
             //--- Act ---

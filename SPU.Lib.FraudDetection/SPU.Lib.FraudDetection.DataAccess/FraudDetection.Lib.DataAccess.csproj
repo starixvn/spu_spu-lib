@@ -92,12 +92,13 @@
     <Compile Include="Interface\IBettypeDataAccess.cs" />
     <Compile Include="Interface\IConfigurationsDataAccess.cs" />
     <Compile Include="Interface\IGroupDataAccess.cs" />
-    <Compile Include="Interface\IMatchDataAccess.cs" />
+    <Compile Include="Implement\MatchDataAccess.cs" />
     <Compile Include="Interface\IScannedMatchesDataAccess.cs" />
     <Compile Include="Interface\ISuspiciousInfoDataAccess.cs" />
     <Compile Include="Interface\ITaskDataAccess.cs" />
     <Compile Include="Interface\ICaseDataAccess.cs" />
     <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="Interface\IMatchDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

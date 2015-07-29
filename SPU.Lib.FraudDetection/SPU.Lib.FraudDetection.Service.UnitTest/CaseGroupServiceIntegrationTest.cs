@@ -14,7 +14,7 @@
         {
             var sut = new CaseGroupService();
 
-            var result = sut.SelectCaseGroup(new CaseGroupGetAllCriteria
+            var result = sut.GetCaseGroup(new CaseGroupGetAllCriteria
             {
                 CaseId = 1
             });
@@ -28,7 +28,7 @@
         {
             var sut = new CaseGroupService();
 
-            var result = sut.SelectCaseGroup(new CaseGroupGetAllCriteria
+            var result = sut.GetCaseGroup(new CaseGroupGetAllCriteria
             {
                 CaseId = 99
             });

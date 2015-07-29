@@ -1,3 +1,12 @@
+// --------------------------------------------------------------------------
+// <copyright file="ICaseGroupService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Long.Luu" date="2015.03.25">Created</change>
+// </history>
+
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
@@ -9,8 +18,8 @@ namespace FD.Lib.Service.Interface
     {
         ICommandResult InsertCaseGroup(CaseGroupInsertCriteria criteria);
 
-        ICommandResult RemoveCaseGroup(CaseGroupDeleteCriteria criteria);
+        ICommandResult DeleteCaseGroup(CaseGroupDeleteCriteria criteria);
 
-        IList<CaseGroup> SelectCaseGroup(CaseGroupGetAllCriteria criteria);
+        IList<CaseGroup> GetCaseGroup(CaseGroupGetAllCriteria criteria);
     }
 }

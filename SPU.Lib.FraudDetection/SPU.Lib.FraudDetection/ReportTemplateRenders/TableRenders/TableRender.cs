@@ -18,7 +18,7 @@ namespace FD.Lib.ReportTemplateRenders.TableRenders
 
         protected TableRender()
         {
-            _razor = new SpuRazor();
+            _razor = new FDRazor();
         }
 
         protected TableRender(IRazor razor)

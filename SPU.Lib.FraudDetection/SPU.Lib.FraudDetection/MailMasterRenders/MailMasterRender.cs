@@ -43,13 +43,9 @@ namespace FD.Lib.MailMasterRenders
         public MailMasterInfo RenderContentOfMailMaster(int mailMasterId)
         {
             var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
-
             var render = ReportRenderAbstractFactory.GetReportTemplateRender();
-
             var contentOfPlaceholder = render.RenderContent();
-
             var newMailContent = PlaceholderReplacer.ReplacePlaceholder(mailMaster.MailContent, contentOfPlaceholder);
-
             mailMaster.MailContent = newMailContent;
 
             return mailMaster;
