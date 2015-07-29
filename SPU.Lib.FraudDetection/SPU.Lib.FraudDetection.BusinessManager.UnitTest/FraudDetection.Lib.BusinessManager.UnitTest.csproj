@@ -201,29 +201,29 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+    <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899f43-de3c-4f21-affb-b683e4d4cd59}</Project>
-      <Name>SPU.Lib.Core</Name>
+      <Name>FraudDetection.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\FraudDetection.Lib.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
-      <Name>SPU.Lib.FraudDetection.Criteria</Name>
+      <Name>FraudDetection.Lib.Criteria</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.DataAccess\SPU.Lib.FraudDetection.DataAccess.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DataAccess\FraudDetection.Lib.DataAccess.csproj">
       <Project>{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}</Project>
-      <Name>SPU.Lib.FraudDetection.DataAccess</Name>
+      <Name>FraudDetection.Lib.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
       <Project>{c9c9a21e-f6dc-49e7-8c6d-670fc2a7f610}</Project>
-      <Name>SPU.Lib.FraudDetection.DTO</Name>
+      <Name>FraudDetection.Lib.DTO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.Service\SPU.Lib.FraudDetection.Service.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Service\FraudDetection.Lib.Service.csproj">
       <Project>{251d8c72-bc97-448b-924a-274dcda7a2e8}</Project>
-      <Name>SPU.Lib.FraudDetection.Service</Name>
+      <Name>FraudDetection.Lib.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection\SPU.Lib.FraudDetection.BusinessManager.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection\FraudDetection.Lib.BusinessManager.csproj">
       <Project>{1b2147ac-1a2b-462a-bb70-73786617ad6b}</Project>
-      <Name>SPU.Lib.FraudDetection.BusinessManager</Name>
+      <Name>FraudDetection.Lib.BusinessManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -231,8 +231,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.dll" />
-    <Content Include="Dependencies\SPU.Lib.FraudDetection.DTO.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dependencies\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

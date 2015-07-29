@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2013.03.12">Created</change>
 // </history>
 
-namespace SPU.Lib.Core
+namespace FD.Lib.Core.Attribute
 {
     using System.IO.Compression;
     using System.Web;

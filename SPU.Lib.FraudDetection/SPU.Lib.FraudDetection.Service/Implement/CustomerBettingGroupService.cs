@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.07.09">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service.Implement
+namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
     using DataAccess.Implement;

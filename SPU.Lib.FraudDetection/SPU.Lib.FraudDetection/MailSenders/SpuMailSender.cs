@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.MailSenders
+namespace FD.Lib.MailSenders
 {
     using Fanex.MailDelivery.Client.Models;
     using MailMasterRenders;

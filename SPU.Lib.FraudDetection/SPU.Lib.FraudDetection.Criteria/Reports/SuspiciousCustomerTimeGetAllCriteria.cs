@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.06.24">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Reports
+namespace FD.Lib.Criteria.Reports
 {
     using Fanex.Data.Repository;
 

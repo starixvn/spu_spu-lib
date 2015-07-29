@@ -8,12 +8,12 @@
 //   <change who="Thai.Tran" date="2015.05.21">Loading all active tasks.</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service.Implement
+namespace FD.Lib.Service.Implement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Core;
+    using Core.Utilities;
     using Criteria.Task;
     using DataAccess.Implement;
     using DataAccess.Interface;

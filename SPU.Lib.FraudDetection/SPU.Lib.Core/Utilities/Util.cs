@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.Core.Utilities
+﻿namespace FD.Lib.Core.Utilities
 {
     using System;
 

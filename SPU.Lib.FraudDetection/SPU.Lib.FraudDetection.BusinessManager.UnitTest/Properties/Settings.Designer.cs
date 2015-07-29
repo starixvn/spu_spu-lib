@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.Properties
+namespace FD.Lib.BusinessManager.UnitTest.Properties
 {
 
 

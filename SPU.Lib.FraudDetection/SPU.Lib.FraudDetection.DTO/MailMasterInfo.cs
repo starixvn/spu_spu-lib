@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.06.11">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DTO
+namespace FD.Lib.DTO
 {
     /// <summary>
     ///     Mail master information.

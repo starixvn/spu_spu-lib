@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.Implement
+﻿namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
     using System.Linq;

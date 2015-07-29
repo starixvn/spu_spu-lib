@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.TaskExecutors
+namespace FD.Lib.TaskExecutors
 {
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.DataAccess.Interface
+﻿namespace FD.Lib.DataAccess.Interface
 {
     using System;
     using Fanex.Data.Repository;

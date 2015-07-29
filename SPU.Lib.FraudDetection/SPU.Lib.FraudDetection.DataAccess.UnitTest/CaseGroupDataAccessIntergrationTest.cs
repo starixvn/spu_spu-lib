@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.DataAccess.UnitTest
+﻿namespace FD.Lib.DataAccess.UnitTest
 {
     using Core;
     using Criteria.CaseGroup;

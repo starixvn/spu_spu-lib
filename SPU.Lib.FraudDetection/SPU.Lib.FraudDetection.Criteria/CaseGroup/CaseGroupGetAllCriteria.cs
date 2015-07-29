@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Criteria.CaseGroup
+﻿namespace FD.Lib.Criteria.CaseGroup
 {
     using Fanex.Data.Repository;
 

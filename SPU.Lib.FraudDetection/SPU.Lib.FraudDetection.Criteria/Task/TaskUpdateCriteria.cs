@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Task
+namespace FD.Lib.Criteria.Task
 {
     /// <summary>
     /// TaskUpdateCriteria Class.

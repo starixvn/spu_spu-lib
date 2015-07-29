@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Event
+namespace FD.Lib.Criteria.Event
 {
     using Fanex.Data.Repository;
 

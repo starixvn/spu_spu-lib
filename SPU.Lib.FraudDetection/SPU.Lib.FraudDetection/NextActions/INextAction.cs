@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.NextActions
+namespace FD.Lib.NextActions
 {
     using System.Collections.Generic;
     using DTO;

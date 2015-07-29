@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.UnitTest
+﻿namespace FD.Lib.Service.UnitTest
 {
     using Criteria.CaseGroup;
     using DataAccess.Interface;

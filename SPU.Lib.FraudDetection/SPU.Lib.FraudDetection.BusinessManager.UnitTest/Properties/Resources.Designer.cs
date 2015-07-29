@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.Properties
+namespace FD.Lib.BusinessManager.UnitTest.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SPU.Lib.FraudDetection.BusinessManager.UnitTest.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FD.Lib.BusinessManager.UnitTest.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

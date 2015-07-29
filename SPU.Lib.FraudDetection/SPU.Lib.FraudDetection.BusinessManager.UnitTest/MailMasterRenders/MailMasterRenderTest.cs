@@ -1,9 +1,9 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailMasterRenders
+﻿namespace FD.Lib.BusinessManager.UnitTest.MailMasterRenders
 {
     using DTO;
     using Fanex.Data.Repository;
-    using FraudDetection.MailMasterRenders;
-    using FraudDetection.ReportTemplateRenders;
+    using Lib.MailMasterRenders;
+    using Lib.ReportTemplateRenders;
     using Moq;
     using NUnit.Framework;
     using Service.Interface;

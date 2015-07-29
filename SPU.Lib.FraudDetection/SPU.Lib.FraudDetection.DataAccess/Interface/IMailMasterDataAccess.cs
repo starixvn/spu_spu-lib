@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.06.15">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess.Interface
+namespace FD.Lib.DataAccess.Interface
 {
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;

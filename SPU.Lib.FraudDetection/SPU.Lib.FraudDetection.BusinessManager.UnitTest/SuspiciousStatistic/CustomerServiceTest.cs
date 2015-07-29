@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.SuspiciousStatistic
+﻿namespace FD.Lib.BusinessManager.UnitTest.SuspiciousStatistic
 {
     using System.Collections.Generic;
     using System.Messaging;

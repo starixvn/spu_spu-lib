@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.09">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.CustomerBettingGroup
+namespace FD.Lib.Criteria.CustomerBettingGroup
 {
     using Fanex.Data.Repository;
 

@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.TaskLoader
+﻿namespace FD.Lib.BusinessManager.UnitTest.TaskLoader
 {
     using System;
     using System.Collections.Generic;

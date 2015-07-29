@@ -1,8 +1,8 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.Mock_Objects
+﻿namespace FD.Lib.BusinessManager.UnitTest.Mock_Objects
 {
     using System.Net.Mail;
     using Fanex.MailDelivery.Client.Models;
-    using FraudDetection.MailSenders;
+    using Lib.MailSenders;
 
     public class FakeMailClient : IMailClient
     {

@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 
-namespace SPU.Lib.FraudDetection.Service.Implement
+namespace FD.Lib.Service.Implement
 {
     using System;
     using System.Collections.Generic;

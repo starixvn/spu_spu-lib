@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}</ProjectGuid>
+    <ProjectGuid>{251D8C72-BC97-448B-924A-274DCDA7A2E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.DataAccess</RootNamespace>
-    <AssemblyName>FraudDetection.Lib.DataAccess</AssemblyName>
+    <RootNamespace>FraudDetection.Lib.Service</RootNamespace>
+    <AssemblyName>FD.Lib.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -43,9 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\spu-winservice-frauddetection\SPU.WinService.FraudDetection\packages\Fanex.NAP.Framework.1.0.0.3\lib\net40\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EnterpriseLibrary.Common.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,9 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,53 +73,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implement\CustomerBettingGroupDataAccess.cs" />
-    <Compile Include="Implement\CustomerReportDataAccess.cs" />
-    <Compile Include="Implement\EventDataAccess.cs" />
-    <Compile Include="Implement\BettypeDataAccess.cs" />
-    <Compile Include="Implement\ConfigurationsDataAccess.cs" />
-    <Compile Include="Implement\GroupDataAccess.cs" />
-    <Compile Include="Implement\MailMasterDataAccess.cs" />
-    <Compile Include="Implement\ScannedMatchesDataAccess.cs" />
-    <Compile Include="Interface\ICustomerBettingGroupDataAccess.cs" />
-    <Compile Include="Interface\ICaseGroupDataAccess.cs" />
-    <Compile Include="Interface\IMailMasterDataAccess.cs" />
-    <Compile Include="Interface\ICustomerReportDataAccess.cs" />
-    <Compile Include="Implement\SuspiciousInfoDataAccess.cs" />
-    <Compile Include="Implement\TaskDataAccess.cs" />
-    <Compile Include="Implement\CaseDataAccess.cs" />
-    <Compile Include="Interface\IEventDataAccess.cs" />
-    <Compile Include="Interface\IBettypeDataAccess.cs" />
-    <Compile Include="Interface\IConfigurationsDataAccess.cs" />
-    <Compile Include="Interface\IGroupDataAccess.cs" />
-    <Compile Include="Interface\IMatchDataAccess.cs" />
-    <Compile Include="Interface\IScannedMatchesDataAccess.cs" />
-    <Compile Include="Interface\ISuspiciousInfoDataAccess.cs" />
-    <Compile Include="Interface\ITaskDataAccess.cs" />
-    <Compile Include="Interface\ICaseDataAccess.cs" />
-    <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="Implement\BalanceUpDayDTO.cs" />
+    <Compile Include="Implement\BettypeService.cs" />
+    <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\CustomerBettingGroupService.cs" />
+    <Compile Include="Implement\CustomerReportService.cs" />
+    <Compile Include="Implement\EventService.cs" />
+    <Compile Include="Implement\CustomerService.cs" />
+    <Compile Include="Implement\SuspiciousCustomer.cs" />
+    <Compile Include="Implement\CaseGroupService.cs" />
+    <Compile Include="Implement\CustomerGroupService.cs" />
+    <Compile Include="Interface\ICaseGroupService.cs" />
+    <Compile Include="Interface\ICustomerBettingGroupService.cs" />
+    <Compile Include="Interface\ICustomerGroupService.cs" />
+    <Compile Include="Interface\ICustomerReportService.cs" />
+    <Compile Include="Interface\IBalanceUpDayService.cs" />
+    <Compile Include="Interface\ICustomerService.cs" />
+    <Compile Include="Interface\IEventService.cs" />
+    <Compile Include="Interface\IMailMasterService.cs" />
+    <Compile Include="Implement\MailMasterService.cs" />
+    <Compile Include="Interface\IBettypeService.cs" />
+    <Compile Include="Interface\IConfigurationsService.cs" />
+    <Compile Include="Interface\IGroupService.cs" />
+    <Compile Include="Interface\IMatchService.cs" />
+    <Compile Include="Interface\IReportService.cs" />
+    <Compile Include="Interface\ITaskService.cs" />
+    <Compile Include="Implement\CaseService.cs" />
+    <Compile Include="Implement\GroupService.cs" />
+    <Compile Include="Interface\IScannedMatchesService.cs" />
+    <Compile Include="Interface\ISuspiciousInfoService.cs" />
+    <Compile Include="Interface\ICaseService.cs" />
+    <Compile Include="Implement\SuspiciousStatisticsReportService.cs" />
+    <Compile Include="Implement\MatchService.cs" />
+    <Compile Include="QueryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implement\ScannedMatchesService.cs" />
+    <Compile Include="Implement\SuspiciousInfoService.cs" />
+    <Compile Include="Implement\TaskService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+    <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
-      <Name>SPU.Lib.Core</Name>
+      <Name>FraudDetection.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\FraudDetection.Lib.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
-      <Name>SPU.Lib.FraudDetection.Criteria</Name>
+      <Name>FraudDetection.Lib.Criteria</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DataAccess\FraudDetection.Lib.DataAccess.csproj">
+      <Project>{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}</Project>
+      <Name>FraudDetection.Lib.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
       <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
-      <Name>SPU.Lib.FraudDetection.DTO</Name>
+      <Name>FraudDetection.Lib.DTO</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

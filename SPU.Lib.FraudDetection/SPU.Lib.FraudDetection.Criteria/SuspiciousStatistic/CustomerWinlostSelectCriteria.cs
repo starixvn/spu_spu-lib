@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Criteria.SuspiciousStatistic
+﻿namespace FD.Lib.Criteria.SuspiciousStatistic
 {
     using Fanex.Data.Repository;
 

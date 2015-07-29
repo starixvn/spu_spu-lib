@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.06.16">Created</change>
 // </history>
 
-namespace SPU.Lib.Core
+namespace FD.Lib.Core.Attribute
 {
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -32,7 +32,7 @@ namespace SPU.Lib.Core
             {
                 var result = db.Query<dynamic>();
 
-                var count = result.Where(x => x.MailCode.Equals(mailCode)).Count();
+                var count = result.Count(x => x.MailCode.Equals(mailCode));
 
                 if (count != 0)
                 {

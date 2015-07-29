@@ -1,8 +1,8 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
+﻿namespace FD.Lib.BusinessManager.UnitTest.ReportTemplateRenders
 {
     using System.Collections.Generic;
-    using FraudDetection.ReportTemplateRenders;
-    using FraudDetection.ReportTemplateRenders.TableRenders;
+    using Lib.ReportTemplateRenders;
+    using Lib.ReportTemplateRenders.TableRenders;
     using Moq;
 
     public class FakeSuspiciousStatisticReporRenderAbstractFactory : IReportRenderAbstractFactory

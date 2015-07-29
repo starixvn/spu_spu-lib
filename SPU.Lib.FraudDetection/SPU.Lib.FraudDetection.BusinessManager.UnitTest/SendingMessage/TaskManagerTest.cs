@@ -1,8 +1,8 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+﻿namespace FD.Lib.BusinessManager.UnitTest
 {
     using DTO;
     using Fanex.Data.Repository;
-    using FraudDetection.TaskExecutors;
+    using Lib.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using Service.Interface;
@@ -119,8 +119,8 @@
             _sut.AddTask(1);
 
             // --- Act ---
-            const string TaskName = "Task Demo";
-            task.TaskName = TaskName;
+            const string taskName = "Task Demo";
+            task.TaskName = taskName;
 
             _mockTaskService
                 .Setup(x => x.GetTaskInfoByTaskId(It.IsAny<ICriteria>()))
@@ -131,7 +131,7 @@
             // --- Assert ---
             var actualCount = _sut.TaskExecutors.Count;
             Assert.AreEqual(1, actualCount);
-            Assert.AreEqual(TaskName, _sut.TaskExecutors[0].Task.TaskName);
+            Assert.AreEqual(taskName, _sut.TaskExecutors[0].Task.TaskName);
         }
 
         [Test]

@@ -1,10 +1,10 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
+﻿namespace FD.Lib.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
 {
     using System.Collections.Generic;
     using System.IO;
     using DTO.ReportTemplate;
-    using FraudDetection.ReportTemplateRenders;
-    using FraudDetection.ReportTemplateRenders.TableRenders;
+    using Lib.ReportTemplateRenders;
+    using Lib.ReportTemplateRenders.TableRenders;
     using Moq;
     using NUnit.Framework;
 

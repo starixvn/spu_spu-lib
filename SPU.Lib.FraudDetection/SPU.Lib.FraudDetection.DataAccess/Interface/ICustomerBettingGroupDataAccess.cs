@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.09">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess.Interface
+namespace FD.Lib.DataAccess.Interface
 {
     using System.Collections.Generic;
     using DTO;

@@ -8,7 +8,7 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.TaskExecutors
+namespace FD.Lib.TaskExecutors
 {
     using System;
     using System.Diagnostics;

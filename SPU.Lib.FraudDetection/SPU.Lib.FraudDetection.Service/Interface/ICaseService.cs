@@ -7,10 +7,10 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Service.Interface
+namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
-    using Core;
+    using Core.Utilities;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;

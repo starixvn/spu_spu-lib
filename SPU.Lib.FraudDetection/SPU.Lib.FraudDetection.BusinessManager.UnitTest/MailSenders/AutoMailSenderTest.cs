@@ -1,12 +1,12 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
+﻿namespace FD.Lib.BusinessManager.UnitTest.MailSenders
 {
     using System.Collections.Generic;
     using DTO;
     using DTO.ReportTemplate;
     using Fanex.Data.Configuration;
-    using FraudDetection.MailMasterRenders;
-    using FraudDetection.MailSenders;
-    using FraudDetection.ReportTemplateRenders;
+    using Lib.MailMasterRenders;
+    using Lib.MailSenders;
+    using Lib.ReportTemplateRenders;
     using Mock_Objects;
     using Moq;
     using NUnit.Framework;
@@ -25,14 +25,14 @@
         public void When_Calling_Send_Mail_Then_RenderContent_Should_Be_Called()
         {
             // --- Arrange --
-            const string PartialContent = "Suspicious Statistic Table and Margin Table";
+            const string partialContent = "Suspicious Statistic Table and Margin Table";
             var reporRenderAbstractFactory = new Mock<IReportRenderAbstractFactory>();
             var mockMailRender = new Mock<IReportTemplateRender>();
             var mockMailRenderAbstractFactory = new Mock<IMailMasterRenderAbstractFactory>();
             var mockMailMasterRender = new MailMasterRender(reporRenderAbstractFactory.Object);
             reporRenderAbstractFactory.Setup(x => x.GetReportTemplateRender()).Returns(mockMailRender.Object);
             mockMailRenderAbstractFactory.Setup(x => x.GetMailMasterRender()).Returns(mockMailMasterRender);
-            mockMailRender.Setup(x => x.RenderContent()).Returns(PartialContent);
+            mockMailRender.Setup(x => x.RenderContent()).Returns(partialContent);
 
             // --- Act --
             var sut = new SpuMailSender(new FakeMailClient())

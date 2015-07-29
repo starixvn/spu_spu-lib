@@ -7,10 +7,10 @@
 //   <change who="Long.Luu" date="2015.06.12">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+namespace FD.Lib.BusinessManager.UnitTest
 {
     using System;
-    using FraudDetection.TaskExecutors;
+    using Lib.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
@@ -35,8 +35,8 @@ namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
         public void When_Removing_Valid_CaseId_Then_Send_Should_Called_Once_()
         {
             //--- Act ---
-            const int WorflowId = 1;
-            var result = _sut.Send(WorflowId);
+            const int worflowId = 1;
+            var result = _sut.Send(worflowId);
 
             //--- Assert ---
             _mockQueue.Verify(

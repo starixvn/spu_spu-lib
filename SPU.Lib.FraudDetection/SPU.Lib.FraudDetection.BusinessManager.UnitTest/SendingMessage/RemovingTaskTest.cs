@@ -7,16 +7,14 @@
 //   <change who="Long.Luu" date="2015.06.12">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest
+namespace FD.Lib.BusinessManager.UnitTest
 {
     using System;
-    using DTO;
-    using FraudDetection.TaskExecutors;
+    using Lib.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
     using QueueManagement.SendingTasks;
-    using Service.Interface;
 
     [TestFixture]
     public class RemovingTaskTest

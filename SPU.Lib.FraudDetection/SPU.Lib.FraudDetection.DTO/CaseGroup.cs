@@ -1,4 +1,4 @@
-namespace SPU.Lib.FraudDetection.DTO
+namespace FD.Lib.DTO
 {
     public class CaseGroup
     {

@@ -1,10 +1,10 @@
-﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
+﻿namespace FD.Lib.BusinessManager.UnitTest.ReportTemplateRenders.TableRenders
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using DTO.ReportTemplate;
-    using FraudDetection.ReportTemplateRenders.TableRenders;
+    using Lib.ReportTemplateRenders.TableRenders;
     using Moq;
     using NUnit.Framework;
 
@@ -12,7 +12,7 @@
     public class SuspiciousStatisticsTableRenderTest
     {
         private const string TemplateFilePath =
-            @"..\..\..\SPU.Lib.FraudDetection\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
+            @"..\..\..\FD.Lib\ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml";
 
         [Test]
         public void When_Call_RenderTable_Then_Method_Parse_Should_Be_Called()

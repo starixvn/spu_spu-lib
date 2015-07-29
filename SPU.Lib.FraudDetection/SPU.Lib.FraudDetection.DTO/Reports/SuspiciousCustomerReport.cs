@@ -7,7 +7,7 @@
 //   <change who="Aaron.Cao" date="2015.06.24">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DTO.Reports
+namespace FD.Lib.DTO.Reports
 {
     using System.Collections.Generic;
 

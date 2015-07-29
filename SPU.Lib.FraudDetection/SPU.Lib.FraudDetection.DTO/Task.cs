@@ -8,7 +8,7 @@
 //   <change who="Thai.Tran" date="2015.05.21">Updated fields for mapping a retrieved task.</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DTO
+namespace FD.Lib.DTO
 {
     using System;
 

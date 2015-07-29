@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.QueueManagement
+namespace FD.Lib.QueueManagement
 {
     using System;
     using System.Messaging;

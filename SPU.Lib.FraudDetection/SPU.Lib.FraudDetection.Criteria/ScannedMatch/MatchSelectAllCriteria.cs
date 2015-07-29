@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.Criteria.Match
+namespace FD.Lib.Criteria.ScannedMatch
 {
     using Fanex.Data.Repository;
 

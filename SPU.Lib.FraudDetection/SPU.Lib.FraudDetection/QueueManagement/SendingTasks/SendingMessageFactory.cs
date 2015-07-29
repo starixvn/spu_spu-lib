@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.QueueManagement.SendingTasks
+namespace FD.Lib.QueueManagement.SendingTasks
 {
     using System;
     using SendingWorklows;

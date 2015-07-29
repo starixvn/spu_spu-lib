@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FraudDetection.Lib.BusinessManager</RootNamespace>
-    <AssemblyName>FraudDetection.Lib.BusinessManager</AssemblyName>
+    <AssemblyName>FD.Lib.BusinessManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -163,21 +163,21 @@
     <Compile Include="TaskLoaders\TaskLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SPU.Lib.Core\SPU.Lib.Core.csproj">
+    <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
-      <Name>SPU.Lib.Core</Name>
+      <Name>FraudDetection.Lib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\SPU.Lib.FraudDetection.Criteria.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\FraudDetection.Lib.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
-      <Name>SPU.Lib.FraudDetection.Criteria</Name>
+      <Name>FraudDetection.Lib.Criteria</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\SPU.Lib.FraudDetection.DTO.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
       <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
-      <Name>SPU.Lib.FraudDetection.DTO</Name>
+      <Name>FraudDetection.Lib.DTO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPU.Lib.FraudDetection.Service\SPU.Lib.FraudDetection.Service.csproj">
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.Service\FraudDetection.Lib.Service.csproj">
       <Project>{251D8C72-BC97-448B-924A-274DCDA7A2E8}</Project>
-      <Name>SPU.Lib.FraudDetection.Service</Name>
+      <Name>FraudDetection.Lib.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

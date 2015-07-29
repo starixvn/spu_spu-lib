@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.Core
+﻿namespace FD.Lib.Core
 {
     using Fanex.Data.Configuration;
     using NUnit.Framework;

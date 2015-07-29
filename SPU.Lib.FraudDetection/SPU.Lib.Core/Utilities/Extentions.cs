@@ -7,7 +7,7 @@
 //   <change who="Thai.Tran" date="2015.4.27">Create</change>
 // </history>
 
-namespace SPU.Lib.Core
+namespace FD.Lib.Core.Utilities
 {
     using System.Collections.Generic;
     using System.Linq;

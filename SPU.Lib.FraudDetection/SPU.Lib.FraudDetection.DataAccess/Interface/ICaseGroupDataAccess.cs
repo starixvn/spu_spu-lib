@@ -1,9 +1,7 @@
-﻿namespace SPU.Lib.FraudDetection.DataAccess.Interface
+﻿namespace FD.Lib.DataAccess.Interface
 {
-    using System.Collections.Generic;
     using Criteria.CaseGroup;
     using DataAccess;
-    using DTO;
     using Fanex.NAP.Framework.Command;
 
     public interface ICaseGroupDataAccess

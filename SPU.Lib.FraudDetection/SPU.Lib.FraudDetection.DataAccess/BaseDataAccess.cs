@@ -7,13 +7,13 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.DataAccess
+namespace FD.Lib.DataAccess
 {
     using System;
     using System.Collections;
     using System.Data;
     using System.Data.SqlClient;
-    using Core;
+    using Core.Utilities;
     using Criteria.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;

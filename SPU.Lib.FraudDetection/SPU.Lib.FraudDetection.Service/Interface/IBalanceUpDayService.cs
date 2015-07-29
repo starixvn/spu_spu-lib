@@ -1,4 +1,4 @@
-﻿namespace SPU.Lib.FraudDetection.Service.Interface
+﻿namespace FD.Lib.Service.Interface
 {
     using Criteria.SuspiciousStatistic;
     using Implement;

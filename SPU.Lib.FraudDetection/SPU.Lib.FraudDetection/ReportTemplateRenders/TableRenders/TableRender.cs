@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace SPU.Lib.FraudDetection.ReportTemplateRenders.TableRenders
+namespace FD.Lib.ReportTemplateRenders.TableRenders
 {
     using System.Diagnostics.CodeAnalysis;
 
