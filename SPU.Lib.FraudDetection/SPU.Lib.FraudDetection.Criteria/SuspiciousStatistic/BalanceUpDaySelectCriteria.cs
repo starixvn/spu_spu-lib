@@ -19,7 +19,7 @@ namespace FD.Lib.Criteria.SuspiciousStatistic
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "SPU_SelBalanceUpDay";
+            return "FD_GetBalanceUpDay";
         }
 
         /// <summary>

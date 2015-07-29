@@ -46,7 +46,7 @@
     <Setting Key="FD_GetMatchInfoFromDB02" SpName="FD_GetMatchInfoFromDB02" DbName="DBSPU.bodb02.bodbSPUNet" />
     <Setting Key="FD_GetMatchInfoFromDBArchive" SpName="FD_GetMatchInfoFromDBArchive"
              DbName="DBSPU.bodb_Archive.bodbSPUNet" />
-    <Setting Key="SPU_SelBalanceUpDay" SpName="SPU_SelBalanceUpDay" DbName="DBSPU.bodb02.bodbSPUNet" />
+    <Setting Key="FD_GetBalanceUpDay" SpName="FD_GetBalanceUpDay" DbName="DBSPU.bodb02.bodbSPUNet" />
     <Setting Key="FD_CustomerWinlostGetByIds" SpName="FD_CustomerWinlostGetByIds" DbName="DBSPU.bodb02.bodbSPUNet" />
   </Function>
 
