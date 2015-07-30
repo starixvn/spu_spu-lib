@@ -10,6 +10,7 @@
 namespace FD.Lib.NextActions
 {
     using System.Collections.Generic;
+    using BusinessManager.ReportTemplateRenders;
     using DTO;
     using MailMasterRenders;
     using MailSenders;

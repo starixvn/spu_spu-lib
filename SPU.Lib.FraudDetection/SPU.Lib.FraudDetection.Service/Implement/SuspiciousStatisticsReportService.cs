@@ -16,8 +16,8 @@ namespace FD.Lib.Service.Implement
     using Criteria.Case;
     using Criteria.SuspiciousStatistic;
     using DTO;
-    using DTO.ReportTemplate;
     using Interface;
+    using Model.ReportTemplate;
 
     public class SuspiciousStatisticsReportService : IReportService
     {

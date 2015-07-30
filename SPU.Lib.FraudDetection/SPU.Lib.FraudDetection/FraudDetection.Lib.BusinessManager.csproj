@@ -164,6 +164,10 @@
     <Compile Include="TaskLoaders\TaskLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
+      <Project>{4be9ad54-e1b1-43ce-bff6-139440888ee5}</Project>
+      <Name>FraudDetection.Lib.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
       <Name>FraudDetection.Lib.Core</Name>

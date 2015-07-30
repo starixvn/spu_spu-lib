@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.03.25">Created</change>
 // </history>
 
-namespace FD.Lib.DTO.ReportTemplate
+namespace FD.Lib.Model.ReportTemplate
 {
     using System.Collections.Generic;
 

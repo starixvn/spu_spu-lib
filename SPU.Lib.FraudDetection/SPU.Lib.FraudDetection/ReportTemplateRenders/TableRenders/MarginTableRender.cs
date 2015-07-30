@@ -7,10 +7,11 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace FD.Lib.ReportTemplateRenders.TableRenders
+namespace FD.Lib.BusinessManager.ReportTemplateRenders.TableRenders
 {
     using System.Collections.Generic;
-    using DTO.ReportTemplate;
+    using Lib.ReportTemplateRenders.TableRenders;
+    using Model.ReportTemplate;
 
     public class MarginTableRender : TableRender
     {

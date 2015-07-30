@@ -1,16 +1,17 @@
-﻿namespace FD.Lib.BusinessManager.UnitTest.MailSenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.MailSenders
 {
     using System.Collections.Generic;
-    using DTO;
-    using DTO.ReportTemplate;
     using Fanex.Data.Configuration;
-    using Lib.MailMasterRenders;
-    using Lib.MailSenders;
-    using Lib.ReportTemplateRenders;
-    using Mock_Objects;
+    using FD.Lib.BusinessManager.ReportTemplateRenders;
+    using FD.Lib.BusinessManager.UnitTest.Mock_Objects;
+    using FD.Lib.DTO;
+    using FD.Lib.MailMasterRenders;
+    using FD.Lib.MailSenders;
+    using FD.Lib.Model.ReportTemplate;
+    using FD.Lib.ReportTemplateRenders;
+    using FD.Lib.Service.Implement;
     using Moq;
     using NUnit.Framework;
-    using Service.Implement;
 
     [TestFixture]
     public class SpuMailSenderTest

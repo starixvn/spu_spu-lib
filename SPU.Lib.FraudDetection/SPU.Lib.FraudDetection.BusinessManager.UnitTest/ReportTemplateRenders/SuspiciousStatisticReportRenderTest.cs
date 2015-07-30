@@ -1,9 +1,11 @@
-﻿namespace FD.Lib.BusinessManager.UnitTest.ReportTemplateRenders
+﻿namespace SPU.Lib.FraudDetection.BusinessManager.UnitTest.ReportTemplateRenders
 {
     using System;
     using System.Collections.Generic;
-    using DTO.ReportTemplate;
-    using Lib.ReportTemplateRenders;
+    using FD.Lib.BusinessManager.ReportTemplateRenders;
+    using FD.Lib.BusinessManager.UnitTest.ReportTemplateRenders;
+    using FD.Lib.Model.ReportTemplate;
+    using FD.Lib.ReportTemplateRenders;
     using NUnit.Framework;
 
     [TestFixture]

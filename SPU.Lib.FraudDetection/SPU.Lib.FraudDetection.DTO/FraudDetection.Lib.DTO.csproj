@@ -90,9 +90,6 @@
     <Compile Include="Parameter.cs" />
     <Compile Include="MailMasterInfo.cs" />
     <Compile Include="RawMarginCustomer.cs" />
-    <Compile Include="ReportTemplate\MarginCustormer.cs" />
-    <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />
-    <Compile Include="ReportTemplate\SuspiciousStatisticViewModel.cs" />
     <Compile Include="SuspiciousCustomer.cs" />
     <Compile Include="TablesForeignKey.cs" />
     <Compile Include="Sport.cs" />

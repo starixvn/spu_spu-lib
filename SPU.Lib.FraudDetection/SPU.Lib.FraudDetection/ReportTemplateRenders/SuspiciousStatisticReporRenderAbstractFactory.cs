@@ -7,13 +7,15 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace FD.Lib.ReportTemplateRenders
+namespace FD.Lib.BusinessManager.ReportTemplateRenders
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using DTO.ReportTemplate;
-    using TableRenders;
+    using BusinessManager.ReportTemplateRenders.TableRenders;
+    using Lib.ReportTemplateRenders;
+    using Lib.ReportTemplateRenders.TableRenders;
+    using Model.ReportTemplate;
 
     public class SuspiciousStatisticReporRenderAbstractFactory : IReportRenderAbstractFactory
     {

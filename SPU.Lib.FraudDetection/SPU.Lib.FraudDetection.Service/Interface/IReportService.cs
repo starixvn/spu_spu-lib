@@ -11,7 +11,7 @@ namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
     using DTO;
-    using DTO.ReportTemplate;
+    using Model.ReportTemplate;
 
     public interface IReportService
     {
