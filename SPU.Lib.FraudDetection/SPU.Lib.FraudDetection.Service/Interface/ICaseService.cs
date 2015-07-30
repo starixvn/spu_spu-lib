@@ -10,10 +10,10 @@
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
-    using Core.Utilities;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
+    using Model.Case;
 
     /// <summary>
     ///     Case Service interface.
@@ -26,7 +26,7 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<CaseInfo> GetCaseInfo(ICriteria criteria);
 
-        DataCollection GetCases(ICriteria criteria);
+        CaseListModel GetCases(ICriteria criteria);
 
         IEnumerable<Task> GetTasks(ICriteria criteria);
 

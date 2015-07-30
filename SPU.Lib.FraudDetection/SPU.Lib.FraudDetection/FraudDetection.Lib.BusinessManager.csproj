@@ -8,7 +8,7 @@
     <ProjectGuid>{1B2147AC-1A2B-462A-BB70-73786617AD6B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.BusinessManager</RootNamespace>
+    <RootNamespace>FD.Lib.BusinessManager</RootNamespace>
     <AssemblyName>FD.Lib.BusinessManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

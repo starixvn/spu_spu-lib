@@ -8,7 +8,7 @@
     <ProjectGuid>{251D8C72-BC97-448B-924A-274DCDA7A2E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.Service</RootNamespace>
+    <RootNamespace>FD.Lib.Service</RootNamespace>
     <AssemblyName>FD.Lib.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -115,6 +115,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
+      <Project>{4BE9AD54-E1B1-43CE-BFF6-139440888EE5}</Project>
+      <Name>FraudDetection.Lib.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
       <Name>FraudDetection.Lib.Core</Name>

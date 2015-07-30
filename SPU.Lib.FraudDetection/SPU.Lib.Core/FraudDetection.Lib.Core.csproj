@@ -8,7 +8,7 @@
     <ProjectGuid>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.Core</RootNamespace>
+    <RootNamespace>FD.Lib.Core</RootNamespace>
     <AssemblyName>FD.Lib.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

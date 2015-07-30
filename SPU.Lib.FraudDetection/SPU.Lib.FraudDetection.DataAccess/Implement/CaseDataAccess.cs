@@ -9,10 +9,11 @@
 
 namespace FD.Lib.DataAccess.Implement
 {
-    using Core.Utilities;
+    using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
+    using Model.Case;
 
     /// <summary>
     ///     Case Data Access Implement.
@@ -34,9 +35,20 @@ namespace FD.Lib.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetCases(ICriteria criteria)
+        public CaseListModel GetCases(ICriteria criteria)
         {
-            return ReturnDataCollection(criteria);
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var data = db.Query<CaseModel>(criteria.GetSpParams());
+                var totalItem = (int)db.GetOuputParams()["rowcount"];
+                var result = new CaseListModel
+                {
+                    TotalItem = totalItem,
+                    Cases = data
+                };
+
+                return result;
+            }
         }
     }
 }

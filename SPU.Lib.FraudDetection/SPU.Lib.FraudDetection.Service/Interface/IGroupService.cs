@@ -10,11 +10,11 @@
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
-    using Core.Utilities;
     using Criteria.Group;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
+    using Model.Group;
 
     /// <summary>
     ///     Group Service interface.
@@ -25,7 +25,7 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult DeleteGroup(ICriteria criteria);
 
-        DataCollection GetGroups(ICriteria criteria);
+        GroupListModel GetGroups(ICriteria criteria);
 
         IEnumerable<Group> GetAllGroups(ICriteria criteria);
 

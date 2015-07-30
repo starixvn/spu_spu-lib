@@ -8,7 +8,7 @@
     <ProjectGuid>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.Criteria</RootNamespace>
+    <RootNamespace>FD.Lib.Criteria</RootNamespace>
     <AssemblyName>FD.Lib.Criteria</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -9,9 +9,9 @@
 
 namespace FD.Lib.DataAccess.Interface
 {
-    using Core.Utilities;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
+    using Model.Group;
 
     /// <summary>
     ///     Group Data Access Interface.
@@ -20,7 +20,7 @@ namespace FD.Lib.DataAccess.Interface
     {
         ICommandResult InsertGroup(ICriteria criteria);
 
-        DataCollection GetGroups(ICriteria criteria);
+        GroupListModel GetGroups(ICriteria criteria);
 
         ICommandResult UpdateGroup(ICriteria criteria);
 

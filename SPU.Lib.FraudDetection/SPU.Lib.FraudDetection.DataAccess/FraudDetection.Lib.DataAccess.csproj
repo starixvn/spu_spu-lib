@@ -8,7 +8,7 @@
     <ProjectGuid>{A2B5A1D1-5B63-42E3-AC7D-FAA25E6A4C0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.DataAccess</RootNamespace>
+    <RootNamespace>FD.Lib.DataAccess</RootNamespace>
     <AssemblyName>FD.Lib.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -108,6 +108,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
+      <Project>{4BE9AD54-E1B1-43CE-BFF6-139440888EE5}</Project>
+      <Name>FraudDetection.Lib.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
       <Name>FraudDetection.Lib.Core</Name>

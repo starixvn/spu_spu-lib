@@ -9,10 +9,11 @@
 
 namespace FD.Lib.DataAccess.Implement
 {
-    using Core.Utilities;
+    using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
+    using Model.Group;
 
     /// <summary>
     ///     Group Data Access Implement.
@@ -24,9 +25,20 @@ namespace FD.Lib.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
-        public DataCollection GetGroups(ICriteria criteria)
+        public GroupListModel GetGroups(ICriteria criteria)
         {
-            return ReturnDataCollection(criteria);
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var data = db.Query<GroupModel>(criteria.GetSpParams());
+                var totalItem = (int)db.GetOuputParams()["rowcount"];
+                var result = new GroupListModel
+                {
+                    TotalItem = totalItem,
+                    Groups = data
+                };
+
+                return result;
+            }
         }
 
         public ICommandResult UpdateGroup(ICriteria criteria)

@@ -12,13 +12,13 @@ namespace FD.Lib.Service.Implement
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Core.Utilities;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
+    using Model.Case;
 
     /// <summary>
     ///     Case Service.
@@ -47,7 +47,7 @@ namespace FD.Lib.Service.Implement
             return GetData<CaseInfo>(criteria);
         }
 
-        public DataCollection GetCases(ICriteria criteria)
+        public CaseListModel GetCases(ICriteria criteria)
         {
             return _caseDataAccess.GetCases(criteria);
         }

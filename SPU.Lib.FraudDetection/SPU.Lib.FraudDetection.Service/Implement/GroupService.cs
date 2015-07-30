@@ -11,7 +11,6 @@ namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Core.Utilities;
     using Criteria.Group;
     using DataAccess.Implement;
     using DataAccess.Interface;
@@ -19,6 +18,7 @@ namespace FD.Lib.Service.Implement
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
+    using Model.Group;
 
     /// <summary>
     ///     Group Service.
@@ -42,7 +42,7 @@ namespace FD.Lib.Service.Implement
             return _groupDataAccess.DeleteGroup(criteria);
         }
 
-        public DataCollection GetGroups(ICriteria criteria)
+        public GroupListModel GetGroups(ICriteria criteria)
         {
             return _groupDataAccess.GetGroups(criteria);
         }

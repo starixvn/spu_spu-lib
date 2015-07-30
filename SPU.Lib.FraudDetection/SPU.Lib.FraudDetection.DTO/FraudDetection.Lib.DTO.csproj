@@ -8,7 +8,7 @@
     <ProjectGuid>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FraudDetection.Lib.DTO</RootNamespace>
+    <RootNamespace>FD.Lib.DTO</RootNamespace>
     <AssemblyName>FD.Lib.DTO</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

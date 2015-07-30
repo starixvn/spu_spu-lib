@@ -9,9 +9,9 @@
 
 namespace FD.Lib.DataAccess.Interface
 {
-    using Core.Utilities;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
+    using Model.Case;
 
     /// <summary>
     ///     Case Data Access interface.
@@ -24,6 +24,6 @@ namespace FD.Lib.DataAccess.Interface
 
         ICommandResult DeleteCase(ICriteria criteria);
 
-        DataCollection GetCases(ICriteria criteria);
+        CaseListModel GetCases(ICriteria criteria);
     }
 }
