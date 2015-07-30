@@ -11,10 +11,10 @@ namespace FD.Lib.DataAccess.Implement
 {
     using System.Collections.Generic;
     using DTO;
-    using DTO.Reports;
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Interface;
+    using Model.Reports.SuspiciousCustomer;
 
     /// <summary>
     /// Customer Report Data Access.
@@ -26,11 +26,11 @@ namespace FD.Lib.DataAccess.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List off suspicious customers.</returns>
-        public IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomersByGroup(ICriteria criteria)
+        public IEnumerable<SuspiciousCustomerReportModel> GetSuspiciousCustomersByGroup(ICriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var suspiciousCustomers = db.Query<SuspiciousCustomerReport, Customer, Group, SuspiciousCustomerReport>(
+                var suspiciousCustomers = db.Query<SuspiciousCustomerReportModel, Customer, Group, SuspiciousCustomerReportModel>(
                     (report, cust, group) =>
                     {
                         report.Customer = cust;

@@ -45,6 +45,15 @@
     <Compile Include="Group\GroupModel.cs" />
     <Compile Include="Group\GroupListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportModel.cs" />
+    <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerTimeModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
+      <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
+      <Name>FraudDetection.Lib.DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

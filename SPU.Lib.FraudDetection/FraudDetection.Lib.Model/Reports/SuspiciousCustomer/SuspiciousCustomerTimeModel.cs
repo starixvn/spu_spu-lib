@@ -7,12 +7,12 @@
 //   <change who="Aaron.Cao" date="2015.06.24">Created</change>
 // </history>
 
-namespace FD.Lib.DTO.Reports
+namespace FD.Lib.Model.Reports.SuspiciousCustomer
 {
     /// <summary>
     /// The class SuspiciousCustomerTime.
     /// </summary>
-    public class SuspiciousCustomerTime
+    public class SuspiciousCustomerTimeModel
     {
         public int CustId { get; set; }
 

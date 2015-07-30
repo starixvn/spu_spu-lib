@@ -7,16 +7,17 @@
 //   <change who="Aaron.Cao" date="2015.06.24">Created</change>
 // </history>
 
-namespace FD.Lib.DTO.Reports
+namespace FD.Lib.Model.Reports.SuspiciousCustomer
 {
     using System.Collections.Generic;
+    using DTO;
 
     /// <summary>
     /// The class SuspiciousCustomerReport.
     /// </summary>
-    public class SuspiciousCustomerReport
+    public class SuspiciousCustomerReportModel
     {
-        public SuspiciousCustomerReport()
+        public SuspiciousCustomerReportModel()
         {
             Margins = new List<decimal?>();
 
@@ -25,7 +26,7 @@ namespace FD.Lib.DTO.Reports
 
         public Customer Customer { get; set; }
 
-        public Group Group { get; set; }
+        public DTO.Group Group { get; set; }
 
         public int SuspiciousTime { get; set; }
 

@@ -13,8 +13,8 @@ namespace FD.Lib.Service.Implement
     using Criteria.SuspiciousStatistic;
     using DataAccess.Implement;
     using DTO;
-    using DTO.Reports;
     using Interface;
+    using Model.Reports.SuspiciousCustomer;
 
     /// <summary>
     /// The class CustomerReportService.
@@ -37,7 +37,7 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The list of Suspicious Customers.</returns>
-        public IEnumerable<SuspiciousCustomerReport> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
+        public IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
         {
             var suspiciousCustomers = GetSuspiciousCustomersByGroup(criteria.GroupId);
             var customers = GetCustomers(GetSuspiciousCustomerIds(suspiciousCustomers));
@@ -68,8 +68,8 @@ namespace FD.Lib.Service.Implement
         /// <param name="customers">List customers.</param>
         /// <param name="margins">List margins.</param>
         /// <returns>The bind data.</returns>
-        private IEnumerable<SuspiciousCustomerReport> BindMarginData(
-            IEnumerable<SuspiciousCustomerReport> customers,
+        private IEnumerable<SuspiciousCustomerReportModel> BindMarginData(
+            IEnumerable<SuspiciousCustomerReportModel> customers,
             IEnumerable<RawMarginCustomer> margins)
         {
             var startMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-2);
@@ -134,9 +134,9 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="listCustIds">List customer ID.</param>
         /// <returns>The list suspicious time.</returns>
-        private IEnumerable<SuspiciousCustomerTime> GetSuspiciousTime(string listCustIds)
+        private IEnumerable<SuspiciousCustomerTimeModel> GetSuspiciousTime(string listCustIds)
         {
-            var result = new List<SuspiciousCustomerTime>().AsEnumerable();
+            var result = new List<SuspiciousCustomerTimeModel>().AsEnumerable();
             foreach (var customerIds in Split(listCustIds, 60))
             {
                 var criteria = new SuspiciousCustomerTimeGetAllCriteria()
@@ -144,7 +144,7 @@ namespace FD.Lib.Service.Implement
                     ListCustIds = customerIds
                 };
 
-                result = result.Concat(GetData<SuspiciousCustomerTime>(criteria));
+                result = result.Concat(GetData<SuspiciousCustomerTimeModel>(criteria));
             }
 
             return result;
@@ -178,11 +178,11 @@ namespace FD.Lib.Service.Implement
         /// <param name="suspiciousCustomers">The input suspicious customers.</param>
         /// <param name="customers">The input customers.</param>
         /// <returns>List filtered customers.</returns>
-        private IEnumerable<SuspiciousCustomerReport> GetFilteredSuspiciousCustomers(
-            IEnumerable<SuspiciousCustomerReport> suspiciousCustomers,
+        private IEnumerable<SuspiciousCustomerReportModel> GetFilteredSuspiciousCustomers(
+            IEnumerable<SuspiciousCustomerReportModel> suspiciousCustomers,
             IEnumerable<Customer> customers)
         {
-            var result = new List<SuspiciousCustomerReport>();
+            var result = new List<SuspiciousCustomerReportModel>();
             foreach (var suspiciousCustomer in suspiciousCustomers)
             {
                 foreach (var customer in customers)
@@ -201,7 +201,7 @@ namespace FD.Lib.Service.Implement
             return result;
         }
 
-        private IEnumerable<SuspiciousCustomerReport> GetSuspiciousCustomersByGroup(int groupId)
+        private IEnumerable<SuspiciousCustomerReportModel> GetSuspiciousCustomersByGroup(int groupId)
         {
             var suspiciousCustomerGetByGroupCriteria = new SuspiciousCustomerGetByGroupCriteria
             {
@@ -233,7 +233,7 @@ namespace FD.Lib.Service.Implement
             return result;
         }
 
-        private string GetSuspiciousCustomerIds(IEnumerable<SuspiciousCustomerReport> customers)
+        private string GetSuspiciousCustomerIds(IEnumerable<SuspiciousCustomerReportModel> customers)
         {
             var distinctCustomers = customers.Select(t => t.Customer.CustId).Distinct().ToList();
             var result = string.Join(",", distinctCustomers);
