@@ -28,7 +28,7 @@ namespace FD.Lib.DataAccess
 
         public BaseDataAccess()
         {
-            _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBSPU.SPU_FraudDetection.bodbSPUNet2");
+            _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBFD.FraudDetection.bodbSPUNet2");
         }
 
         /// <summary>

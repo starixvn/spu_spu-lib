@@ -2,13 +2,13 @@
 
 <Functions>
   <Function Name="CaseGroup">
-    <Setting Key="FD_CaseGroupInsert" SpName="FD_CaseGroupInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseGroupDelete" SpName="FD_CaseGroupDelete" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CaseGroupGetAll" SpName="FD_CaseGroupGetAll" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGroupInsert" SpName="FD_CaseGroupInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGroupDelete" SpName="FD_CaseGroupDelete" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CaseGroupGetAll" SpName="FD_CaseGroupGetAll" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
   <Function Name="CustomerGroup">
-    <Setting Key="FD_CustomerGroupInsert" SpName="FD_CustomerGroupInsert" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
-    <Setting Key="FD_CustomerGroupUpdate" SpName="FD_CustomerGroupUpdate" DbName="DBSPU.SPU_FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerGroupInsert" SpName="FD_CustomerGroupInsert" DbName="DBFD.FraudDetection.bodbSPUNet" />
+    <Setting Key="FD_CustomerGroupUpdate" SpName="FD_CustomerGroupUpdate" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 </Functions>
