@@ -55,12 +55,12 @@ namespace FD.Lib.NextActions
 
         public void TakeAction()
         {
+            InsertScannedMatch();
+
             if (_suspiciousInfoList.Count <= 0)
             {
                 return;
             }
-
-            InsertScannedMatch();
 
             InsertSuspicious();
         }
