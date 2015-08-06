@@ -24,7 +24,7 @@ namespace FD.Lib.Criteria.Task
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "FD_TaskSelectByCaseId";
+            return "FD_TaskGetByCaseId";
         }
 
         /// <summary>
