@@ -21,8 +21,7 @@ namespace FD.Lib.MailSenders
     {
         public void Send(Mail mail)
         {
-            MailClientHandler.Start();
-            MailClientHandler.SendMail(mail);
+            MailClientHandler.SendMail(mail);         
         }
     }
 }

@@ -33,14 +33,12 @@ namespace FD.Lib.MailSenders
             var mailMasterRender = MailMasterRenderAbstractFactory.GetMailMasterRender();
             var mail = mailMasterRender.RenderContentOfMailMaster(mailMasterId);
 
-            ////FileWriter.WriteFile(mail.MailContent);
-
             var newMail = new Mail
             {
                 Subject = mail.MailSubject,
                 Title = mail.MailSubject,
                 Body = mail.MailContent,
-                MailingListId = 80
+                MailingListId = mail.MailingListId
             };
 
             MailClient.Send(newMail);

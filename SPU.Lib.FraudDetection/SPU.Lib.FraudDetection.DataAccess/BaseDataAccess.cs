@@ -18,6 +18,7 @@ namespace FD.Lib.DataAccess
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
+    using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
     /// <summary>
     ///     Base Data Access.
@@ -28,7 +29,8 @@ namespace FD.Lib.DataAccess
 
         public BaseDataAccess()
         {
-            _sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBFD.FraudDetection.bodbSPUNet2");
+            _sqlConnectionString = ConnectionStringGetter.GetConnectionString("DBFD.FraudDetection.bodbSPUNet");
+            //_sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBFD.FraudDetection.bodbSPUNet");
         }
 
         /// <summary>
@@ -63,8 +65,6 @@ namespace FD.Lib.DataAccess
                 var param = criteria.GetSpParams();
                 var ds = objectDb.ExecuteDataSet(param);
 
-                // var mainTable = ds.Tables.Count > 0 ? ds.Tables[0] : new DataTable();
-                // var referenceTable = ds.Tables.Count > 1 ? ds.Tables[1] : new DataTable();
                 return ds;
             }
         }

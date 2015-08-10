@@ -25,11 +25,14 @@ namespace FD.Lib.TaskExecutors
 
         private IList<string> _matchIdList;
 
+        private readonly List<Task<IList<SuspiciousInfo>>> _threads;
+
         public ScanMatchTaskExecutor(Task task)
             : base(task)
         {
             _matchIdList = new List<string>();
             _suspicionList = new List<SuspiciousInfo>();
+            _threads = new List<Task<IList<SuspiciousInfo>>>();
         }
 
         public ScanMatchTaskExecutor(Task task, ITaskService taskService)
@@ -37,10 +40,12 @@ namespace FD.Lib.TaskExecutors
         {
             _matchIdList = new List<string>();
             _suspicionList = new List<SuspiciousInfo>();
+            _threads = new List<Task<IList<SuspiciousInfo>>>();
         }
 
         protected override void ClearOldResult()
         {
+            _threads.Clear();
             _matchIdList.Clear();
             _suspicionList.Clear();
         }
@@ -79,7 +84,6 @@ namespace FD.Lib.TaskExecutors
 
         private void FindSuspiciousCustomerOnAllMatches()
         {
-            var threads = new List<Task<IList<SuspiciousInfo>>>();
             var coreCount = Environment.ProcessorCount;
             var matchCount = _matchIdList.Count;
             int count = 0;
@@ -91,41 +95,40 @@ namespace FD.Lib.TaskExecutors
                     break;
                 }
 
-                var thread = System.Threading.Tasks.Task.Factory.StartNew((obj) =>
-                {
-                    var id = (string) obj;
-                    return FindSuspiciousCustomerOnEachMatch(id);
-                }, _matchIdList[count]);
-
-                threads.Add(thread);
+                CreateAndAddNewThread(count);
             }
 
             int threadsHaveDone = 0;
 
             while (threadsHaveDone < matchCount)
             {
-                int index = System.Threading.Tasks.Task.WaitAny(threads.ToArray());
-                
-                if (threads[index].Exception == null)
+                int index = System.Threading.Tasks.Task.WaitAny(_threads.ToArray());
+
+                if (_threads[index].Exception == null)
                 {
-                    _suspicionList.AddRange(threads[index].Result);
+                    _suspicionList.AddRange(_threads[index].Result);
                 }
 
                 threadsHaveDone++;
-                threads.RemoveAt(index);
+                _threads.RemoveAt(index);
 
                 if (count < matchCount)
                 {
-                    var task = System.Threading.Tasks.Task.Factory.StartNew((obj) =>
-                    {
-                        var id = (string)obj;
-                        return FindSuspiciousCustomerOnEachMatch(id);
-                    }, _matchIdList[count]);
-
-                    count ++;
-                    threads.Add(task);
+                    CreateAndAddNewThread(count);
+                    count++;
                 }
             }
+        }
+
+        private void CreateAndAddNewThread(int count)
+        {
+            var thread = System.Threading.Tasks.Task.Factory.StartNew((obj) =>
+            {
+                var id = (string)obj;
+                return FindSuspiciousCustomerOnEachMatch(id);
+            }, _matchIdList[count]);
+
+            _threads.Add(thread);
         }
 
         private IList<SuspiciousInfo> FindSuspiciousCustomerOnEachMatch(string matchId)
@@ -133,6 +136,7 @@ namespace FD.Lib.TaskExecutors
             var ruleQuery = Task.TaskRules.Replace("$param1$", matchId);
             return TaskService.ExecuteRule(ruleQuery, Task.TaskId, Task.CaseId);
         }
+
         private void SaveSuspiciousCustomers()
         {
             var saveAction = new SavingSuspicious(_suspicionList, _matchIdList, Task.TaskId);

@@ -11,12 +11,15 @@
 namespace FD.Lib.TaskExecutors
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Threading.Tasks;
     using System.Timers;
     using DTO;
     using Fanex.Logging;
     using Service.Implement;
     using Service.Interface;
+    using Task = DTO.Task;
 
     /// <summary>
     ///     Task Class.
@@ -80,7 +83,7 @@ namespace FD.Lib.TaskExecutors
             PreExecute(null, null);
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             IsStop = true;
             Timer.Elapsed -= PreExecute;

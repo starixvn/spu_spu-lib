@@ -45,6 +45,7 @@ namespace FD.Lib.MailMasterRenders
             var mailMaster = MailMasterService.GetMailById(new MailMasterGetByIdCriteria { MailId = mailMasterId });
             var render = ReportRenderAbstractFactory.GetReportTemplateRender();
             var contentOfPlaceholder = render.RenderContent();
+
             var newMailContent = PlaceholderReplacer.ReplacePlaceholder(mailMaster.MailContent, contentOfPlaceholder);
             mailMaster.MailContent = newMailContent;
 
