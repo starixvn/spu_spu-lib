@@ -1,7 +1,7 @@
-﻿namespace FD.Lib.Model.Reports.SuspiciousCustomer
+﻿namespace FD.Lib.Model.Reports.FraudCaseDetail
 {
     using System.Collections.Generic;
-    using System.Security.AccessControl;
+    using SuspiciousCustomer;
 
     public class FraudCaseDetailReportViewModel
     {

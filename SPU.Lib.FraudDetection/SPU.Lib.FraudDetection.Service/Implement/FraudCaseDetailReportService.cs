@@ -4,9 +4,11 @@ namespace FD.Lib.Service.Implement
     using System.Linq;
     using Criteria.Reports;
     using Fanex.BetList.Core.Builder;
+    using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.Data;
     using Interface;
+    using Model.Reports.FraudCaseDetail;
     using Model.Reports.SuspiciousCustomer;
     using RemotingRef;
 
@@ -27,7 +29,7 @@ namespace FD.Lib.Service.Implement
                 using (var multi = db.QueryMultiple(criteria.GetSpParams()))
                 {
                     var summary = multi.Read<FraudCaseDetailSummary>();
-                    var body = multi.Read<FraudCaseDetailTicket>().ToList();
+                    var body = multi.Read<Ticket>().ToList();
 
                     var builder = new BetListHTMLBuilder();
                     var ticketHelper = new TicketHelper();

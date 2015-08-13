@@ -78,10 +78,9 @@
     <Compile Include="Group\GroupModel.cs" />
     <Compile Include="Group\GroupListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\FraudCaseDetailTicket.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\FraudCaseDetailItem.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\FraudCaseDetailReportModel.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\FraudCaseDetailSummary.cs" />
+    <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailItem.cs" />
+    <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailReportModel.cs" />
+    <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailSummary.cs" />
     <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportModel.cs" />
     <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerTimeModel.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />

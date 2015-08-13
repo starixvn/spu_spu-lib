@@ -1,4 +1,4 @@
-﻿namespace FD.Lib.Model.Reports.SuspiciousCustomer
+﻿namespace FD.Lib.Model.Reports.FraudCaseDetail
 {
     public class FraudCaseDetailItem
     {
