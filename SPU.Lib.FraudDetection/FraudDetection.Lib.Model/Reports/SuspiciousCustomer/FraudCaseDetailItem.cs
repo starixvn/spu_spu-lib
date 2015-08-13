@@ -1,0 +1,31 @@
+﻿namespace FD.Lib.Model.Reports.SuspiciousCustomer
+{
+    public class FraudCaseDetailItem
+    {
+        public string CustName { get; set; }
+
+        public long TransId { get; set; }
+
+        public string TransDate { get; set; }
+
+        public string BetType { get; set; }
+
+        public string HomeName { get; set; }
+
+        public string AwayName { get; set; }
+
+        public string Odds { get; set; }
+
+        public string Score { get; set; }
+
+        public string Stake { get; set; }
+
+        public decimal WinLoss { get; set; }
+
+        public string Status { get; set; }
+
+        public string Choice { get; set; }
+
+        public string IP { get; set; }
+    }
+}

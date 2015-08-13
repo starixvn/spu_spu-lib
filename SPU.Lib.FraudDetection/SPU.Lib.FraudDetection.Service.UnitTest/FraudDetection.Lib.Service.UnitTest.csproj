@@ -113,6 +113,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="FraudCaseDetailReportServiceIntegrationTest.cs" />
     <Compile Include="CustomerGroupServiceIntegrationTest.cs" />
     <Compile Include="CaseGroupServiceIntegrationTest.cs" />
     <Compile Include="CaseGroupServiceUnitTest.cs" />
@@ -125,6 +126,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
+      <Project>{4BE9AD54-E1B1-43CE-BFF6-139440888EE5}</Project>
+      <Name>FraudDetection.Lib.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
       <Project>{32899f43-de3c-4f21-affb-b683e4d4cd59}</Project>
       <Name>FraudDetection.Lib.Core</Name>
