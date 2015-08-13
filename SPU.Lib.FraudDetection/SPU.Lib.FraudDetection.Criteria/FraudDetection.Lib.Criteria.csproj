@@ -75,6 +75,8 @@
     <Compile Include="CaseGroup\CaseGroupGetAllCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
+    <Compile Include="Case\CaseGetByNameCriteria.cs" />
+    <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
     <Compile Include="Config\ConfigGetAllCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCustomerCriteria.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\FraudCaseDetailReportCriteria.cs" />
+    <Compile Include="Reports\MatchMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />

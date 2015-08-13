@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousCustomerReport.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomerReportModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousCustomerTime.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomerTimeModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------

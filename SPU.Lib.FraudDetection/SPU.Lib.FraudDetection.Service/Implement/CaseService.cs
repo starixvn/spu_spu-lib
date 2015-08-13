@@ -69,6 +69,13 @@ namespace FD.Lib.Service.Implement
             return result.SingleOrDefault();
         }
 
+        public CaseInfo GetCaseByName(ICriteria criteria)
+        {
+            var result = GetData<CaseInfo>(criteria);
+
+            return result.SingleOrDefault();
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

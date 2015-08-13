@@ -23,9 +23,9 @@ namespace FD.Lib.TaskExecutors
     {
         private readonly List<SuspiciousInfo> _suspicionList;
 
-        private IList<string> _matchIdList;
-
         private readonly List<Task<IList<SuspiciousInfo>>> _threads;
+
+        private IList<string> _matchIdList;
 
         public ScanMatchTaskExecutor(Task task)
             : base(task)
@@ -122,11 +122,13 @@ namespace FD.Lib.TaskExecutors
 
         private void CreateAndAddNewThread(int count)
         {
-            var thread = System.Threading.Tasks.Task.Factory.StartNew((obj) =>
+            var thread = System.Threading.Tasks.Task.Factory.StartNew(
+                (obj) =>
             {
                 var id = (string)obj;
                 return FindSuspiciousCustomerOnEachMatch(id);
-            }, _matchIdList[count]);
+            },
+            _matchIdList[count]);
 
             _threads.Add(thread);
         }

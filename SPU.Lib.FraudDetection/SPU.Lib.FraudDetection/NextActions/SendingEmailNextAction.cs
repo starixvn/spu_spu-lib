@@ -9,14 +9,11 @@
 
 namespace FD.Lib.NextActions
 {
-    using System;
     using System.Collections.Generic;
     using BusinessManager.ReportTemplateRenders;
     using DTO;
-    using Fanex.MailDelivery.Client.Models;
     using MailMasterRenders;
     using MailSenders;
-    using ReportTemplateRenders;
     using Service.Implement;
     using Service.Interface;
 
@@ -25,7 +22,6 @@ namespace FD.Lib.NextActions
     /// </summary>
     public class SendingEmailNextAction : INextAction
     {
-
         public SendingEmailNextAction(int mailMasterId)
         {
             MailMasterId = mailMasterId;

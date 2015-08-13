@@ -13,7 +13,7 @@ namespace FD.Lib.Core.Utilities
     using System.Linq;
 
     /// <summary>
-    /// Extentions class.
+    /// Extension class.
     /// </summary>
     public static class Extentions
     {

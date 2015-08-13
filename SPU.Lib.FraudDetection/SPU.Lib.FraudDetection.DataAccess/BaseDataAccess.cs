@@ -30,7 +30,6 @@ namespace FD.Lib.DataAccess
         public BaseDataAccess()
         {
             _sqlConnectionString = ConnectionStringGetter.GetConnectionString("DBFD.FraudDetection.bodbSPUNet");
-            //_sqlConnectionString = ConfigSettings.GetConnectionStringByName("DBFD.FraudDetection.bodbSPUNet");
         }
 
         /// <summary>

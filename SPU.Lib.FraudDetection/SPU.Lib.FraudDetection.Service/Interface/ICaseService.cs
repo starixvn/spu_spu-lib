@@ -34,6 +34,8 @@ namespace FD.Lib.Service.Interface
 
         CaseInfo GetCaseById(ICriteria criteria);
 
+        CaseInfo GetCaseByName(ICriteria criteria);
+
         void Dispose();
     }
 }

@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\MatchMonitoringReportService.cs" />
     <Compile Include="Implement\CustomerBettingGroupService.cs" />
     <Compile Include="Implement\CustomerReportService.cs" />
     <Compile Include="Implement\EventService.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Implement\CaseGroupService.cs" />
     <Compile Include="Implement\CustomerGroupService.cs" />
     <Compile Include="Implement\FraudCaseDetailReportService.cs" />
+    <Compile Include="Interface\IMatchMonitoringReportService.cs" />
     <Compile Include="Interface\ICaseGroupService.cs" />
     <Compile Include="Interface\ICustomerBettingGroupService.cs" />
     <Compile Include="Interface\ICustomerGroupService.cs" />
