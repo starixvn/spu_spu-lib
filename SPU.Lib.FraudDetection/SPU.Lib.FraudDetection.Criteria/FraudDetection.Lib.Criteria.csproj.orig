@@ -93,11 +93,14 @@
     <Compile Include="Group\GroupGetAvailableGroupsForCaseCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
-<<<<<<< HEAD
+    <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
+    <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />
     <Compile Include="Reports\FraudCaseDetailReportCriteria.cs" />
-=======
+<<<<<<< HEAD
     <Compile Include="Reports\MatchMonitoringReportGetAllCriteria.cs" />
->>>>>>> #41446 - MatchMonitoring report
+=======
+    <Compile Include="Reports\FraudCaseDetailSummaryGetByMatchIdCriteria.cs" />
+>>>>>>> #39203 - Change the process of getting suspicious tickets on the match.
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />

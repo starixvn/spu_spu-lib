@@ -13,6 +13,7 @@ namespace FD.Lib.Service
     using System.Collections.Generic;
     using System.Data;
     using DataAccess;
+    using Fanex.Common.Helper;
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
@@ -85,6 +86,77 @@ namespace FD.Lib.Service
             var baseDataAccess = new BaseDataAccess();
 
             return baseDataAccess.ExecuteReaderQueryInline(sqlQueryString);
+        }
+
+        /// <summary>
+        /// Get output values.
+        /// </summary>
+        /// <param name="criteria">Input criteria.</param>
+        public void ExecuteOutput(ICriteria criteria)
+        {
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var param = criteria.GetSpParams();
+                objectDb.ExecuteNonQuery(param);
+
+                var outputParams = objectDb.GetOuputParams();
+                var properties = criteria.GetType().GetProperties();
+                foreach (string outputParam in outputParams.Keys)
+                {
+                    foreach (var property in properties)
+                    {
+                        if (property.CanWrite && property.Name.ToLower() == outputParam)
+                        {
+                            property.SetValue(criteria, param[outputParam] == DBNull.Value ? null : param[outputParam], null);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get the list of found entities and output values.
+        /// </summary>
+        /// <typeparam name="T">General type.</typeparam>
+        /// <param name="criteria">Input criteria.</param>
+        /// <returns>The list of found entities and output values.</returns>
+        public IEnumerable<T> GetDataOutput<T>(ICriteria criteria)
+        {
+            Check.Argument.IsNotNull(criteria, "criteria");
+
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                IEnumerable<T> list = new List<T>();
+
+                try
+                {
+                    var param = criteria.GetSpParams();
+                    list = objectDb.Query<T>(param);
+
+                    var outputParams = objectDb.GetOuputParams();
+
+                    if (outputParams != null)
+                    {
+                        var properties = criteria.GetType().GetProperties();
+
+                        foreach (string outputParam in outputParams.Keys)
+                        {
+                            foreach (var property in properties)
+                            {
+                                if (property.CanWrite && property.Name.ToLower() == outputParam)
+                                {
+                                    property.SetValue(criteria, param[outputParam], null);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                }
+
+                return list;
+            }
         }
     }
 }

@@ -21,13 +21,25 @@
 
         [Test]
         [Ignore]
-        public void When_Select_Existed_CaseGroup_Then_Result_Should_Be_Non_Empty()
+        public void When_EventDate_Of_Match_Is_Greater_Than_BalanceUp_Date_Then_Get_Data_From_Bob02()
         {
             var result = sut.GetFraudCaseDetails(new FraudCaseDetailReportCriteria
             {
                 CaseId = 4,
                 MatchId = 14337488,
                 EventDate = new DateTime(2015, 8, 5)
+            });
+        }
+
+        [Test]
+        [Ignore]
+        public void When_EventDate_Of_Match_Is_Equal_Or_Less_Than_BalanceUp_Date_Then_Get_Data_From_Bodb_Archieve()
+        {
+            var result = sut.GetFraudCaseDetails(new FraudCaseDetailReportCriteria
+            {
+                CaseId = 4,
+                MatchId = 14310233,
+                EventDate = new DateTime(2015, 8, 1)
             });
         }
     }
