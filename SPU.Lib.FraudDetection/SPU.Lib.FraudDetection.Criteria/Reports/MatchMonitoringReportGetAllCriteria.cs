@@ -23,7 +23,7 @@ namespace FD.Lib.Criteria.Reports
 
         public string MatchStatus { get; set; }
 
-        public int SuspiciousStatus { get; set; }
+        public bool IsLatestData { get; set; }
 
         // Out put param
         public int NumberOfCases { get; set; }
