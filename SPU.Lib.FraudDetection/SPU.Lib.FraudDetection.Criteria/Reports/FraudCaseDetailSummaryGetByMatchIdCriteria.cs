@@ -10,6 +10,8 @@ namespace FD.Lib.Criteria.Reports
 
         public string TransList { get; set; }
 
+        public string CaseName { get; set; }
+
         public int CustomerCount { get; set; }
 
         public int BetCount { get; set; }

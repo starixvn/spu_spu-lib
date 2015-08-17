@@ -75,6 +75,8 @@ namespace FD.Lib.Service.Implement
                 list.Add(item);
             }
 
+            list = list.OrderBy(t => t.CustName).ToList();
+
             return list;
         }
 
@@ -84,7 +86,8 @@ namespace FD.Lib.Service.Implement
             {
                 CaseId = criteria.CaseId,
                 MatchId = criteria.MatchId,
-                TransList = null
+                TransList = null,
+                CaseName = null
             };
 
             ExecuteOutput(summaryCriteria);
@@ -93,7 +96,8 @@ namespace FD.Lib.Service.Implement
             {
                 CustomerCount = summaryCriteria.CustomerCount,
                 BetCount = summaryCriteria.BetCount,
-                TransList = summaryCriteria.TransList
+                TransList = summaryCriteria.TransList,
+                CaseName = summaryCriteria.CaseName
             };
         }
 

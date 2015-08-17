@@ -12,6 +12,8 @@
 
         public string TransList { get; set; }
 
+        public string CaseName { get; set; }
+
         public string HomeName
         {
             get
