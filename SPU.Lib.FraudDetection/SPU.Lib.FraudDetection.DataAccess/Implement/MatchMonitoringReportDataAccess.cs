@@ -52,7 +52,9 @@ namespace FD.Lib.DataAccess.Implement
                 var totalColumns = dataTable.Columns.Count;
                 for(var i = 6; i < totalColumns; i ++)
                 {
-                    match.SuspiciousCases.Add(dataTable.Columns[i].ColumnName, int.Parse(dataRow[i].ToString()));
+                    match.SuspiciousCases.Add(
+                        dataTable.Columns[i].ColumnName, 
+                        string.IsNullOrEmpty(dataRow[i].ToString()) ? -1 : int.Parse(dataRow[i].ToString()));
                 }
 
                 matches.Add(match);
