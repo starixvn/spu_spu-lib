@@ -19,6 +19,8 @@ namespace FD.Lib.Criteria.Common
     {
         public DateTime EventDate { get; set; }
 
+        public bool IsLatestData { get; set; }
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>
