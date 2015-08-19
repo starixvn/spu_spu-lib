@@ -59,7 +59,7 @@ namespace FD.Lib.QueryGenerator
 
             var dangerPeriodSql = Configs.Single(l => l.ConfigName.ToLower() == "in danger period").ConfigSQLField;
             OriginalFormula = OriginalFormula.Replace("NEARTHEGOAL", dangerPeriodSql);
-            var sqlWhereString = "ans.liveindicator = 1 and tch.matchid in ($param1$) and (" + OriginalFormula + ")";
+            var sqlWhereString = "ans.liveindicator = 1 AND ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) and tch.matchid in ($param1$) and (" + OriginalFormula + ")";
 
             return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
         }
