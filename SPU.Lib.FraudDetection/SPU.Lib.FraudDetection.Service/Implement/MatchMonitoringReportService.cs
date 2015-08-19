@@ -43,5 +43,11 @@ namespace FD.Lib.Service.Implement
         {
             return _matchMonitoringReportDataAccess.GetMatchMonitoringReport(criteria);
         }
+
+        public List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(
+            MatchMonitoringReportGetAllDBArchiveCriteria criteria)
+        {
+            return _matchMonitoringReportDataAccess.GetMatchMonitoringReportFromDBArchive(criteria);
+        }
     }
 }

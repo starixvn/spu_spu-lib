@@ -10,9 +10,9 @@
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
-    using Criteria.Reports;
     using DTO;
     using Fanex.Data.Repository;
+    using Criteria.Reports;
 
     /// <summary>
     /// Match Monitoring interface.
@@ -22,5 +22,7 @@ namespace FD.Lib.Service.Interface
         IEnumerable<League> GetLeaguesByDate(ICriteria criteria);
 
         List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria);
+
+        List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(MatchMonitoringReportGetAllDBArchiveCriteria criteria);
     }
 }

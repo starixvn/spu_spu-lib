@@ -23,11 +23,13 @@ namespace FD.Lib.Criteria.Reports
 
         public string MatchStatus { get; set; }
 
+        public int SuspiciousStatus { get; set; }
+
         public bool IsLatestData { get; set; }
 
         // Out put param
         public int NumberOfCases { get; set; }
-
+        
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>

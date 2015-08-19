@@ -76,6 +76,7 @@
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
+    <Compile Include="Common\LeagueGetAllByDateFromDBArchiveCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
     <Compile Include="Config\ConfigGetAllCriteria.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />
+    <Compile Include="Reports\MatchMonitoringReportGetAllDBArchiveCriteria.cs" />
     <Compile Include="Reports\FraudCaseDetailReportCriteria.cs" />
     <Compile Include="Reports\MatchMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\FraudCaseDetailSummaryGetByMatchIdCriteria.cs" />

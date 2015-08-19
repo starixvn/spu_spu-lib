@@ -19,5 +19,7 @@ namespace FD.Lib.DataAccess.Interface
     public interface IMatchMonitoringReportDataAccess
     {
         List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria);
+
+        List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(MatchMonitoringReportGetAllDBArchiveCriteria criteria);
     }
 }

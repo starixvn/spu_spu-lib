@@ -35,6 +35,21 @@ namespace FD.Lib.DataAccess.Implement
             }
         }
 
+        public List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(
+            MatchMonitoringReportGetAllDBArchiveCriteria criteria)
+        {
+            var hash = criteria.GetSpParams();
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                db.AssignParamValues(hash);
+                var dataSet = db.ExecuteDataSet();
+                criteria.NumberOfCases = (int)db.GetOuputParams()["numberofcases"];
+
+                return MapMatchMonitoringData(dataSet.Tables[0]);
+            }
+        }
+
         private List<MatchMonitoring> MapMatchMonitoringData(DataTable dataTable)
         {
             var matches = new List<MatchMonitoring>();
