@@ -10,7 +10,7 @@
 namespace FD.Lib.BusinessManager.UnitTest
 {
     using System;
-    using Lib.TaskExecutors;
+    using BusinessManager.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;

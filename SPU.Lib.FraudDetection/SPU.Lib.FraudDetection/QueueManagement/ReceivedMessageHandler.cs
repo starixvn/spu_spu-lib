@@ -12,6 +12,9 @@ namespace FD.Lib.QueueManagement
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Messaging;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using BusinessManager.TaskExecutors;
     using SendingTasks;
     using TaskExecutors;
 
@@ -22,6 +25,7 @@ namespace FD.Lib.QueueManagement
     {
         private readonly IMessageQueue _queue;
         private readonly ITaskManager _taskManager;
+        private Task _currentThread;
 
         public ReceivingMessageHandler()
         {
@@ -47,59 +51,68 @@ namespace FD.Lib.QueueManagement
             {
                 var message = msg.Body;
                 var id = (int)message;
+                var label = msg.Label;
 
-                if (string.IsNullOrEmpty(msg.Label))
+                if (string.IsNullOrEmpty(label))
                 {
                     return;
                 }
 
-                var type = ConvertLabelIntoSendingType(msg);
-
-                switch (type)
-                {
-                    case SendingType.AddingTask:
-#if DEBUG
-                        Console.WriteLine("AddingTask: {0}", id);
-#endif
-
-                        _taskManager.AddTask(id);
-                        break;
-
-                    case SendingType.UpdatingTask:
-#if DEBUG
-                        Console.WriteLine("UpdatingTask: {0}", id);
-#endif
-
-                        _taskManager.UpdateTask(id);
-                        break;
-
-                    case SendingType.RemovingTask:
-#if DEBUG
-                        Console.WriteLine("RemovingTask: {0}{0}", id);
-#endif
-
-                        _taskManager.RemoveTask(id);
-                        break;
-
-                    case SendingType.DeactivatingCase:
-#if DEBUG
-                        Console.WriteLine("DeactivateCase: {0}", id);
-#endif
-                        _taskManager.RemoveTasksInCase(id);
-                        break;
-                    case SendingType.ActivatingCase:
-#if DEBUG
-                        Console.WriteLine("ActivateCase: {0}", id);
-#endif
-                        _taskManager.AddTasksInCase(id);
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                _currentThread = _currentThread == null
+                    ? Task.Factory.StartNew(() => HandleMessage(label, id))
+                    : _currentThread.ContinueWith((antecedent) => HandleMessage(label, id));
             }
 
             _queue.BeginReceive();
+        }
+
+        private void HandleMessage(string label, int id)
+        {
+            var type = ConvertLabelIntoSendingType(label);
+
+            switch (type)
+            {
+                case SendingType.AddingTask:
+#if DEBUG
+                    Console.WriteLine("AddingTask: {0}", id);
+#endif
+
+                    _taskManager.AddTask(id);
+                    break;
+
+                case SendingType.UpdatingTask:
+#if DEBUG
+                    Console.WriteLine("UpdatingTask: {0}", id);
+#endif
+
+                    _taskManager.UpdateTask(id);
+                    break;
+
+                case SendingType.RemovingTask:
+#if DEBUG
+                    Console.WriteLine("RemovingTask: {0}{0}", id);
+#endif
+
+                    _taskManager.RemoveTask(id);
+                    break;
+
+                case SendingType.DeactivatingCase:
+#if DEBUG
+                    Console.WriteLine("DeactivateCase: {0}", id);
+#endif
+                    _taskManager.RemoveTasksInCase(id);
+                    break;
+
+                case SendingType.ActivatingCase:
+#if DEBUG
+                    Console.WriteLine("ActivateCase: {0}", id);
+#endif
+                    _taskManager.AddTasksInCase(id);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void TriggerReceivingMessage()
@@ -113,10 +126,10 @@ namespace FD.Lib.QueueManagement
             _queue.DeattachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
-        private SendingType ConvertLabelIntoSendingType(Message msg)
+        private SendingType ConvertLabelIntoSendingType(string label)
         {
             SendingType type;
-            var result = Enum.TryParse(msg.Label, true, out type);
+            var result = Enum.TryParse(label, true, out type);
 
             return result ? type : SendingType.None;
         }

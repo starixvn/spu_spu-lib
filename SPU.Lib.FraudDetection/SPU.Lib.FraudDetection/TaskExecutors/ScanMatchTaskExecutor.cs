@@ -13,6 +13,7 @@ namespace FD.Lib.TaskExecutors
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using BusinessManager.TaskExecutors;
     using Core.Utilities;
     using DTO;
     using NextActions;
@@ -59,27 +60,23 @@ namespace FD.Lib.TaskExecutors
         protected override void ExecuteRule()
         {
             FindSuspiciousCustomerOnAllMatches();
-
-            SaveSuspiciousCustomers();
         }
 
         protected override void TakeNextAction()
         {
-            if (_suspicionList.Count == 0)
+            if (_suspicionList.Count > 0)
             {
-                return;
+                foreach (var item in _nextActionDictionary)
+                {
+                    Console.WriteLine("<Key, Value> = <" + item.Key + ", " + item.Value + ">");
+                    var actionType = Utility.ParseEnum<NextActionType>(item.Key.ToString());
+                    var nextAction = NextActionFactory.GetNextAction(actionType, item.Value, Task.CaseId);
+                    nextAction.SuspicionList = _suspicionList;
+                    nextAction.TakeAction();
+                }
             }
 
-            var nextActionIdList = Task.NextActionIdList.Split(',');
-            var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
-
-            for (var i = 0; i < nextActionIdList.Count(); i++)
-            {
-                var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
-                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]), Task.CaseId);
-                nextAction.SuspicionList = _suspicionList;
-                nextAction.TakeAction();
-            }
+            SaveSuspiciousCustomers();
         }
 
         private void FindSuspiciousCustomerOnAllMatches()
@@ -124,10 +121,10 @@ namespace FD.Lib.TaskExecutors
         {
             var thread = System.Threading.Tasks.Task.Factory.StartNew(
                 (obj) =>
-            {
-                var id = (string)obj;
-                return FindSuspiciousCustomerOnEachMatch(id);
-            },
+                {
+                    var id = (string)obj;
+                    return FindSuspiciousCustomerOnEachMatch(id);
+                },
             _matchIdList[count]);
 
             _threads.Add(thread);

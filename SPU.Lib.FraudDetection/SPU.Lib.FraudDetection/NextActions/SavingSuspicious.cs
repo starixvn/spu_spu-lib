@@ -55,14 +55,12 @@ namespace FD.Lib.NextActions
 
         public void TakeAction()
         {
-            InsertScannedMatch();
-
-            if (_suspiciousInfoList.Count <= 0)
+            if (_suspiciousInfoList.Count > 0)
             {
-                return;
+                InsertSuspicious();
             }
 
-            InsertSuspicious();
+            InsertScannedMatch();
         }
 
         private void InsertScannedMatch()
@@ -82,7 +80,7 @@ namespace FD.Lib.NextActions
 
                 if (result.IsSuccessful == false)
                 {
-                    Logger.Log.Error("Error  UpdateScannedMatch : " + result.Message);
+                    Logger.Log.Error("Error UpdateScannedMatch: " + result.Message);
                 }
             }
         }
@@ -102,7 +100,7 @@ namespace FD.Lib.NextActions
 
                 if (result.IsSuccessful == false)
                 {
-                    Logger.Log.Error("Error  InsertSuspiciousInfo : " + result.Message);
+                    Logger.Log.Error("Error InsertSuspiciousInfo: " + result.Message);
                 }
             }
         }

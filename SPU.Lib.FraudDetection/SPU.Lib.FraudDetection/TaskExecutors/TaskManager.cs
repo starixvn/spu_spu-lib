@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2015.07.23">Created</change>
 // </history>
 
-namespace FD.Lib.TaskExecutors
+namespace FD.Lib.BusinessManager.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace FD.Lib.TaskExecutors
     using Criteria.Task;
     using DTO;
     using Fanex.Logging;
+    using Lib.TaskExecutors;
     using Service.Implement;
     using Service.Interface;
 
@@ -106,6 +107,7 @@ namespace FD.Lib.TaskExecutors
                 }
 
                 taskExecutor.Stop();
+
                 TaskExecutors.Remove(taskExecutor);
             }
             catch (Exception ex)
@@ -121,6 +123,7 @@ namespace FD.Lib.TaskExecutors
             foreach (var taskExecutor in taskExecutorsForCase)
             {
                 taskExecutor.Stop();
+
                 TaskExecutors.Remove(taskExecutor);
             }
         }

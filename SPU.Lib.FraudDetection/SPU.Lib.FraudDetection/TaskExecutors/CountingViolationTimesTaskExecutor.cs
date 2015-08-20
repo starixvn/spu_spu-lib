@@ -11,6 +11,7 @@ namespace FD.Lib.TaskExecutors
 {
     using System.Collections.Generic;
     using System.Linq;
+    using BusinessManager.TaskExecutors;
     using Core.Utilities;
     using Criteria.SuspiciousInfo;
     using DTO;
@@ -70,7 +71,7 @@ namespace FD.Lib.TaskExecutors
             }
 
             var suspiciousCustomerChunks = _suspiciousCustomers.Chunk(ChunkSize);
-            var suspicionList = new List<SuspiciousInfo>();
+            var suspciousList = new List<SuspiciousInfo>();
 
             foreach (var suspiciousCustomerChunk in suspiciousCustomerChunks)
             {
@@ -80,18 +81,14 @@ namespace FD.Lib.TaskExecutors
                     CaseId = Task.CaseId
                 };
 
-                suspicionList.AddRange(TaskService.GetSuspiciousCustomerHistory(criteria));
+                suspciousList.AddRange(TaskService.GetSuspiciousCustomerHistory(criteria));
             }
 
-            var nextActionIdList = Task.NextActionIdList.Split(',');
-            var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
-
-            for (var i = 0; i < nextActionIdList.Count(); i++)
+            foreach (var item in _nextActionDictionary)
             {
-                var actionType = Utility.ParseEnum<NextActionType>(nextActionIdList[i]);
-                var nextAction = NextActionFactory.GetNextAction(actionType, int.Parse(nextActionTargetIdList[i]), Task.CaseId);
-                nextAction.SuspicionList = suspicionList;
-
+                var actionType = Utility.ParseEnum<NextActionType>(item.Key.ToString());
+                var nextAction = NextActionFactory.GetNextAction(actionType, item.Value, Task.CaseId);
+                nextAction.SuspicionList = suspciousList;
                 nextAction.TakeAction();
             }
         }

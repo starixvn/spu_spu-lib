@@ -10,6 +10,7 @@
 namespace FD.Lib.TaskExecutors
 {
     using System.Collections.Generic;
+    using BusinessManager.TaskExecutors;
     using DTO;
 
     public interface ITaskManager

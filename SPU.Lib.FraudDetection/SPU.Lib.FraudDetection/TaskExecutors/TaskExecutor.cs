@@ -8,15 +8,14 @@
 //   <change who="Long.Luu" date="2015.04.01">Modified: TaskInfo</change>
 // </history>
 
-namespace FD.Lib.TaskExecutors
+namespace FD.Lib.BusinessManager.TaskExecutors
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Threading.Tasks;
     using System.Timers;
-    using DTO;
     using Fanex.Logging;
+    using Lib.TaskExecutors;
     using Service.Implement;
     using Service.Interface;
     using Task = DTO.Task;
@@ -28,6 +27,8 @@ namespace FD.Lib.TaskExecutors
     {
         protected const int ChunkSize = 60;
 
+        protected SortedDictionary<int, int> _nextActionDictionary;
+
         #region Constructor
 
         protected TaskExecutor(Task task)
@@ -35,12 +36,15 @@ namespace FD.Lib.TaskExecutors
             Task = task;
             TaskService = new TaskService();
             IsRunning = false;
+            GetNextActionDictionary();
         }
 
         protected TaskExecutor(Task task, ITaskService taskService)
         {
             Task = task;
             TaskService = taskService;
+            IsRunning = false;
+            GetNextActionDictionary();
         }
 
         #endregion Constructor
@@ -61,7 +65,7 @@ namespace FD.Lib.TaskExecutors
         private bool IsRunning { get; set; }
 
         private bool IsStop { get; set; }
-        
+
         #endregion Properties
 
         #region Execute task
@@ -99,11 +103,11 @@ namespace FD.Lib.TaskExecutors
                 return;
             }
 
-            #if DEBUG
-                Console.WriteLine("{0} - {1} - {2} is running", Task.CaseId, Task.TaskId, Task.TaskName);
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-            #endif
+#if DEBUG
+            Console.WriteLine("{0} - {1} - {2} is running", Task.CaseId, Task.TaskId, Task.TaskName);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+#endif
 
             IsRunning = true;
 
@@ -111,10 +115,10 @@ namespace FD.Lib.TaskExecutors
 
             IsRunning = false;
 
-            #if DEBUG
-                stopwatch.Stop();
-                Console.WriteLine("{0} - {1} - {2} spent {3} running", Task.CaseId, Task.TaskId, Task.TaskName, stopwatch.Elapsed.ToString());
-            #endif
+#if DEBUG
+            stopwatch.Stop();
+            Console.WriteLine("{0} - {1} - {2} spent {3} running", Task.CaseId, Task.TaskId, Task.TaskName, stopwatch.Elapsed.ToString());
+#endif
         }
 
         public virtual void Execute()
@@ -151,6 +155,37 @@ namespace FD.Lib.TaskExecutors
             Logger.Log.Error(message);
         }
 
-        #endregion Scan
+        private void GetNextActionDictionary()
+        {
+            var nextActionIdList = Task.NextActionIdList.Split(',');
+            var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
+            _nextActionDictionary = new SortedDictionary<int, int>(new KeyComparer());
+            var nextActionCount = nextActionIdList.GetLength(0);
+
+            for (var i = 0; i < nextActionCount; i++)
+            {
+                _nextActionDictionary.Add(int.Parse(nextActionIdList[i]), int.Parse(nextActionTargetIdList[i]));
+            }
+        }
+
+        #endregion Execute task
+    }
+
+    public class KeyComparer : IComparer<int>
+    {
+        public int Compare(int x, int y)
+        {
+            if (x < y)
+            {
+                return 1;
+            }
+
+            if (x == y)
+            {
+                return 0;
+            }
+
+            return -1;
+        }
     }
 }

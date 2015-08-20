@@ -16,7 +16,7 @@
 
             var task = taskService.GetTaskForExecuting(new TaskGetForExecutingCriteria
             {
-                TaskId = 44
+                TaskId = 1
             });
            
             // --- Arrange ---
