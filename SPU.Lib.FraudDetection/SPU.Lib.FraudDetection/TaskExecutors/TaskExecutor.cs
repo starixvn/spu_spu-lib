@@ -11,13 +11,14 @@
 namespace FD.Lib.BusinessManager.TaskExecutors
 {
     using System;
-    using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Timers;
     using Fanex.Logging;
     using Lib.TaskExecutors;
     using Service.Implement;
     using Service.Interface;
+    using Sunplus.UMControllerLibrary;
     using Task = DTO.Task;
 
     /// <summary>
@@ -125,13 +126,19 @@ namespace FD.Lib.BusinessManager.TaskExecutors
         {
             try
             {
-                ClearOldResult();
+                var maintenanceService = new UMBusiness();
+                var isUnderMaintenance = maintenanceService.isUnderMaintainence(Sites.AccountSite, ConfigurationManager.AppSettings["FDUrl"]);
 
-                ExecutePrecondition();
+                if (!isUnderMaintenance)
+                {
+                    ClearOldResult();
 
-                ExecuteRule();
+                    ExecutePrecondition();
 
-                TakeNextAction();
+                    ExecuteRule();
+
+                    TakeNextAction();
+                }
             }
             catch (Exception ex)
             {
