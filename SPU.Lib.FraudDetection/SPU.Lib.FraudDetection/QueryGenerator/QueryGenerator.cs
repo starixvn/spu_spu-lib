@@ -101,8 +101,9 @@ namespace FD.Lib.QueryGenerator
         /// <summary>
         /// Generate the WHERE statement. This should be done by descendants.
         /// </summary>
+        /// <param name="formula">Original Formula.</param>
         /// <returns>WHERE SQL string.</returns>
-        protected abstract string GenerateWhereSql();
+        protected abstract string GenerateWhereSql(string formula);
 
         #region Ultilites
 

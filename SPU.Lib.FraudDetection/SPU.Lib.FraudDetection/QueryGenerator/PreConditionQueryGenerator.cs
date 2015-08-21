@@ -51,15 +51,17 @@ namespace FD.Lib.QueryGenerator
                 queryPreconString,
                 GenerateSelectSql(),
                 GenerateFromSql(),
-                GenerateWhereSql());
+                GenerateWhereSql(OriginalFormula));
         }
 
         /// <summary>
         /// Generate the WHERE statement. This should be done by descendants.
         /// </summary>
+        /// <param name="formula">Original Formula.</param>
         /// <returns>WHERE SQL string.</returns>
-        protected override string GenerateWhereSql()
+        protected override string GenerateWhereSql(string formula)
         {
+            OriginalFormula = formula;
             var isSelectScanningState = PreConditionRawFormula.Contains("Match State");
             var sqlForNotScanned = Configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
             var configIds = RelevantConfigIds.Split('#');
