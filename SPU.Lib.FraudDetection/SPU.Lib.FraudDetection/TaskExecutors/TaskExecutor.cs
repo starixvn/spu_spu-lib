@@ -29,7 +29,9 @@ namespace FD.Lib.BusinessManager.TaskExecutors
     {
         protected const int ChunkSize = 60;
 
-        protected SortedDictionary<int, int> _nextActionDictionary;
+        protected SortedDictionary<int, int> NextActionDictionary;
+
+        protected UMBusiness MaintenanceService;
 
         #region Constructor
 
@@ -39,6 +41,7 @@ namespace FD.Lib.BusinessManager.TaskExecutors
             TaskService = new TaskService();
             IsRunning = false;
             GetNextActionDictionary();
+            MaintenanceService = new UMBusiness();
         }
 
         protected TaskExecutor(Task task, ITaskService taskService)
@@ -47,6 +50,7 @@ namespace FD.Lib.BusinessManager.TaskExecutors
             TaskService = taskService;
             IsRunning = false;
             GetNextActionDictionary();
+            MaintenanceService = new UMBusiness();
         }
 
         #endregion Constructor
@@ -127,8 +131,7 @@ namespace FD.Lib.BusinessManager.TaskExecutors
         {
             try
             {
-                var maintenanceService = new UMBusiness();
-                var isUnderMaintenance = maintenanceService.isUnderMaintainence(Sites.AccountSite, ConfigurationManager.AppSettings["FDUrl"]);
+                var isUnderMaintenance = MaintenanceService.isUnderMaintainence(Sites.AccountSite, ConfigurationManager.AppSettings["FDUrl"]);
 
                 if (!isUnderMaintenance)
                 {
@@ -167,12 +170,12 @@ namespace FD.Lib.BusinessManager.TaskExecutors
         {
             var nextActionIdList = Task.NextActionIdList.Split(',');
             var nextActionTargetIdList = Task.NextActionTargetIdList.Split(',');
-            _nextActionDictionary = new SortedDictionary<int, int>(new KeyComparer());
+            NextActionDictionary = new SortedDictionary<int, int>(new KeyComparer());
             var nextActionCount = nextActionIdList.GetLength(0);
 
             for (var i = 0; i < nextActionCount; i++)
             {
-                _nextActionDictionary.Add(int.Parse(nextActionIdList[i]), int.Parse(nextActionTargetIdList[i]));
+                NextActionDictionary.Add(int.Parse(nextActionIdList[i]), int.Parse(nextActionTargetIdList[i]));
             }
         }
 

@@ -66,7 +66,7 @@ namespace FD.Lib.TaskExecutors
         {
             if (_suspicionList.Count > 0)
             {
-                foreach (var item in _nextActionDictionary)
+                foreach (var item in NextActionDictionary)
                 {
                     Console.WriteLine("<Key, Value> = <" + item.Key + ", " + item.Value + ">");
                     var actionType = Utility.ParseEnum<NextActionType>(item.Key.ToString());

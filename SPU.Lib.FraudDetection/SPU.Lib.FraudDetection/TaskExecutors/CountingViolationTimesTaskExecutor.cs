@@ -84,7 +84,7 @@ namespace FD.Lib.TaskExecutors
                 suspciousList.AddRange(TaskService.GetSuspiciousCustomerHistory(criteria));
             }
 
-            foreach (var item in _nextActionDictionary)
+            foreach (var item in NextActionDictionary)
             {
                 var actionType = Utility.ParseEnum<NextActionType>(item.Key.ToString());
                 var nextAction = NextActionFactory.GetNextAction(actionType, item.Value, Task.CaseId);
