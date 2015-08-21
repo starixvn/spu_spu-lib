@@ -68,6 +68,12 @@ namespace FD.Lib.QueryGenerator
             return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
         }
 
+        /// <summary>
+        /// Manage Bet Count Case.
+        /// </summary>
+        /// <param name="formula">Original formula.</param>
+        /// <param name="queryRuleString">Query Rule String.</param>
+        /// <returns>Rule Configuration String.</returns>
         protected string ManageBetCountCase(string formula, string queryRuleString)
         {
             RelevantConfigIds = RelevantConfigIds.Replace("#17",string.Empty);
@@ -83,7 +89,7 @@ namespace FD.Lib.QueryGenerator
 
             return string.Format(
                 queryRuleString,
-                GenerateSelectSql(),
+                Configs.Single(l=>l.ConfigId == 17).ConfigSQLReturn,
                 tableBetCount,
                 ruleWhere);
         }
