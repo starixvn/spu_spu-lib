@@ -58,9 +58,8 @@ namespace FD.Lib.TaskExecutors
             {
                 var taskRule = Task.TaskRules + " AND susCust.CustId in ($param1$)";
                 ruleQuery = taskRule.Replace("$param1$", string.Join(",", _customerIdList));
+                _suspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
             }
-
-            _suspiciousCustomers = TaskService.GetSuspiciousCustomers(ruleQuery, Task.TaskId);
         }
 
         protected override void TakeNextAction()
