@@ -34,7 +34,7 @@ namespace FD.Lib.QueryGenerator
             const string queryRuleString = "select distinct {0} from {1} where {2}";
 
             return OriginalFormula.IndexOf("Bet Count On A Match", System.StringComparison.Ordinal) > 0
-                       ? ManageBetCountCase(OriginalFormula, queryRuleString)
+                       ? ManageBetCountCase(OriginalFormula)
                        : string.Format(
                            queryRuleString,
                            GenerateSelectSql(),
@@ -72,9 +72,8 @@ namespace FD.Lib.QueryGenerator
         /// Manage Bet Count Case.
         /// </summary>
         /// <param name="formula">Original formula.</param>
-        /// <param name="queryRuleString">Query Rule String.</param>
         /// <returns>Rule Configuration String.</returns>
-        protected string ManageBetCountCase(string formula, string queryRuleString)
+        protected string ManageBetCountCase(string formula)
         {
             RelevantConfigIds = RelevantConfigIds.Replace("#17",string.Empty);
             var tableBetCount = TablesForeignKey.Single(l => l.DBTable2 == "temptable.betcount").ForeignKey;
@@ -83,15 +82,12 @@ namespace FD.Lib.QueryGenerator
 
             var additionalFromForBetCount = GenerateFromSql();
             var additionalWhereForBetCount = GenerateWhereSql(ruleConfigAfterRemovedBetCount);
-            var ruleWhere = ruleConfig.Replace("Bet Count On A Match", "unt.ticketscounter");
+            var ruleWhere = ruleConfig.Replace("Bet Count On A Match", Configs.Single(l => l.ConfigName == "Bet Count On A Match").ConfigSQLField);
             tableBetCount = tableBetCount.Replace("$betcount_additionalfrom$", additionalFromForBetCount)
-                         .Replace("$betcount_additionalwhere$", " AND " + additionalWhereForBetCount);
+                        .Replace("$betcount_additionalwhere$", additionalWhereForBetCount)
+                        .Replace("$betcount_additionalcount$", ruleWhere);
 
-            return string.Format(
-                queryRuleString,
-                Configs.Single(l=>l.ConfigId == 17).ConfigSQLReturn,
-                tableBetCount,
-                ruleWhere);
+            return tableBetCount;
         }
 
         #region Utilities
