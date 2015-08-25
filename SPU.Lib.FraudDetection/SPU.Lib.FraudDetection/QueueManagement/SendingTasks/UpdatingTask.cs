@@ -18,7 +18,7 @@ namespace FD.Lib.QueueManagement.SendingTasks
             Type = SendingType.UpdatingTask;
         }
 
-        public UpdatingTask(IMessageQueue messageQueue)
+        public UpdatingTask(IMessageQueueSender messageQueue)
             : base(messageQueue)
         {
             Type = SendingType.UpdatingTask;

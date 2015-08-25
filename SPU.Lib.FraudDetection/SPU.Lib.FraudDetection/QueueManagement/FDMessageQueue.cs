@@ -17,11 +17,11 @@ namespace FD.Lib.QueueManagement
     /// <summary>
     ///     SPU Message Queue.
     /// </summary>
-    public class FDMessageQueue : IMessageQueue
+    public abstract class FDMessageQueue
     {
-        private readonly MessageQueue _messageQueue;
+        protected readonly MessageQueue _messageQueue;
 
-        public FDMessageQueue()
+        protected FDMessageQueue()
         {
             var queuePath = ConfigSettings.GetConfigStringByName("queuePath");
 
@@ -33,47 +33,6 @@ namespace FD.Lib.QueueManagement
             {
                 Logger.Log.Error("_messageQueue = MessageQueue.Exists(queuePath) .. : " + ex);
             }
-        }
-
-        public void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)
-        {
-            _messageQueue.ReceiveCompleted += receiveCompleted;
-        }
-
-        public void DeattachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted)
-        {
-            _messageQueue.ReceiveCompleted -= receiveCompleted;
-        }
-
-        public void Send(object task)
-        {
-            _messageQueue.Send(task);
-        }
-
-        public void Send(object task, string label)
-        {
-            _messageQueue.Send(task, label);
-        }
-
-        public void Stop()
-        {
-            _messageQueue.Purge();
-            _messageQueue.Close();
-        }
-
-        public void Clear()
-        {
-            _messageQueue.Purge();
-        }
-
-        public void BeginReceive()
-        {
-            _messageQueue.BeginReceive();
-        }
-
-        public Message EndReceive(IAsyncResult asyncResult)
-        {
-            return _messageQueue.EndReceive(asyncResult);
         }
     }
 }

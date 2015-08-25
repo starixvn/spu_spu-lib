@@ -23,18 +23,18 @@ namespace FD.Lib.QueueManagement
     /// </summary>
     public class ReceivingMessageHandler : IReceivingMessageHandler
     {
-        private readonly IMessageQueue _queue;
+        private readonly IMessageQueueReceiver _queue;
         private readonly ITaskManager _taskManager;
         private Task _currentThread;
 
         public ReceivingMessageHandler()
         {
             _taskManager = new TaskManager();
-            _queue = new FDMessageQueue();
+            _queue = new MessageQueueReceiver();
             _queue.AttachReceiveCompletedEventHandler(HandleReceivedMessage);
         }
 
-        public ReceivingMessageHandler(ITaskManager taskManager, IMessageQueue queue)
+        public ReceivingMessageHandler(ITaskManager taskManager, IMessageQueueReceiver queue)
         {
             _taskManager = taskManager;
             _queue = queue;

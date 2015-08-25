@@ -21,7 +21,7 @@ namespace FD.Lib.QueueManagement.SendingTasks
             Type = SendingType.RemovingTask;
         }
 
-        public RemovingTask(IMessageQueue messageQueue)
+        public RemovingTask(IMessageQueueSender messageQueue)
             : base(messageQueue)
         {
             Type = SendingType.RemovingTask;

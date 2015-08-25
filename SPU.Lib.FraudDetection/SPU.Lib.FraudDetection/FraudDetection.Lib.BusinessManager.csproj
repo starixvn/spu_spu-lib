@@ -120,6 +120,7 @@
     <Compile Include="QueryGenerator\RuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\PreConditionQueryGenerator.cs" />
     <Compile Include="QueryGenerator\QueryGenerator.cs" />
+    <Compile Include="QueueManagement\IMessageQueueReceiver.cs" />
     <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />
     <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />

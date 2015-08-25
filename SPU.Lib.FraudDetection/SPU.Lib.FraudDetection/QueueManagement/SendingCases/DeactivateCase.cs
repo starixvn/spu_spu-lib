@@ -19,7 +19,7 @@ namespace FD.Lib.QueueManagement.SendingWorklows
             Type = SendingType.DeactivatingCase;
         }
 
-        protected DeactivatingCase(IMessageQueue messageQueue)
+        protected DeactivatingCase(IMessageQueueSender messageQueue)
             : base(messageQueue)
         {
             Type = SendingType.DeactivatingCase;

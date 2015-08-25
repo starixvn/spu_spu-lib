@@ -11,14 +11,14 @@ namespace FD.Lib.QueueManagement.SendingTasks
 {
     public abstract class SendingMessage : ISendingMessage
     {
-        private IMessageQueue _messageQueue;
+        private IMessageQueueSender _messageQueue;
 
         protected SendingMessage()
         {
-            _messageQueue = new FDMessageQueue();
+            _messageQueue = new MessageQueueSender();
         }
 
-        protected SendingMessage(IMessageQueue messageQueue)
+        protected SendingMessage(IMessageQueueSender messageQueue)
         {
             _messageQueue = messageQueue;
         }

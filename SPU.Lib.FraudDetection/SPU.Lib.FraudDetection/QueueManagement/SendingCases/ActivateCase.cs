@@ -18,7 +18,7 @@ namespace FD.Lib.QueueManagement.SendingTasks
             Type = SendingType.ActivatingCase;
         }
 
-        protected ActivatingCase(IMessageQueue messageQueue)
+        protected ActivatingCase(IMessageQueueSender messageQueue)
             : base(messageQueue)
         {
             Type = SendingType.DeactivatingCase;

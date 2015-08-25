@@ -10,13 +10,13 @@
     [TestFixture]
     public class AddingTaskTest
     {
-        private Mock<IMessageQueue> _mockQueue;
+        private Mock<IMessageQueueSender> _mockQueue;
         private ISendingMessage _sut;
 
         [SetUp]
         public void Setup()
         {
-            _mockQueue = new Mock<IMessageQueue>();
+            _mockQueue = new Mock<IMessageQueueSender>();
             _sut = new AddingTask(_mockQueue.Object);
         }
 

@@ -15,7 +15,7 @@
 
     public class TaskLoaderTest
     {
-        private Mock<IMessageQueue> _mockQueue;
+        private Mock<IMessageQueueSender> _mockQueue;
         private Mock<ITaskService> _mockTaskService;
         private ITaskLoader _sut;
 
@@ -24,7 +24,7 @@
         {
             DbSettingProviderManager.Current.Start();
             _mockTaskService = new Mock<ITaskService>();
-            _mockQueue = new Mock<IMessageQueue>();
+            _mockQueue = new Mock<IMessageQueueSender>();
             _sut = new TaskLoader(_mockTaskService.Object, _mockQueue.Object);
         }
 
@@ -126,7 +126,7 @@
             //--- Arrange ---
             var sut = new TaskLoader();
 
-            var queue = new FDMessageQueue();
+            var queue = new MessageQueueSender();
             queue.Clear();
 
             //--- Act ---

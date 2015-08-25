@@ -8,7 +8,7 @@
     [TestFixture]
     public class ReceivingMessageHandlerTest
     {
-        private Mock<IMessageQueue> _mockQueue;
+        private Mock<IMessageQueueReceiver> _mockQueue;
         private Mock<ITaskManager> _mockTaskManager;
         private IReceivingMessageHandler _sut;
 
@@ -16,7 +16,7 @@
         public void SetUp()
         {
             // --- Arrange ---
-            _mockQueue = new Mock<IMessageQueue>();
+            _mockQueue = new Mock<IMessageQueueReceiver>();
             _mockTaskManager = new Mock<ITaskManager>();
             _sut = new ReceivingMessageHandler(_mockTaskManager.Object, _mockQueue.Object);
         }

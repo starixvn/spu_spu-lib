@@ -9,28 +9,30 @@
 
 namespace FD.Lib.QueueManagement
 {
-    using System;
-    using System.Messaging;
-
-    /// <summary>
-    ///     Message Queue interface.
-    /// </summary>
-    public interface IMessageQueue
+    public interface IMessageQueueSender
     {
-        void AttachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted);
-
-        void DeattachReceiveCompletedEventHandler(ReceiveCompletedEventHandler receiveCompleted);
+        void Clear();
 
         void Send(object task);
 
         void Send(object task, string label);
+    }
 
-        void Stop();
+    public class MessageQueueSender : FDMessageQueue, IMessageQueueSender
+    {
+        public void Clear()
+        {
+            _messageQueue.Purge();
+        }
 
-        void Clear();
+        public void Send(object task)
+        {
+            _messageQueue.Send(task);
+        }
 
-        void BeginReceive();
-
-        Message EndReceive(IAsyncResult asyncResult);
+        public void Send(object task, string label)
+        {
+            _messageQueue.Send(task, label);
+        }
     }
 }
