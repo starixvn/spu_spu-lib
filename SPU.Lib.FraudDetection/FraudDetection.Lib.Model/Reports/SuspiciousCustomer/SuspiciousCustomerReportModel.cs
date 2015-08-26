@@ -24,9 +24,11 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
             WinLoss = new List<decimal?>();
         }
 
+        public int Row { get; set; }
+
         public Customer Customer { get; set; }
 
-        public DTO.Group Group { get; set; }
+        public Group Group { get; set; }
 
         public int SuspiciousTime { get; set; }
 

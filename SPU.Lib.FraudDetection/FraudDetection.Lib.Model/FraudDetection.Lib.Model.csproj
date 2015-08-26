@@ -81,8 +81,8 @@
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailItem.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailReportModel.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailSummary.cs" />
+    <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportListModel.cs" />
     <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportModel.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerTimeModel.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousStatisticViewModel.cs" />

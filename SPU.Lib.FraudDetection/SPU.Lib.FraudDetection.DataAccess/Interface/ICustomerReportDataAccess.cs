@@ -17,6 +17,6 @@ namespace FD.Lib.DataAccess.Interface
     /// </summary>
     public interface ICustomerReportDataAccess
     {
-        IEnumerable<SuspiciousCustomerReportModel> GetSuspiciousCustomersByGroup(ICriteria criteria);
+        SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(ICriteria criteria);
     }
 }

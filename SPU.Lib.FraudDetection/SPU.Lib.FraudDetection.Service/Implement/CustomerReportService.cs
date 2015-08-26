@@ -37,29 +37,13 @@ namespace FD.Lib.Service.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The list of Suspicious Customers.</returns>
-        public IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
+        public SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
         {
-            var suspiciousCustomers = GetSuspiciousCustomersByGroup(criteria.GroupId);
-            var customers = GetCustomers(GetSuspiciousCustomerIds(suspiciousCustomers));
-            var filteredCustomers = FilterCustomersByName(criteria.CustName, customers);
-            var filteredSuspiciousCustomers = GetFilteredSuspiciousCustomers(suspiciousCustomers, filteredCustomers);
-            var suspiciousCustomerTime = GetSuspiciousTime(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
+            var suspiciousCustomers = _reportDataAccess.GetAllSuspiciousCustomers(criteria);
+            var marginCustomers = GetSuspiciousCustomerMargins(GetSuspiciousCustomerIds(suspiciousCustomers.SuspiciousCustomers));
+            suspiciousCustomers.SuspiciousCustomers = BindMarginData(suspiciousCustomers.SuspiciousCustomers, marginCustomers);
 
-            foreach (var filteredCuspiciousCustomer in filteredSuspiciousCustomers)
-            {
-                foreach (var suspiciousCustomer in suspiciousCustomerTime)
-                {
-                    if (suspiciousCustomer.CustId == filteredCuspiciousCustomer.Customer.CustId)
-                    {
-                        filteredCuspiciousCustomer.SuspiciousTime = suspiciousCustomer.SuspiciousTime;
-                    }
-                }
-            }
-
-            var marginCustomers = GetSuspiciousCustomerMargins(GetSuspiciousCustomerIds(filteredSuspiciousCustomers));
-            var result = BindMarginData(filteredSuspiciousCustomers, marginCustomers);
-
-            return result;
+            return suspiciousCustomers;
         }
 
         /// <summary>
@@ -124,32 +108,6 @@ namespace FD.Lib.Service.Implement
             return null;
         }
 
-        private IEnumerable<Customer> FilterCustomersByName(string custName, IEnumerable<Customer> customers)
-        {
-            return from c in customers where c.CustName.ToLower().Contains(custName.ToLower()) select c;
-        }
-
-        /// <summary>
-        /// Get suspicious time.
-        /// </summary>
-        /// <param name="listCustIds">List customer ID.</param>
-        /// <returns>The list suspicious time.</returns>
-        private IEnumerable<SuspiciousCustomerTimeModel> GetSuspiciousTime(string listCustIds)
-        {
-            var result = new List<SuspiciousCustomerTimeModel>().AsEnumerable();
-            foreach (var customerIds in Split(listCustIds, 60))
-            {
-                var criteria = new SuspiciousCustomerTimeGetAllCriteria()
-                {
-                    ListCustIds = customerIds
-                };
-
-                result = result.Concat(GetData<SuspiciousCustomerTimeModel>(criteria));
-            }
-
-            return result;
-        }
-
         /// <summary>
         /// Get margin and win loss.
         /// </summary>
@@ -161,73 +119,12 @@ namespace FD.Lib.Service.Implement
 
             foreach (var customerIds in Split(listCustIds, 60))
             {
-                var marginCriteria = new CustomerWinlostSelectCriteria()
+                var marginCriteria = new CustomerWinlostSelectCriteria
                 {
                     ListCustIDs = customerIds
                 };
 
                 result = result.Concat(_customerService.GetMarginCustomerByCustId(marginCriteria));
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Get filtered customers.
-        /// </summary>
-        /// <param name="suspiciousCustomers">The input suspicious customers.</param>
-        /// <param name="customers">The input customers.</param>
-        /// <returns>List filtered customers.</returns>
-        private IEnumerable<SuspiciousCustomerReportModel> GetFilteredSuspiciousCustomers(
-            IEnumerable<SuspiciousCustomerReportModel> suspiciousCustomers,
-            IEnumerable<Customer> customers)
-        {
-            var result = new List<SuspiciousCustomerReportModel>();
-            foreach (var suspiciousCustomer in suspiciousCustomers)
-            {
-                foreach (var customer in customers)
-                {
-                    if (suspiciousCustomer.Customer.CustId == customer.CustId)
-                    {
-                        suspiciousCustomer.Customer.CustName = customer.CustName;
-
-                        result.Add(suspiciousCustomer);
-
-                        break;
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        private IEnumerable<SuspiciousCustomerReportModel> GetSuspiciousCustomersByGroup(int groupId)
-        {
-            var suspiciousCustomerGetByGroupCriteria = new SuspiciousCustomerGetByGroupCriteria
-            {
-                GroupId = groupId
-            };
-
-            return _reportDataAccess.GetSuspiciousCustomersByGroup(suspiciousCustomerGetByGroupCriteria);
-        }
-
-        /// <summary>
-        /// Get customers from BODB02.
-        /// </summary>
-        /// <param name="listCustIds">The list of ID.</param>
-        /// <returns>List customers.</returns>
-        private IEnumerable<Customer> GetCustomers(string listCustIds)
-        {
-            var result = new List<Customer>().AsEnumerable();
-
-            foreach (var customerIds in Split(listCustIds, 60))
-            {
-                var customerSelectCritiria = new CustomerSelectCriteria
-                {
-                    ListCustIds = customerIds
-                };
-
-                result = result.Concat(_customerService.GetUsernameByCustId(customerSelectCritiria));
             }
 
             return result;

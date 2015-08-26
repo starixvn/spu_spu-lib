@@ -107,7 +107,6 @@ namespace FD.Lib.QueryGenerator
             return subString1.Substring(0, startIndexSubStr1) + (startIndexSubStr2 > -1 ? subString2.Substring(startIndexSubStr2, subString2.Length - startIndexSubStr2) : string.Empty);
         }
 
-
         #endregion
     }
 }

@@ -26,7 +26,7 @@ namespace FD.Lib.DataAccess.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List off suspicious customers.</returns>
-        public IEnumerable<SuspiciousCustomerReportModel> GetSuspiciousCustomersByGroup(ICriteria criteria)
+        public SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(ICriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -41,7 +41,15 @@ namespace FD.Lib.DataAccess.Implement
                     "CustId,GroupId",
                     criteria.GetSpParams());
 
-                return suspiciousCustomers;
+                var totalItem = (int)db.GetOuputParams()["rowcount"];
+
+                var result = new SuspiciousCustomerReportListModel
+                {
+                    SuspiciousCustomers = suspiciousCustomers,
+                    TotalItem = totalItem
+                };
+
+                return result;
             }
         }
     }

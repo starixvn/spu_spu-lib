@@ -1,10 +1,11 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SuspiciousCustomerGetByGroupCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuspiciousCustomerReportGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Aaron.Cao" date="2015.06.24">Created</change>
+//   <change who="Aaron.Cao" date="2015.08.25">Modified</change>
 // </history>
 
 namespace FD.Lib.Criteria.Reports
@@ -12,11 +13,21 @@ namespace FD.Lib.Criteria.Reports
     using Fanex.Data.Repository;
 
     /// <summary>
-    /// SuspiciousCustomerGetByGroupCriteria Class.
+    /// SuspiciousCustomerReportGetAllCriteria Class.
     /// </summary>
-    public class SuspiciousCustomerGetByGroupCriteria : CriteriaBase
+    public class SuspiciousCustomerReportGetAllCriteria : CriteriaBase
     {
+        public string CustName { get; set; }
+
         public int GroupId { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageIndex { get; set; }
+
+        public int PageCount { get; set; }
+
+        public int RowCount { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
@@ -24,7 +35,7 @@ namespace FD.Lib.Criteria.Reports
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "FD_SuspiciousCustomerGetByGroup";
+            return "FD_SuspiciousCustomerReportGetAll";
         }
 
         /// <summary>

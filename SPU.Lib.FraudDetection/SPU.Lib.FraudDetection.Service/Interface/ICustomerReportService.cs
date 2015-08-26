@@ -9,12 +9,11 @@
 
 namespace FD.Lib.Service.Interface
 {
-    using System.Collections.Generic;
     using Criteria.Reports;
     using Model.Reports.SuspiciousCustomer;
 
     public interface ICustomerReportService
     {
-        IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria);
+        SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria);
     }
 }
