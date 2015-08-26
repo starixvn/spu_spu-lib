@@ -18,7 +18,6 @@ namespace FD.Lib.DataAccess
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
-    using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
     /// <summary>
     ///     Base Data Access.

@@ -77,6 +77,18 @@ namespace FD.Lib.Service
         }
 
         /// <summary>
+        ///     Execute Non Query.
+        /// </summary>
+        /// <param name="criteria">Criteria input.</param>
+        /// <returns>Command result.</returns>
+        public ICommandResult ExecuteNonQuery(ICriteria criteria)
+        {
+            var baseDataAccess = new BaseDataAccess();
+
+            return baseDataAccess.ExecuteNonQuery(criteria);
+        }
+
+        /// <summary>
         ///     Execute Reader Query Inline.
         /// </summary>
         /// <param name="sqlQueryString">Query string.</param>

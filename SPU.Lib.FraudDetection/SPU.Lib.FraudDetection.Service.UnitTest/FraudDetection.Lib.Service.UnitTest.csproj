@@ -113,6 +113,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="SuspiciousCustomerServiceIntegrationTest.cs" />
+    <Compile Include="TaskServiceIntegrationTest.cs" />
     <Compile Include="MatchMonitoringReportServiceIntegrationTest.cs" />
     <Compile Include="FraudCaseDetailReportServiceIntegrationTest.cs" />
     <Compile Include="CustomerGroupServiceIntegrationTest.cs" />

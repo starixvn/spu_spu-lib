@@ -155,23 +155,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MailMasterRenders\MailMasterRenderTest.cs" />
-    <Compile Include="MailSenders\AutoMailSenderTest.cs" />
-    <Compile Include="Mock Objects\FakeMailClient.cs" />
-    <Compile Include="SendingMessage\ReceivingMessageHandlerTest.cs" />
     <Compile Include="SendingMessage\DeactivateCaseTest.cs" />
     <Compile Include="SendingMessage\RemovingTaskTest.cs" />
-    <Compile Include="ReportTemplateRenders\FakeSuspiciousStatisticReporRenderAbstractFactory.cs" />
-    <Compile Include="ReportTemplateRenders\SuspiciousStatisticReportRenderTest.cs" />
-    <Compile Include="ReportTemplateRenders\TableRenders\MarginTableRenderTest.cs" />
-    <Compile Include="ReportTemplateRenders\TableRenders\SuspiciousStatisticsTableRenderTest.cs" />
-    <Compile Include="TaskExecutors\CountingViolationTimesTaskExecutorIntegrationTest.cs" />
-    <Compile Include="SuspiciousStatistic\CustomerServiceTest.cs" />
-    <Compile Include="TaskExecutors\ScanMatchTaskExecutorTest.cs" />
-    <Compile Include="SendingMessage\TaskManagerTest.cs" />
     <Compile Include="SendingMessage\UpdatingTaskTest.cs" />
     <Compile Include="SendingMessage\AddingTaskTest.cs" />
-    <Compile Include="TaskLoader\TaskLoaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -195,12 +182,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="ReportTemplateRenders\TableTemplates\MarginReport.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ReportTemplateRenders\TableTemplates\SuspiciousStatisticsReport.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
@@ -238,9 +219,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dependencies\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

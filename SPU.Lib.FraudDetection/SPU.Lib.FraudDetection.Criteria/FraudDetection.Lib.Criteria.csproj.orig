@@ -76,6 +76,7 @@
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
+    <Compile Include="Common\LeagueGetAllByDateFromDBArchiveCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
     <Compile Include="Config\ConfigGetAllCriteria.cs" />
@@ -95,16 +96,19 @@
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />
+    <Compile Include="Reports\MatchMonitoringReportGetAllDBArchiveCriteria.cs" />
     <Compile Include="Reports\FraudCaseDetailReportCriteria.cs" />
-<<<<<<< HEAD
     <Compile Include="Reports\MatchMonitoringReportGetAllCriteria.cs" />
-=======
     <Compile Include="Reports\FraudCaseDetailSummaryGetByMatchIdCriteria.cs" />
->>>>>>> #39203 - Change the process of getting suspicious tickets on the match.
+<<<<<<< HEAD
+=======
     <Compile Include="Reports\SuspiciousCustomerTimeGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerGetByGroupCriteria.cs" />
+    <Compile Include="SuspiciousInfo\NewSuspiciousCustomersGetCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
+>>>>>>> #42443 - Move running tasks business  into  windows service.
     <Compile Include="Reports\SuspiciousCustomerReportGetAllCriteria.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerWinlostSelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\BalanceUpDaySelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\MatchSelectCriteria.cs" />

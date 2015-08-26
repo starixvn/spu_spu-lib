@@ -25,7 +25,7 @@ namespace FD.Lib.Service.Implement
 
         public IMoveBetsBalanceUpService BalanceUpDayService { get; set; }
 
-        public IList<Customer> GetUsernameByCustId(ICriteria criteria)
+        public IList<Customer> GetCustormersByCustIds(CustomerSelectCriteria criteria)
         {
             return GetData<Customer>(criteria).ToList();
         }

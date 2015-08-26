@@ -103,7 +103,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var customerChunk in customerChunks)
             {
-                customers.AddRange(CustomerService.GetUsernameByCustId(new CustomerSelectCriteria
+                customers.AddRange(CustomerService.GetCustormersByCustIds(new CustomerSelectCriteria
                 {
                     ListCustIds = string.Join(",", customerChunk)
                 }));

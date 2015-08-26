@@ -1,7 +1,6 @@
 ﻿namespace FD.Lib.BusinessManager.UnitTest
 {
     using System;
-    using BusinessManager.TaskExecutors;
     using Moq;
     using NUnit.Framework;
     using QueueManagement;
@@ -31,7 +30,7 @@
                     It.IsAny<object>(),
                     It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                     Times.Exactly(1));
-                Assert.IsTrue(result);
+            Assert.IsTrue(result);
         }
 
         [Test]
@@ -43,10 +42,10 @@
             //--- Assert ---
             _mockQueue.Verify(
                 x => x.Send(
-                    It.IsAny<TaskExecutor>(),
+                    It.IsAny<object>(),
                     It.Is<string>(t => t.Equals(_sut.Type.ToString(), StringComparison.OrdinalIgnoreCase))),
                     Times.Exactly(0));
-                Assert.IsFalse(result);
+            Assert.IsFalse(result);
         }
     }
 }

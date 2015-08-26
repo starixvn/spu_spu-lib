@@ -16,7 +16,7 @@ namespace FD.Lib.Service.Interface
 
     public interface ICustomerService
     {
-        IList<Customer> GetUsernameByCustId(ICriteria criteria);
+        IList<Customer> GetCustormersByCustIds(CustomerSelectCriteria criteria);
 
         IList<RawMarginCustomer> GetMarginCustomerByCustId(CustomerWinlostSelectCriteria criteria);
     }
