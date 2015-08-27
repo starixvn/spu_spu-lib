@@ -123,6 +123,7 @@
     <Compile Include="SuspiciousInfo\SuspiciousCustomerInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerSelectCriteria.cs" />
+    <Compile Include="SuspiciousStatistic\SuspiciousCustomerGetByIdCriteria.cs" />
     <Compile Include="Task\TaskInfoCriteria.cs" />
     <Compile Include="Task\TaskGetAllByCaseIdCriteria.cs" />
     <Compile Include="Task\TaskGetForExecutingCriteria.cs" />

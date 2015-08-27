@@ -21,16 +21,19 @@ namespace FD.Lib.Service.Implement
 
     public class SuspiciousStatisticsReportService : IReportService
     {
-        private const int ChunkSize = 60;
+        private const int ChunkSize = 50;
 
         public SuspiciousStatisticsReportService()
         {
-            CustomerService = new CustomerService();
+            SuspiciousCustomerService = new SuspiciousCustomerService();
             MatchService = new MatchService();
             CaseService = new CaseService();
+            CustomerService = new CustomerService();
         }
 
         public ICustomerService CustomerService { get; set; }
+
+        public ISuspiciousCustomerService SuspiciousCustomerService { get; set; }
 
         public IMatchService MatchService { get; set; }
 
@@ -51,7 +54,7 @@ namespace FD.Lib.Service.Implement
         private SuspiciousStatisticViewModel BuildSuspiciousStatisticViewModel(
             IList<SuspiciousInfo> list,
             IList<MatchDetail> matches,
-            IList<Customer> customers, 
+            IList<Customer> customers,
             IList<MarginCustormer> margins)
         {
             if (customers.Count == 0 || matches.Count == 0)
@@ -103,9 +106,9 @@ namespace FD.Lib.Service.Implement
 
             foreach (var customerChunk in customerChunks)
             {
-                customers.AddRange(CustomerService.GetCustormersByCustIds(new CustomerSelectCriteria
+                customers.AddRange(SuspiciousCustomerService.GetSuspiciousCustomerById(new SuspiciousCustomerGetByIdCriteria
                 {
-                    ListCustIds = string.Join(",", customerChunk)
+                    CustIdList = string.Join(",", customerChunk)
                 }));
             }
 
