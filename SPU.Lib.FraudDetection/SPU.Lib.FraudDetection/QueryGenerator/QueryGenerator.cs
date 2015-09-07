@@ -115,9 +115,11 @@ namespace FD.Lib.QueryGenerator
         {
             var relevantTables = string.Empty;
             var configsList = RelevantConfigIds.Split('#');
+
             foreach (var config in configsList)
             {
                 var currentRelevantTables = Configs.Single(l => l.ConfigId == int.Parse(config)).ConfigSQLTable.Split(',');
+
                 foreach (var currentTable in currentRelevantTables)
                 {
                     if (!relevantTables.Contains(currentTable))

@@ -112,11 +112,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QueryGenerator\EventType.cs" />
+    <Compile Include="QueryGenerator\GeneratorAbstractFactory.cs" />
     <Compile Include="QueryGenerator\QueryGeneratorType.cs" />
     <Compile Include="QueryGenerator\QueryGeneratorFactory.cs" />
+    <Compile Include="QueryGenerator\GroupBettingRuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\RuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\PreConditionQueryGenerator.cs" />
     <Compile Include="QueryGenerator\QueryGenerator.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorFactory.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGrouping.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingCusomter.cs" />
     <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />
     <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />
