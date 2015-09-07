@@ -10,7 +10,6 @@
 namespace FD.Lib.Model.Reports.SuspiciousCustomer
 {
     using System.Collections.Generic;
-    using DTO;
 
     /// <summary>
     /// The class SuspiciousCustomerReportListModel.

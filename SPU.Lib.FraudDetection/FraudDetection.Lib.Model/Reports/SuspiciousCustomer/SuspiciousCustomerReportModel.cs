@@ -9,7 +9,6 @@
 
 namespace FD.Lib.Model.Reports.SuspiciousCustomer
 {
-    using System.Collections.Generic;
     using DTO;
 
     /// <summary>
@@ -17,13 +16,6 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
     /// </summary>
     public class SuspiciousCustomerReportModel
     {
-        public SuspiciousCustomerReportModel()
-        {
-            Margins = new List<decimal?>();
-
-            WinLoss = new List<decimal?>();
-        }
-
         public int Row { get; set; }
 
         public Customer Customer { get; set; }
@@ -31,9 +23,5 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
         public Group Group { get; set; }
 
         public int SuspiciousTime { get; set; }
-
-        public IList<decimal?> Margins { get; set; }
-
-        public IList<decimal?> WinLoss { get; set; }
     }
 }
