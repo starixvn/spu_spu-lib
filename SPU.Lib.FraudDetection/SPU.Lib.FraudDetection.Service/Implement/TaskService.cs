@@ -166,6 +166,52 @@ namespace FD.Lib.Service.Implement
             return suspiciousInfoList;
         }
 
+        /// <summary>
+        ///     Execute Rule.
+        /// </summary>
+        /// <param name="sqlQueryString">SQL Query String.</param>
+        /// <param name="taskId">Parameter Task ID.</param>
+        /// <param name="caseId">Parameter Case ID.</param>
+        /// <returns>List of Suspicious Info.</returns>
+        public List<SuspiciousGroupInfo> ExecuteRuleForGrouping(string sqlQueryString, int taskId, int caseId)
+        {
+            var suspiciousInfoList = new List<SuspiciousGroupInfo>();
+
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            var customerList = new List<dynamic>();
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                customerList.Add(new
+                {
+                    CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                    MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
+                    TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
+                    GroupingOption = dt.Rows[i]["groupby"].ToString()
+                });
+            }
+
+            var groups = customerList.GroupBy(t => new { t.MatchId, t.GroupingOption, t.CustId });
+
+            foreach (var group in groups)
+            {
+                var suspiciousGroup = new SuspiciousGroupInfo
+                {
+                    MatchId = group.Key.MatchId,
+                    GroupingOption = group.Key.GroupingOption,
+                    CustId = group.Key.CustId,
+                    TransId = string.Join(",", group.Select(t => t.TransId)),
+                    CaseId = caseId,
+                    TaskId = taskId
+                };
+
+                suspiciousInfoList.Add(suspiciousGroup);
+            }
+
+            return suspiciousInfoList;
+        }
+
         public IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int taskId)
         {
             var suspiciousCustomers = new List<SuspiciousCustomer>();

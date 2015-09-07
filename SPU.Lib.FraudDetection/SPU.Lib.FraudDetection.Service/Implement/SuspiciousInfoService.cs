@@ -9,6 +9,7 @@
 
 namespace FD.Lib.Service.Implement
 {
+    using Criteria.SuspiciousInfo;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using Fanex.Data.Repository;
@@ -27,7 +28,7 @@ namespace FD.Lib.Service.Implement
             _suspiciousDataAccess = new SuspiciousInfoDataAccess();
         }
 
-        public ICommandResult InsertSuspiciousInfo(ICriteria criteria)
+        public ICommandResult InsertSuspiciousInfo(SuspiciousInfoInsertCriteria criteria)
         {
             return _suspiciousDataAccess.InsertSuspiciousInfo(criteria);
         }

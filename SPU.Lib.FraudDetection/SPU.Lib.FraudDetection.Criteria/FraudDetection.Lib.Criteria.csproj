@@ -102,6 +102,7 @@
     <Compile Include="Reports\FraudCaseDetailSummaryGetByMatchIdCriteria.cs" />
     <Compile Include="SuspiciousInfo\NewSuspiciousCustomersGetCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerReportGetAllCriteria.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousGroupInfoInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerWinlostSelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\BalanceUpDaySelectCriteria.cs" />

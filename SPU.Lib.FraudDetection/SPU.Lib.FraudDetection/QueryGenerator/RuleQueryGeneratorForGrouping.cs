@@ -1,6 +1,8 @@
 namespace FD.Lib.QueryGenerator
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using Criteria.Task;
     using DTO;
@@ -11,11 +13,54 @@ namespace FD.Lib.QueryGenerator
 
         protected string RuleConfig;
 
+        protected string ForeignKeyName;
+
         public string GroupingConfigName { get; set; }
+
+        protected IDictionary<string, string> additionalParams;
 
         protected RuleQueryGeneratorForGrouping(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
+            additionalParams = new Dictionary<string, string>();
+        }
+
+        public override string GenerateQuery()
+        {
+            GroupingConfig = Configs.Single(l => l.ConfigName == GroupingConfigName);
+            RemoveGroupingConfigId();
+
+            var rawSql = TablesForeignKey.Single(l => l.DBTable2 == ForeignKeyName).ForeignKey;
+            var ruleConfigWithoutGroupingConfig = RemoveGroupingConfig();
+
+            CreateAdditionalParams(ruleConfigWithoutGroupingConfig);
+
+            var sql = ReplaceAdditionalParams(rawSql);
+
+            sql = sql.Replace(Environment.NewLine, " ");
+
+            return sql;
+        }
+
+        protected virtual void CreateAdditionalParams(string ruleConfigWithoutGroupingConfig)
+        {
+            var additionalFrom = GenerateFromSql();
+            additionalParams.Add("additionalFrom", additionalFrom);
+
+            var additionalWhere = GenerateWhereSql(ruleConfigWithoutGroupingConfig);
+            additionalParams.Add("additionalWhere", additionalWhere);
+
+            var additionalHaving = RuleConfig.Replace(GroupingConfigName, GroupingConfig.ConfigSQLField);
+            additionalParams.Add("additionalHaving", additionalHaving);
+        }
+
+        protected virtual string ReplaceAdditionalParams(string sql)
+        {
+            sql = sql.Replace("$additionalfrom$", additionalParams["additionalFrom"])
+                .Replace("$additionalwhere$", additionalParams["additionalWhere"])
+                .Replace("$additionalhaving$", additionalParams["additionalHaving"]);
+
+            return sql;
         }
 
         protected void RemoveGroupingConfigId()

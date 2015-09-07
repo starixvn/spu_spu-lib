@@ -15,7 +15,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
 
             if (originalFormula.IndexOf(GroupByCustomer, System.StringComparison.Ordinal) >= 0)
             {
-                return new RuleQueryGeneratorForGroupingCusomter(fraudCaseId, criteria)
+                return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)
                 {
                     GroupingConfigName = GroupByCustomer
                 };

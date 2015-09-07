@@ -76,5 +76,7 @@ namespace FD.Lib.Service.Interface
         IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int caseId);
 
         IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria);
+
+        List<SuspiciousGroupInfo> ExecuteRuleForGrouping(string sqlQueryString, int taskId, int caseId);
     }
 }

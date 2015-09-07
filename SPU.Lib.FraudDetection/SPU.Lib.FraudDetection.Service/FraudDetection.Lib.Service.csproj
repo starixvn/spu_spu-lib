@@ -82,6 +82,8 @@
   <ItemGroup>
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\ISuspiciousGroupInfoService.cs" />
+    <Compile Include="Implement\SuspiciousGroupInfoService.cs" />
     <Compile Include="Interface\ISuspiciousCustomerService.cs" />
     <Compile Include="Implement\SuspiciousCustomerService.cs" />
     <Compile Include="Implement\MatchMonitoringReportService.cs" />

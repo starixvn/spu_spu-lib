@@ -9,6 +9,7 @@
 
 namespace FD.Lib.Service.Interface
 {
+    using Criteria.SuspiciousInfo;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
 
@@ -17,6 +18,6 @@ namespace FD.Lib.Service.Interface
     /// </summary>
     public interface ISuspiciousInfoService
     {
-        ICommandResult InsertSuspiciousInfo(ICriteria criteria);
+        ICommandResult InsertSuspiciousInfo(SuspiciousInfoInsertCriteria criteria);
     }
 }

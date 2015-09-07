@@ -93,6 +93,7 @@
     <Compile Include="MailMasterInfo.cs" />
     <Compile Include="RawMarginCustomer.cs" />
     <Compile Include="SuspiciousCustomer.cs" />
+    <Compile Include="SuspiciousGroupInfo.cs" />
     <Compile Include="TablesForeignKey.cs" />
     <Compile Include="Sport.cs" />
     <Compile Include="CaseInfo.cs" />
