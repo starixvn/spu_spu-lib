@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingArbitrage.cs" />
     <Compile Include="QueryGenerator\EventType.cs" />
     <Compile Include="QueryGenerator\GeneratorAbstractFactory.cs" />
     <Compile Include="QueryGenerator\QueryGeneratorType.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGrouping.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice - Copy 1.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice.cs" />
-    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingCusomter.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingCustomer.cs" />
     <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />
     <Compile Include="QueueManagement\SendingCases\DeactivateCase.cs" />
     <Compile Include="QueueManagement\SendingTasks\SendingMessage.cs" />

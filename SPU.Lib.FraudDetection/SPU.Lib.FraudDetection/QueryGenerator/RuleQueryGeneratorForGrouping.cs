@@ -94,9 +94,11 @@ namespace FD.Lib.QueryGenerator
             {
                 var startIndexOfAddress = RuleConfig.IndexOf('@');
                 var startIndexOfSharp = RuleConfig.IndexOf('#');
-                var finalRule = RuleConfig.Substring(startIndexOfSharp + 1, RuleConfig.Length - startIndexOfSharp - 1);
+                var finalRule = startIndexOfSharp >= 0
+                    ? RuleConfig.Substring(startIndexOfSharp + 1, RuleConfig.Length - startIndexOfSharp - 1)
+                    : string.Empty;
                 
-                RuleConfig = RuleConfig.Substring(0, startIndexOfAddress);
+                RuleConfig = startIndexOfAddress >= 0 ? RuleConfig.Substring(0, startIndexOfAddress) : RuleConfig;
                 return finalRule;
             }
 
