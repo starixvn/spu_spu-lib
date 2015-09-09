@@ -22,10 +22,10 @@ namespace FD.Lib.QueryGenerator
 
         protected override void CreateAdditionalParams(string ruleConfigWithoutGroupingConfig)
         {
-            var additionalFrom = GenerateFromSql();
-            additionalParams.Add("additionalFrom", string.IsNullOrEmpty(additionalFrom) ? string.Empty : " and " + additionalFrom);
+            var additionalFrom = string.IsNullOrEmpty(ruleConfigWithoutGroupingConfig) ? string.Empty : GenerateFromSql();
+            additionalParams.Add("additionalFrom", string.IsNullOrEmpty(additionalFrom) ? "bodb02.dbo.bettrans ans with(nolock)" : additionalFrom);
 
-            var additionalWhere = GenerateWhereSql(ruleConfigWithoutGroupingConfig);
+            var additionalWhere = string.IsNullOrEmpty(ruleConfigWithoutGroupingConfig) ? string.Empty : GenerateWhereSql(ruleConfigWithoutGroupingConfig);
             additionalParams.Add("additionalWhere", string.IsNullOrEmpty(additionalWhere) ? string.Empty : " and " + additionalWhere);
         }
 
