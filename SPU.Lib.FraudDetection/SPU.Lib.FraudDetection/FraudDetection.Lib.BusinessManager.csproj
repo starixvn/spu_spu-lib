@@ -122,6 +122,7 @@
     <Compile Include="QueryGenerator\QueryGenerator.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorFactory.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGrouping.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice - Copy 1.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingCusomter.cs" />
     <Compile Include="QueueManagement\SendingCases\ActivateCase.cs" />

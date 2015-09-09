@@ -10,6 +10,7 @@
 namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
+    using Criteria.CustomerBettingGroup;
     using DataAccess.Implement;
     using DataAccess.Interface;
     using DTO;
@@ -67,6 +68,11 @@ namespace FD.Lib.Service.Implement
         public Customer GetCustomerByName(ICriteria criteria)
         {
             return _customerBettingGroupDataAccess.GetCustomerByName(criteria);
+        }
+
+        public ICommandResult CreateBettingGroupAutomatically(BettingGroupAutomaticallyCreateCriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
         }
     }
 }

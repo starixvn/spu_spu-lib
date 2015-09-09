@@ -10,6 +10,7 @@
 namespace FD.Lib.Service
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using DataAccess;
@@ -111,16 +112,22 @@ namespace FD.Lib.Service
                 var param = criteria.GetSpParams();
                 objectDb.ExecuteNonQuery(param);
 
-                var outputParams = objectDb.GetOuputParams();
-                var properties = criteria.GetType().GetProperties();
-                foreach (string outputParam in outputParams.Keys)
+                GetOutput(criteria, objectDb, param);
+            }
+        }
+
+        private void GetOutput(ICriteria criteria, ObjectDb objectDb, Hashtable param)
+        {
+            var outputParams = objectDb.GetOuputParams();
+            var properties = criteria.GetType().GetProperties();
+
+            foreach (string outputParam in outputParams.Keys)
+            {
+                foreach (var property in properties)
                 {
-                    foreach (var property in properties)
+                    if (property.CanWrite && property.Name.ToLower() == outputParam)
                     {
-                        if (property.CanWrite && property.Name.ToLower() == outputParam)
-                        {
-                            property.SetValue(criteria, param[outputParam] == DBNull.Value ? null : param[outputParam], null);
-                        }
+                        property.SetValue(criteria, param[outputParam] == DBNull.Value ? null : param[outputParam], null);
                     }
                 }
             }
@@ -145,23 +152,7 @@ namespace FD.Lib.Service
                     var param = criteria.GetSpParams();
                     list = objectDb.Query<T>(param);
 
-                    var outputParams = objectDb.GetOuputParams();
-
-                    if (outputParams != null)
-                    {
-                        var properties = criteria.GetType().GetProperties();
-
-                        foreach (string outputParam in outputParams.Keys)
-                        {
-                            foreach (var property in properties)
-                            {
-                                if (property.CanWrite && property.Name.ToLower() == outputParam)
-                                {
-                                    property.SetValue(criteria, param[outputParam], null);
-                                }
-                            }
-                        }
-                    }
+                    GetOutput(criteria, objectDb, param);
                 }
                 catch
                 {

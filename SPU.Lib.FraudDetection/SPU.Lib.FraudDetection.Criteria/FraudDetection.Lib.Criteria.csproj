@@ -80,9 +80,13 @@
     <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
     <Compile Include="Config\ConfigGetAllCriteria.cs" />
+    <Compile Include="CustomerBettingGroupDetails\CustomerBettingGrouMergeCriteria.cs" />
+    <Compile Include="CustomerBettingGroupDetails\CustomersIntoBettingGroupInsertCriteria.cs" />
+    <Compile Include="CustomerBettingGroupDetails\RelatedBettingGroupGetCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCustomerCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetCustomerByNameCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetByIdCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\BettingGroupAutomaticallyCreateCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCustomerCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCriteria.cs" />

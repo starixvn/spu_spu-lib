@@ -9,6 +9,8 @@ namespace FD.Lib.BusinessManager.QueryGenerator
 
         private const string GroupByChoice = "Group Betting Count By Choice";
 
+        private const string GroupByIp = "Group Betting Count By IP";
+
         public static RuleQueryGenerator CreateRuleQueryGenerator(int fraudCaseId, TaskInfoCriteria criteria)
         {
             var originalFormula = criteria.TaskRules;
@@ -26,6 +28,14 @@ namespace FD.Lib.BusinessManager.QueryGenerator
                 return new RuleQueryGeneratorForGroupingChoice(fraudCaseId, criteria)
                 {
                     GroupingConfigName = GroupByChoice
+                };
+            }
+
+            if (originalFormula.IndexOf(GroupByIp, System.StringComparison.Ordinal) >= 0)
+            {
+                return new RuleQueryGeneratorForGroupingIp(fraudCaseId, criteria)
+                {
+                    GroupingConfigName = GroupByIp
                 };
             }
 

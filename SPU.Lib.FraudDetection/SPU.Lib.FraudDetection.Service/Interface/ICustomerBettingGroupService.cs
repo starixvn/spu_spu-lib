@@ -10,6 +10,7 @@
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
+    using Criteria.CustomerBettingGroup;
     using DTO;
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
@@ -34,5 +35,7 @@ namespace FD.Lib.Service.Interface
         ICommandResult DeleteCustomer(ICriteria criteria);
 
         Customer GetCustomerByName(ICriteria criteria);
+
+        ICommandResult CreateBettingGroupAutomatically(BettingGroupAutomaticallyCreateCriteria criteria);
     }
 }

@@ -115,7 +115,7 @@ namespace FD.Lib.QueryGenerator
 
             var lastSubString1 = subString1.Substring(0, startIndexSubStr1);
             var lastSubString2 = subString2.Substring(startIndexSubStr2, subString2.Length - startIndexSubStr2);
-            RuleConfig = RuleConfig.Substring(0, startIndexSubStr2);
+            RuleConfig = subString2.Substring(0, startIndexSubStr2);
 
             return lastSubString1 + lastSubString2;
         }

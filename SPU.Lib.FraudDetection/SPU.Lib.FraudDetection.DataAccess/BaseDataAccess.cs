@@ -47,7 +47,26 @@ namespace FD.Lib.DataAccess
             {
                 db.ExecuteNonQuery(hash);
 
+                GetOutput(criteria, db, hash);
+
                 return GetCommandResult(hash);
+            }
+        }
+
+        private void GetOutput(ICriteria criteria, ObjectDb objectDb, Hashtable param)
+        {
+            var outputParams = objectDb.GetOuputParams();
+            var properties = criteria.GetType().GetProperties();
+
+            foreach (string outputParam in outputParams.Keys)
+            {
+                foreach (var property in properties)
+                {
+                    if (property.CanWrite && property.Name.ToLower() == outputParam)
+                    {
+                        property.SetValue(criteria, param[outputParam] == DBNull.Value ? null : param[outputParam], null);
+                    }
+                }
             }
         }
 

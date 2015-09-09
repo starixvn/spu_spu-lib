@@ -95,6 +95,7 @@
       <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -113,6 +114,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="CustomerBettingGroupDetailsServiceIntegrationTest.cs" />
+    <Compile Include="CustomerBettingGroupServiceIntegrationTest.cs" />
     <Compile Include="SuspiciousGroupInfoServiceIntegrationTest.cs" />
     <Compile Include="SuspiciousCustomerServiceIntegrationTest.cs" />
     <Compile Include="TaskServiceIntegrationTest.cs" />
