@@ -47,7 +47,7 @@ namespace FD.Lib.QueryGenerator
                 case QueryGeneratorType.PreCondition:
                     return new PreConditionQueryGenerator(FraudCaseId, Criteria, ChunkOfSelection);
 
-                case QueryGeneratorType.Rule:                    
+                case QueryGeneratorType.Rule:
                     return RuleQueryGeneratorFactory.CreateRuleQueryGenerator(FraudCaseId, Criteria);
 
                 default:

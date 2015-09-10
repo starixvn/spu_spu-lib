@@ -10,9 +10,6 @@
 namespace FD.Lib.Service.Implement
 {
     using Criteria.SuspiciousInfo;
-    using DataAccess.Implement;
-    using DataAccess.Interface;
-    using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
     using Interface;
 

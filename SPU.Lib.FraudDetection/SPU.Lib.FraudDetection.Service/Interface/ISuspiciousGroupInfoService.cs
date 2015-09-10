@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FD.Lib.Service.Implement
+﻿namespace FD.Lib.Service.Interface
 {
     using Criteria.SuspiciousInfo;
     using Fanex.NAP.Framework.Command;
