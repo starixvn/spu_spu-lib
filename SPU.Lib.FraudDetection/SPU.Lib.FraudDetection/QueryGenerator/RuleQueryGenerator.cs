@@ -46,9 +46,13 @@ namespace FD.Lib.QueryGenerator
         /// <returns>WHERE SQL string.</returns>
         protected override string GenerateWhereSql(string formula)
         {
+            const string requiredCondition =
+                "ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) and tch.matchid in ($param1$)";
+
             if (string.IsNullOrEmpty(RelevantConfigIds))
                 return string.Empty;
 
+           
             OriginalFormula = formula;
             var configIds = RelevantConfigIds.Split('#');
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))
@@ -61,9 +65,14 @@ namespace FD.Lib.QueryGenerator
                 return OriginalFormula;
             }
 
+            if (string.IsNullOrEmpty(formula))
+            {
+                return requiredCondition;
+            }
+
             var dangerPeriodSql = Configs.Single(l => l.ConfigName.ToLower() == "in danger period").ConfigSQLField;
             OriginalFormula = OriginalFormula.Replace("NEARTHEGOAL", dangerPeriodSql);
-            var sqlWhereString = "ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) and tch.matchid in ($param1$) and (" + OriginalFormula + ")";
+            var sqlWhereString = requiredCondition + " and (" + OriginalFormula + ")";
 
             var afterRemoving = RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
 

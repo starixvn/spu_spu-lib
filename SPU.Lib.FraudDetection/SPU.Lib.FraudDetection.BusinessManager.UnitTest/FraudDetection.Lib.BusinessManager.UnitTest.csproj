@@ -155,7 +155,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="QueryGenerator\PreConditionQueryGeneratorIntegrationTest.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingIntegrationTest.cs" />
     <Compile Include="SendingMessage\DeactivateCaseTest.cs" />
     <Compile Include="SendingMessage\RemovingTaskTest.cs" />
     <Compile Include="SendingMessage\UpdatingTaskTest.cs" />
