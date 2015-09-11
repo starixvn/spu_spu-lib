@@ -75,6 +75,27 @@ namespace FD.Lib.QueryGenerator
             Assert.AreEqual(expected, actual);
         }
 
+        [Test]
+        public void When_Scan_Office_By_Ip()
+        {
+            var criteria = GetCriteriaGroupByChoice2();
+            var caseId = "1";
+
+            var expected = "declare @tempTable table (custid bigint, matchid bigint, transid bigint) insert into @tempTable select ans.custid, ans.matchid, ans.transid from bodb02.dbo.match tch with(nolock) inner join bodb02.dbo.bettrans ans with(nolock) on tch.matchid = ans.matchid join (SELECT max(ans.transid) transid, max(ans.transdate) deletetime, ans.livehomescore, ans.liveawayscore , ans.matchid FROM bodb02.dbo.bettrans ans with (nolock) WHERE ans.matchid in ($param1$) AND ans.STATUSID = 101 AND ans.liveindicator = 1 AND ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) GROUP BY ans.livehomescore, ans.liveawayscore, ans.matchid) msc on msc.matchid = ans.matchid where ans.liveindicator = 1 AND ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) and tch.matchid in ($param1$) and (ans.statusid = 112 AND ans.transdate BETWEEN DATEADD(ss, -(select p.ParamValue from Parameters p with(nolock) where p.ParamName = 'SecondsToGoal') , msc.deletetime) AND msc.deletetime AND ans.livehomescore = msc.livehomescore AND ans.liveawayscore = msc.liveawayscore) select tbl.* from @tempTable tbl inner join (select tt.custid, tt.matchid from @tempTable tt group by tt.custid, tt.matchid having COUNT(tt.transid) >= 5) res on res.custid = tbl.custid AND res.matchid = tbl.matchid";
+
+            var queryGeneratorFactory = new QueryGeneratorFactory(
+                   int.Parse(caseId),
+                   criteria,
+                   10);
+
+            var generator = queryGeneratorFactory.GetQueryGenerator(QueryGeneratorType.Rule);
+
+            var actual = criteria.TaskRules = generator.GenerateQuery();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+
         private TaskUpdateCriteria GetCriteriaGroupByCustomer()
         {
             var criteria = new TaskUpdateCriteria()
@@ -164,5 +185,8 @@ namespace FD.Lib.QueryGenerator
 
             return criteria;
         }
+
+
+       
     }
 }

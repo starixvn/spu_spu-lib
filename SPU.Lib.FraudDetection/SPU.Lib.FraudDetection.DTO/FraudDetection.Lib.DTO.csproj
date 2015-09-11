@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerBettingGroupDetail.cs" />
     <Compile Include="MatchMonitoring.cs" />
     <Compile Include="League.cs" />
     <Compile Include="MoveBetsBalanceUp.cs" />

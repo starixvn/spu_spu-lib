@@ -115,8 +115,4 @@
     <Setting Key="FD_CustomerBettingGroupsMerge" SpName="FD_CustomerBettingGroupsMerge" DbName="DBFD.FraudDetection.bodbSPUNet" />
   </Function>
 
-
-  
-
-
 </Functions>

@@ -188,11 +188,13 @@ namespace FD.Lib.Service.Implement
                     CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
                     MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
                     TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
+                    Currency = int.Parse(dt.Rows[i]["currency"].ToString()),
+                    CurrencyName = dt.Rows[i]["currencyname"].ToString(),
                     GroupingOption = dt.Rows[i]["groupby"].ToString()
                 });
             }
 
-            var groups = customerList.GroupBy(t => new { t.MatchId, t.GroupingOption, t.CustId });
+            var groups = customerList.GroupBy(t => new { t.MatchId, t.CustId, t.Currency, t.CurrencyName, t.GroupingOption });
 
             foreach (var group in groups)
             {
@@ -203,7 +205,9 @@ namespace FD.Lib.Service.Implement
                     CustId = group.Key.CustId,
                     TransId = string.Join(",", group.Select(t => t.TransId)),
                     CaseId = caseId,
-                    TaskId = taskId
+                    TaskId = taskId,
+                    Currency = group.Key.Currency,
+                    CurrencyName = group.Key.CurrencyName
                 };
 
                 suspiciousInfoList.Add(suspiciousGroup);

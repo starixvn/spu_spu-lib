@@ -25,5 +25,9 @@ namespace FD.Lib.DTO
         public int CaseId { get; set; }
 
         public string GroupingOption { get; set; }
+
+        public int Currency { get; set; }
+
+        public string CurrencyName { get; set; }
     }
 }

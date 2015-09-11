@@ -18,7 +18,7 @@ namespace FD.Lib.Criteria.CustomerBettingGroupDetails
     {
         public int GroupId { get; set; }
 
-        public string CustIds { get; set; }
+        public string XmlDoc { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

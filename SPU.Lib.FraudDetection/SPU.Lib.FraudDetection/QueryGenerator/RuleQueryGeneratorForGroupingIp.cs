@@ -1,6 +1,7 @@
-namespace FD.Lib.QueryGenerator
+namespace FD.Lib.BusinessManager.QueryGenerator
 {
     using Criteria.Task;
+    using Lib.QueryGenerator;
 
     public class RuleQueryGeneratorForGroupingIp : RuleQueryGeneratorForGrouping
     {

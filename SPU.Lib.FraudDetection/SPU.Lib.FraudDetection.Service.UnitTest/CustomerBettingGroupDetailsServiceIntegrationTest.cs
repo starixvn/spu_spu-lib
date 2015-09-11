@@ -1,9 +1,12 @@
 ﻿namespace FD.Lib.Service.UnitTest
 {
+    using System.Collections.Generic;
+    using System.Text;
     using Core;
     using Criteria.CustomerBettingGroup;
     using Criteria.CustomerBettingGroupDetails;
     using Criteria.Group;
+    using DTO;
     using Fanex.Data.Configuration;
     using Implement;
     using Interface;
@@ -38,10 +41,21 @@
         [Ignore]
         public void When_Insert_Customers_Into_Betting_Group_Then_It_Should_Be_Successful()
         {
+            IEnumerable<SuspiciousGroupInfo> chunk = new List<SuspiciousGroupInfo>
+            {
+                new SuspiciousGroupInfo
+                {
+                    CustId = 123,
+                    Currency = 20,
+                    CurrencyName = "HKH"
+                }
+            };
+
+
             var criteria = new CustomersIntoBettingGroupInsertCriteria
             {
                 GroupId = 10,
-                CustIds = "10,11,12"
+                XmlDoc = CreateXmlParam(chunk)
             };
 
             var result = _sut.InsertCustomersIntoBettingGroup(criteria);
@@ -59,6 +73,30 @@
             };
 
             _sut.MergeCustomerBettingGroups(criteria);
+        }
+
+        private string CreateXmlParam(IEnumerable<SuspiciousGroupInfo> chunk)
+        {
+            var builder = new StringBuilder();
+            builder.Append("<Root>");
+
+            foreach (var suspiciousInfo in chunk)
+            {
+                builder.Append("<Row>");
+                builder.Append(GetElement("CustId", suspiciousInfo.CustId));
+                builder.Append(GetElement("Currency", suspiciousInfo.Currency));
+                builder.Append(GetElement("CurrencyName", suspiciousInfo.CurrencyName));                
+                builder.Append("</Row>");
+            }
+
+            builder.Append("</Root>");
+
+            return builder.ToString();
+        }
+
+        private string GetElement(string tagName, object value)
+        {
+            return string.Format("<{0}>{1}</{0}>", tagName, value);
         }
     }
 }
