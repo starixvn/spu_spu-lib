@@ -46,6 +46,9 @@ namespace FD.Lib.QueryGenerator
         /// <returns>WHERE SQL string.</returns>
         protected override string GenerateWhereSql(string formula)
         {
+            if (string.IsNullOrEmpty(RelevantConfigIds))
+                return string.Empty;
+
             OriginalFormula = formula;
             var configIds = RelevantConfigIds.Split('#');
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))

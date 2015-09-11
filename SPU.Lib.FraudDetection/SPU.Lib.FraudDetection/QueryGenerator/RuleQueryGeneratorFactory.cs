@@ -9,6 +9,8 @@ namespace FD.Lib.BusinessManager.QueryGenerator
 
         private const string Arbitrage = "Arbitrage";
 
+        private const string AbnormalMove = "Abnormal Move";
+
         private const string GroupByChoice = "Group Betting Count By Choice";
 
         private const string GroupByIp = "Group Betting Count By IP";
@@ -46,6 +48,14 @@ namespace FD.Lib.BusinessManager.QueryGenerator
                 return new RuleQueryGeneratorForGroupingArbitrage(fraudCaseId, criteria)
                 {
                     GroupingConfigName = Arbitrage
+                };
+            }
+
+            if (originalFormula.IndexOf(AbnormalMove, System.StringComparison.Ordinal) >= 0)
+            {
+                return new RuleQueryGeneratorForGroupingAbnormalMove(fraudCaseId, criteria)
+                {
+                    GroupingConfigName = AbnormalMove
                 };
             }
 
