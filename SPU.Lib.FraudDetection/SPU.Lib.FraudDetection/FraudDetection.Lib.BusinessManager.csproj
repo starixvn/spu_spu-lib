@@ -113,13 +113,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingAbnormalMove.cs" />
-    <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingArbitrage.cs" />
     <Compile Include="QueryGenerator\EventType.cs" />
     <Compile Include="QueryGenerator\GeneratorAbstractFactory.cs" />
     <Compile Include="QueryGenerator\GroupBettingRuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\QueryGeneratorType.cs" />
     <Compile Include="QueryGenerator\QueryGeneratorFactory.cs" />
-    <Compile Include="QueryGenerator\GroupBettingRuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\RuleQueryGenerator.cs" />
     <Compile Include="QueryGenerator\PreConditionQueryGenerator.cs" />
     <Compile Include="QueryGenerator\QueryGenerator.cs" />
