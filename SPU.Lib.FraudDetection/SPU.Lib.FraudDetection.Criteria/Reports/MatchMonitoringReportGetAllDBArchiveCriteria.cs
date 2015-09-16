@@ -21,6 +21,8 @@ namespace FD.Lib.Criteria.Reports
 
         public int LeagueId { get; set; }
 
+        public string MatchCode { get; set; }
+
         public string MatchStatus { get; set; }
 
         public int SuspiciousStatus { get; set; }
@@ -32,6 +34,7 @@ namespace FD.Lib.Criteria.Reports
         {
             EventDate = criteria.EventDate;
             LeagueId = criteria.LeagueId;
+            MatchCode = criteria.MatchCode;
             MatchStatus = criteria.MatchStatus;
             SuspiciousStatus = criteria.SuspiciousStatus;
         }
