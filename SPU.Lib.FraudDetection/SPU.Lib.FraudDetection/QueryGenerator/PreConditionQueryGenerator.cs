@@ -75,10 +75,16 @@ namespace FD.Lib.QueryGenerator
                 return OriginalFormula;
             }
 
-            var sqlWhereString = "tch.sporttype between 1 and 99 and tch.matchid not in ($param1$) and (" + OriginalFormula + ")";
-            sqlWhereString = (isSelectScanningState && IsCheckNotScanned)
-                ? sqlWhereString.Replace("$param1$", sqlForNotScanned)
-                : "tch.sporttype between 1 and 99 and " + OriginalFormula;
+            var sqlWhereString = "tch.sporttype between 1 and 99 and " + OriginalFormula;
+            if (isSelectScanningState && IsCheckNotScanned)
+            {
+                sqlWhereString = sqlWhereString.Replace("$MatchState$", "tch.matchid not in (" + sqlForNotScanned + ")");
+            }
+            else
+            {
+                sqlWhereString = sqlWhereString.Replace("$MatchState$", "1=1");
+            }
+
 
             return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
         }
