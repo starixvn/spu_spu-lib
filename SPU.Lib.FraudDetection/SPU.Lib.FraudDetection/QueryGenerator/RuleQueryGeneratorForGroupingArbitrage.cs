@@ -16,7 +16,7 @@ namespace FD.Lib.QueryGenerator
         public RuleQueryGeneratorForGroupingArbitrage(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
-            RuleConfig = OriginalFormula;
+            GroupingCondition = OriginalFormula;
             ForeignKeyName = "temptable.arbitrage";
         }
 

@@ -16,7 +16,7 @@ namespace FD.Lib.QueryGenerator
         public RuleQueryGeneratorForGroupingAbnormalMove(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
-            RuleConfig = OriginalFormula;
+            GroupingCondition = OriginalFormula;
             ForeignKeyName = "temptable.abnormalmove";
         }
         /*

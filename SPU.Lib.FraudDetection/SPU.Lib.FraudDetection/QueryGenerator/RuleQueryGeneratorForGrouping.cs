@@ -11,7 +11,11 @@ namespace FD.Lib.QueryGenerator
     {
         protected Config GroupingConfig;
 
-        protected string RuleConfig;
+        protected Config SumWlByMatchConfig;
+
+        protected string GroupingCondition;
+
+        protected string SumWlByMatchCondition;
 
         protected string ForeignKeyName;
 
@@ -27,19 +31,57 @@ namespace FD.Lib.QueryGenerator
 
         public override string GenerateQuery()
         {
+            PreGenerateQuery();
+
             GroupingConfig = Configs.Single(l => l.ConfigName == GroupingConfigName);
-            RemoveGroupingConfigId();
+            RemoveSpecificConfigId(GroupingConfig.ConfigId.ToString());
 
             var rawSql = TablesForeignKey.Single(l => l.DBTable2 == ForeignKeyName).ForeignKey;
-            var ruleConfigWithoutGroupingConfig = RemoveGroupingConfig();
+            var groupingCondition = string.Empty;
 
-            CreateAdditionalParams(ruleConfigWithoutGroupingConfig);
+            OriginalFormula = RemoveGroupingConfig(OriginalFormula, GroupingConfigName, ref groupingCondition);
+            GroupingCondition = groupingCondition;
+
+            CreateAdditionalParams(OriginalFormula);
 
             var sql = ReplaceAdditionalParams(rawSql);
+
+            sql = PostGenerateQuery(sql);
 
             sql = sql.Replace(Environment.NewLine, " ");
 
             return sql;
+        }
+
+        const string SumWlByMatchConfigName = "Sum WinLoss by Match";
+
+        private void PreGenerateQuery()
+        {
+            var specificCondition = string.Empty;
+
+            SumWlByMatchConfig = Configs.Single(l => l.ConfigName == SumWlByMatchConfigName);
+            RemoveSpecificConfigId(SumWlByMatchConfig.ConfigId.ToString());
+            OriginalFormula = RemoveGroupingConfig(OriginalFormula, SumWlByMatchConfigName,
+                ref specificCondition);
+            SumWlByMatchCondition = specificCondition;
+        }
+
+        private string PostGenerateQuery(string sql)
+        {
+            if (string.IsNullOrEmpty(SumWlByMatchCondition))
+            {
+                return sql.Replace("$additionalsumwl$", string.Empty);
+            }
+
+            SumWlByMatchCondition = SumWlByMatchCondition.Replace("%", string.Empty);
+            var condition = SumWlByMatchCondition.Replace(SumWlByMatchConfigName, string.Empty);
+            
+            const string key = "temptable.sumwl";
+            var foreignKey = TablesForeignKey.Single(t => t.DBTable2.Equals(key)).ForeignKey;
+
+            foreignKey = foreignKey.Replace("$winlosscondition$", condition);
+
+            return sql.Replace("$additionalsumwl$", foreignKey);
         }
 
         protected virtual void CreateAdditionalParams(string ruleConfigWithoutGroupingConfig)
@@ -50,7 +92,7 @@ namespace FD.Lib.QueryGenerator
             var additionalWhere = GenerateWhereSql(ruleConfigWithoutGroupingConfig);
             additionalParams.Add("additionalWhere", additionalWhere);
 
-            var additionalHaving = RuleConfig.Replace(GroupingConfigName, GroupingConfig.ConfigSQLField);
+            var additionalHaving = GroupingCondition.Replace(GroupingConfigName, GroupingConfig.ConfigSQLField);
             additionalParams.Add("additionalHaving", additionalHaving);
         }
 
@@ -63,9 +105,8 @@ namespace FD.Lib.QueryGenerator
             return sql;
         }
 
-        protected void RemoveGroupingConfigId()
+        protected void RemoveSpecificConfigId(string configId)
         {
-            var configId = GroupingConfig.ConfigId.ToString();
             var startIndexOfConfigId = RelevantConfigIds.IndexOf(configId, StringComparison.Ordinal);
 
             if (startIndexOfConfigId < 0)
@@ -84,40 +125,42 @@ namespace FD.Lib.QueryGenerator
             RelevantConfigIds = RelevantConfigIds.Replace("#" + configId, string.Empty);
         }
 
-        protected virtual string RemoveGroupingConfig()
+        protected virtual string RemoveGroupingConfig(string formula, string configName, ref string specificCondition)
         {
-            var startIndex = RuleConfig.IndexOf(
-                Configs.Single(l => l.ConfigName == GroupingConfigName).ConfigName,
-                System.StringComparison.Ordinal);
+            var startIndex = formula.IndexOf(configName, StringComparison.Ordinal);
 
-            if (startIndex == 0)
+            switch (startIndex)
             {
-                var startIndexOfAddress = RuleConfig.IndexOf('@');
-                var startIndexOfSharp = RuleConfig.IndexOf('#');
-                var finalRule = startIndexOfSharp >= 0
-                    ? RuleConfig.Substring(startIndexOfSharp + 1, RuleConfig.Length - startIndexOfSharp - 1)
-                    : string.Empty;
-                
-                RuleConfig = startIndexOfAddress >= 0 ? RuleConfig.Substring(0, startIndexOfAddress) : RuleConfig;
-                return finalRule;
+                case -1:
+                    specificCondition = string.Empty;
+                    return formula;
+                case 0:
+                    var startIndexOfAddress = formula.IndexOf('@');
+                    var startIndexOfSharp = formula.IndexOf('#');
+                    var finalRule = startIndexOfSharp >= 0
+                        ? formula.Substring(startIndexOfSharp + 1, formula.Length - startIndexOfSharp - 1)
+                        : string.Empty;
+
+                    specificCondition = startIndexOfAddress >= 0 ? formula.Substring(0, startIndexOfAddress) : formula;
+                    return finalRule;
             }
 
-            var subString1 = RuleConfig.Substring(0, startIndex);
-            var subString2 = RuleConfig.Substring(startIndex, RuleConfig.Length - startIndex);
+            var subString1 = formula.Substring(0, startIndex);
+            var subString2 = formula.Substring(startIndex, formula.Length - startIndex);
 
             var startIndexSubStr1 = subString1.LastIndexOf('@');
             var startIndexSubStr2 = subString2.IndexOf('@');
 
             if (startIndexSubStr2 == -1)
             {
-                RuleConfig = subString2;
+                specificCondition = subString2;
 
                 return subString1.Substring(0, startIndexSubStr1);
             }
 
             var lastSubString1 = subString1.Substring(0, startIndexSubStr1);
             var lastSubString2 = subString2.Substring(startIndexSubStr2, subString2.Length - startIndexSubStr2);
-            RuleConfig = subString2.Substring(0, startIndexSubStr2);
+            specificCondition = subString2.Substring(0, startIndexSubStr2);
 
             return lastSubString1 + lastSubString2;
         }
