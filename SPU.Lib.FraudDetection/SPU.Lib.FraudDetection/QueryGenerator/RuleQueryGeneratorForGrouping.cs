@@ -1,12 +1,11 @@
 namespace FD.Lib.QueryGenerator
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using Criteria.Task;
     using DTO;
-
+    
     public abstract class RuleQueryGeneratorForGrouping : RuleQueryGenerator
     {
         protected Config GroupingConfig;
@@ -22,6 +21,8 @@ namespace FD.Lib.QueryGenerator
         public string GroupingConfigName { get; set; }
 
         protected IDictionary<string, string> additionalParams;
+
+        private const string SumWlByMatchConfigName = "Sum WinLoss by Match";
 
         protected RuleQueryGeneratorForGrouping(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
@@ -53,8 +54,6 @@ namespace FD.Lib.QueryGenerator
             return sql;
         }
 
-        const string SumWlByMatchConfigName = "Sum WinLoss by Match";
-
         private void PreGenerateQuery()
         {
             var specificCondition = string.Empty;
@@ -75,7 +74,7 @@ namespace FD.Lib.QueryGenerator
 
             SumWlByMatchCondition = SumWlByMatchCondition.Replace("%", string.Empty);
             var condition = SumWlByMatchCondition.Replace(SumWlByMatchConfigName, string.Empty);
-            
+
             const string key = "temptable.sumwl";
             var foreignKey = TablesForeignKey.Single(t => t.DBTable2.Equals(key)).ForeignKey;
 
@@ -134,6 +133,7 @@ namespace FD.Lib.QueryGenerator
                 case -1:
                     specificCondition = string.Empty;
                     return formula;
+
                 case 0:
                     var startIndexOfAddress = formula.IndexOf('@');
                     var startIndexOfSharp = formula.IndexOf('#');
