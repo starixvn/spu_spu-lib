@@ -31,12 +31,13 @@ namespace FD.Lib.QueryGenerator
         /// <returns>SQL string.</returns>
         public override string GenerateQuery()
         {
-            const string queryRuleString = "select distinct {0} from {1} where {2}";
+            const string QueryRuleString = "select distinct {0} from {1} where {2}";
 
-            return string.Format(queryRuleString,
-                           GenerateSelectSql(),
-                           GenerateFromSql(),
-                           GenerateWhereSql(OriginalFormula));
+            return string.Format(
+                QueryRuleString,
+                GenerateSelectSql(),
+                GenerateFromSql(),
+                GenerateWhereSql(OriginalFormula));
         }
 
         /// <summary>
@@ -46,23 +47,30 @@ namespace FD.Lib.QueryGenerator
         /// <returns>WHERE SQL string.</returns>
         protected override string GenerateWhereSql(string formula)
         {
-            const string requiredCondition =
+            var requiredCondition =
                 "ans.bettype IN (select distinct spb.BetType from bodb02.dbo.SportBettypeMatrix spb WITH(NOLOCK) where spb.ProductID = 1) and tch.matchid in ($param1$)";
 
             if (string.IsNullOrEmpty(RelevantConfigIds))
+            {
                 return string.Empty;
+            }
 
-           
             OriginalFormula = formula;
             var configIds = RelevantConfigIds.Split('#');
+
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))
             {
                 OriginalFormula = OriginalFormula.Replace(config.ConfigName, config.ConfigSQLField);
             }
-            
+
             if (IsCountSuspiciousTime)
             {
                 return OriginalFormula;
+            }
+
+            if (configIds.Any(configId => int.Parse(configId) == 30))
+            {
+                requiredCondition = requiredCondition + " and b.matchid in ($param1$)";
             }
 
             if (string.IsNullOrEmpty(formula))
