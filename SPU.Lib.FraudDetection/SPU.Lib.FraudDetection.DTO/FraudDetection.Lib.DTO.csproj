@@ -92,6 +92,7 @@
     <Compile Include="MatchDetail.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="MailMasterInfo.cs" />
+    <Compile Include="RawAssociationCustomer.cs" />
     <Compile Include="RawMarginCustomer.cs" />
     <Compile Include="SuspiciousCustomer.cs" />
     <Compile Include="SuspiciousGroupInfo.cs" />

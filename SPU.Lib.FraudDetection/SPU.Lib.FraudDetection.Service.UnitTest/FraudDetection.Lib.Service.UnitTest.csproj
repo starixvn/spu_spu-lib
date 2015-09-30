@@ -114,6 +114,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BettingGroupReportServiceIntegrationTest.cs" />
     <Compile Include="CustomerBettingGroupDetailsServiceIntegrationTest.cs" />
     <Compile Include="CustomerBettingGroupServiceIntegrationTest.cs" />
     <Compile Include="SuspiciousGroupInfoServiceIntegrationTest.cs" />
