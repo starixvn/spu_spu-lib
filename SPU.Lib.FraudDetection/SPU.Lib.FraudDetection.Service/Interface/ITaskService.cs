@@ -78,5 +78,11 @@ namespace FD.Lib.Service.Interface
         IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria);
 
         List<SuspiciousGroupInfo> ExecuteRuleForGrouping(string sqlQueryString, int taskId, int caseId);
+
+        List<string> ExecuteRuleForCapturingData(string sqlQueryString);
+
+        List<DataTypeCapture> GetAllDataTypeCapture(ICriteria criteria);
+
+        decimal CaptureData(string sqlQueryString);
     }
 }

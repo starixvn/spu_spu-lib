@@ -76,6 +76,7 @@
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
+    <Compile Include="Common\DataTypeCaptureGetAllCriteria.cs" />
     <Compile Include="Common\CurrencyGetAllCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateFromDBArchiveCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="CustomerBettingGroup\BettingGroupAutomaticallyCreateCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetAllCriteria.cs" />
+    <Compile Include="DataCapture\DataCaptureInsertCriteria.cs" />
     <Compile Include="Event\EventGetAllCriteria.cs" />
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />

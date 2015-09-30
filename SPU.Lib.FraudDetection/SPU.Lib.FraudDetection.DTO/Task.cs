@@ -11,6 +11,7 @@
 namespace FD.Lib.DTO
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     ///     Task Info class.

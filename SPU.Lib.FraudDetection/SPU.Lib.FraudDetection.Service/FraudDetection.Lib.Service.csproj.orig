@@ -82,6 +82,21 @@
   <ItemGroup>
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\DataCaptureService.cs" />
+    <Compile Include="Implement\CurrencyService.cs" />
+    <Compile Include="Implement\CustomerBettingGroupDetailsService.cs" />
+<<<<<<< HEAD
+    <Compile Include="Implement\IBettingGroupReportService.cs" />
+    <Compile Include="Implement\BettingGroupReportService.cs" />
+=======
+    <Compile Include="Interface\IDataCaptureService.cs" />
+>>>>>>> #44641: Implement event Scan Match - Capture Data
+    <Compile Include="Interface\ISuspiciousGroupInfoService.cs" />
+    <Compile Include="Implement\SuspiciousGroupInfoService.cs" />
+    <Compile Include="Interface\ICurrencyService.cs" />
+    <Compile Include="Interface\ICustomerBettingGroupDetailsService.cs" />
+    <Compile Include="Interface\ISuspiciousCustomerService.cs" />
+    <Compile Include="Implement\SuspiciousCustomerService.cs" />
     <Compile Include="Implement\MatchMonitoringReportService.cs" />
     <Compile Include="Implement\CustomerBettingGroupService.cs" />
     <Compile Include="Implement\CustomerReportService.cs" />

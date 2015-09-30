@@ -78,6 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTypeCapture.cs" />
+    <Compile Include="DataCapture.cs" />
     <Compile Include="CustomerBettingGroupDetail.cs" />
     <Compile Include="MatchMonitoring.cs" />
     <Compile Include="League.cs" />

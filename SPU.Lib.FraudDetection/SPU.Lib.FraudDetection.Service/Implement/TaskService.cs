@@ -12,6 +12,7 @@ namespace FD.Lib.Service.Implement
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using Core.Utilities;
     using Criteria.Task;
@@ -216,6 +217,20 @@ namespace FD.Lib.Service.Implement
             return suspiciousInfoList;
         }
 
+        public List<string> ExecuteRuleForCapturingData(string sqlQueryString)
+        {
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            var ticketList = new List<string>();
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                ticketList.Add(dt.Rows[i]["transid"].ToString());
+            }
+
+            return ticketList;
+        }
+
         public IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int taskId)
         {
             var suspiciousCustomers = new List<SuspiciousCustomer>();
@@ -237,6 +252,19 @@ namespace FD.Lib.Service.Implement
         public IList<SuspiciousInfo> GetSuspiciousCustomerHistory(ICriteria criteria)
         {
             return GetData<SuspiciousInfo>(criteria).ToList();
+        }
+
+        public List<DataTypeCapture> GetAllDataTypeCapture(ICriteria criteria)
+        {
+            return GetData<DataTypeCapture>(criteria).ToList();
+        }
+
+        public decimal CaptureData(string sqlQueryString)
+        {
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+            var result = decimal.Parse(dt.Rows[0]["DataCapture"].ToString(), CultureInfo.InvariantCulture);
+
+            return result;
         }
     }
 }

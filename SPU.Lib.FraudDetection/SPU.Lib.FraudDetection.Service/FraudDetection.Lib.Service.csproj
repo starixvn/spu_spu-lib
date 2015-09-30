@@ -82,8 +82,10 @@
   <ItemGroup>
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
+    <Compile Include="Implement\DataCaptureService.cs" />
     <Compile Include="Implement\CurrencyService.cs" />
     <Compile Include="Implement\CustomerBettingGroupDetailsService.cs" />
+    <Compile Include="Interface\IDataCaptureService.cs" />
     <Compile Include="Implement\IBettingGroupReportService.cs" />
     <Compile Include="Implement\BettingGroupReportService.cs" />
     <Compile Include="Interface\ISuspiciousGroupInfoService.cs" />
