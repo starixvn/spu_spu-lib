@@ -17,6 +17,8 @@ namespace FD.Lib.Criteria.DataCapture
     /// </summary>
     public class DataCaptureInsertCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+
         public int DataId { get; set; }
 
         public int MatchId { get; set; }

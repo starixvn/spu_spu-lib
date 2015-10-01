@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DataCaptureServiceAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DataCaptureAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,11 +14,21 @@ namespace FD.Lib.DataAccess.Implement
     using Interface;
 
     /// <summary>
-    ///     DataCaptureServiceAccess Implement.
+    ///     DataCaptureAccess Implement.
     /// </summary>
-    public class DataCaptureServiceAccess : BaseDataAccess, IDataCaptureServiceAccess
+    public class DataCaptureAccess : BaseDataAccess, IDataCaptureAccess
     {
         public ICommandResult InsertCapturedData(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult InsertSuspiciousCapturedData(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult UpdateCapturedData(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
         }

@@ -81,7 +81,7 @@ namespace FD.Lib.Service.Interface
 
         List<string> ExecuteRuleForCapturingData(string sqlQueryString);
 
-        List<DataTypeCapture> GetAllDataTypeCapture(ICriteria criteria);
+        List<DataCapture> ExecuteRuleForComparingData(string sqlQueryString);
 
         decimal CaptureData(string sqlQueryString);
     }

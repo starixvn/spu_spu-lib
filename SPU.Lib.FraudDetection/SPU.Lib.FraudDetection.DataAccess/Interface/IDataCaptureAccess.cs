@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IDataCaptureServiceAccess.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IDataCaptureAccess.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,10 +13,14 @@ namespace FD.Lib.DataAccess.Interface
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
-    ///     InsertCapturedData interface.
+    ///     IDataCaptureAccess interface.
     /// </summary>
-    public interface IDataCaptureServiceAccess
+    public interface IDataCaptureAccess
     {
         ICommandResult InsertCapturedData(ICriteria criteria);
+
+        ICommandResult InsertSuspiciousCapturedData(ICriteria criteria);
+
+        ICommandResult UpdateCapturedData(ICriteria criteria);
     }
 }

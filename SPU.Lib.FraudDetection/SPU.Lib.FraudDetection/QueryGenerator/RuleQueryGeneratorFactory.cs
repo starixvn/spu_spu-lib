@@ -19,6 +19,11 @@ namespace FD.Lib.BusinessManager.QueryGenerator
         {
             var originalFormula = criteria.TaskRules;
 
+            if (criteria.EventId == (int) EventType.ScanMatchCompareData)
+            {
+                return new RuleQueryGeneratorForComparingData(fraudCaseId, criteria);
+            }
+
             if (originalFormula.IndexOf(GroupByCustomer, System.StringComparison.Ordinal) >= 0)
             {
                 return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)

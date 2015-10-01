@@ -254,17 +254,34 @@ namespace FD.Lib.Service.Implement
             return GetData<SuspiciousInfo>(criteria).ToList();
         }
 
-        public List<DataTypeCapture> GetAllDataTypeCapture(ICriteria criteria)
-        {
-            return GetData<DataTypeCapture>(criteria).ToList();
-        }
-
         public decimal CaptureData(string sqlQueryString)
         {
             var dt = ExecuteReaderQueryInline(sqlQueryString);
             var result = decimal.Parse(dt.Rows[0]["DataCapture"].ToString(), CultureInfo.InvariantCulture);
 
             return result;
+        }
+
+        public List<DataCapture> ExecuteRuleForComparingData(string sqlQueryString)
+        {
+            var dataCaptureList = new List<DataCapture>();
+
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                dataCaptureList.Add(new DataCapture
+                {
+                    DataId = int.Parse(dt.Rows[i]["DataId"].ToString()),
+                    MatchId = int.Parse(dt.Rows[i]["MatchId"].ToString()),
+                    NewValue = decimal.Parse(dt.Rows[i]["NewValue"].ToString()),
+                    OldValue = decimal.Parse(dt.Rows[i]["OldValue"].ToString()),
+                    NewDate = DateTime.Parse(dt.Rows[i]["NewDate"].ToString()),
+                    OldDate = DateTime.Parse(dt.Rows[i]["OldDate"].ToString())
+                });
+            }
+
+            return dataCaptureList;
         }
     }
 }
