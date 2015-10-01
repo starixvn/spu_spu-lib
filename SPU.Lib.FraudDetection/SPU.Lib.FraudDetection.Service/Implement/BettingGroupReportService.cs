@@ -12,11 +12,7 @@ namespace FD.Lib.Service.Implement
     using System.Collections.Generic;
     using System.Linq;
     using Criteria.Reports;
-    using DataAccess.Implement;
-    using DataAccess.Interface;
     using DTO;
-    using Fanex.Data.Repository;
-    using Interface;
     using Model.Reports.BettingGroup;
 
     /// <summary>
@@ -28,7 +24,7 @@ namespace FD.Lib.Service.Implement
         {
             var result = GetData<RawAssociationCustomer>(criteria);
 
-            var groups = result.GroupBy(t => new {t.MatchId, t.GroupingOption});
+            var groups = result.GroupBy(t => new { t.MatchId, t.GroupingOption });
 
             var finalResult = new List<AssociationCustomer>();
 
@@ -36,19 +32,18 @@ namespace FD.Lib.Service.Implement
             {
                 var associationCustomers = string.Join(", ",
                     group.Where(t => t.CustId != criteria.CustId).Select(t => t.CustName));
-                associationCustomers = group.Single(t => t.CustId == criteria.CustId).CustName + ", " + associationCustomers;
+                associationCustomers = group.First(t => t.CustId == criteria.CustId).CustName + ", " + associationCustomers;
 
                 var associationTransactions = string.Join(",", group.Select(t => t.TransIds));
-                var sumwl = GetSumWinLossOfAssociationTransactions(associationTransactions);
+                var results = GetSumWinLossOfAssociationTransactions(associationCustomers, associationTransactions);
 
-                sumwl.AssociationMembers = associationCustomers;
-                finalResult.Add(sumwl);
+                finalResult.AddRange(results);
             }
 
             return finalResult;
         }
 
-        private AssociationCustomer GetSumWinLossOfAssociationTransactions(string associationTransactions)
+        private IList<AssociationCustomer> GetSumWinLossOfAssociationTransactions(string associationCustomers, string associationTransactions)
         {
             var criteriaForBodb02 = new SumWinLossByTransIdsGetCriteria
             {
@@ -59,17 +54,27 @@ namespace FD.Lib.Service.Implement
 
             if (resultFromBodb02.Count > 0)
             {
-                return resultFromBodb02.Single();
+                foreach (var sumwl in resultFromBodb02)
+                {
+                    sumwl.AssociationMembers = associationCustomers;
+                }
+
+                return resultFromBodb02;
             }
 
-            var criteriaForBodbArchieve = new SumWinLossByTransIdsGetFromDBArchiveCriteria
+            var criteriaForBodbArchieve = new SumWinLossByTransIdsGetFromDbArchiveCriteria
             {
                 TransList = associationTransactions
             };
 
             var resultFromBodbArchieve = GetData<AssociationCustomer>(criteriaForBodbArchieve).ToList();
 
-            return resultFromBodbArchieve.Count > 0 ? resultFromBodbArchieve.Single() : null;
+            foreach (var sumwl in resultFromBodbArchieve)
+            {
+                sumwl.AssociationMembers = associationCustomers;
+            }
+
+            return resultFromBodbArchieve.Count > 0 ? resultFromBodbArchieve : new List<AssociationCustomer>();
         }
     }
 }
