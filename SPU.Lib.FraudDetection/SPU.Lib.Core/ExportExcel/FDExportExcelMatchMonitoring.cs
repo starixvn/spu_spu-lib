@@ -7,13 +7,12 @@
 //   <change who="Long.Luu" date="2015.10.13">Created</change>
 // </history>
 
-using NPOI.SS.UserModel;
-
 namespace FD.Lib.Core.ExportExcel
 {
     using System.Collections.Generic;
     using System.Linq;
     using DTO;
+    using NPOI.SS.UserModel;
 
     /// <summary>
     /// Fraud Detection Export Excel - Match Monitoring report.
@@ -82,7 +81,7 @@ namespace FD.Lib.Core.ExportExcel
             if (!Data.Any())
             {
                 SetUpACell(Sheet.CreateRow(RowIndex), 0, "There is no data.", ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
-                Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(RowIndex, RowIndex, 0, Headers.Count()));
+                Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(RowIndex, RowIndex, 0, Headers.Count() - 1));
                 return;
             }
 
@@ -91,18 +90,18 @@ namespace FD.Lib.Core.ExportExcel
             {
                 var row = Sheet.CreateRow(RowIndex);
                 rowCount++;
-                SetUpACell(row, 0, rowCount.ToString(), ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
+                SetUpACell(row, 0, rowCount.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 1, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 2, dataRow.MatchCode, ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
+                SetUpACell(row, 2, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 3, dataRow.Event, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 4, dataRow.EventStatus, ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
+                SetUpACell(row, 4, dataRow.EventStatus, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
 
                 for (var i = 5; i <= (dataRow.SuspiciousCases.Count + 4); i++)
                 {
                     SetUpACell(
-                        row, 
+                        row,
                         i,
-                        string.Empty, 
+                        string.Empty,
                         ReportContentFont(),
                         GetCellStyleBySuspiciousStatus(dataRow.SuspiciousCases.ElementAt(i - 5).Value));
                 }

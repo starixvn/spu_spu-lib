@@ -2,10 +2,9 @@
 {
     using Criteria.Reports;
     using Model.Reports.FraudCaseDetail;
-    using Model.Reports.SuspiciousCustomer;
 
     public interface IFraudCaseDetailReportService
     {
-        FraudCaseDetailReportViewModel GetFraudCaseDetails(FraudCaseDetailReportCriteria criteria);
+        FraudCaseDetailReportViewModel GetFraudCaseDetails(FraudCaseDetailReportCriteria criteria, bool getDataForExcelFile = false);
     }
 }

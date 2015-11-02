@@ -98,6 +98,9 @@
   <ItemGroup>
     <Compile Include="Attribute\CompressAttribute.cs" />
     <Compile Include="Attribute\MailCodeUniqueAttribute.cs" />
+    <Compile Include="ExportExcel\FDExportExcelDailyDataMonitoring.cs" />
+    <Compile Include="ExportExcel\FDExportExcelFraudCaseDetails.cs" />
+    <Compile Include="ExportExcel\FDExportExcelSuspiciousCustomer.cs" />
     <Compile Include="ExportExcel\FDExportExcel.cs" />
     <Compile Include="ExportExcel\FDExportExcelMatchMonitoring.cs" />
     <Compile Include="ExportExcel\Legend.cs" />
@@ -114,6 +117,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FraudDetection.Lib.Model\FraudDetection.Lib.Model.csproj">
+      <Project>{4BE9AD54-E1B1-43CE-BFF6-139440888EE5}</Project>
+      <Name>FraudDetection.Lib.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
       <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>
       <Name>FraudDetection.Lib.DTO</Name>

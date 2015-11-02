@@ -28,8 +28,9 @@ namespace FD.Lib.Service.Implement
         /// Get Fraud Case Details.
         /// </summary>
         /// <param name="criteria">Criteria input.</param>
+        /// <param name="getDataForExcelFile">Check whether getting data for exporting to Excel file.</param>
         /// <returns>Fraud Case Detail Report Model.</returns>
-        public FraudCaseDetailReportViewModel GetFraudCaseDetails(FraudCaseDetailReportCriteria criteria)
+        public FraudCaseDetailReportViewModel GetFraudCaseDetails(FraudCaseDetailReportCriteria criteria, bool getDataForExcelFile = false)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
 
@@ -37,7 +38,7 @@ namespace FD.Lib.Service.Implement
 
             var suspiciousTickets = GetSuspiciousTickets(criteria, moveBetBalanceUp, summary);
 
-            var list = GetChoiceForSuspiciousTickets(suspiciousTickets);
+            var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets) : GetChoiceForSuspiciousTickets(suspiciousTickets);
 
             return new FraudCaseDetailReportViewModel
             {
@@ -80,6 +81,47 @@ namespace FD.Lib.Service.Implement
             return list;
         }
 
+        private List<FraudCaseDetailItem> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets)
+        {
+            var builder = new BetListHTMLBuilder();
+            var ticketHelper = new TicketHelper();
+
+            var list = new List<FraudCaseDetailItem>();
+
+            foreach (var ticket in suspiciousTickets)
+            {
+                var item = new FraudCaseDetailItem
+                {
+                    HomeName = RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty),
+                    AwayName = RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty),
+                    BetType = RefData.GetBetTypeName(ticket.BetTypeId.ToString(), "en", string.Empty),
+                    Choice = FDBuildChoice(ticket),
+                    CustName = ticket.UserName,
+                    IP = ticket.IP,
+                    Odds = string.Format("{0} ({1})", string.Format("{0:#,##0.00}", ticket.Odds), RefData.GetOddsTypeName(ticket.OddsType, "en", string.Empty)),
+                    Stake = string.Format("{0:#,##0}", ticket.Stake),
+                    WinLoss = ticket.Winlost,
+                    Score = string.Format("{0} - {1}", ticket.LiveHomeScore, ticket.LiveAwayScore),
+                    Status = ticket.Status,
+                    TransDate = ticket.TransDate.ToString(),
+                    TransId = ticket.TransId
+                };
+
+                list.Add(item);
+            }
+
+            list = list.OrderBy(t => t.CustName).ToList();
+
+            return list;
+        }
+
+        private string FDBuildChoice(Ticket ticket)
+        {
+            return ticket.BetTeam.ToUpper() == "H"
+                ? RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
+                : RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
+        }
+
         private FraudCaseDetailSummary GetFraudCaseDetailSummary(FraudCaseDetailReportCriteria criteria)
         {
             var summaryCriteria = new FraudCaseDetailSummaryGetByMatchIdCriteria
@@ -94,6 +136,9 @@ namespace FD.Lib.Service.Implement
 
             return new FraudCaseDetailSummary
             {
+                MatchId = criteria.MatchId,
+                CaseId = criteria.CaseId,
+                EventDate = criteria.EventDate,
                 CustomerCount = summaryCriteria.CustomerCount,
                 BetCount = summaryCriteria.BetCount,
                 TransList = summaryCriteria.TransList,

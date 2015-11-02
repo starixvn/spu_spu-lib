@@ -35,6 +35,16 @@ namespace FD.Lib.Core.ExportExcel
 
         public ISheet Sheet { get; set; }
 
+        public IFont DefaultFont { get; set; }
+
+        public IFont DefaultBoldFont { get; set; }
+
+        public ICellStyle DefaultCellStyleAlignLeft { get; set; }
+
+        public ICellStyle DefaultCellStyleAlignCenter { get; set; }
+
+        public ICellStyle DefaultCellStyleAlignRight { get; set; }
+
         public int RowIndex { get; set; }
         #endregion
 
@@ -52,6 +62,11 @@ namespace FD.Lib.Core.ExportExcel
             Headers = headers;
             Workbook = new HSSFWorkbook();
             Sheet = Workbook.CreateSheet(SheetName);
+            DefaultFont = CreateDefaultFont();
+            DefaultBoldFont = CreateDefaultFont((short)FontBoldWeight.Bold);
+            DefaultCellStyleAlignLeft = CreateDefaultCellStyle();
+            DefaultCellStyleAlignCenter = CreateDefaultCellStyle(HorizontalAlignment.Center);
+            DefaultCellStyleAlignRight = CreateDefaultCellStyle(HorizontalAlignment.Right);
         }
         #endregion
 
@@ -62,7 +77,7 @@ namespace FD.Lib.Core.ExportExcel
             foreach (var info in ReportInfo)
             {
                 var row = Sheet.CreateRow(RowIndex);
-                SetUpACell(row, 1, info.Key, ReportInfoFont(), DecorateCellAlignment(ReportInfoCellStyle(), HorizontalAlignment.Left));
+                SetUpACell(row, 1, info.Key, ReportInfoFont(), DefaultCellStyleAlignLeft);
                 SetUpACell(row, 2, info.Value, ReportInfoFont(), ReportInfoCellStyle());
                 RowIndex++;
             }
@@ -94,13 +109,13 @@ namespace FD.Lib.Core.ExportExcel
 
         protected virtual string WriteFile()
         {
-            var fileName = SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls";
-            using (var fileData = new FileStream(fileName, FileMode.Create))
+            var saveAsFileName = FilePath + "/" + SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls";
+            using (var fileData = new FileStream(saveAsFileName, FileMode.Create))
             {
                 Workbook.Write(fileData);
             }
 
-            return fileName;
+            return SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls";
         }
 
         public string ExportFile()
@@ -113,6 +128,18 @@ namespace FD.Lib.Core.ExportExcel
             AutoSizeColumnsWidth();
 
             return WriteFile();
+        }
+
+        public string GenerateExcelFile()
+        {
+            GenerateReportInfo();
+            GenerateReportLegend();
+            GenerateReportHeader();
+            GenerateReportContent();
+            SetColumnsWidth();
+            AutoSizeColumnsWidth();
+
+            return SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls"; ;
         }
 
         #endregion
@@ -132,18 +159,18 @@ namespace FD.Lib.Core.ExportExcel
             cell.CellStyle = cellStyle;
         }
 
-        private IFont CreateDefaultFont()
+        private IFont CreateDefaultFont(short isBolded = (short)FontBoldWeight.None)
         {
             var defaultFont = Workbook.CreateFont();
             defaultFont.FontHeightInPoints = 9;
             defaultFont.FontName = "Tahoma";
-            defaultFont.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.None;
+            defaultFont.Boldweight = isBolded;
             defaultFont.Color = IndexedColors.Black.Index;
 
             return defaultFont;
         }
 
-        private ICellStyle CreateDefaultCellStyle()
+        private ICellStyle CreateDefaultCellStyle(HorizontalAlignment alignment = HorizontalAlignment.Left)
         {
             var defaultCellStyle = Workbook.CreateCellStyle();
             defaultCellStyle.BorderLeft = BorderStyle.Thin;
@@ -153,7 +180,7 @@ namespace FD.Lib.Core.ExportExcel
             defaultCellStyle.WrapText = false;
             defaultCellStyle.FillForegroundColor = IndexedColors.White.Index;
             defaultCellStyle.FillPattern = FillPattern.SolidForeground;
-            defaultCellStyle.Alignment = HorizontalAlignment.Left;
+            defaultCellStyle.Alignment = alignment;
 
             return defaultCellStyle;
         }
@@ -173,12 +200,12 @@ namespace FD.Lib.Core.ExportExcel
         #region Fonts
         protected virtual IFont ReportInfoFont()
         {
-            return CreateDefaultFont();
+            return DefaultFont;
         }
 
         protected virtual IFont ReportLegendFont()
         {
-            return CreateDefaultFont();
+            return DefaultFont;
         }
 
         protected virtual IFont ReportHeaderFont()
@@ -186,7 +213,7 @@ namespace FD.Lib.Core.ExportExcel
             var font = Workbook.CreateFont();
             font.FontHeightInPoints = 10;
             font.FontName = "Tahoma";
-            font.Boldweight = (short)NPOI.SS.UserModel.FontBoldWeight.Bold;
+            font.Boldweight = (short)FontBoldWeight.Bold;
             font.Color = IndexedColors.White.Index;
 
             return font;
@@ -194,12 +221,12 @@ namespace FD.Lib.Core.ExportExcel
 
         protected virtual IFont ReportContentFont()
         {
-            return CreateDefaultFont();
+            return DefaultFont;
         }
 
         protected virtual IFont ReportFooterFont()
         {
-            return CreateDefaultFont();
+            return DefaultFont;
         }
 
         #endregion
@@ -208,12 +235,12 @@ namespace FD.Lib.Core.ExportExcel
 
         protected virtual ICellStyle ReportInfoCellStyle()
         {
-            return CreateDefaultCellStyle();
+            return DefaultCellStyleAlignLeft;
         }
 
         protected virtual ICellStyle ReportLegendCellStyle()
         {
-            return CreateDefaultCellStyle();
+            return DefaultCellStyleAlignLeft;
         }
 
         protected virtual ICellStyle ReportHeaderCellStyle()
@@ -226,14 +253,28 @@ namespace FD.Lib.Core.ExportExcel
             return cellStyle;
         }
 
-        protected virtual ICellStyle ReportContentCellStyle()
+        protected virtual ICellStyle ReportContentCellStyle(HorizontalAlignment alignment = HorizontalAlignment.Left)
         {
-            return CreateDefaultCellStyle();
+            ICellStyle cellStyle;
+            switch (alignment)
+            {
+                case HorizontalAlignment.Right:
+                    cellStyle = DefaultCellStyleAlignRight;
+                    break;
+                case HorizontalAlignment.Center:
+                    cellStyle =  DefaultCellStyleAlignCenter;
+                    break;
+                default:
+                    cellStyle = DefaultCellStyleAlignLeft;
+                    break;
+            }
+
+            return cellStyle;
         }
 
         protected virtual ICellStyle ReportFooterCellStyle()
         {
-            return CreateDefaultCellStyle();
+            return DefaultCellStyleAlignLeft;
         }
 
         #endregion
