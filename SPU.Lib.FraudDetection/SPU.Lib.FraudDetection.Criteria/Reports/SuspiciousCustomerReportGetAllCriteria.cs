@@ -10,6 +10,7 @@
 
 namespace FD.Lib.Criteria.Reports
 {
+    using System;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -17,6 +18,10 @@ namespace FD.Lib.Criteria.Reports
     /// </summary>
     public class SuspiciousCustomerReportGetAllCriteria : CriteriaBase
     {
+        public DateTime EventDateFrom { get; set; }
+
+        public DateTime EventDateTo { get; set; }
+
         public string CustName { get; set; }
 
         public int GroupId { get; set; }
