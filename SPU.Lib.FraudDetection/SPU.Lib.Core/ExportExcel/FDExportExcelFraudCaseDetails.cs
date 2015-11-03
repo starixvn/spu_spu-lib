@@ -77,15 +77,24 @@ namespace FD.Lib.Core.ExportExcel
 
         protected override void SetColumnsWidth()
         {
-            // Do nothing for Columns Width of Fraud Case Details report.
+            var counter = 0;
+            Sheet.SetColumnWidth(counter++, 2000);
+            Sheet.SetColumnWidth(counter++, 5000);
+            Sheet.SetColumnWidth(counter++, 6000);
+            Sheet.SetColumnWidth(counter++, 4000);
+            Sheet.SetColumnWidth(counter++, 3000);
+            Sheet.SetColumnWidth(counter++, 8000);
+            Sheet.SetColumnWidth(counter++, 2000);
+            Sheet.SetColumnWidth(counter++, 3000);
+            Sheet.SetColumnWidth(counter++, 3000);
+            Sheet.SetColumnWidth(counter++, 3000);
+            Sheet.SetColumnWidth(counter++, 2000);
+            Sheet.SetColumnWidth(counter++, 3000);
         }
 
         protected override void AutoSizeColumnsWidth()
         {
-            for (var i = 0; i < Headers.Count(); i ++)
-            {
-                Sheet.AutoSizeColumn(i);
-            }
+            // Do nothing for Columns Width of Fraud Case Details report.
         }
     }
 }

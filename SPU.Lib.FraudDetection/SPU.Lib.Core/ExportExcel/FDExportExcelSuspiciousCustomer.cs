@@ -67,15 +67,14 @@ namespace FD.Lib.Core.ExportExcel
         protected override void SetColumnsWidth()
         {
             Sheet.SetColumnWidth(0, 2000);
-            Sheet.SetColumnWidth(1, 8000);
-            Sheet.SetColumnWidth(2, 15000);
+            Sheet.SetColumnWidth(1, 6000);
+            Sheet.SetColumnWidth(2, 12000);
             Sheet.SetColumnWidth(3, 3000);
         }
 
         protected override void AutoSizeColumnsWidth()
         {
-            Sheet.AutoSizeColumn(1);
-            Sheet.AutoSizeColumn(2);
+            // Do nothing for Columns Width of Fraud Case Details report.
         }
     }
 }
