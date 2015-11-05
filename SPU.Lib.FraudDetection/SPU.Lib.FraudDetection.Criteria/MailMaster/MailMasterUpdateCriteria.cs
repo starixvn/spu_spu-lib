@@ -38,6 +38,17 @@ namespace FD.Lib.Criteria.MailMaster
 
         public string MailContent { get; set; }
 
+        [Required(ErrorMessage = "Mailing To Required.")]
+        [SpParam(Ignored = true)]
+        public string To { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string CcTo { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string BccTo { get; set; }
+
+
         public bool IsActive { get; set; }
 
         /// <summary>

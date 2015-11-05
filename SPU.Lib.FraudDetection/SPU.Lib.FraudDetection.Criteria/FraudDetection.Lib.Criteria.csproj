@@ -90,6 +90,10 @@
     <Compile Include="CustomerBettingGroup\BettingGroupAutomaticallyCreateCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupDeleteCriteria.cs" />
     <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetAllCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupGetCustomerByNameCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupInsertCustomerCriteria.cs" />
+    <Compile Include="CustomerBettingGroup\CustomerBettingGroupUpdateCriteria.cs" />
     <Compile Include="DataCapture\DataCaptureUpdateCriteria.cs" />
     <Compile Include="DataCapture\SuspiciousCapturedDataInsertCriteria.cs" />
     <Compile Include="DataCapture\DataCaptureGetAllNotComparedMatchesCriteria.cs" />
