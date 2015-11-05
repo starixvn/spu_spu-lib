@@ -84,6 +84,8 @@ namespace FD.Lib.QueryGenerator
 
             var afterRemoving = RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
 
+            afterRemoving = afterRemoving.Replace("$LIKE$","%");
+
             return afterRemoving;
         }
     }
