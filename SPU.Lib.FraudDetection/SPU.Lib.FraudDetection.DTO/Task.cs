@@ -11,7 +11,6 @@
 namespace FD.Lib.DTO
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     ///     Task Info class.
@@ -38,9 +37,9 @@ namespace FD.Lib.DTO
 
         public int CaseId { get; set; }
 
-        public bool IsBackgroundProcess { get; set; } // get from [IsBackgroundProcess] in Action table
-
         public int EventId { get; set; }
+
+        public int ActivityId { get; set; }
 
         public string NextActionIdList { get; set; }
 
@@ -56,19 +55,14 @@ namespace FD.Lib.DTO
         {
             get
             {
-                try
+                var intervalType = IntervalType != null ? IntervalType.ToLower() : string.Empty;
+                
+                switch (intervalType)
                 {
-                    switch (IntervalType.ToLower())
-                    {
-                        case "day": return Interval * 24 * 3600 * 1000;
-                        case "hour": return Interval * 3600 * 1000;
-                        case "minute": return Interval * 60 * 1000;
-                        default: return Interval * 1000; // second
-                    }
-                }
-                catch (Exception exception)
-                {
-                    throw exception;
+                    case "day": return Interval * 24 * 3600 * 1000;
+                    case "hour": return Interval * 3600 * 1000;
+                    case "minute": return Interval * 60 * 1000;
+                    default: return Interval * 1000; // second
                 }
             }
         }

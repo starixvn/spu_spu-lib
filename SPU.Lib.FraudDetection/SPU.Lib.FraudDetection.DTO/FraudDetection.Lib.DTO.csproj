@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
     <Compile Include="DailyDataMonitoring.cs" />
     <Compile Include="DataTypeCapture.cs" />
     <Compile Include="DataCapture.cs" />

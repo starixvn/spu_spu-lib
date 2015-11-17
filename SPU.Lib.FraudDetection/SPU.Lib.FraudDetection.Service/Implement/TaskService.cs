@@ -64,6 +64,11 @@ namespace FD.Lib.Service.Implement
             return GetData<Task>(criteria);
         }
 
+        public IEnumerable<Task> GetBackGroundTasksByCase(TaskBackGroundGetByCaseIdCriteria criteria)
+        {
+            return GetData<Task>(criteria);
+        }
+
         public ICommandResult UpdateTask(ICriteria criteria)
         {
             return _taskDataAccess.UpdateTask(criteria);

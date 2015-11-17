@@ -20,6 +20,6 @@ namespace FD.Lib.DTO
 
         public string EventDesc { get; set; }
 
-        public bool IsBackgroundProcess { get; set; }
+        public bool IsActive { get; set; }
     }
 }

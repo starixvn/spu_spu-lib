@@ -30,6 +30,8 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<Task> GetTasksByCaseId(TaskGetByCaseIdCriteria criteria);
 
+        IEnumerable<Task> GetBackGroundTasksByCase(TaskBackGroundGetByCaseIdCriteria criteria);
+
         ICommandResult UpdateTask(ICriteria criteria);
 
         IEnumerable<Task> LoadAllTasks(ICriteria criteria);
