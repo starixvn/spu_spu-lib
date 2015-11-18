@@ -42,6 +42,10 @@ namespace FD.Lib.Criteria.Task
 
         public int EventId { get; set; }
 
+        public int ActivityId { get; set; }
+
+        public int BackGroundTaskId { get; set; }
+
         public string NextActionIdList { get; set; }
 
         public string NextActionTargetIdList { get; set; }

@@ -41,6 +41,8 @@ namespace FD.Lib.DTO
 
         public int ActivityId { get; set; }
 
+        public int BackGroundTaskId { get; set; }
+
         public string NextActionIdList { get; set; }
 
         public string NextActionTargetIdList { get; set; }
