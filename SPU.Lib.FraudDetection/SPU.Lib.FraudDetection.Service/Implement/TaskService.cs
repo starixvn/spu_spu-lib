@@ -104,6 +104,11 @@ namespace FD.Lib.Service.Implement
             return Get<Task>(criteria);
         }
 
+        public IEnumerable<Task> GetTaskForTriggering(ICriteria criteria)
+        {
+            return GetData<Task>(criteria);
+        }
+
         public IEnumerable<SuspiciousInfo> CollectSuspiciousInfo(string sqlQueryString)
         {
             throw new NotImplementedException();

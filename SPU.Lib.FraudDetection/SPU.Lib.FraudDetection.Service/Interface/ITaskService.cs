@@ -46,6 +46,8 @@ namespace FD.Lib.Service.Interface
 
         Task GetTaskForExecuting(ICriteria criteria);
 
+        IEnumerable<Task> GetTaskForTriggering(ICriteria criteria);
+
         /// <summary>
         ///     Return a list of ids.
         /// </summary>

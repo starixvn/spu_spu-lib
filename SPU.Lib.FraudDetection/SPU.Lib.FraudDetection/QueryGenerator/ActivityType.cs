@@ -18,18 +18,18 @@ namespace FD.Lib.QueryGenerator
         CountSuspiciousTimes = 2,
 
         /// <summary>
-        /// Scan Match - Find Betting Groups.
-        /// </summary>
-        ScanMatchFinBettingGroups = 3,
-
-        /// <summary>
         /// Scan Match - Capture Data.
         /// </summary>
-        ScanMatchCaptureData = 4,
+        ScanMatchCaptureData = 3,
 
         /// <summary>
         /// Scan Match - Compare Match Data.
         /// </summary>
-        ScanMatchCompareData = 5
+        ScanMatchCompareData = 4,
+
+        /// <summary>
+        /// Scan Match - Find Betting Groups.
+        /// </summary>
+        ScanMatchFindBettingGroups = 5
     }
 }

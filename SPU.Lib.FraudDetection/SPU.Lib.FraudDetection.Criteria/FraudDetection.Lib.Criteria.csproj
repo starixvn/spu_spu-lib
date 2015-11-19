@@ -142,6 +142,7 @@
     <Compile Include="SuspiciousInfo\SuspiciousInfoInsertCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerSelectCriteria.cs" />
     <Compile Include="SuspiciousStatistic\SuspiciousCustomerGetByIdCriteria.cs" />
+    <Compile Include="Task\TaskGetForTriggeringCriteria.cs" />
     <Compile Include="Task\TaskBackGroundGetByCaseIdCriteria.cs" />
     <Compile Include="Task\TaskInfoCriteria.cs" />
     <Compile Include="Task\TaskGetAllByCaseIdCriteria.cs" />
