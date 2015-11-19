@@ -8,28 +8,13 @@ namespace FD.Lib.QueryGenerator
         None = 0,
 
         /// <summary>
-        /// Scan Match - Find Ticket
+        /// BackGround.
         /// </summary>
-        ScanMathFindTicket = 1,
+        BackGround = 1,
 
         /// <summary>
-        /// Count Suspicious Times By Customer.
+        /// Trigger.
         /// </summary>
-        CountSuspiciousTimes = 2,
-
-        /// <summary>
-        /// Scan Match - Find Betting Groups.
-        /// </summary>
-        ScanMatchFinBettingGroups = 3,
-
-        /// <summary>
-        /// Scan Match - Capture Data.
-        /// </summary>
-        ScanMatchCaptureData = 4,
-
-        /// <summary>
-        /// Scan Match - Compare Match Data.
-        /// </summary>
-        ScanMatchCompareData = 5
+        TriggerByOtherTask = 2
     }
 }

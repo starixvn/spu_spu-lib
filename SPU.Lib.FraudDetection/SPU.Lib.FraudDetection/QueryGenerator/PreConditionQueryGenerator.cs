@@ -22,7 +22,7 @@ namespace FD.Lib.QueryGenerator
             TaskInfoCriteria criteria,
             int chunkOfSelection)
         {
-            IsCountSuspiciousTime = criteria.EventId == CheckBettingHistory;
+            IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
             IsCheckNotScanned = criteria.IsCheckNotScanned;
             ChunkOfSelection = chunkOfSelection;
             OriginalFormula = criteria.TaskPreconditions;
@@ -62,7 +62,6 @@ namespace FD.Lib.QueryGenerator
         protected override string GenerateWhereSql(string formula)
         {
             OriginalFormula = formula;
-            var isSelectScanningState = PreConditionRawFormula.Contains("Match State");
             var sqlForNotScanned = Configs.Single(l => l.ConfigName.ToLower() == "match state").ConfigSQLField;
             var configIds = RelevantConfigIds.Split('#');
             foreach (var config in configIds.Select(configId => Configs.Single(l => l.ConfigId == int.Parse(configId))))
@@ -76,14 +75,7 @@ namespace FD.Lib.QueryGenerator
             }
 
             var sqlWhereString = "tch.sporttype between 1 and 99 and " + OriginalFormula;
-            if (isSelectScanningState && IsCheckNotScanned)
-            {
-                sqlWhereString = sqlWhereString.Replace("$MatchState$", "tch.matchid not in (" + sqlForNotScanned + ")");
-            }
-            else
-            {
-                sqlWhereString = sqlWhereString.Replace("$MatchState$", "1=1");
-            }
+            sqlWhereString = IsCheckNotScanned ? sqlWhereString.Replace("$MatchState$", "tch.matchid not in (" + sqlForNotScanned + ")") : sqlWhereString.Replace("$MatchState$", "1=1");
 
 
             return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));

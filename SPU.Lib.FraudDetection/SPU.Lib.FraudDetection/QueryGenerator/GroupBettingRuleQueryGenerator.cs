@@ -20,7 +20,7 @@ namespace FD.Lib.QueryGenerator
     {
         public GroupBettingRuleQueryGenerator(int fraudCaseId, TaskInfoCriteria criteria)
         {
-            IsCountSuspiciousTime = criteria.EventId == CheckBettingHistory;
+            IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
             OriginalFormula = criteria.TaskRules;
             RelevantConfigIds = criteria.RuleConfigs;
             GetConfigsInfo(fraudCaseId);
