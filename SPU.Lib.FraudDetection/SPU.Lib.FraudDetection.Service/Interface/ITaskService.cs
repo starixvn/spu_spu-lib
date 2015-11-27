@@ -9,6 +9,7 @@
 
 namespace FD.Lib.Service.Interface
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using Core.Utilities;
@@ -48,14 +49,11 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<Task> GetTaskForTriggering(ICriteria criteria);
 
-        /// <summary>
-        ///     Return a list of ids.
-        /// </summary>
-        /// <param name="sqlQueryString">The query string.</param>
-        /// <returns>List of ids.</returns>
-        IEnumerable<string> ExecutePrecondition(string sqlQueryString);
+        IEnumerable<Match> ExecutePrecondition(string sqlQueryString);
 
-        List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId);
+        IEnumerable<string> ExecutePreconditionForCountingSuspiciousTimes(string sqlQueryString);
+
+        List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId, DateTime eventDate);
 
         IEnumerable<T> GetData<T>(ICriteria criteria);
 
@@ -63,18 +61,8 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<T> GetData<T>(ICriteria criteria, ref int totalPages);
 
-        /// <summary>
-        ///     Execute Non Query Inline.
-        /// </summary>
-        /// <param name="sqlQueryString">Query string.</param>
-        /// <returns>Command result.</returns>
         ICommandResult ExecuteNonQueryInline(string sqlQueryString);
 
-        /// <summary>
-        ///     Execute Reader Query Inline.
-        /// </summary>
-        /// <param name="sqlQueryString">Query string.</param>
-        /// <returns>Data table.</returns>
         DataTable ExecuteReaderQueryInline(string sqlQueryString);
 
         IList<SuspiciousCustomer> GetSuspiciousCustomers(string sqlQueryString, int caseId);

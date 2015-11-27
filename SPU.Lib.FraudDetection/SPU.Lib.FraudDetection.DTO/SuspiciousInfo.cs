@@ -9,6 +9,8 @@
 
 namespace FD.Lib.DTO
 {
+    using System;
+
     /// <summary>
     ///     Suspicious Info Class.
     /// </summary>
@@ -16,12 +18,18 @@ namespace FD.Lib.DTO
     {
         public int CustId { get; set; }
 
+        public string CustName { get; set; }
+
         public int MatchId { get; set; }
+
+        public DateTime EventDate { get; set; }
 
         public int TaskId { get; set; }
 
         public string TransId { get; set; }
 
         public int CaseId { get; set; }
+
+        public int ViolationCounter { get; set; }
     }
 }

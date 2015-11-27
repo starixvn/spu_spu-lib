@@ -114,12 +114,25 @@ namespace FD.Lib.Service.Implement
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        ///     Return a list of ids.
-        /// </summary>
-        /// <param name="sqlQueryString">The query string.</param>
-        /// <returns>List of ids.</returns>
-        public IEnumerable<string> ExecutePrecondition(string sqlQueryString)
+        public IEnumerable<Match> ExecutePrecondition(string sqlQueryString)
+        {
+            var matches = new List<Match>();
+
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                matches.Add(new Match
+                {
+                    MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
+                    EventDate = DateTime.Parse(dt.Rows[i]["eventdate"].ToString())
+                });
+            }
+
+            return matches;
+        }
+
+        public IEnumerable<string> ExecutePreconditionForCountingSuspiciousTimes(string sqlQueryString)
         {
             var listOfIDs = new List<string>();
 
@@ -128,19 +141,13 @@ namespace FD.Lib.Service.Implement
             for (var i = 0; i < dt.Rows.Count; i++)
             {
                 listOfIDs.Add(dt.Rows[i][0].ToString());
+
             }
 
             return listOfIDs;
         }
 
-        /// <summary>
-        ///     Execute Rule.
-        /// </summary>
-        /// <param name="sqlQueryString">SQL Query String.</param>
-        /// <param name="taskId">Parameter Task ID.</param>
-        /// <param name="caseId">Parameter Case ID.</param>
-        /// <returns>List of Suspicious Info.</returns>
-        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId)
+        public List<SuspiciousInfo> ExecuteRule(string sqlQueryString, int taskId, int caseId, DateTime eventDate)
         {
             var suspiciousInfoList = new List<SuspiciousInfo>();
 
@@ -153,22 +160,26 @@ namespace FD.Lib.Service.Implement
                 customerList.Add(new
                 {
                     CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                    CustName = dt.Rows[i]["username"].ToString(),
                     MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
                     TransId = long.Parse(dt.Rows[i]["transid"].ToString())
                 });
             }
 
-            var groups = customerList.GroupBy(t => new { t.CustId, t.MatchId });
+            var groups = customerList.GroupBy(t => new { t.CustId, t.CustName, t.MatchId });
 
             foreach (var group in groups)
             {
                 var suspicion = new SuspiciousInfo
                 {
                     CustId = group.Key.CustId,
+                    CustName = group.Key.CustName,
                     MatchId = group.Key.MatchId,
+                    EventDate = eventDate,
                     TransId = string.Join(",", group.Select(t => t.TransId)),
                     CaseId = caseId,
-                    TaskId = taskId
+                    TaskId = taskId,
+                    ViolationCounter = 1
                 };
 
                 suspiciousInfoList.Add(suspicion);
@@ -177,13 +188,6 @@ namespace FD.Lib.Service.Implement
             return suspiciousInfoList;
         }
 
-        /// <summary>
-        ///     Execute Rule.
-        /// </summary>
-        /// <param name="sqlQueryString">SQL Query String.</param>
-        /// <param name="taskId">Parameter Task ID.</param>
-        /// <param name="caseId">Parameter Case ID.</param>
-        /// <returns>List of Suspicious Info.</returns>
         public List<SuspiciousGroupInfo> ExecuteRuleForGrouping(string sqlQueryString, int taskId, int caseId)
         {
             var suspiciousInfoList = new List<SuspiciousGroupInfo>();
