@@ -158,12 +158,14 @@ namespace FD.Lib.Service.Implement
             for (var i = 0; i < dt.Rows.Count; i++)
             {
                 customerList.Add(new
-                {
-                    CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
-                    CustName = dt.Rows[i]["username"].ToString(),
-                    MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
-                    TransId = long.Parse(dt.Rows[i]["transid"].ToString())
-                });
+                    {
+                        CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                        CustName = dt.Rows[i]["username"].ToString(),
+                        MatchId = int.Parse(dt.Rows[i]["matchid"].ToString()),
+                        TransId = long.Parse(dt.Rows[i]["transid"].ToString()),
+                        LiveHomeScore = dt.Columns.Contains("livehomescore") ? int.Parse(dt.Rows[i]["livehomescore"].ToString()) : 0,
+                        LiveAwayScore = dt.Columns.Contains("liveawayscore") ? int.Parse(dt.Rows[i]["liveawayscore"].ToString()) : 0
+                    });
             }
 
             var groups = customerList.GroupBy(t => new { t.CustId, t.CustName, t.MatchId });
@@ -179,7 +181,7 @@ namespace FD.Lib.Service.Implement
                     TransId = string.Join(",", group.Select(t => t.TransId)),
                     CaseId = caseId,
                     TaskId = taskId,
-                    ViolationCounter = 1
+                    ViolationCounter = group.Count(t => t.LiveHomeScore)
                 };
 
                 suspiciousInfoList.Add(suspicion);
