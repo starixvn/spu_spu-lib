@@ -181,7 +181,7 @@ namespace FD.Lib.Service.Implement
                     TransId = string.Join(",", group.Select(t => t.TransId)),
                     CaseId = caseId,
                     TaskId = taskId,
-                    ViolationCounter = group.Count(t => t.LiveHomeScore)
+                    ViolationCounter = group.GroupBy(t => new { t.LiveHomeScore, t.LiveAwayScore }).Count()
                 };
 
                 suspiciousInfoList.Add(suspicion);

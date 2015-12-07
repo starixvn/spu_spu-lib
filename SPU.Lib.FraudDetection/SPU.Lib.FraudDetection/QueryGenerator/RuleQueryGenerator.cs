@@ -9,6 +9,7 @@
 
 namespace FD.Lib.QueryGenerator
 {
+    using System;
     using System.Linq;
     using Criteria.Task;
 
@@ -31,13 +32,17 @@ namespace FD.Lib.QueryGenerator
         /// <returns>SQL string.</returns>
         public override string GenerateQuery()
         {
-            const string QueryRuleString = "select distinct {0} from {1} where {2}";
+            var queryRuleString = "select distinct {0} from {1} where {2}";
 
-            return string.Format(
-                QueryRuleString,
+            queryRuleString = string.Format(
+                queryRuleString,
                 GenerateSelectSql(),
                 GenerateFromSql(),
                 GenerateWhereSql(OriginalFormula));
+
+            return queryRuleString.ToLower().Contains("sum(ans.stake*ans.actualrate)")
+                ? ArrangeForSumStake(queryRuleString)
+                : queryRuleString;
         }
 
         /// <summary>
@@ -87,6 +92,23 @@ namespace FD.Lib.QueryGenerator
             afterRemoving = afterRemoving.Replace("$LIKE$","%");
 
             return afterRemoving;
+        }
+
+        private string ArrangeForSumStake(string originalStr)
+        {
+            var startIndex = originalStr.ToLower().IndexOf("sum(ans.stake*ans.actualrate)", StringComparison.Ordinal);
+            var remainedString = originalStr.Substring(startIndex, originalStr.Length - startIndex).ToLower();
+            var endIndex = remainedString.IndexOf("and", StringComparison.Ordinal) > 0
+                ? remainedString.IndexOf("and", StringComparison.Ordinal)
+                : (remainedString.IndexOf("or", StringComparison.Ordinal) > 0
+                    ? remainedString.IndexOf("or", StringComparison.Ordinal)
+                    : remainedString.Length);
+            var stakeConstraint = originalStr.Substring(startIndex, endIndex);
+
+            var arrangedString = originalStr.Replace(stakeConstraint, "1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet ";
+            arrangedString += "HAVING " + stakeConstraint;
+
+            return arrangedString;
         }
     }
 }
