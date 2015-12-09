@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace FD.Lib.Service.Implement
 {
     using Criteria.Reports;
@@ -33,6 +35,11 @@ namespace FD.Lib.Service.Implement
             var suspiciousCustomers = _reportDataAccess.GetAllSuspiciousCustomers(criteria);
 
             return suspiciousCustomers;
+        }
+
+        public IEnumerable<SuspiciousCustomerReportNoteModel> GetNotes(SuspiciousCustomerReportGetNotesCriteria criteria)
+        {
+            return GetData<SuspiciousCustomerReportNoteModel>(criteria);
         }
     }
 }
