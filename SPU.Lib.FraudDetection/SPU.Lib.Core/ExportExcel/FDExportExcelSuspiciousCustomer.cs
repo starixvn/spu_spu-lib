@@ -57,8 +57,8 @@ namespace FD.Lib.Core.ExportExcel
                 var row = Sheet.CreateRow(RowIndex);
                 SetUpACell(row, 0, dataRow.Row.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 1, dataRow.Customer.CustName, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 2, dataRow.Group.GroupName, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 3, dataRow.SuspiciousTime.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
+                //SetUpACell(row, 2, dataRow.Group.GroupName, ReportContentFont(), ReportContentCellStyle());
+                //SetUpACell(row, 3, dataRow.SuspiciousTime.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
 
                 RowIndex++;
             }

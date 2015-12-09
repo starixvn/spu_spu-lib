@@ -9,7 +9,6 @@
 
 namespace FD.Lib.DataAccess.Implement
 {
-    using System.Collections.Generic;
     using DTO;
     using Fanex.Data;
     using Fanex.Data.Repository;
@@ -30,15 +29,14 @@ namespace FD.Lib.DataAccess.Implement
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var suspiciousCustomers = db.Query<SuspiciousCustomerReportModel, Customer, Group, SuspiciousCustomerReportModel>(
-                    (report, cust, group) =>
+                var suspiciousCustomers = db.Query<SuspiciousCustomerReportModel, Customer, SuspiciousCustomerReportModel>(
+                    (report, cust) =>
                     {
                         report.Customer = cust;
-                        report.Group = group;
 
                         return report;
                     },
-                    "CustId,GroupId",
+                    "CustId",
                     criteria.GetSpParams());
 
                 var totalItem = (int)db.GetOuputParams()["rowcount"];

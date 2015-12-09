@@ -24,7 +24,13 @@ namespace FD.Lib.Criteria.Reports
 
         public string CustName { get; set; }
 
-        public int GroupId { get; set; }
+        public int? TotalViolations { get; set; }
+
+        public int? NewViolations { get; set; }
+
+        public bool? IsDelinquent { get; set; }
+
+        public bool? IsVerified { get; set; }
 
         public int PageSize { get; set; }
 

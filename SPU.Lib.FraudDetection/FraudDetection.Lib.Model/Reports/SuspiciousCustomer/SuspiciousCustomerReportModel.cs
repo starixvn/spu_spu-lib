@@ -9,6 +9,7 @@
 
 namespace FD.Lib.Model.Reports.SuspiciousCustomer
 {
+    using System;
     using DTO;
 
     /// <summary>
@@ -18,10 +19,32 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
     {
         public int Row { get; set; }
 
+        public bool IsDelinquent { get; set; }
+
+        public bool HasNote { get; set; }
+
+        public bool IsVerified { get; set; }
+
         public Customer Customer { get; set; }
 
-        public Group Group { get; set; }
+        public int TotalViolations { get; set; }
 
-        public int SuspiciousTime { get; set; }
+        public int NewViolations { get; set; }
+
+        public int ViolatedCases { get; set; }
+
+        public string Assignees { get; set; }
+
+        public string LastVerifiedDateString
+        {
+            get
+            {
+                return LastVerifiedDate.HasValue ? LastVerifiedDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : string.Empty;
+            }
+        }
+
+        public DateTime? LastVerifiedDate { get; set; }
+
+        public string LastVerifiedBy { get; set; }
     }
 }
