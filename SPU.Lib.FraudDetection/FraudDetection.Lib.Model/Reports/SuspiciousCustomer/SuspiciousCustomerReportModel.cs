@@ -34,17 +34,5 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
         public int ViolatedCases { get; set; }
 
         public string Assignees { get; set; }
-
-        public string LastVerifiedDateString
-        {
-            get
-            {
-                return LastVerifiedDate.HasValue ? LastVerifiedDate.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : string.Empty;
-            }
-        }
-
-        public DateTime? LastVerifiedDate { get; set; }
-
-        public string LastVerifiedBy { get; set; }
     }
 }

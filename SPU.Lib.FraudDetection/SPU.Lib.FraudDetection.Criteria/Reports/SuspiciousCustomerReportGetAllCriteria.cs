@@ -28,9 +28,9 @@ namespace FD.Lib.Criteria.Reports
 
         public int? NewViolations { get; set; }
 
-        public bool? IsDelinquent { get; set; }
-
         public bool? IsVerified { get; set; }
+
+        public int? CaseId { get; set; }
 
         public int PageSize { get; set; }
 
