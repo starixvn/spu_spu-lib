@@ -21,5 +21,7 @@ namespace FD.Lib.DTO
         public string CaseDesc { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsInternal { get; set; }
     }
 }

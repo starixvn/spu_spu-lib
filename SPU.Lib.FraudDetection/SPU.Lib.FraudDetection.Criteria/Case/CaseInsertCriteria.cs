@@ -25,6 +25,8 @@ namespace FD.Lib.Criteria.Case
 
         public bool IsActive { get; set; }
 
+        public bool IsInternal { get; set; }
+
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>
