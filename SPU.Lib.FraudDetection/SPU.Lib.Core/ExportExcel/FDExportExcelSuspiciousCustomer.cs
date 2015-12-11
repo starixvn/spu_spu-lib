@@ -56,7 +56,13 @@ namespace FD.Lib.Core.ExportExcel
             {
                 var row = Sheet.CreateRow(RowIndex);
                 SetUpACell(row, 0, dataRow.Row.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
-                SetUpACell(row, 1, dataRow.Customer.CustName, ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, 1, dataRow.IsDelinquent ? "Yes" : "No", ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, 2, dataRow.IsVerified ? "Yes" : "No", ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, 3, dataRow.Customer.CustName, ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, 4, dataRow.TotalViolations.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
+                SetUpACell(row, 5, dataRow.NewViolations.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
+                SetUpACell(row, 6, dataRow.ViolatedCases.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
+                SetUpACell(row, 7, dataRow.Assignees == null ? "-" : dataRow.Assignees.Length > 0 ? dataRow.Assignees : "-", ReportContentFont(), ReportContentCellStyle());
                 //SetUpACell(row, 2, dataRow.Group.GroupName, ReportContentFont(), ReportContentCellStyle());
                 //SetUpACell(row, 3, dataRow.SuspiciousTime.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
 
@@ -67,9 +73,13 @@ namespace FD.Lib.Core.ExportExcel
         protected override void SetColumnsWidth()
         {
             Sheet.SetColumnWidth(0, 2000);
-            Sheet.SetColumnWidth(1, 6000);
-            Sheet.SetColumnWidth(2, 12000);
-            Sheet.SetColumnWidth(3, 3000);
+            Sheet.SetColumnWidth(1, 4000);
+            Sheet.SetColumnWidth(2, 3000);
+            Sheet.SetColumnWidth(3, 4000);
+            Sheet.SetColumnWidth(4, 4000);
+            Sheet.SetColumnWidth(5, 4000);
+            Sheet.SetColumnWidth(6, 4000);
+            Sheet.SetColumnWidth(7, 8000);
         }
 
         protected override void AutoSizeColumnsWidth()
