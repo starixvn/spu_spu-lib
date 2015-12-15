@@ -8,7 +8,7 @@ namespace FD.Lib.QueryGenerator
         None = 0,
 
         /// <summary>
-        /// Scan Match - Find Ticket
+        /// Scan Match - Find Ticket.
         /// </summary>
         ScanMathFindTicket = 1,
 

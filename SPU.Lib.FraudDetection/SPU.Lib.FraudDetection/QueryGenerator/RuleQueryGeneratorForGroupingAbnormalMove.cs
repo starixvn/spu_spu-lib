@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------
-// <copyright file="RuleQueryGeneratorForGroupingArbitrage.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="RuleQueryGeneratorForGroupingAbnormalMove.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,8 +16,8 @@ namespace FD.Lib.QueryGenerator
         public RuleQueryGeneratorForGroupingAbnormalMove(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
-            GroupingCondition = OriginalFormula;
-            ForeignKeyName = "temptable.abnormalmove";
+            groupingCondition = OriginalFormula;
+            foreignKeyName = "temptable.abnormalmove";
         }
         /*
         protected override void CreateAdditionalParams(string ruleConfigWithoutGroupingConfig)

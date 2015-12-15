@@ -79,6 +79,7 @@
     <Compile Include="Group\GroupListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\BettingGroup\AssociationCustomer.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsModel.cs" />
     <Compile Include="Reports\DailyDataMonitoring\DailyDataMonitoringModel.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailItem.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailReportModel.cs" />

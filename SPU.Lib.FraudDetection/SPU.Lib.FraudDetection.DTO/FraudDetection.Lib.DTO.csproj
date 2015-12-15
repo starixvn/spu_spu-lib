@@ -79,6 +79,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity.cs" />
+    <Compile Include="CustomerDetails\CustomerInfo.cs" />
+    <Compile Include="CustomerDetails\WinlossStatisticTopBettypes.cs" />
+    <Compile Include="CustomerDetails\WinlossStatisticTopSports.cs" />
+    <Compile Include="CustomerDetails\WinlossStatisticEventChoice.cs" />
+    <Compile Include="CustomerDetails\WinlossStatisticSummary.cs" />
+    <Compile Include="CustomerDetails\LogsNotes.cs" />
+    <Compile Include="CustomerDetails\FraudCaseDetails.cs" />
     <Compile Include="DailyDataMonitoring.cs" />
     <Compile Include="DataTypeCapture.cs" />
     <Compile Include="DataCapture.cs" />

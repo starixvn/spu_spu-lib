@@ -84,7 +84,9 @@ namespace FD.Lib.QueryGenerator
             var sqlFromString = "bodb02.dbo.match tch with(nolock) ";
             var relevantTables = GenerateRelevantTables();
             if (string.IsNullOrEmpty(relevantTables))
+            {
                 return string.Empty;
+            }
 
             if (relevantTables.ToLower().Contains("count("))
             {
@@ -116,7 +118,9 @@ namespace FD.Lib.QueryGenerator
         protected string GenerateRelevantTables()
         {
             if (string.IsNullOrEmpty(RelevantConfigIds))
+            {
                 return string.Empty;
+            }
 
             var relevantTables = string.Empty;
             var configsList = RelevantConfigIds.Split('#');

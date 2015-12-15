@@ -110,6 +110,17 @@
     <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />
     <Compile Include="Reports\BettingGroupsMergeCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\ViolatedCasesGetByCustIdCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerNoteInsertCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerVerifyInsertCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportTransListCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportFraudTicketsFromDbArchiveCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportCustInfoCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportWinlossStatisticCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportFraudTicketsCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportLogNoteCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportFraudCaseCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDetailsReportCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerReportGetNotesCriteria.cs" />
     <Compile Include="Reports\DailyDataMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\MatchMonitoringReportGetAllDBArchiveCriteria.cs" />

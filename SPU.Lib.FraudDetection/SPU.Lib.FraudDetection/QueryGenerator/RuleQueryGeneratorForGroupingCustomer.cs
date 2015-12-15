@@ -7,8 +7,8 @@ namespace FD.Lib.QueryGenerator
         public RuleQueryGeneratorForGroupingCustomer(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
-            GroupingCondition = OriginalFormula;
-            ForeignKeyName = "temptable.betcount";
+            groupingCondition = OriginalFormula;
+            foreignKeyName = "temptable.betcount";
         }
     }
 }

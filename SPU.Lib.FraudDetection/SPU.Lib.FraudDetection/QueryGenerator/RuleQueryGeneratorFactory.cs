@@ -19,7 +19,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
         {
             var originalFormula = criteria.TaskRules;
 
-            if (criteria.ActivityId == (int) ActivityType.ScanMatchCompareData)
+            if (criteria.ActivityId == (int)ActivityType.ScanMatchCompareData)
             {
                 return new RuleQueryGeneratorForComparingData(fraudCaseId, criteria);
             }
@@ -28,7 +28,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
             {
                 return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)
                 {
-                    GroupingConfigName = GroupByCustomer
+                    groupingConfigName = GroupByCustomer
                 };
             }
 
@@ -36,7 +36,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
             {
                 return new RuleQueryGeneratorForGroupingChoice(fraudCaseId, criteria)
                 {
-                    GroupingConfigName = GroupByChoice
+                    groupingConfigName = GroupByChoice
                 };
             }
 
@@ -44,7 +44,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
             {
                 return new RuleQueryGeneratorForGroupingIp(fraudCaseId, criteria)
                 {
-                    GroupingConfigName = GroupByIp
+                    groupingConfigName = GroupByIp
                 };
             }
             
@@ -52,7 +52,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
             {
                 return new RuleQueryGeneratorForGroupingArbitrage(fraudCaseId, criteria)
                 {
-                    GroupingConfigName = Arbitrage
+                    groupingConfigName = Arbitrage
                 };
             }
 
@@ -60,7 +60,7 @@ namespace FD.Lib.BusinessManager.QueryGenerator
             {
                 return new RuleQueryGeneratorForGroupingAbnormalMove(fraudCaseId, criteria)
                 {
-                    GroupingConfigName = AbnormalMove
+                    groupingConfigName = AbnormalMove
                 };
             }
 

@@ -8,8 +8,8 @@ namespace FD.Lib.BusinessManager.QueryGenerator
         public RuleQueryGeneratorForGroupingIp(int fraudCaseId, TaskInfoCriteria criteria)
             : base(fraudCaseId, criteria)
         {
-            GroupingCondition = OriginalFormula;
-            ForeignKeyName = "temptable.groupbyip";
+            groupingCondition = OriginalFormula;
+            foreignKeyName = "temptable.groupbyip";
         }
     }
 }

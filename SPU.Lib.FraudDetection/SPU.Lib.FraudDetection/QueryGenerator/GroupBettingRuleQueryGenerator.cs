@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="RuleQueryGenerator.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupBettingRuleQueryGenerator.cs" company="Nexcel Solutions Vietnam">
 // Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -69,7 +69,9 @@ namespace FD.Lib.QueryGenerator
             var startIndexSubStr2 = subString2.IndexOf('@');
             ruleString = startIndexSubStr2 > -1 ? subString2.Substring(0, startIndexSubStr2) : subString2;
 
-            return subString1.Substring(0, startIndexSubStr1) + (startIndexSubStr2 > -1 ? subString2.Substring(startIndexSubStr2, subString2.Length - startIndexSubStr2) : string.Empty);
+            return subString1.Substring(0, startIndexSubStr1) + (startIndexSubStr2 > -1 
+                ? subString2.Substring(startIndexSubStr2, subString2.Length - startIndexSubStr2) 
+                : string.Empty);
         }
 
         #endregion

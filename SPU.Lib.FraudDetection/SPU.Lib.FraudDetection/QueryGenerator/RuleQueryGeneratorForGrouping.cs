@@ -8,17 +8,17 @@ namespace FD.Lib.QueryGenerator
     
     public abstract class RuleQueryGeneratorForGrouping : RuleQueryGenerator
     {
-        protected Config GroupingConfig;
+        protected Config groupingConfig;
 
-        protected Config SumWlByMatchConfig;
+        protected Config sumWlByMatchConfig;
 
-        protected string GroupingCondition;
+        protected string groupingCondition;
 
-        protected string SumWlByMatchCondition;
+        protected string sumWlByMatchCondition;
 
-        protected string ForeignKeyName;
+        protected string foreignKeyName;
 
-        public string GroupingConfigName { get; set; }
+        public string groupingConfigName { get; set; }
 
         protected IDictionary<string, string> additionalParams;
 
@@ -34,14 +34,14 @@ namespace FD.Lib.QueryGenerator
         {
             PreGenerateQuery();
 
-            GroupingConfig = Configs.Single(l => l.ConfigName == GroupingConfigName);
-            RemoveSpecificConfigId(GroupingConfig.ConfigId.ToString());
+            groupingConfig = Configs.Single(l => l.ConfigName == groupingConfigName);
+            RemoveSpecificConfigId(groupingConfig.ConfigId.ToString());
 
-            var rawSql = TablesForeignKey.Single(l => l.DBTable2 == ForeignKeyName).ForeignKey;
+            var rawSql = TablesForeignKey.Single(l => l.DBTable2 == foreignKeyName).ForeignKey;
             var groupingCondition = string.Empty;
 
-            OriginalFormula = RemoveGroupingConfig(OriginalFormula, GroupingConfigName, ref groupingCondition);
-            GroupingCondition = groupingCondition;
+            OriginalFormula = RemoveGroupingConfig(OriginalFormula, groupingConfigName, ref groupingCondition);
+            this.groupingCondition = groupingCondition;
 
             CreateAdditionalParams(OriginalFormula);
 
@@ -58,25 +58,24 @@ namespace FD.Lib.QueryGenerator
         {
             var specificCondition = string.Empty;
 
-            SumWlByMatchConfig = Configs.Single(l => l.ConfigName == SumWlByMatchConfigName);
-            RemoveSpecificConfigId(SumWlByMatchConfig.ConfigId.ToString());
-            OriginalFormula = RemoveGroupingConfig(OriginalFormula, SumWlByMatchConfigName,
-                ref specificCondition);
-            SumWlByMatchCondition = specificCondition;
+            sumWlByMatchConfig = Configs.Single(l => l.ConfigName == SumWlByMatchConfigName);
+            RemoveSpecificConfigId(sumWlByMatchConfig.ConfigId.ToString());
+            OriginalFormula = RemoveGroupingConfig(OriginalFormula, SumWlByMatchConfigName, ref specificCondition);
+            sumWlByMatchCondition = specificCondition;
         }
 
         private string PostGenerateQuery(string sql)
         {
-            if (string.IsNullOrEmpty(SumWlByMatchCondition))
+            if (string.IsNullOrEmpty(sumWlByMatchCondition))
             {
                 return sql.Replace("$additionalsumwl$", string.Empty);
             }
 
-            SumWlByMatchCondition = SumWlByMatchCondition.Replace("%", string.Empty);
-            var condition = SumWlByMatchCondition.Replace(SumWlByMatchConfigName, string.Empty);
+            sumWlByMatchCondition = sumWlByMatchCondition.Replace("%", string.Empty);
+            var condition = sumWlByMatchCondition.Replace(SumWlByMatchConfigName, string.Empty);
 
-            const string key = "temptable.sumwl";
-            var foreignKey = TablesForeignKey.Single(t => t.DBTable2.Equals(key)).ForeignKey;
+            const string Key = "temptable.sumwl";
+            var foreignKey = TablesForeignKey.Single(t => t.DBTable2.Equals(Key)).ForeignKey;
 
             foreignKey = foreignKey.Replace("$winlosscondition$", condition);
 
@@ -91,7 +90,7 @@ namespace FD.Lib.QueryGenerator
             var additionalWhere = GenerateWhereSql(ruleConfigWithoutGroupingConfig);
             additionalParams.Add("additionalWhere", additionalWhere);
 
-            var additionalHaving = GroupingCondition.Replace(GroupingConfigName, GroupingConfig.ConfigSQLField);
+            var additionalHaving = groupingCondition.Replace(groupingConfigName, groupingConfig.ConfigSQLField);
             additionalParams.Add("additionalHaving", additionalHaving);
         }
 
@@ -109,7 +108,9 @@ namespace FD.Lib.QueryGenerator
             var startIndexOfConfigId = RelevantConfigIds.IndexOf(configId, StringComparison.Ordinal);
 
             if (startIndexOfConfigId < 0)
+            {
                 return;
+            }
 
             if (startIndexOfConfigId == 0)
             {

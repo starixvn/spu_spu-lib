@@ -40,9 +40,9 @@ namespace FD.Lib.QueryGenerator
 
         private new string GenerateFromSql()
         {
-            const string sqlFromString = "dbo.CapturedData cd WITH (nolock)";
+            const string SqlFromString = "dbo.CapturedData cd WITH (nolock)";
 
-            return sqlFromString;
+            return SqlFromString;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace FD.Lib.QueryGenerator
         /// <returns>WHERE SQL string.</returns>
         protected override string GenerateWhereSql(string formula)
         {
-            const string requiredCondition = "cd.matchid IN ($param1$)";
+            const string RequiredCondition = "cd.matchid IN ($param1$)";
 
             if (string.IsNullOrEmpty(RelevantConfigIds))
             {
@@ -69,10 +69,10 @@ namespace FD.Lib.QueryGenerator
 
             if (string.IsNullOrEmpty(formula))
             {
-                return requiredCondition;
+                return RequiredCondition;
             }
 
-            var sqlWhereString = requiredCondition + " and (" + OriginalFormula + ")";
+            var sqlWhereString = RequiredCondition + " and (" + OriginalFormula + ")";
 
             var afterRemoving = RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
 

@@ -8,12 +8,12 @@ namespace FD.Lib.QueryGenerator
         None = 0,
 
         /// <summary>
-        /// BackGround.
+        /// Back Ground.
         /// </summary>
         BackGround = 1,
 
         /// <summary>
-        /// Trigger.
+        /// Trigger By Other Task.
         /// </summary>
         TriggerByOtherTask = 2
     }
