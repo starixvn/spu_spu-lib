@@ -110,9 +110,23 @@ namespace FD.Lib.Service.Implement
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
             var transList = _customerDetailsDataAccess.GetTransListByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate));
-            var suspiciousTickets = toDate < moveBetBalanceUp.BalanceUpDay
-                ? GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(transList))
-                : GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria(fromDate, toDate, moveBetBalanceUp.MoveBetsDay, transList));
+            
+            if (toDate <= moveBetBalanceUp.BalanceUpDay)
+            {
+                return GetChoiceForSuspiciousTickets(
+                    GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(transList)).ToList());
+            }
+
+            if (fromDate > moveBetBalanceUp.BalanceUpDay)
+            {
+                return GetChoiceForSuspiciousTickets(
+                    GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria(fromDate, toDate, moveBetBalanceUp.MoveBetsDay, transList)).ToList());
+            }
+
+            var suspiciousTickets =
+                    GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(transList)).ToList();
+            suspiciousTickets.AddRange(
+                GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria(fromDate, toDate, moveBetBalanceUp.MoveBetsDay, transList)).ToList());
 
             return GetChoiceForSuspiciousTickets(suspiciousTickets);
         }
@@ -167,6 +181,11 @@ namespace FD.Lib.Service.Implement
         public ICommandResult InsertCustomerNote(ICriteria criteria)
         {
             return _customerDetailsDataAccess.InsertCustomerNote(criteria);
+        }
+
+        public ICommandResult UpdateCustomerDelinquent(ICriteria criteria)
+        {
+            return _customerDetailsDataAccess.UpdateCustomerDelinquent(criteria);
         }
 
         public List<int> GetViolatedCases(ICriteria criteria)

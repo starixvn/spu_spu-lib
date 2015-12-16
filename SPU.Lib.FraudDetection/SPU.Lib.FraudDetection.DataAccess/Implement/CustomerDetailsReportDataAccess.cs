@@ -71,6 +71,11 @@ namespace FD.Lib.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
+        public ICommandResult UpdateCustomerDelinquent(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
         public List<int> GetViolatedCases(ICriteria criteria)
         {
             var hash = criteria.GetSpParams();

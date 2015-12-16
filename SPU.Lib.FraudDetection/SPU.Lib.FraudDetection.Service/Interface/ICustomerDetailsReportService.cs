@@ -47,6 +47,8 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult InsertCustomerNote(ICriteria criteria);
 
+        ICommandResult UpdateCustomerDelinquent(ICriteria criteria);
+
         List<int> GetViolatedCases(ICriteria criteria);
     }
 }

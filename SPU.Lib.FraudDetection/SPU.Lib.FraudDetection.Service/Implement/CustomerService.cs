@@ -13,7 +13,6 @@ namespace FD.Lib.Service.Implement
     using System.Linq;
     using Criteria.SuspiciousStatistic;
     using DTO;
-    using Fanex.Data.Repository;
     using Interface;
 
     public class CustomerService : QueryService, ICustomerService

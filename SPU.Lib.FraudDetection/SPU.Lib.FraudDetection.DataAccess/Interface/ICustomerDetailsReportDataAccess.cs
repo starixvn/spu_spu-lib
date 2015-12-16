@@ -28,6 +28,8 @@ namespace FD.Lib.DataAccess.Interface
 
         ICommandResult InsertCustomerNote(ICriteria criteria);
 
+        ICommandResult UpdateCustomerDelinquent(ICriteria criteria);
+
         List<int> GetViolatedCases(ICriteria criteria);
     }
 }

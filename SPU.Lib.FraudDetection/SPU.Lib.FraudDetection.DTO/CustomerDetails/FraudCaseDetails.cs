@@ -26,5 +26,13 @@ namespace FD.Lib.DTO.CustomerDetails
         public DateTime LastVerifiedDate { get; set; }
 
         public string LastVerifiedBy { get; set; }
+
+        public string LastVerifiedDateString
+        {
+            get
+            {
+                return LastVerifiedDate.ToString("MM/dd/yyyy hh:mm tt");
+            }
+        }
     }
 }

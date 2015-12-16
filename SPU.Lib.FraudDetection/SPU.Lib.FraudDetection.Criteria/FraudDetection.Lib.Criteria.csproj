@@ -110,6 +110,7 @@
     <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />
     <Compile Include="Reports\BettingGroupsMergeCriteria.cs" />
+    <Compile Include="Reports\CustomerDetails\CustomerDelinquentUpdateCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\ViolatedCasesGetByCustIdCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerNoteInsertCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerVerifyInsertCriteria.cs" />

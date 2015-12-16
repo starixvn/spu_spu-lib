@@ -20,5 +20,13 @@ namespace FD.Lib.DTO.CustomerDetails
         public string AuthorName { get; set; }
 
         public string CustLogTypeName { get; set; }
+
+        public string LogDateString
+        {
+            get
+            {
+                return LogDate.ToString("MM/dd/yyyy");
+            }
+        }
     }
 }
