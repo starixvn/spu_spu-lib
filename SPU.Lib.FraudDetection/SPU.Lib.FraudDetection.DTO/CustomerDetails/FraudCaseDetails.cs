@@ -23,7 +23,7 @@ namespace FD.Lib.DTO.CustomerDetails
 
         public int UnverifiedViolations { get; set; }
 
-        public DateTime LastVerifiedDate { get; set; }
+        public DateTime? LastVerifiedDate { get; set; }
 
         public string LastVerifiedBy { get; set; }
 
@@ -31,7 +31,7 @@ namespace FD.Lib.DTO.CustomerDetails
         {
             get
             {
-                return LastVerifiedDate.ToString("MM/dd/yyyy hh:mm tt");
+                return LastVerifiedDate == null ? "-" : LastVerifiedDate.Value.ToString("MM/dd/yyyy hh:mm tt");
             }
         }
     }
