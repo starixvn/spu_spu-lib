@@ -32,7 +32,7 @@ namespace FD.Lib.DTO
         {
             get
             {
-                var distinctCurrencies = Customers.Select(t => t.Currency.CurrencyName).Distinct().ToList();
+                var distinctCurrencies = Customers.Select(t => t.CurrencyName).Distinct().ToList();
                 var currencies = string.Join(",", distinctCurrencies);
 
                 return currencies;

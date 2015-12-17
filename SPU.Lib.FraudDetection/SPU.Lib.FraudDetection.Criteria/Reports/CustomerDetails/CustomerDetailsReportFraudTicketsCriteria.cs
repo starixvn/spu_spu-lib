@@ -23,19 +23,11 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
 
         public DateTime MoveBetDate { get; set; }
 
+        public DateTime WinlostDate { get; set; }
+
+        public int MatchId { get; set; }
+
         public string TransList { get; set; }
-    
-        public CustomerDetailsReportFraudTicketsCriteria(
-            DateTime fromDate,
-            DateTime toDate,
-            DateTime movebetDate,
-            string transList)
-        {
-            FromDate = fromDate;
-            ToDate = toDate;
-            MoveBetDate = movebetDate;
-            TransList = transList;
-        }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

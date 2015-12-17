@@ -18,6 +18,8 @@ namespace FD.Lib.DTO
 
         public string CustName { get; set; }
 
-        public Currency Currency { get; set; }
+        public int CurrencyId { get; set; }
+
+        public string CurrencyName { get; set; }
     }
 }

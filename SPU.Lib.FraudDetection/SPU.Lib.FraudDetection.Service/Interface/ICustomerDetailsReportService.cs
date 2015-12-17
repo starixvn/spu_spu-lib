@@ -11,7 +11,6 @@ namespace FD.Lib.Service.Interface
 {
     using System;
     using System.Collections.Generic;
-    using Criteria.Reports.CustomerDetails;
     using DTO.CustomerDetails;
     using Fanex.Data.Repository;
     using Model.Reports.CustomerDetails;
@@ -27,7 +26,7 @@ namespace FD.Lib.Service.Interface
 
         CustomerInfo GetCustomerInfo(ICriteria criteria);
 
-        string GetTransListByCustId(CustomerDetailsReportTransListCriteria criteria);
+        IEnumerable<SuspiciousInfoDetails> GetSuspiciousInfoByCustId(ICriteria criteria);
 
         IEnumerable<FraudCaseDetails> GetFraudCasesDetails(ICriteria criteria);
 

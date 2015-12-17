@@ -101,10 +101,10 @@ namespace FD.Lib.QueryGenerator
                 ? remainedString.IndexOf("and", StringComparison.Ordinal)
                 : (remainedString.IndexOf("or", StringComparison.Ordinal) > 0
                     ? remainedString.IndexOf("or", StringComparison.Ordinal)
-                    : remainedString.Length);
+                    : remainedString.Length - 1);
             var stakeConstraint = originalStr.Substring(startIndex, endIndex);
 
-            var arrangedString = originalStr.Replace(stakeConstraint, "1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet ";
+            var arrangedString = originalStr.Replace(stakeConstraint, "1=1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet ";
             arrangedString += "HAVING " + stakeConstraint;
 
             return arrangedString;

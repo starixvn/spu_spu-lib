@@ -56,15 +56,7 @@ namespace FD.Lib.DataAccess.Implement
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var customers = db.Query<Customer, Currency, Customer>(
-                    (cust, curr) =>
-                    {
-                        cust.Currency = curr;
-
-                        return cust;
-                    },
-                    "CurrencyId",
-                    criteria.GetSpParams());
+                var customers = db.Query<Customer>(criteria.GetSpParams());
 
                 return customers.FirstOrDefault();
             }
@@ -131,11 +123,8 @@ namespace FD.Lib.DataAccess.Implement
                         {
                             CustId = groupDetail.CustId,
                             CustName = groupDetail.CustName,
-                            Currency = new Currency
-                            {
-                                CurrencyId = groupDetail.CurrencyId,
-                                CurrencyName = groupDetail.CurrencyName
-                            }
+                            CurrencyId = groupDetail.CurrencyId,
+                            CurrencyName = groupDetail.CurrencyName
                         };
 
                         group.Customers.Add(customer);

@@ -71,9 +71,9 @@ namespace FD.Lib.Service.Implement
             return GetData<CustomerInfo>(criteria).First();
         }
 
-        public string GetTransListByCustId(CustomerDetailsReportTransListCriteria criteria)
+        public IEnumerable<SuspiciousInfoDetails> GetSuspiciousInfoByCustId(ICriteria criteria)
         {
-            return _customerDetailsDataAccess.GetTransListByCustId(criteria);
+            return GetData<SuspiciousInfoDetails>(criteria);
         }
 
         public IEnumerable<FraudCaseDetails> GetFraudCasesDetails(ICriteria criteria)
@@ -109,24 +109,28 @@ namespace FD.Lib.Service.Implement
         public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            var transList = _customerDetailsDataAccess.GetTransListByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate));
-            
-            if (toDate <= moveBetBalanceUp.BalanceUpDay)
-            {
-                return GetChoiceForSuspiciousTickets(
-                    GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(transList)).ToList());
-            }
+            var suspiciousDetails = GetSuspiciousInfoByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate)).ToList();
+            var suspiciousTickets = new List<Ticket>();
 
-            if (fromDate > moveBetBalanceUp.BalanceUpDay)
+            foreach (var susp in suspiciousDetails)
             {
-                return GetChoiceForSuspiciousTickets(
-                    GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria(fromDate, toDate, moveBetBalanceUp.MoveBetsDay, transList)).ToList());
+                suspiciousTickets.AddRange(susp.EventDate >= moveBetBalanceUp.BalanceUpDay
+                    ? GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
+                        {
+                            FromDate = fromDate,
+                            ToDate = toDate,
+                            MoveBetDate = moveBetBalanceUp.MoveBetsDay,
+                            MatchId = susp.MatchId,
+                            WinlostDate = susp.EventDate,
+                            TransList = susp.TransList
+                        }).ToList()
+                    : GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria
+                        {
+                            MatchId = susp.MatchId,
+                            WinlostDate = susp.EventDate,
+                            TransList = susp.TransList
+                        }).ToList());
             }
-
-            var suspiciousTickets =
-                    GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(transList)).ToList();
-            suspiciousTickets.AddRange(
-                GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria(fromDate, toDate, moveBetBalanceUp.MoveBetsDay, transList)).ToList());
 
             return GetChoiceForSuspiciousTickets(suspiciousTickets);
         }

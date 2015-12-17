@@ -9,6 +9,7 @@
 
 namespace FD.Lib.Criteria.Reports.CustomerDetails
 {
+    using System;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -16,13 +17,11 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportFraudTicketsFromDbArchiveCriteria : CriteriaBase
     {
-        public string TransList { get; set; }
+        public DateTime WinlostDate { get; set; }
 
-        public CustomerDetailsReportFraudTicketsFromDbArchiveCriteria(
-            string transList)
-        {
-            TransList = transList;
-        }
+        public int MatchId { get; set; }
+
+        public string TransList { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
