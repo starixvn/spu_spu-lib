@@ -88,7 +88,7 @@ namespace FD.Lib.Service.Implement
 
         public WinlossStatisticSummary GetWinlossStatisticSummary(ICriteria criteria)
         {
-            return GetData<WinlossStatisticSummary>(criteria).First(); ;
+            return GetData<WinlossStatisticSummary>(criteria).FirstOrDefault();
         }
 
         public IEnumerable<WinlossStatisticEventChoice> GetEventChoice(ICriteria criteria)
@@ -195,6 +195,16 @@ namespace FD.Lib.Service.Implement
         public List<int> GetViolatedCases(ICriteria criteria)
         {
             return _customerDetailsDataAccess.GetViolatedCases(criteria);
+        }
+
+        public ICommandResult InsertAssignees(ICriteria criteria)
+        {
+            return _customerDetailsDataAccess.InsertAssignees(criteria);
+        }
+
+        public string GetAssignees(ICriteria criteria)
+        {
+            return GetData<string>(criteria).FirstOrDefault();
         }
     }
 }

@@ -13,9 +13,9 @@ namespace FD.Lib.Service.Interface
     using System.Collections.Generic;
     using DTO.CustomerDetails;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Model.Reports.CustomerDetails;
     using Model.Reports.FraudCaseDetail;
-    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Customer Details interface.
@@ -49,5 +49,9 @@ namespace FD.Lib.Service.Interface
         ICommandResult UpdateCustomerDelinquent(ICriteria criteria);
 
         List<int> GetViolatedCases(ICriteria criteria);
+
+        ICommandResult InsertAssignees(ICriteria criteria);
+
+        string GetAssignees(ICriteria criteria);
     }
 }

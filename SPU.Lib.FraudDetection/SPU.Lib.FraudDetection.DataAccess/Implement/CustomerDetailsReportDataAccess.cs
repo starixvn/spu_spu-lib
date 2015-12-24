@@ -89,6 +89,11 @@ namespace FD.Lib.DataAccess.Implement
             }
         }
 
+        public ICommandResult InsertAssignees(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
         #region Utilities
         private WinlossStatisticSummary GetSummary(DataTable dataTable)
         {
