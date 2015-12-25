@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.12.14">Created</change>
 // </history>
 
+using System.Globalization;
+
 namespace FD.Lib.Service.Implement
 {
     using System;
@@ -18,14 +20,13 @@ namespace FD.Lib.Service.Implement
     using DataAccess.Interface;
     using DTO.CustomerDetails;
     using Fanex.BetList.Core.Builder;
-    using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using Interface;
     using Model.Reports.CustomerDetails;
     using Model.Reports.FraudCaseDetail;
     using RemotingRef;
-    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Customer Details Report Service.
@@ -110,7 +111,7 @@ namespace FD.Lib.Service.Implement
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
             var suspiciousDetails = GetSuspiciousInfoByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate)).ToList();
-            var suspiciousTickets = new List<Ticket>();
+            var suspiciousTickets = new List<FraudTicketModel>();
 
             foreach (var susp in suspiciousDetails)
             {
@@ -134,18 +135,18 @@ namespace FD.Lib.Service.Implement
 
             return GetChoiceForSuspiciousTickets(suspiciousTickets);
         }
-        
-        public IList<Ticket> GetSuspiciousTicketFromBodb02(CustomerDetailsReportFraudTicketsCriteria criteria)
+
+        public IList<FraudTicketModel> GetSuspiciousTicketFromBodb02(CustomerDetailsReportFraudTicketsCriteria criteria)
         {
-            return GetDataOutput<Ticket>(criteria).ToList();
+            return GetDataOutput<FraudTicketModel>(criteria).ToList();
         }
 
-        public IList<Ticket> GetSuspiciousTicketsFromBodbArchieve(CustomerDetailsReportFraudTicketsFromDbArchiveCriteria criteria)
+        public IList<FraudTicketModel> GetSuspiciousTicketsFromBodbArchieve(CustomerDetailsReportFraudTicketsFromDbArchiveCriteria criteria)
         {
-            return GetDataOutput<Ticket>(criteria).ToList();
+            return GetDataOutput<FraudTicketModel>(criteria).ToList();
         }
 
-        public IEnumerable<FraudCaseDetailItem> GetChoiceForSuspiciousTickets(IEnumerable<Ticket> suspiciousTickets)
+        public IEnumerable<FraudCaseDetailItem> GetChoiceForSuspiciousTickets(IEnumerable<FraudTicketModel> suspiciousTickets)
         {
             var builder = new BetListHTMLBuilder();
             var ticketHelper = new TicketHelper();
@@ -156,18 +157,18 @@ namespace FD.Lib.Service.Implement
             {
                 var item = new FraudCaseDetailItem
                 {
-                    HomeName = RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty),
-                    AwayName = RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty),
-                    BetType = RefData.GetBetTypeName(ticket.BetTypeId.ToString(), "en", string.Empty),
+                    HomeName = RefData.GetTeamName(ticket.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty),
+                    AwayName = RefData.GetTeamName(ticket.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty),
+                    BetType = RefData.GetBetTypeName(ticket.BetTypeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty),
                     Choice = builder.BuildChoice(ticket, ticketHelper, null, false),
                     CustName = ticket.UserName,
                     IP = ticket.IP,
                     Odds = builder.BuildOdds(ticket, null, CacheRef.GetOddsTypeName),
                     Stake = builder.BuildStake(ticket),
                     WinLoss = ticket.Winlost,
-                    Score = string.Format("{0} - {1}", ticket.LiveHomeScore, ticket.LiveAwayScore),
+                    Score = FormatScore(ticket),
                     Status = ticket.Status,
-                    TransDate = ticket.TransDate.ToString(),
+                    TransDate = ticket.TransDate.ToString(CultureInfo.InvariantCulture),
                     TransId = ticket.TransId
                 };
 
@@ -205,6 +206,14 @@ namespace FD.Lib.Service.Implement
         public string GetAssignees(ICriteria criteria)
         {
             return GetData<string>(criteria).FirstOrDefault();
+        }
+
+        private string FormatScore(FraudTicketModel ticket)
+        {
+            var result = string.Format("HT: {0} - {1}<br><b>FT: {2} - {3}</b>", ticket.HalfTimeHomeScore, ticket.HalfTimeAwayScore,
+                                   ticket.FullTimeHomeScore, ticket.FullTimeAwayScore);
+
+            return result;
         }
     }
 }
