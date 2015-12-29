@@ -15,7 +15,8 @@ namespace FD.Lib.DataAccess.Implement
     using DTO;
     using Fanex.Data;
     using Interface;
-    
+    using System;
+
     /// <summary>
     ///  Match Monitoring Report Data Access Implement.
     /// </summary>
@@ -24,7 +25,7 @@ namespace FD.Lib.DataAccess.Implement
         public List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria)
         {
             var hash = criteria.GetSpParams();
-            
+
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(hash);
@@ -57,18 +58,25 @@ namespace FD.Lib.DataAccess.Implement
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 var match = new MatchMonitoring();
+                bool temp;
+                DateTime tempDate;
+
                 match.MatchId = int.Parse(dataRow["matchid"].ToString());
                 match.LeagueName = dataRow["leaguename"].ToString();
                 match.MatchCode = dataRow["matchcode"].ToString();
+                match.IsDelinquent = bool.TryParse(dataRow["IsDelinquent"].ToString(), out temp) ? temp : (bool?)null;
+                match.IsVerified = bool.TryParse(dataRow["IsVerified"].ToString(), out temp) ? temp : (bool?)null;
+                match.LastVerifiedBy = dataRow["LastVerifiedBy"].ToString();
+                match.LastVerifiedDate = DateTime.TryParse(dataRow["LastVerifiedDate"].ToString(), out tempDate) ? tempDate : (DateTime?)null;
                 match.HomeId = int.Parse(dataRow["homeid"].ToString());
                 match.AwayId = int.Parse(dataRow["awayid"].ToString());
                 match.EventStatus = dataRow["eventstatus"].ToString();
 
                 var totalColumns = dataTable.Columns.Count;
-                for(var i = 6; i < totalColumns; i ++)
+                for (var i = 10; i < totalColumns; i++)
                 {
                     match.SuspiciousCases.Add(
-                        dataTable.Columns[i].ColumnName, 
+                        dataTable.Columns[i].ColumnName,
                         string.IsNullOrEmpty(dataRow[i].ToString()) ? -1 : int.Parse(dataRow[i].ToString()));
                 }
 

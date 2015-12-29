@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.08.12">Created</change>
 // </history>
 
+using Fanex.NAP.Framework.Command;
+
 namespace FD.Lib.Service.Implement
 {
     using System.Collections.Generic;
@@ -48,6 +50,16 @@ namespace FD.Lib.Service.Implement
             MatchMonitoringReportGetAllDBArchiveCriteria criteria)
         {
             return _matchMonitoringReportDataAccess.GetMatchMonitoringReportFromDBArchive(criteria);
+        }
+
+        public ICommandResult UpdateDelinquency(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult UpdateVerification(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
         }
     }
 }

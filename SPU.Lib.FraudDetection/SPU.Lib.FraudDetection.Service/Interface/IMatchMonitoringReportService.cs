@@ -10,9 +10,10 @@
 namespace FD.Lib.Service.Interface
 {
     using System.Collections.Generic;
+    using Criteria.Reports;
     using DTO;
     using Fanex.Data.Repository;
-    using Criteria.Reports;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Match Monitoring interface.
@@ -24,5 +25,9 @@ namespace FD.Lib.Service.Interface
         List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria);
 
         List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(MatchMonitoringReportGetAllDBArchiveCriteria criteria);
+
+        ICommandResult UpdateDelinquency(ICriteria criteria);
+
+        ICommandResult UpdateVerification(ICriteria criteria);
     }
 }

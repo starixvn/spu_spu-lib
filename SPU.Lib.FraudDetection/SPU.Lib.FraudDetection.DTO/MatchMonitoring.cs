@@ -9,6 +9,7 @@
 
 namespace FD.Lib.DTO
 {
+    using System;
     using System.Collections.Generic;
 
     public class MatchMonitoring
@@ -18,6 +19,14 @@ namespace FD.Lib.DTO
         public string LeagueName { get; set; }
 
         public string MatchCode { get; set; }
+
+        public bool? IsDelinquent { get; set; }
+
+        public bool? IsVerified { get; set; }
+
+        public string LastVerifiedBy { get; set; }
+
+        public DateTime? LastVerifiedDate { get; set; }
 
         public int HomeId { get; set; }
 
@@ -32,6 +41,14 @@ namespace FD.Lib.DTO
         public MatchMonitoring()
         {
             SuspiciousCases = new Dictionary<string, int>();
+        }
+
+        public string LastVerifiedDateString
+        {
+            get
+            {
+                return LastVerifiedDate != null ? LastVerifiedDate.Value.ToString("MM/dd/yyyy") : "-";
+            }
         }
     }
 }
