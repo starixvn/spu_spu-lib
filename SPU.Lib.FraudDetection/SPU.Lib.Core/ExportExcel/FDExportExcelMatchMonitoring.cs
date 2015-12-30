@@ -7,6 +7,8 @@
 //   <change who="Long.Luu" date="2015.10.13">Created</change>
 // </history>
 
+using System.Globalization;
+
 namespace FD.Lib.Core.ExportExcel
 {
     using System.Collections.Generic;
@@ -89,21 +91,26 @@ namespace FD.Lib.Core.ExportExcel
             foreach (var dataRow in Data)
             {
                 var row = Sheet.CreateRow(RowIndex);
+                var index = 0;
                 rowCount++;
-                SetUpACell(row, 0, rowCount.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
-                SetUpACell(row, 1, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 2, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
-                SetUpACell(row, 3, dataRow.Event, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, 4, dataRow.EventStatus, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, index++, rowCount.ToString(CultureInfo.InvariantCulture), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, index++, dataRow.IsDelinquent != null ? (dataRow.IsDelinquent.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, index++, dataRow.IsVerified != null ? (dataRow.IsVerified.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, index++, dataRow.LastVerifiedBy.Length > 0 ? dataRow.LastVerifiedBy : "-", ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, index++, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, index++, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, index++, dataRow.Event, ReportContentFont(), ReportContentCellStyle());
+                SetUpACell(row, index++, dataRow.EventStatus, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
 
-                for (var i = 5; i <= (dataRow.SuspiciousCases.Count + 4); i++)
+                var setupCellIndex = index;
+                for (; index <= (dataRow.SuspiciousCases.Count + setupCellIndex - 1); index++)
                 {
                     SetUpACell(
                         row,
-                        i,
+                        index,
                         string.Empty,
                         ReportContentFont(),
-                        GetCellStyleBySuspiciousStatus(dataRow.SuspiciousCases.ElementAt(i - 5).Value));
+                        GetCellStyleBySuspiciousStatus(dataRow.SuspiciousCases.ElementAt(index - setupCellIndex).Value));
                 }
 
                 RowIndex++;
@@ -112,20 +119,27 @@ namespace FD.Lib.Core.ExportExcel
 
         protected override void SetColumnsWidth()
         {
-            Sheet.SetColumnWidth(0, 2000);
-            Sheet.SetColumnWidth(1, 12000);
-            Sheet.SetColumnWidth(2, 5000);
-            Sheet.SetColumnWidth(3, 12000);
-            Sheet.SetColumnWidth(4, 3000);
+            var index = 0;
+
+            Sheet.SetColumnWidth(index++, 2000);
+            Sheet.SetColumnWidth(index++, 5000);
+            Sheet.SetColumnWidth(index++, 5000);
+            Sheet.SetColumnWidth(index++, 5000);
+            Sheet.SetColumnWidth(index++, 12000);
+            Sheet.SetColumnWidth(index++, 5000);
+            Sheet.SetColumnWidth(index++, 12000);
+            Sheet.SetColumnWidth(index++, 3000);
 
             if (!Data.Any())
             {
                 return;
             }
 
-            for (var i = 5; i <= (Data.ElementAt(0).SuspiciousCases.Count + 4); i++)
+            var setupCellIndex = index;
+
+            for (; index <= (Data.ElementAt(0).SuspiciousCases.Count + setupCellIndex - 1); index++)
             {
-                Sheet.SetColumnWidth(i, 3000);
+                Sheet.SetColumnWidth(index, 3000);
             }
         }
 
@@ -135,6 +149,9 @@ namespace FD.Lib.Core.ExportExcel
             Sheet.AutoSizeColumn(2);
             Sheet.AutoSizeColumn(3);
             Sheet.AutoSizeColumn(4);
+            Sheet.AutoSizeColumn(5);
+            Sheet.AutoSizeColumn(6);
+            Sheet.AutoSizeColumn(7);
         }
 
         private ICellStyle GetCellStyleBySuspiciousStatus(int suspiciousStatus)
