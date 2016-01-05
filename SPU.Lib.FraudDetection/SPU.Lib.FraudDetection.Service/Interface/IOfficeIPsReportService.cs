@@ -16,5 +16,7 @@ namespace FD.Lib.Service.Interface
     public interface IOfficeIPsReportService
     {
         IEnumerable<FraudCaseDetailItem> GetFraudTickets(int caseId, DateTime fromDate, DateTime toDate);
+
+        IEnumerable<FraudCaseDetailItem> ExportExcel(int caseId, DateTime fromDate, DateTime toDate);
     }
 }

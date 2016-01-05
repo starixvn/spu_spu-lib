@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Attribute\CompressAttribute.cs" />
     <Compile Include="Attribute\MailCodeUniqueAttribute.cs" />
+    <Compile Include="ExportExcel\FDExportExcelOfficeIPs.cs" />
     <Compile Include="ExportExcel\FDExportExcelDailyDataMonitoring.cs" />
     <Compile Include="ExportExcel\FDExportExcelFraudCaseDetails.cs" />
     <Compile Include="ExportExcel\FDExportExcelSuspiciousCustomer.cs" />
