@@ -120,11 +120,13 @@
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
     <Compile Include="Implement\CommonService.cs" />
+    <Compile Include="Implement\OfficeIPsReportService.cs" />
     <Compile Include="Implement\CustomerDetailsReportService.cs" />
     <Compile Include="Implement\DailyDataMonitoringReportService.cs" />
     <Compile Include="Implement\DataCaptureService.cs" />
     <Compile Include="Implement\CurrencyService.cs" />
     <Compile Include="Implement\CustomerBettingGroupDetailsService.cs" />
+    <Compile Include="Interface\IOfficeIPsReportService.cs" />
     <Compile Include="Interface\ICustomerDetailsReportService.cs" />
     <Compile Include="Interface\ICommonService.cs" />
     <Compile Include="Interface\IDailyDataMonitoringReportService.cs" />

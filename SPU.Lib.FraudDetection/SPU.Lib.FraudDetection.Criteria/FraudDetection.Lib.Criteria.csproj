@@ -126,6 +126,7 @@
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportLogNoteCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportFraudCaseCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportCriteria.cs" />
+    <Compile Include="Reports\OfficeIPs\OfficeIPsReportGetTransListCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomerReportGetNotesCriteria.cs" />
     <Compile Include="Reports\DailyDataMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\MatchMonitoringReportGetAllDBArchiveCriteria.cs" />
