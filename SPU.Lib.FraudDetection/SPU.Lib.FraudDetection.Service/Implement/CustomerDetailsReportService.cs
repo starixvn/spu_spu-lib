@@ -115,7 +115,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var susp in suspiciousDetails)
             {
-                suspiciousTickets.AddRange(susp.EventDate >= moveBetBalanceUp.BalanceUpDay
+                suspiciousTickets.AddRange(susp.EventDate > moveBetBalanceUp.BalanceUpDay
                     ? GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
                         {
                             FromDate = fromDate,

@@ -39,7 +39,7 @@ namespace FD.Lib.Service.Implement
         public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int caseId, DateTime fromDate, DateTime toDate)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            var suspiciousDetails = GetSuspiciousInfoByCustId(new OfficeIPsReportGetTransListCriteria
+            var suspiciousDetails = GetSuspiciousInfoByCaseId(new OfficeIPsReportGetTransListCriteria
             {
                 CaseId = caseId,
                 FromDate = fromDate,
@@ -52,7 +52,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var susp in suspiciousDetailDistinct)
             {
-                suspiciousTickets.AddRange(susp.EventDate >= moveBetBalanceUp.BalanceUpDay
+                suspiciousTickets.AddRange(susp.EventDate > moveBetBalanceUp.BalanceUpDay
                     ? GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
                     {
                         FromDate = fromDate,
@@ -76,7 +76,7 @@ namespace FD.Lib.Service.Implement
         public IEnumerable<FraudCaseDetailItem> ExportExcel(int caseId, DateTime fromDate, DateTime toDate)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            var suspiciousDetails = GetSuspiciousInfoByCustId(new OfficeIPsReportGetTransListCriteria
+            var suspiciousDetails = GetSuspiciousInfoByCaseId(new OfficeIPsReportGetTransListCriteria
             {
                 CaseId = caseId,
                 FromDate = fromDate,
@@ -89,7 +89,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var susp in suspiciousDetailDistinct)
             {
-                suspiciousTickets.AddRange(susp.EventDate >= moveBetBalanceUp.BalanceUpDay
+                suspiciousTickets.AddRange(susp.EventDate > moveBetBalanceUp.BalanceUpDay
                     ? GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
                     {
                         FromDate = fromDate,
@@ -179,7 +179,7 @@ namespace FD.Lib.Service.Implement
             return list.OrderBy(t => t.CustName).ToList();
         }
 
-        private IEnumerable<SuspiciousInfoDetails> GetSuspiciousInfoByCustId(ICriteria criteria)
+        private IEnumerable<SuspiciousInfoDetails> GetSuspiciousInfoByCaseId(ICriteria criteria)
         {
             return GetData<SuspiciousInfoDetails>(criteria);
         }
@@ -198,12 +198,12 @@ namespace FD.Lib.Service.Implement
             
             foreach (var matchId in matchIds)
             {
-                var transLists = suspiciousDetails.Select(x => x.TransList);
+                var id = matchId;
                 var suspiciousInfoDetail = new SuspiciousInfoDetails
                 {
                     MatchId = matchId,
                     EventDate = suspiciousDetails.FirstOrDefault(x => x.MatchId == matchId).EventDate,
-                    TransList = string.Join(",", transLists)
+                    TransList = string.Join(",", suspiciousDetails.Where(x => x.MatchId == id).Select(m => m.TransList))
                 };
 
                 result.Add(suspiciousInfoDetail);
