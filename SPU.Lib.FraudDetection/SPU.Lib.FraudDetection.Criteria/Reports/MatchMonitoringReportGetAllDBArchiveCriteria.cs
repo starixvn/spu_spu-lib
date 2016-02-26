@@ -19,6 +19,9 @@ namespace FD.Lib.Criteria.Reports
     {
         public DateTime EventDate { get; set; }
 
+        public string LeagueIds { get; set; }
+
+        [SpParam(Ignored = true)]
         public int LeagueId { get; set; }
 
         public string MatchCode { get; set; }
@@ -33,7 +36,7 @@ namespace FD.Lib.Criteria.Reports
         public MatchMonitoringReportGetAllDBArchiveCriteria(MatchMonitoringReportGetAllCriteria criteria)
         {
             EventDate = criteria.EventDate;
-            LeagueId = criteria.LeagueId;
+            LeagueIds = criteria.LeagueIds;
             MatchCode = criteria.MatchCode;
             MatchStatus = criteria.MatchStatus;
             SuspiciousStatus = criteria.SuspiciousStatus;

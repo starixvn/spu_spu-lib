@@ -22,6 +22,8 @@ namespace FD.Lib.Service.Interface
     {
         IEnumerable<League> GetLeaguesByDate(ICriteria criteria);
 
+        IEnumerable<League> GetLeaguesByDateAndSport(ICriteria criteria);
+
         List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria);
 
         List<MatchMonitoring> GetMatchMonitoringReportFromDBArchive(MatchMonitoringReportGetAllDBArchiveCriteria criteria);

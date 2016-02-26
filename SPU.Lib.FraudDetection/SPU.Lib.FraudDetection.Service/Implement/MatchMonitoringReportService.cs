@@ -41,6 +41,11 @@ namespace FD.Lib.Service.Implement
             return GetData<League>(criteria);
         }
 
+        public IEnumerable<League> GetLeaguesByDateAndSport(ICriteria criteria)
+        {
+            return GetData<League>(criteria);
+        }
+
         public List<MatchMonitoring> GetMatchMonitoringReport(MatchMonitoringReportGetAllCriteria criteria)
         {
             return _matchMonitoringReportDataAccess.GetMatchMonitoringReport(criteria);

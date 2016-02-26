@@ -19,6 +19,9 @@ namespace FD.Lib.Criteria.Reports
     {
         public DateTime EventDate { get; set; }
 
+        public string LeagueIds { get; set; }
+
+        [SpParam(Ignored = true)]
         public int LeagueId { get; set; }
 
         public string MatchCode { get; set; }
@@ -31,7 +34,7 @@ namespace FD.Lib.Criteria.Reports
 
         // Out put param
         public int NumberOfCases { get; set; }
-        
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>

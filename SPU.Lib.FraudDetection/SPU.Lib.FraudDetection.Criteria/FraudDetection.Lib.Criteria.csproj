@@ -78,6 +78,8 @@
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
     <Compile Include="Common\DataTypeCaptureGetAllCriteria.cs" />
     <Compile Include="Common\CurrencyGetAllCriteria.cs" />
+    <Compile Include="Common\LeagueGetAllByDateAndSportCriteria.cs" />
+    <Compile Include="Common\LeagueGetAllByDateAndSportFromDBArchiveCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateFromDBArchiveCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateCriteria.cs" />
     <Compile Include="Common\ResultCriteria.cs" />
