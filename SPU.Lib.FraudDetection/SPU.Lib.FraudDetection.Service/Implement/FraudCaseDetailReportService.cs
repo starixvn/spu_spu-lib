@@ -76,7 +76,7 @@ namespace FD.Lib.Service.Implement
                 list.Add(item);
             }
 
-            list = list.OrderBy(t => t.CustName).ToList();
+            //// list = list.OrderBy(t => t.CustName).ToList();
 
             return list;
         }

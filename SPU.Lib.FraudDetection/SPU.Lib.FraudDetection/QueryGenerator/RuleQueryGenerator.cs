@@ -103,11 +103,30 @@ namespace FD.Lib.QueryGenerator
                     ? remainedString.IndexOf("or", StringComparison.Ordinal)
                     : remainedString.Length - 1);
             var stakeConstraint = originalStr.Substring(startIndex, endIndex);
+            var maxBet = stakeConstraint.Split(' ')[2];
+            var operatorStake = stakeConstraint.Split(' ')[1];
 
-            var arrangedString = originalStr.Replace(stakeConstraint, "1=1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet ";
-            arrangedString += "HAVING " + stakeConstraint;
+            var extraSelect = ",sum(ans.stake*ans.actualrate) OVER (PARTITION BY ans.custid, ans.matchid, ans.bettype, ans.liveawayscore,ans.livehomescore) AS TotalStake,";
+            extraSelect += maxBet + " AS MaxBet ";
 
-            return arrangedString;
+            var fromQueryRuleString = "select distinct {0} from {1} where {2}";
+
+            fromQueryRuleString = string.Format(
+                fromQueryRuleString,
+                GenerateSelectSql() + extraSelect,
+                GenerateFromSql(),
+                GenerateWhereSql(OriginalFormula).Replace(stakeConstraint, "1=1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet,ans.bettype,ans.stake,ans.actualrate ");
+
+            var newQueryRuleString = "select distinct {0} from ({1}) ans where {2}";
+            var whereQueryRuleString = "ans.TotalStake " + operatorStake + " ans.Maxbet";
+
+            newQueryRuleString = string.Format(
+                newQueryRuleString,
+                GenerateSelectSql(),
+                fromQueryRuleString,
+                whereQueryRuleString);
+
+            return newQueryRuleString;
         }
     }
 }
