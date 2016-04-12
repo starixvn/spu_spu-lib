@@ -15,7 +15,7 @@ namespace FD.Lib.Criteria.Reports
     /// <summary>
     /// MatchMonitoringReportGetAllCriteria Class.
     /// </summary>
-    public class MatchMonitoringReportGetAllCriteria : CriteriaBase
+    public class MatchMonitoringReportGetAllCriteria: CriteriaBase
     {
         public DateTime EventDate { get; set; }
 
@@ -31,6 +31,8 @@ namespace FD.Lib.Criteria.Reports
         public int SuspiciousStatus { get; set; }
 
         public bool IsLatestData { get; set; }
+
+        public bool? IsMainMarket { get; set; }
 
         // Out put param
         public int NumberOfCases { get; set; }
