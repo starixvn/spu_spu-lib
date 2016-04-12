@@ -113,6 +113,8 @@ namespace FD.Lib.DataAccess
         {
             var sqlConnection = new SqlConnection(_sqlConnectionString);
             var sqlCommand = new SqlCommand(sqlQueryString, sqlConnection);
+            sqlCommand.CommandTimeout = 300;
+
             var sqlDa = new SqlDataAdapter(sqlCommand);
             var sqlDt = new DataTable();
             sqlDa.Fill(sqlDt);
