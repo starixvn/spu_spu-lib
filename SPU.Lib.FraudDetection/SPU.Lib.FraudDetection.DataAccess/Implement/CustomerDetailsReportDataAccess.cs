@@ -19,22 +19,29 @@ namespace FD.Lib.DataAccess.Implement
     using Fanex.NAP.Framework.Command;
     using Interface;
     using Model.Reports.CustomerDetails;
-    
+
     /// <summary>
     ///  Customer Details Report Data Access Implement.
     /// </summary>
-    public class CustomerDetailsReportDataAccess : BaseDataAccess, ICustomerDetailsReportDataAccess
+    public class CustomerDetailsReportDataAccess: BaseDataAccess, ICustomerDetailsReportDataAccess
     {
         public CustomerDetailsModel GetCustomerDetailWinlossStatistic(CustomerDetailsReportWinlossStatisticCriteria criteria)
         {
             var hash = criteria.GetSpParams();
-            
+
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(hash);
                 var dataSet = db.ExecuteDataSet();
 
-                return MapCustomerDetailsData(dataSet);
+                try
+                {
+                    return MapCustomerDetailsData(dataSet);
+                }
+                catch
+                {
+                    return new CustomerDetailsModel();
+                }
             }
         }
         private CustomerDetailsModel MapCustomerDetailsData(DataSet dataSet)
@@ -111,9 +118,9 @@ namespace FD.Lib.DataAccess.Implement
             return (from DataRow dataRow in dataTable.Rows
                     select new WinlossStatisticEventChoice
                         {
-                            EventChoice = dataRow["eventchoice"].ToString(), 
-                            SumTO = float.Parse(dataRow["sumto"].ToString()), 
-                            SumWL = float.Parse(dataRow["sumwl"].ToString()), 
+                            EventChoice = dataRow["eventchoice"].ToString(),
+                            SumTO = float.Parse(dataRow["sumto"].ToString()),
+                            SumWL = float.Parse(dataRow["sumwl"].ToString()),
                             Margin = float.Parse(dataRow["margin"].ToString())
                         }).ToList();
         }

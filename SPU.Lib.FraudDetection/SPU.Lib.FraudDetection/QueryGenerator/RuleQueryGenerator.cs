@@ -16,14 +16,19 @@ namespace FD.Lib.QueryGenerator
     /// <summary>
     /// General Rule Query Generator.
     /// </summary>
-    public class RuleQueryGenerator : QueryGenerator
+    public class RuleQueryGenerator: QueryGenerator
     {
+        private bool _isNearTheGoal;
+        private bool _isCalculatedByPercentMaxBet;
+
         public RuleQueryGenerator(int fraudCaseId, TaskInfoCriteria criteria)
         {
             IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
             OriginalFormula = criteria.TaskRules;
             RelevantConfigIds = criteria.RuleConfigs;
             GetConfigsInfo(fraudCaseId);
+            _isNearTheGoal = OriginalFormula.Contains("NEARTHEGOAL");
+            _isCalculatedByPercentMaxBet = OriginalFormula.Contains("% Max Bet");
         }
 
         /// <summary>
@@ -103,19 +108,29 @@ namespace FD.Lib.QueryGenerator
                     ? remainedString.IndexOf("or", StringComparison.Ordinal)
                     : remainedString.Length - 1);
             var stakeConstraint = originalStr.Substring(startIndex, endIndex);
+
+            if (!_isNearTheGoal)
+            {
+                var arrangedString = originalStr.Replace(stakeConstraint, "1=1 ") + " GROUP BY " + GenerateSelectSql();
+                arrangedString += " HAVING " + stakeConstraint;
+
+                return arrangedString;
+            }
+
             var maxBet = stakeConstraint.Split(' ')[2];
             var operatorStake = stakeConstraint.Split(' ')[1];
 
             var extraSelect = ",sum(ans.stake*ans.actualrate) OVER (PARTITION BY ans.custid, ans.matchid, ans.bettype, ans.liveawayscore,ans.livehomescore) AS TotalStake,";
             extraSelect += maxBet + " AS MaxBet ";
 
+            var groupBy = GenerateSelectSql() + (_isCalculatedByPercentMaxBet ? ",dds.maxbet,ans.bettype,ans.stake,ans.actualrate " : ",ans.bettype,ans.stake,ans.actualrate ");
             var fromQueryRuleString = "select distinct {0} from {1} where {2}";
 
             fromQueryRuleString = string.Format(
                 fromQueryRuleString,
                 GenerateSelectSql() + extraSelect,
                 GenerateFromSql(),
-                GenerateWhereSql(OriginalFormula).Replace(stakeConstraint, "1=1 ") + " GROUP BY " + GenerateSelectSql() + ", dds.maxbet,ans.bettype,ans.stake,ans.actualrate ");
+                GenerateWhereSql(OriginalFormula).Replace(stakeConstraint, "1=1 ") + " GROUP BY " + groupBy);
 
             var newQueryRuleString = "select distinct {0} from ({1}) ans where {2}";
             var whereQueryRuleString = "ans.TotalStake " + operatorStake + " ans.Maxbet";

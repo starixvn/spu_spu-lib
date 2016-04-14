@@ -30,6 +30,8 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
 
         public string Author { get; set; }
 
+        public int AuthorId { get; set; }
+
         public string Type { get; set; }
     }
 }

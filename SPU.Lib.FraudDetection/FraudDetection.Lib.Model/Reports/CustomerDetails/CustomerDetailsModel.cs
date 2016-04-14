@@ -20,6 +20,25 @@ namespace FD.Lib.Model.Reports.CustomerDetails
     [Serializable]
     public class CustomerDetailsModel
     {
+        public CustomerDetailsModel()
+        {
+            CustInfo = new CustomerInfo();
+
+            FraudCasesDetails = new List<FraudCaseDetails>();
+
+            LogsNotesDetails = new List<LogsNotes>();
+
+            ViolatedTickets = new List<FraudCaseDetailItem>();
+
+            Summary = new WinlossStatisticSummary();
+
+            EventChoice = new List<WinlossStatisticEventChoice>();
+
+            TopSportsByMargin = new List<WinlossStatisticTopSports>();
+
+            TopBettypesByMargin = new List<WinlossStatisticTopBettypes>();
+        }
+
         public CustomerInfo CustInfo { get; set; }
 
         public IEnumerable<FraudCaseDetails> FraudCasesDetails { get; set; }
