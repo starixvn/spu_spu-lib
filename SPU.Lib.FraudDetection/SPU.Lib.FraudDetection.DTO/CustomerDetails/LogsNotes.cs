@@ -13,6 +13,8 @@ namespace FD.Lib.DTO.CustomerDetails
 
     public class LogsNotes
     {
+        public int CustomerLogId { get; set; }
+
         public DateTime LogDate { get; set; }
 
         public string LogDesc { get; set; }

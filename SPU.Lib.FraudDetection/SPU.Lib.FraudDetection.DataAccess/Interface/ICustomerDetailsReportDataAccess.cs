@@ -28,6 +28,8 @@ namespace FD.Lib.DataAccess.Interface
 
         ICommandResult InsertCustomerNote(ICriteria criteria);
 
+        ICommandResult RemoveCustomerLogNote(ICriteria criteria);
+
         ICommandResult UpdateCustomerDelinquent(ICriteria criteria);
 
         ICommandResult InsertAssignees(ICriteria criteria);

@@ -188,6 +188,11 @@ namespace FD.Lib.Service.Implement
             return _customerDetailsDataAccess.InsertCustomerNote(criteria);
         }
 
+        public ICommandResult RemoveCustomerLogNote(ICriteria criteria)
+        {
+            return _customerDetailsDataAccess.RemoveCustomerLogNote(criteria);
+        }
+
         public ICommandResult UpdateCustomerDelinquent(ICriteria criteria)
         {
             return _customerDetailsDataAccess.UpdateCustomerDelinquent(criteria);

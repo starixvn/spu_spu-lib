@@ -32,6 +32,8 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<LogsNotes> GetLogsNotes(ICriteria criteria);
 
+        ICommandResult RemoveCustomerLogNote(ICriteria criteria);
+
         WinlossStatisticSummary GetWinlossStatisticSummary(ICriteria criteria);
 
         IEnumerable<WinlossStatisticEventChoice> GetEventChoice(ICriteria criteria);

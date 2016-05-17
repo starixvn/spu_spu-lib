@@ -73,6 +73,11 @@ namespace FD.Lib.DataAccess.Implement
             return ExecuteNonQuery(criteria);
         }
 
+        public ICommandResult RemoveCustomerLogNote(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
         public ICommandResult InsertCustomerNote(ICriteria criteria)
         {
             return ExecuteNonQuery(criteria);
