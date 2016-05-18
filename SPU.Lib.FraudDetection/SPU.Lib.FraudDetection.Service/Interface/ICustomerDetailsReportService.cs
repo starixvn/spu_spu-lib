@@ -57,5 +57,7 @@ namespace FD.Lib.Service.Interface
         ICommandResult InsertAssignees(ICriteria criteria);
 
         string GetAssignees(ICriteria criteria);
+
+        IEnumerable<MarginModel> GetMonthlyWinloss(ICriteria criteria);
     }
 }

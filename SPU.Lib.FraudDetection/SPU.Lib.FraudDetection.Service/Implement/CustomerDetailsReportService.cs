@@ -225,5 +225,10 @@ namespace FD.Lib.Service.Implement
 
             return result;
         }
+
+        public IEnumerable<MarginModel> GetMonthlyWinloss(ICriteria criteria)
+        {
+            return GetData<MarginModel>(criteria);
+        }
     }
 }
