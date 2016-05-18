@@ -50,6 +50,8 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult UpdateCustomerDelinquent(ICriteria criteria);
 
+        ICommandResult UpdateCustomerHedge(ICriteria criteria);
+
         List<int> GetViolatedCases(ICriteria criteria);
 
         ICommandResult InsertAssignees(ICriteria criteria);

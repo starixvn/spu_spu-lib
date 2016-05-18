@@ -18,5 +18,7 @@ namespace FD.Lib.DTO.CustomerDetails
         public string CurrencyCode { get; set; }
 
         public bool IsDelinquent { get; set; }
+
+        public bool IsHedge { get; set; }
     }
 }

@@ -195,7 +195,12 @@ namespace FD.Lib.Service.Implement
 
         public ICommandResult UpdateCustomerDelinquent(ICriteria criteria)
         {
-            return _customerDetailsDataAccess.UpdateCustomerDelinquent(criteria);
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult UpdateCustomerHedge(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
         }
 
         public List<int> GetViolatedCases(ICriteria criteria)
