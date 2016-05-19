@@ -16,7 +16,7 @@ namespace FD.Lib.Service.Interface
 
     public interface ICustomerReportService
     {
-        SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria);
+        IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria);
 
         IEnumerable<SuspiciousCustomerReportNoteModel> GetNotes(SuspiciousCustomerReportGetNotesCriteria criteria);
     }

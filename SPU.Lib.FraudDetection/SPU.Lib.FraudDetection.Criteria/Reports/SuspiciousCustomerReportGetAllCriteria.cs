@@ -32,13 +32,9 @@ namespace FD.Lib.Criteria.Reports
 
         public int? CaseId { get; set; }
 
-        public int PageSize { get; set; }
+        public bool? IsDelinquent { get; set; }
 
-        public int PageIndex { get; set; }
-
-        public int PageCount { get; set; }
-
-        public int RowCount { get; set; }
+        public bool? IsHedge { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

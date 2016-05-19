@@ -14,18 +14,14 @@ namespace FD.Lib.DataAccess.Implement
     using Fanex.Data.Repository;
     using Interface;
     using Model.Reports.SuspiciousCustomer;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Customer Report Data Access.
     /// </summary>
     public class CustomerReportDataAccess : BaseDataAccess, ICustomerReportDataAccess
     {
-        /// <summary>
-        /// Get all suspicious customers.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>List off suspicious customers.</returns>
-        public SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(ICriteria criteria)
+        public IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(ICriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -39,15 +35,7 @@ namespace FD.Lib.DataAccess.Implement
                     "CustId",
                     criteria.GetSpParams());
 
-                var totalItem = (int)db.GetOuputParams()["rowcount"];
-
-                var result = new SuspiciousCustomerReportListModel
-                {
-                    SuspiciousCustomers = suspiciousCustomers,
-                    TotalItem = totalItem
-                };
-
-                return result;
+                return suspiciousCustomers;
             }
         }
     }

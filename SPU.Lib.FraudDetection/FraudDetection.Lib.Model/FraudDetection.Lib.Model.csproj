@@ -87,7 +87,6 @@
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailReportModel.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailSummary.cs" />
     <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportNoteModel.cs" />
-    <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportListModel.cs" />
     <Compile Include="Reports\SuspiciousCustomer\SuspiciousCustomerReportModel.cs" />
     <Compile Include="ReportTemplate\MarginCustormer.cs" />
     <Compile Include="ReportTemplate\SuspiciousCustormer.cs" />

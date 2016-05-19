@@ -12,14 +12,11 @@ namespace FD.Lib.Model.Reports.SuspiciousCustomer
     using System;
     using DTO;
 
-    /// <summary>
-    /// The class SuspiciousCustomerReport.
-    /// </summary>
     public class SuspiciousCustomerReportModel
     {
-        public int Row { get; set; }
-
         public bool IsDelinquent { get; set; }
+
+        public bool IsHedge { get; set; }
 
         public bool HasNote { get; set; }
 

@@ -52,10 +52,11 @@ namespace FD.Lib.Core.ExportExcel
                 return;
             }
 
-            foreach (var dataRow in Data)
+            for (var i = 1; i <= Data.Count(); i++ )
             {
+                var dataRow = Data.ElementAt(i - 1);
                 var row = Sheet.CreateRow(RowIndex);
-                SetUpACell(row, 0, dataRow.Row.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                SetUpACell(row, 0, i.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 1, dataRow.IsDelinquent ? "Yes" : "No", ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 2, dataRow.IsVerified ? "Yes" : "No", ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 3, dataRow.Customer.CustName, ReportContentFont(), ReportContentCellStyle());

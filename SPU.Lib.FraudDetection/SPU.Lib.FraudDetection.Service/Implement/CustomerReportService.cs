@@ -25,12 +25,7 @@ namespace FD.Lib.Service.Implement
             _reportDataAccess = new CustomerReportDataAccess();
         }
 
-        /// <summary>
-        /// Get all Suspicious Customers.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The list of Suspicious Customers.</returns>
-        public SuspiciousCustomerReportListModel GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
+        public IEnumerable<SuspiciousCustomerReportModel> GetAllSuspiciousCustomers(SuspiciousCustomerReportGetAllCriteria criteria)
         {
             var suspiciousCustomers = _reportDataAccess.GetAllSuspiciousCustomers(criteria);
 
