@@ -24,10 +24,6 @@ namespace FD.Lib.Criteria.Reports
 
         public string CustName { get; set; }
 
-        public int? TotalViolations { get; set; }
-
-        public int? NewViolations { get; set; }
-
         public bool? IsVerified { get; set; }
 
         public int? CaseId { get; set; }
