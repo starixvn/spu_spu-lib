@@ -24,6 +24,14 @@ namespace FD.Lib.Model.Reports.CustomerDetails
 
         public int Month { get; set; }
 
+        public string ReportDate
+        {
+            get
+            {
+                return (new DateTime(Year, Month, 1).ToString("MMM/yyyy"));
+            }
+        }
+
         public decimal Turnover { get; set; }
 
         public decimal Winloss { get; set; }
