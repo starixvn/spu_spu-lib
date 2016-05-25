@@ -27,6 +27,8 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult DeleteTask(ICriteria criteria);
 
+        bool CheckAllTicketsSettled(int matchId, string bettypeIds);
+
         DataCollection GetTasksByCaseId(TaskGetAllByCaseIdCriteria criteria);
 
         IEnumerable<Task> GetTasksByCaseId(TaskGetByCaseIdCriteria criteria);

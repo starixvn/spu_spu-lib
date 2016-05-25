@@ -54,6 +54,18 @@ namespace FD.Lib.Service.Implement
             return _taskDataAccess.DeleteTask(criteria);
         }
 
+        public bool CheckAllTicketsSettled(int matchId, string bettypeIds)
+        {
+            var criteria = new TaskCheckAllTicketsSettledCriteria 
+            {
+                MatchId = matchId,
+                BettypeIds = bettypeIds
+            };
+            var result = ExecuteNonQuery(criteria);
+
+            return result.IsSuccessful;
+        }
+
         public DataCollection GetTasksByCaseId(TaskGetAllByCaseIdCriteria criteria)
         {
             return _taskDataAccess.GetTasksByCaseId(criteria);

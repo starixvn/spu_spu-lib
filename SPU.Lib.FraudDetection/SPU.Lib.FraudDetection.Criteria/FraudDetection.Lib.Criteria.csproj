@@ -177,6 +177,7 @@
     <Compile Include="Task\TaskDeleteCriteria.cs" />
     <Compile Include="Task\TaskUpdateCriteria.cs" />
     <Compile Include="Task\TaskInsertCriteria.cs" />
+    <Compile Include="Task\TaskCheckAllTicketsSettledCriteria.cs" />
     <Compile Include="Task\TaskUpdateStatusCriteria.cs" />
     <Compile Include="Case\CaseUpdateStatusCriteria.cs" />
     <Compile Include="Case\CaseGetByIdCriteria.cs" />
