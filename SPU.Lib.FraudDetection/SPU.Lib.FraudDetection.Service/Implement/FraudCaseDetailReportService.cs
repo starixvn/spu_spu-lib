@@ -47,12 +47,13 @@ namespace FD.Lib.Service.Implement
             };
         }
 
-        private List<FraudCaseDetailItem> GetChoiceForSuspiciousTickets(IList<Ticket> suspiciousTickets)
+        private List<FraudCaseDetailByBetTypeList> GetChoiceForSuspiciousTickets(IList<Ticket> suspiciousTickets)
         {
             var builder = new BetListHTMLBuilder();
             var ticketHelper = new TicketHelper();
 
             var list = new List<FraudCaseDetailItem>();
+            var result = new List<FraudCaseDetailByBetTypeList>();
 
             foreach (var ticket in suspiciousTickets)
             {
@@ -76,17 +77,26 @@ namespace FD.Lib.Service.Implement
                 list.Add(item);
             }
 
-            //// list = list.OrderBy(t => t.CustName).ToList();
-
-            return list;
+            var groupedList = list.GroupBy(x => x.BetType).ToList();
+            foreach (var item in groupedList)
+            {
+                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList() 
+                {
+                    Bettype = item.Key,
+                    FraudCaseDetailList = item
+                };
+                result.Add(listDetail);
+            }
+            return result;
         }
 
-        private List<FraudCaseDetailItem> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets)
+        private List<FraudCaseDetailByBetTypeList> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets)
         {
             var builder = new BetListHTMLBuilder();
             var ticketHelper = new TicketHelper();
 
             var list = new List<FraudCaseDetailItem>();
+            var result = new List<FraudCaseDetailByBetTypeList>();
 
             foreach (var ticket in suspiciousTickets)
             {
@@ -112,7 +122,17 @@ namespace FD.Lib.Service.Implement
 
             list = list.OrderBy(t => t.CustName).ToList();
 
-            return list;
+            var groupedList = list.GroupBy(x => x.BetType).ToList();
+            foreach (var item in groupedList)
+            {
+                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList()
+                {
+                    Bettype = item.Key,
+                    FraudCaseDetailList = item
+                };
+                result.Add(listDetail);
+            }
+            return result;
         }
 
         private string FDBuildChoice(Ticket ticket)
@@ -157,9 +177,14 @@ namespace FD.Lib.Service.Implement
                 EventDate = criteria.EventDate
             };
 
+            
             var body = GetDataOutput<Ticket>(newCriteria).ToList();
             summary.HomeId = newCriteria.HomeId;
             summary.AwayId = newCriteria.AwayId;
+            summary.HTHomeScore = newCriteria.HTHomeScore;
+            summary.HTAwayScore = newCriteria.HTAwayScore;
+            summary.FTHomeScore = newCriteria.FTHomeScore;
+            summary.FTAwayScore = newCriteria.FTAwayScore;
 
             return body;
         }

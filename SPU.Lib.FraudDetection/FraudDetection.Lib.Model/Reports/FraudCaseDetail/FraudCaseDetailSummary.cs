@@ -26,6 +26,16 @@ namespace FD.Lib.Model.Reports.FraudCaseDetail
 
         public int HomeId { get; set; }
 
+        public int AwayId { get; set; }
+
+        public int HTHomeScore { get; set; }
+
+        public int HTAwayScore { get; set; }
+
+        public int FTHomeScore { get; set; }
+
+        public int FTAwayScore { get; set; }
+
         public string TransList { get; set; }
 
         public string CaseName { get; set; }
@@ -43,8 +53,6 @@ namespace FD.Lib.Model.Reports.FraudCaseDetail
             }
         }
 
-        public int AwayId { get; set; }
-
         public string AwayName
         {
             get
@@ -55,6 +63,22 @@ namespace FD.Lib.Model.Reports.FraudCaseDetail
                 }
 
                 return RefData.GetTeamName(AwayId.ToString(), "en", string.Empty);
+            }
+        }
+
+        public string DisplayHTScore 
+        {
+            get
+            {
+                return HTHomeScore + " - " + HTAwayScore;
+            }
+        }
+
+        public string DisplayFTScore 
+        {
+            get
+            {
+                return FTHomeScore + " - " + FTAwayScore;
             }
         }
     }
