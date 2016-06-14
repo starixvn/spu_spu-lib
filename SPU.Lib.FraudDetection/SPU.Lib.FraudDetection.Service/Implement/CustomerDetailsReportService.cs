@@ -132,8 +132,9 @@ namespace FD.Lib.Service.Implement
                             TransList = susp.TransList
                         }).ToList());
             }
-
-            return GetChoiceForSuspiciousTickets(suspiciousTickets);
+            
+            var result = GetChoiceForSuspiciousTickets(suspiciousTickets);
+            return result;
         }
 
         public IList<FraudTicketModel> GetSuspiciousTicketFromBodb02(CustomerDetailsReportFraudTicketsCriteria criteria)

@@ -9,5 +9,7 @@
         public int CaseId { get; set; }
 
         public DateTime EventDate { get; set; }
+
+        public string Bettype { get; set; }
     }
 }

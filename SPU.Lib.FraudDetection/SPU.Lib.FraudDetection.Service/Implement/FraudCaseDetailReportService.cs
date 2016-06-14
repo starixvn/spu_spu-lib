@@ -38,7 +38,7 @@ namespace FD.Lib.Service.Implement
 
             var suspiciousTickets = GetSuspiciousTickets(criteria, moveBetBalanceUp, summary);
 
-            var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets) : GetChoiceForSuspiciousTickets(suspiciousTickets);
+            var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets, criteria.Bettype) : GetChoiceForSuspiciousTickets(suspiciousTickets);
 
             return new FraudCaseDetailReportViewModel
             {
@@ -90,7 +90,7 @@ namespace FD.Lib.Service.Implement
             return result;
         }
 
-        private List<FraudCaseDetailByBetTypeList> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets)
+        private List<FraudCaseDetailByBetTypeList> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets, string bettype)
         {
             var builder = new BetListHTMLBuilder();
             var ticketHelper = new TicketHelper();
@@ -122,7 +122,8 @@ namespace FD.Lib.Service.Implement
 
             list = list.OrderBy(t => t.CustName).ToList();
 
-            var groupedList = list.GroupBy(x => x.BetType).ToList();
+            var groupedList = list.Where(x => x.BetType == bettype)
+                .GroupBy(y => y.BetType).ToList();
             foreach (var item in groupedList)
             {
                 FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList()

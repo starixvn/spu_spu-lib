@@ -2,6 +2,8 @@
 {
     public class FraudCaseDetailItem
     {
+        private string formatLink = "<span class='link'>{0}</span>";
+
         public string CustName { get; set; }
 
         public long TransId { get; set; }
@@ -27,5 +29,13 @@
         public string Choice { get; set; }
 
         public string IP { get; set; }
+
+        public string DisplayIP 
+        { 
+            get
+            {
+                return string.Format(formatLink, IP);
+            }
+        }
     }
 }
