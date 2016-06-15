@@ -59,5 +59,7 @@ namespace FD.Lib.Service.Interface
         string GetAssignees(ICriteria criteria);
 
         IEnumerable<MarginModel> GetMonthlyWinloss(ICriteria criteria);
+
+        IEnumerable<FraudCaseDetailItem> GetFraudTicketsByIp(string ip);
     }
 }

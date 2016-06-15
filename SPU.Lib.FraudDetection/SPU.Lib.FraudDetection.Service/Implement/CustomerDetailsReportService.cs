@@ -1,12 +1,3 @@
-// --------------------------------------------------------------------------
-// <copyright file="ICustomerDetailsReportService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (coffee) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Long.Luu" date="2015.12.14">Created</change>
-// </history>
-
 using System.Globalization;
 
 namespace FD.Lib.Service.Implement
@@ -134,6 +125,20 @@ namespace FD.Lib.Service.Implement
             }
             
             var result = GetChoiceForSuspiciousTickets(suspiciousTickets);
+            return result;
+        }
+
+        public IEnumerable<FraudCaseDetailItem> GetFraudTicketsByIp(string ip)
+        {
+            var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
+            var tickets = new List<FraudTicketModel>();
+            CustomerDetailsReportTicketsByIpCriteria criteria = new CustomerDetailsReportTicketsByIpCriteria()
+            {
+                Ip = ip
+            };
+            tickets = GetDataOutput<FraudTicketModel>(criteria).ToList();
+            var result = GetChoiceForSuspiciousTickets(tickets);
+
             return result;
         }
 
