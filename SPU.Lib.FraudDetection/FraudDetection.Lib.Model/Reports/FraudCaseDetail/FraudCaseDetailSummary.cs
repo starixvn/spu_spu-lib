@@ -28,13 +28,13 @@ namespace FD.Lib.Model.Reports.FraudCaseDetail
 
         public int AwayId { get; set; }
 
-        public int HTHomeScore { get; set; }
+        public int? HTHomeScore { get; set; }
 
-        public int HTAwayScore { get; set; }
+        public int? HTAwayScore { get; set; }
 
-        public int FTHomeScore { get; set; }
+        public int? FTHomeScore { get; set; }
 
-        public int FTAwayScore { get; set; }
+        public int? FTAwayScore { get; set; }
 
         public string TransList { get; set; }
 
@@ -66,19 +66,33 @@ namespace FD.Lib.Model.Reports.FraudCaseDetail
             }
         }
 
-        public string DisplayHTScore 
+        public string DisplayHTScore
         {
             get
             {
-                return HTHomeScore + " - " + HTAwayScore;
+                if (HTHomeScore == null || HTAwayScore == null)
+                {
+                    return "-";
+                }
+                else
+                {
+                    return HTHomeScore + " - " + HTAwayScore;
+                }
             }
         }
 
-        public string DisplayFTScore 
+        public string DisplayFTScore
         {
             get
             {
-                return FTHomeScore + " - " + FTAwayScore;
+                if (FTHomeScore == null || FTAwayScore == null)
+                {
+                    return "-";
+                }
+                else
+                {
+                    return FTHomeScore + " - " + FTAwayScore;
+                }
             }
         }
     }

@@ -92,9 +92,6 @@ namespace FD.Lib.Service.Implement
 
         private List<FraudCaseDetailByBetTypeList> BuildTicketsForExportToExcel(IList<Ticket> suspiciousTickets, string bettype)
         {
-            var builder = new BetListHTMLBuilder();
-            var ticketHelper = new TicketHelper();
-
             var list = new List<FraudCaseDetailItem>();
             var result = new List<FraudCaseDetailByBetTypeList>();
 
@@ -120,8 +117,6 @@ namespace FD.Lib.Service.Implement
                 list.Add(item);
             }
 
-            list = list.OrderBy(t => t.CustName).ToList();
-
             var groupedList = list.Where(x => x.BetType == bettype)
                 .GroupBy(y => y.BetType).ToList();
             foreach (var item in groupedList)
@@ -133,6 +128,7 @@ namespace FD.Lib.Service.Implement
                 };
                 result.Add(listDetail);
             }
+
             return result;
         }
 

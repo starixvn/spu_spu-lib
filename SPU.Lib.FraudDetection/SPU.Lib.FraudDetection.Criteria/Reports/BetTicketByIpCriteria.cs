@@ -2,13 +2,13 @@
 {
     using Fanex.Data.Repository;
 
-    public class CustomerDetailsReportTicketsByIpCriteria : CriteriaBase
+    public class BetTicketByIpCriteria : CriteriaBase
     {
         public string Ip { get; set; }
 
         public override string GetSettingKey()
         {
-            return "FD_CustomerDetailsTicketsGetByIP";
+            return "FD_BetTicketGetByIp";
         }
 
         public override bool IsValid()

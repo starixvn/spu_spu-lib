@@ -83,6 +83,7 @@
     <Compile Include="Reports\CustomerDetails\FraudTicketModel.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDetailsModel.cs" />
     <Compile Include="Reports\DailyDataMonitoring\DailyDataMonitoringModel.cs" />
+    <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailBetListViewModel.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailByBetTypeList.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailItem.cs" />
     <Compile Include="Reports\FraudCaseDetail\FraudCaseDetailReportModel.cs" />

@@ -60,6 +60,6 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<MarginModel> GetMonthlyWinloss(ICriteria criteria);
 
-        IEnumerable<FraudCaseDetailItem> GetFraudTicketsByIp(string ip);
+        FraudCaseDetailBetListViewModel GetFraudTicketsByIp(string ip);
     }
 }

@@ -123,21 +123,25 @@ namespace FD.Lib.Service.Implement
                             TransList = susp.TransList
                         }).ToList());
             }
-            
+
             var result = GetChoiceForSuspiciousTickets(suspiciousTickets);
             return result;
         }
 
-        public IEnumerable<FraudCaseDetailItem> GetFraudTicketsByIp(string ip)
+        public FraudCaseDetailBetListViewModel GetFraudTicketsByIp(string ip)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
             var tickets = new List<FraudTicketModel>();
-            CustomerDetailsReportTicketsByIpCriteria criteria = new CustomerDetailsReportTicketsByIpCriteria()
+            BetTicketByIpCriteria criteria = new BetTicketByIpCriteria()
             {
                 Ip = ip
             };
             tickets = GetDataOutput<FraudTicketModel>(criteria).ToList();
-            var result = GetChoiceForSuspiciousTickets(tickets);
+            var result = new FraudCaseDetailBetListViewModel()
+            {
+                BalanceUpDay = moveBetBalanceUp.BalanceUpDay,
+                BetList = GetChoiceForSuspiciousTickets(tickets)
+            };
 
             return result;
         }
