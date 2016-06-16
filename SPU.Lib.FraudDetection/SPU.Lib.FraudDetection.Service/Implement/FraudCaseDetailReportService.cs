@@ -80,7 +80,7 @@ namespace FD.Lib.Service.Implement
             var groupedList = list.GroupBy(x => x.BetType).ToList();
             foreach (var item in groupedList)
             {
-                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList() 
+                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList()
                 {
                     Bettype = item.Key,
                     FraudCaseDetailList = item
@@ -105,7 +105,6 @@ namespace FD.Lib.Service.Implement
                     Choice = FDBuildChoice(ticket),
                     CustName = ticket.UserName,
                     IP = ticket.IP,
-                    Odds = string.Format("{0} ({1})", string.Format("{0:#,##0.00}", ticket.Odds), RefData.GetOddsTypeName(ticket.OddsType, "en", string.Empty)),
                     Stake = string.Format("{0:#,##0}", ticket.Stake),
                     WinLoss = ticket.Winlost,
                     Score = string.Format("{0} - {1}", ticket.LiveHomeScore, ticket.LiveAwayScore),
@@ -113,6 +112,16 @@ namespace FD.Lib.Service.Implement
                     TransDate = ticket.TransDate.ToString(),
                     TransId = ticket.TransId
                 };
+
+                if (ticket.OddsType != string.Empty)
+                {
+                    string oddType = RefData.GetOddsTypeName(ticket.OddsType, "en", string.Empty);
+                    item.Odds = string.Format("{0} ({1})", string.Format("{0:#,##0.00}", ticket.Odds), oddType);
+                }
+                else
+                {
+                    item.Odds = string.Format("{0:#,##0.00}", ticket.Odds);
+                }
 
                 list.Add(item);
             }
@@ -174,7 +183,7 @@ namespace FD.Lib.Service.Implement
                 EventDate = criteria.EventDate
             };
 
-            
+
             var body = GetDataOutput<Ticket>(newCriteria).ToList();
             summary.HomeId = newCriteria.HomeId;
             summary.AwayId = newCriteria.AwayId;
