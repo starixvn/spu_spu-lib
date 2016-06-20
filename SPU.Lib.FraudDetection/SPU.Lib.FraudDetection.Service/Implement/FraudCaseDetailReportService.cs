@@ -40,11 +40,12 @@ namespace FD.Lib.Service.Implement
 
             var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets, criteria.Bettype) : GetChoiceForSuspiciousTickets(suspiciousTickets);
 
-            return new FraudCaseDetailReportViewModel
+            FraudCaseDetailReportViewModel result = new FraudCaseDetailReportViewModel() 
             {
                 Summary = summary,
                 Body = list
             };
+            return result;
         }
 
         private List<FraudCaseDetailByBetTypeList> GetChoiceForSuspiciousTickets(IList<Ticket> suspiciousTickets)
@@ -97,6 +98,10 @@ namespace FD.Lib.Service.Implement
 
             foreach (var ticket in suspiciousTickets)
             {
+                if (ticket.BetTypeId == 3)
+                {
+                    var a = ticket;
+                }
                 var item = new FraudCaseDetailItem
                 {
                     HomeName = RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty),
@@ -143,9 +148,25 @@ namespace FD.Lib.Service.Implement
 
         private string FDBuildChoice(Ticket ticket)
         {
-            return ticket.BetTeam.ToUpper() == "H"
-                ? RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
-                : RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
+            string result = "";
+            switch (ticket.BetTypeId)
+            {
+                case 2:
+                case 12:
+                case 184:
+                    result = ticket.BetTeam.ToUpper() == "H" ? "Odd " : "Even ";
+                    break;
+                case 3:
+                case 8:
+                case 18:
+                    result = ticket.BetTeam.ToUpper() == "H" ? "Over " + ticket.Handicap1.ToString("0.##") : "Under " + ticket.Handicap1.ToString("0.##");
+                    break;
+                default:
+                    result = ticket.BetTeam.ToUpper() == "H" ? RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
+                        : RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
+                    break;
+            }
+            return result;
         }
 
         private FraudCaseDetailSummary GetFraudCaseDetailSummary(FraudCaseDetailReportCriteria criteria)

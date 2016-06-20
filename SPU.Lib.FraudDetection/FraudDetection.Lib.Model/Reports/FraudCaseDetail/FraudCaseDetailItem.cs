@@ -2,7 +2,7 @@
 {
     public class FraudCaseDetailItem
     {
-        private string formatLink = "<span class='link'>{0}</span>";
+        private string formatLink = "<span class='all-ticketsip'>{0}</span>";
 
         public string CustName { get; set; }
 
