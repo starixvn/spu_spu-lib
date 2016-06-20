@@ -22,13 +22,18 @@ namespace FD.Lib.QueryGenerator
             TaskInfoCriteria criteria,
             int chunkOfSelection)
         {
-            IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
-            IsCheckNotScanned = criteria.IsCheckNotScanned;
-            ChunkOfSelection = chunkOfSelection;
-            OriginalFormula = criteria.TaskPreconditions;
-            PreConditionRawFormula = criteria.TaskPreconditionsOriginal;
-            RelevantConfigIds = criteria.PreconConfigs;
-            GetConfigsInfo(fraudCaseId);
+            IsNoRule = string.IsNullOrEmpty(criteria.TaskPreconditionsOriginal);
+
+            if(!IsNoRule)
+            {
+                IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
+                IsCheckNotScanned = criteria.IsCheckNotScanned;
+                ChunkOfSelection = chunkOfSelection;
+                OriginalFormula = criteria.TaskPreconditions;
+                PreConditionRawFormula = criteria.TaskPreconditionsOriginal;
+                RelevantConfigIds = criteria.PreconConfigs;
+                GetConfigsInfo(fraudCaseId);
+            }
         }
 
         private bool IsCheckNotScanned { get; set; }
@@ -43,6 +48,11 @@ namespace FD.Lib.QueryGenerator
         /// <returns>SQL string.</returns>
         public override string GenerateQuery()
         {
+            if (IsNoRule)
+            {
+                return string.Empty;
+            }
+
             var queryPreconString = !IsCountSuspiciousTime
                 ? "select distinct top " + ChunkOfSelection + " {0} from {1} where {2}"
                 : "select distinct {0} from {1} where {2}";

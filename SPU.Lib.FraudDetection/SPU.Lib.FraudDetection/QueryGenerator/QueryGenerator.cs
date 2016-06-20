@@ -23,6 +23,8 @@ namespace FD.Lib.QueryGenerator
     {
         protected const int CheckBettingHistory = 2;
 
+        protected bool IsNoRule { get; set; }
+
         protected string OriginalFormula { get; set; }
 
         protected string RelevantConfigIds { get; set; }

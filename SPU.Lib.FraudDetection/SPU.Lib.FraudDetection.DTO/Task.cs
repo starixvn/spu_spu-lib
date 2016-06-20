@@ -68,5 +68,29 @@ namespace FD.Lib.DTO
                 }
             }
         }
+
+        public bool HasPrecondition
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(TaskPreconditions);
+            }
+        }
+
+        public bool HasRule
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(TaskRules);
+            }
+        }
+
+        public bool HasNextAction
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(NextActionIdList) && !string.IsNullOrEmpty(NextActionTargetIdList);
+            }
+        }
     }
 }

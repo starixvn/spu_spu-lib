@@ -23,12 +23,17 @@ namespace FD.Lib.QueryGenerator
 
         public RuleQueryGenerator(int fraudCaseId, TaskInfoCriteria criteria)
         {
-            IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
-            OriginalFormula = criteria.TaskRules;
-            RelevantConfigIds = criteria.RuleConfigs;
-            GetConfigsInfo(fraudCaseId);
-            _isNearTheGoal = OriginalFormula.Contains("NEARTHEGOAL");
-            _isCalculatedByPercentMaxBet = OriginalFormula.Contains("% Max Bet");
+            IsNoRule = string.IsNullOrEmpty(criteria.TaskRulesOriginal);
+
+            if (!IsNoRule)
+            {
+                IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
+                OriginalFormula = criteria.TaskRules;
+                RelevantConfigIds = criteria.RuleConfigs;
+                GetConfigsInfo(fraudCaseId);
+                _isNearTheGoal = OriginalFormula.Contains("NEARTHEGOAL");
+                _isCalculatedByPercentMaxBet = OriginalFormula.Contains("% Max Bet");
+            }
         }
 
         /// <summary>
@@ -37,6 +42,11 @@ namespace FD.Lib.QueryGenerator
         /// <returns>SQL string.</returns>
         public override string GenerateQuery()
         {
+            if (IsNoRule)
+            {
+                return string.Empty;
+            }
+
             var queryRuleString = "select distinct {0} from {1} where {2}";
 
             queryRuleString = string.Format(
