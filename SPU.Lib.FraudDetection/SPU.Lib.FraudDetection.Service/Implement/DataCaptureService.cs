@@ -54,5 +54,10 @@ namespace FD.Lib.Service.Implement
         {
             return GetData<DataTypeCapture>(criteria).ToList();
         }
+
+        public ICommandResult InsertCapturedDataList(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

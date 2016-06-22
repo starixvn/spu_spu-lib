@@ -102,6 +102,7 @@
     <Compile Include="DataCapture\SuspiciousCapturedDataInsertCriteria.cs" />
     <Compile Include="DataCapture\DataCaptureGetAllNotComparedMatchesCriteria.cs" />
     <Compile Include="DataCapture\DataCaptureInsertCriteria.cs" />
+    <Compile Include="DataCapture\DataCaptureListInsertCriteria.cs" />
     <Compile Include="Event\EventGetAllCriteria.cs" />
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />

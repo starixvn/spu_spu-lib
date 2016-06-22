@@ -28,5 +28,7 @@ namespace FD.Lib.Service.Interface
         ICommandResult UpdateCapturedData(ICriteria criteria);
 
         List<DataTypeCapture> GetAllDataTypeCapture(ICriteria criteria);
+
+        ICommandResult InsertCapturedDataList(ICriteria criteria);
     }
 }
