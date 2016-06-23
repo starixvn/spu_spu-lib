@@ -91,14 +91,15 @@ namespace FD.Lib.Core.ExportExcel
             foreach (var dataRow in Data)
             {
                 var row = Sheet.CreateRow(RowIndex);
+                row.Height = 519;
                 var index = 0;
                 rowCount++;
                 SetUpACell(row, index++, rowCount.ToString(CultureInfo.InvariantCulture), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, index++, dataRow.IsDelinquent != null ? (dataRow.IsDelinquent.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.IsVerified != null ? (dataRow.IsVerified.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.LastVerifiedBy.Length > 0 ? dataRow.LastVerifiedBy : "-", ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, index++, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
-                SetUpACell(row, index++, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                //SetUpACell(row, index++, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
+                //SetUpACell(row, index++, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, index++, dataRow.Event, ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.EventStatus, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
 
@@ -121,14 +122,12 @@ namespace FD.Lib.Core.ExportExcel
         {
             var index = 0;
 
-            Sheet.SetColumnWidth(index++, 2000);
-            Sheet.SetColumnWidth(index++, 5000);
-            Sheet.SetColumnWidth(index++, 5000);
-            Sheet.SetColumnWidth(index++, 5000);
-            Sheet.SetColumnWidth(index++, 12000);
-            Sheet.SetColumnWidth(index++, 5000);
-            Sheet.SetColumnWidth(index++, 12000);
+            Sheet.SetColumnWidth(index++, 1800);
             Sheet.SetColumnWidth(index++, 3000);
+            Sheet.SetColumnWidth(index++, 3000);
+            Sheet.SetColumnWidth(index++, 5000);
+            Sheet.SetColumnWidth(index++, 13000);
+            Sheet.SetColumnWidth(index++, 5000);
 
             if (!Data.Any())
             {
