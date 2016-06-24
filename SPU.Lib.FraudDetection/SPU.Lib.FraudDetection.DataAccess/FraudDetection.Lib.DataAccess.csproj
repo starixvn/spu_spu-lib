@@ -78,6 +78,7 @@
     <Compile Include="Implement\CustomerDetailsReportDataAccess.cs" />
     <Compile Include="Implement\DailyDataMonitoringReportDataAccess.cs" />
     <Compile Include="Implement\DataCaptureAccess.cs" />
+    <Compile Include="Implement\LiveMatchMonitoringReportDataAccess.cs" />
     <Compile Include="Implement\MatchMonitoringReportDataAccess.cs" />
     <Compile Include="Implement\CustomerBettingGroupDataAccess.cs" />
     <Compile Include="Implement\CustomerReportDataAccess.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Interface\ICustomerDetailsReportDataAccess.cs" />
     <Compile Include="Interface\IDailyDataMonitoringReportDataAccess.cs" />
     <Compile Include="Interface\IDataCaptureAccess.cs" />
+    <Compile Include="Interface\ILiveMatchMonitoringReportDataAccess.cs" />
     <Compile Include="Interface\IMatchMonitoringReportDataAccess.cs" />
     <Compile Include="Interface\ICustomerBettingGroupDataAccess.cs" />
     <Compile Include="Interface\ICaseGroupDataAccess.cs" />

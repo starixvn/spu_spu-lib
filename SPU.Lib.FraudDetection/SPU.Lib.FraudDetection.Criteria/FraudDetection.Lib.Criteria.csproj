@@ -118,6 +118,7 @@
     <Compile Include="Reports\BetTicketByIpCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerHedgeUpdateCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerLogNoteRemoveCriteria.cs" />
+    <Compile Include="Reports\LiveMatchMonitoring\LiveMatchMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\MatchMonitoringReportUpdateVerifiedCriteria.cs" />
     <Compile Include="Reports\MatchMonitoringReportUpdateDelinquentCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDelinquentUpdateCriteria.cs" />

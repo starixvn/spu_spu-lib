@@ -92,6 +92,7 @@
     <Compile Include="DataTypeCapture.cs" />
     <Compile Include="DataCapture.cs" />
     <Compile Include="CustomerBettingGroupDetail.cs" />
+    <Compile Include="LiveMatchMonitoring.cs" />
     <Compile Include="MatchMonitoring.cs" />
     <Compile Include="League.cs" />
     <Compile Include="MoveBetsBalanceUp.cs" />
