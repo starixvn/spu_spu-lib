@@ -29,6 +29,8 @@ namespace FD.Lib.Criteria.Case
 
         public bool IsInternal { get; set; }
 
+        public int TypeId { get; set; }
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>

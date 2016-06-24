@@ -76,6 +76,7 @@
     <Compile Include="CaseGroup\CaseGroupInsertCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
+    <Compile Include="Common\CaseTypesGetAllCriteria.cs" />
     <Compile Include="Common\DataTypeCaptureGetAllCriteria.cs" />
     <Compile Include="Common\CurrencyGetAllCriteria.cs" />
     <Compile Include="Common\LeagueGetAllByDateAndSportCriteria.cs" />

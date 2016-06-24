@@ -23,5 +23,7 @@ namespace FD.Lib.Service.Interface
         IEnumerable<Activity> GetActivities(ICriteria criteria);
 
         IEnumerable<Config> GetConfigsByActivity(ICriteria criteria);
+
+        IEnumerable<CaseType> GetCaseTypes(ICriteria criteria);
     }
 }

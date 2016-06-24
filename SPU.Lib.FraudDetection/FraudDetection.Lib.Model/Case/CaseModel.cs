@@ -25,5 +25,9 @@ namespace FD.Lib.Model.Case
         public bool IsActive { get; set; }
 
         public bool IsInternal { get; set; }
+
+        public int TypeId { get; set; }
+
+        public string TypeName { get; set; }
     }
 }

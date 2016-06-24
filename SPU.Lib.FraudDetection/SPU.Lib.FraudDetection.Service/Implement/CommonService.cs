@@ -33,5 +33,10 @@ namespace FD.Lib.Service.Implement
         {
             return GetData<Config>(criteria);
         }
+
+        public IEnumerable<CaseType> GetCaseTypes(ICriteria criteria)
+        {
+            return GetData<CaseType>(criteria);
+        }
     }
 }
