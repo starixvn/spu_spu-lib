@@ -30,6 +30,10 @@
 
         public string IP { get; set; }
 
+        public int CaseId { get; set; }
+
+        public string CaseName { get; set; }
+
         public string DisplayIP 
         { 
             get

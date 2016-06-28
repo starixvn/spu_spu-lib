@@ -18,5 +18,9 @@ namespace FD.Lib.DTO.CustomerDetails
         public DateTime EventDate { get; set; }
 
         public string TransList { get; set; }
+
+        public int CaseId { get; set; }
+
+        public string CaseName { get; set; }
     }
 }

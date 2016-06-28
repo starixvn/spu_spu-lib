@@ -25,5 +25,9 @@ namespace FD.Lib.Model.Reports.CustomerDetails
         public int FullTimeHomeScore { get; set; }
 
         public int FullTimeAwayScore { get; set; }
+
+        public int CaseId { get; set; }
+
+        public string CaseName { get; set; }
     }
 }
