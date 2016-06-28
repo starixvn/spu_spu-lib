@@ -101,39 +101,54 @@ namespace FD.Lib.Service.Implement
         public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            var suspiciousGroupedDetails = GetSuspiciousInfoByCustId(
-                new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate)).GroupBy(x => x.CaseId);
+            var suspiciousDetails = GetSuspiciousInfoByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate));
             var suspiciousTickets = new List<FraudTicketModel>();
-            foreach (var suspiciousDetails in suspiciousGroupedDetails)
+
+            foreach (var suspiciousDetail in suspiciousDetails)
             {
-                foreach (var susp in suspiciousDetails)
+                if (suspiciousDetail.EventDate > moveBetBalanceUp.BalanceUpDay)
                 {
-                    suspiciousTickets.AddRange(susp.EventDate > moveBetBalanceUp.BalanceUpDay
-                        ? GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
-                            {
-                                FromDate = fromDate,
-                                ToDate = toDate,
-                                MoveBetDate = moveBetBalanceUp.MoveBetsDay,
-                                MatchId = susp.MatchId,
-                                WinlostDate = susp.EventDate,
-                                TransList = susp.TransList
-                            }).ToList()
-                        : GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria
-                            {
-                                MatchId = susp.MatchId,
-                                WinlostDate = susp.EventDate,
-                                TransList = susp.TransList
-                            }).ToList());
-                    suspiciousTickets.Select(t => 
-                    { 
-                        t.CaseId = susp.CaseId; 
-                        t.CaseName = susp.CaseName; 
-                        return t; 
+                    var tickets = GetSuspiciousTicketFromBodb02(new CustomerDetailsReportFraudTicketsCriteria
+                    {
+                        FromDate = fromDate,
+                        ToDate = toDate,
+                        MoveBetDate = moveBetBalanceUp.MoveBetsDay,
+                        MatchId = suspiciousDetail.MatchId,
+                        WinlostDate = suspiciousDetail.EventDate,
+                        TransList = suspiciousDetail.TransList
                     }).ToList();
+
+                    tickets.Select(t =>
+                    {
+                        t.CaseId = suspiciousDetail.CaseId;
+                        t.CaseName = suspiciousDetail.CaseName;
+                        return t;
+                    }).ToList();
+
+                    suspiciousTickets.AddRange(tickets);
+                }
+                else
+                {
+                    var tickets = GetSuspiciousTicketsFromBodbArchieve(new CustomerDetailsReportFraudTicketsFromDbArchiveCriteria
+                    {
+                        MatchId = suspiciousDetail.MatchId,
+                        WinlostDate = suspiciousDetail.EventDate,
+                        TransList = suspiciousDetail.TransList
+                    }).ToList();
+
+                    tickets.Select(t =>
+                    {
+                        t.CaseId = suspiciousDetail.CaseId;
+                        t.CaseName = suspiciousDetail.CaseName;
+                        return t;
+                    }).ToList();
+
+                    suspiciousTickets.AddRange(tickets);
                 }
             }
 
             var result = GetChoiceForSuspiciousTickets(suspiciousTickets);
+
             return result;
         }
 
@@ -241,8 +256,29 @@ namespace FD.Lib.Service.Implement
 
         private string FormatScore(FraudTicketModel ticket)
         {
-            var result = string.Format("HT: {0} - {1}<br><b>FT: {2} - {3}</b>", ticket.HalfTimeHomeScore, ticket.HalfTimeAwayScore,
-                                   ticket.FullTimeHomeScore, ticket.FullTimeAwayScore);
+            var result = "HT: {0}<br><b>FT: {1}</b>";
+            var halfTimeScore = "{0} - {1}";
+            var fullTimeScore = "{0} - {1}";
+
+            if (ticket.HalfTimeHomeScore == null || ticket.HalfTimeAwayScore == null)
+            {
+                halfTimeScore = string.Format(halfTimeScore, "", "");
+            }
+            else
+            {
+                halfTimeScore = string.Format(halfTimeScore, ticket.HalfTimeHomeScore, ticket.HalfTimeAwayScore);
+            }
+
+            if (ticket.FullTimeHomeScore == null || ticket.FullTimeAwayScore == null)
+            {
+                fullTimeScore = string.Format(fullTimeScore, "", "");
+            }
+            else
+            {
+                fullTimeScore = string.Format(fullTimeScore, ticket.FullTimeHomeScore, ticket.FullTimeAwayScore);
+            }
+
+            result = string.Format(result, halfTimeScore, fullTimeScore);
 
             return result;
         }

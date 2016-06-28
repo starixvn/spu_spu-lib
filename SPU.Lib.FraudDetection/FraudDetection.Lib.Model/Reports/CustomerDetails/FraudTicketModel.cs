@@ -18,13 +18,13 @@ namespace FD.Lib.Model.Reports.CustomerDetails
     [Serializable]
     public class FraudTicketModel : Ticket
     {
-        public int HalfTimeHomeScore { get; set; }
+        public short? HalfTimeHomeScore { get; set; }
 
-        public int HalfTimeAwayScore { get; set; }
+        public short? HalfTimeAwayScore { get; set; }
 
-        public int FullTimeHomeScore { get; set; }
+        public short? FullTimeHomeScore { get; set; }
 
-        public int FullTimeAwayScore { get; set; }
+        public short? FullTimeAwayScore { get; set; }
 
         public int CaseId { get; set; }
 
