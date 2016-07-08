@@ -7,6 +7,7 @@
     using System.Text;
     using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using FD.Lib.DTO;
 
     public class MessageMasterService : QueryService, IMessageMasterService
     {
@@ -26,12 +27,12 @@
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DTO.MessageMaster> GetAllMessage(ICriteria criteria)
+        public IEnumerable<MessageMaster> GetAllMessage(ICriteria criteria)
         {
-            throw new NotImplementedException();
+            return GetData<MessageMaster>(criteria);
         }
 
-        public DTO.MessageMaster GetMessageById(ICriteria criteria)
+        public MessageMaster GetMessageById(ICriteria criteria)
         {
             throw new NotImplementedException();
         }

@@ -2,16 +2,18 @@
 {
     using Fanex.Data.Repository;
 
-    class MessageMasterGetByIdCriteria : CriteriaBase
+    public class MessageMasterGetByIdCriteria : CriteriaBase
     {
+        public int MessageId { get; set; }
+
         public override string GetSettingKey()
         {
-            return "";
+            return "FD_MessageMasterGetById";
         }
 
         public override bool IsValid()
         {
-            return true;
+            return MessageId > 0;
         }
     }
 }

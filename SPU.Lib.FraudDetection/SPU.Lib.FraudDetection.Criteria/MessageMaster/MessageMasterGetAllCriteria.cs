@@ -4,11 +4,9 @@
 
     public class MessageMasterGetAllCriteria : CriteriaBase
     {
-        public string Content { get; set; }
-
         public override string GetSettingKey()
         {
-            return "";
+            return "FD_MessageMasterGetAll";
         }
 
         public override bool IsValid()

@@ -5,14 +5,18 @@ namespace FD.Lib.Criteria.MessageMaster
 
     public class MessageMasterDeleteCriteria : CriteriaBase
     {
+        public int CreatorId { get; set; }
+
+        public int MessageId { get; set; }
+
         public override string GetSettingKey()
         {
-            return "";
+            return "FD_MessageMasterDelete";
         }
 
         public override bool IsValid()
         {
-            return true;
+            return MessageId > 0;
         }
     }
 }
