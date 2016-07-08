@@ -113,7 +113,9 @@
     <Compile Include="MessageMaster\MessageMasterDeleteCriteria.cs" />
     <Compile Include="MessageMaster\MessageMasterGetAllCriteria.cs" />
     <Compile Include="MessageMaster\MessageMasterGetByIdCriteria.cs" />
+    <Compile Include="MessageMaster\MessageMasterInsertCriteria.cs" />
     <Compile Include="MessageMaster\MessageMasterUpdateCriteria.cs" />
+    <Compile Include="MessageMaster\MessageMasterUpdateStatusCriteria.cs" />
     <Compile Include="Reports\AssociationCustomersGetCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListCriteria.cs" />
     <Compile Include="Reports\BetTicketGetByTransListFromDbArchiveCriteria.cs" />

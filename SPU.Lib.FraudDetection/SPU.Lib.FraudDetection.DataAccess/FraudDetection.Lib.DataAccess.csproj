@@ -87,6 +87,7 @@
     <Compile Include="Implement\ConfigurationsDataAccess.cs" />
     <Compile Include="Implement\GroupDataAccess.cs" />
     <Compile Include="Implement\MailMasterDataAccess.cs" />
+    <Compile Include="Implement\MessageMasterDataAccess.cs" />
     <Compile Include="Implement\ScannedMatchesDataAccess.cs" />
     <Compile Include="Interface\ICustomerDetailsReportDataAccess.cs" />
     <Compile Include="Interface\IDailyDataMonitoringReportDataAccess.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Interface\IConfigurationsDataAccess.cs" />
     <Compile Include="Interface\IGroupDataAccess.cs" />
     <Compile Include="Implement\MatchDataAccess.cs" />
+    <Compile Include="Interface\IMessageMasterDataAccess.cs" />
     <Compile Include="Interface\IScannedMatchesDataAccess.cs" />
     <Compile Include="Interface\ISuspiciousInfoDataAccess.cs" />
     <Compile Include="Interface\ITaskDataAccess.cs" />

@@ -16,7 +16,7 @@
 
         ICommandResult UpdateMessage(ICriteria criteria);
 
-        IEnumerable<MessageMaster> GetAllMessage(ICriteria criteria);
+        List<MessageMaster> GetAllMessage(ICriteria criteria);
 
         MessageMaster GetMessageById(ICriteria criteria);
     }

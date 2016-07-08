@@ -1,4 +1,4 @@
-﻿namespace FD.Lib.Criteria.MailMaster
+﻿namespace FD.Lib.Criteria.MessageMaster
 {
     using Fanex.Data.Repository;
 
