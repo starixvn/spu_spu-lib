@@ -102,6 +102,7 @@
     <Compile Include="Implement\ConfigurationsService.cs" />
     <Compile Include="Implement\CommonService.cs" />
     <Compile Include="Implement\LiveMatchMonitoringReportService.cs" />
+    <Compile Include="Implement\NotificationService.cs" />
     <Compile Include="Implement\MessageMasterService.cs" />
     <Compile Include="Implement\OfficeIPsReportService.cs" />
     <Compile Include="Implement\CustomerDetailsReportService.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Interface\IDataCaptureService.cs" />
     <Compile Include="Interface\IBettingGroupReportService.cs" />
     <Compile Include="Implement\BettingGroupReportService.cs" />
+    <Compile Include="Interface\INotificationService .cs" />
     <Compile Include="Interface\ISuspiciousGroupInfoService.cs" />
     <Compile Include="Implement\SuspiciousGroupInfoService.cs" />
     <Compile Include="Interface\ICurrencyService.cs" />
