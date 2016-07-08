@@ -31,7 +31,7 @@
 
         public override bool IsValid()
         {
-            return true;
+            return MessageId > 0;
         }
     }
 }

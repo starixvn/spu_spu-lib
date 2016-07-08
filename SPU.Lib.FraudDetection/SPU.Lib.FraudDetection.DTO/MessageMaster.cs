@@ -2,7 +2,7 @@
 {
     using Fanex.Data.Repository;
 
-    public class MessageMaster : CriteriaBase
+    public class MessageMaster
     {
         public int MessageId { get; set; }
 
@@ -16,16 +16,6 @@
 
         public string OnlineRecipient { get; set; }
 
-        public bool Active { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public bool IsActive { get; set; }
     }
 }
