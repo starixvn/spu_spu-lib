@@ -20,10 +20,6 @@
 
         public bool IsActive { get; set; }
 
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
-
         public override string GetSettingKey()
         {
             return "FD_MessageMasterInsert";
