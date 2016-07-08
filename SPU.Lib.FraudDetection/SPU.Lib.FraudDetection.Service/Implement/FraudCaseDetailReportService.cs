@@ -193,6 +193,23 @@ namespace FD.Lib.Service.Implement
             };
         }
 
+        private IList<Ticket> GetSuspiciousTickets(FraudCaseDetailReportCriteria criteria, MoveBetsBalanceUp moveBetBalanceUp,
+            FraudCaseDetailSummary summary)
+        {
+            if (criteria.EventDate > moveBetBalanceUp.BalanceUpDay)
+            {
+                var body = GetSuspiciousTicketFromBodb02(criteria, moveBetBalanceUp, summary);
+
+                return body;
+            }
+            else
+            {
+                var body = GetSuspiciousTicketsFromBodbArchieve(criteria, summary);
+
+                return body;
+            }
+        }
+
         private IList<Ticket> GetSuspiciousTicketFromBodb02(FraudCaseDetailReportCriteria criteria, MoveBetsBalanceUp moveBetBalanceUp,
             FraudCaseDetailSummary summary)
         {
@@ -216,23 +233,6 @@ namespace FD.Lib.Service.Implement
             return body;
         }
 
-        private IList<Ticket> GetSuspiciousTickets(FraudCaseDetailReportCriteria criteria, MoveBetsBalanceUp moveBetBalanceUp,
-            FraudCaseDetailSummary summary)
-        {
-            if (criteria.EventDate > moveBetBalanceUp.BalanceUpDay)
-            {
-                var body = GetSuspiciousTicketFromBodb02(criteria, moveBetBalanceUp, summary);
-
-                return body;
-            }
-            else
-            {
-                var body = GetSuspiciousTicketsFromBodbArchieve(criteria, summary);
-
-                return body;
-            }
-        }
-
         private IList<Ticket> GetSuspiciousTicketsFromBodbArchieve(FraudCaseDetailReportCriteria criteria, FraudCaseDetailSummary summary)
         {
             var newCriteria = new BetTicketGetByTransListFromDbArchiveCriteria
@@ -244,6 +244,10 @@ namespace FD.Lib.Service.Implement
             var body = GetDataOutput<Ticket>(newCriteria).ToList();
             summary.HomeId = newCriteria.HomeId;
             summary.AwayId = newCriteria.AwayId;
+            summary.HTHomeScore = newCriteria.HTHomeScore;
+            summary.HTAwayScore = newCriteria.HTAwayScore;
+            summary.FTHomeScore = newCriteria.FTHomeScore;
+            summary.FTAwayScore = newCriteria.FTAwayScore;
 
             return body;
         }

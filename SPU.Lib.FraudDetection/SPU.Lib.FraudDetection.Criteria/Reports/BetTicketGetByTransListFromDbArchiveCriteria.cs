@@ -12,6 +12,14 @@
 
         public int AwayId { get; set; }
 
+        public int? HTHomeScore { get; set; }
+
+        public int? HTAwayScore { get; set; }
+
+        public int? FTHomeScore { get; set; }
+
+        public int? FTAwayScore { get; set; }
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>

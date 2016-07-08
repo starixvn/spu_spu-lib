@@ -1,0 +1,31 @@
+﻿namespace FD.Lib.DTO
+{
+    using Fanex.Data.Repository;
+
+    public class MessageMaster : CriteriaBase
+    {
+        public int MessageId { get; set; }
+
+        public string MessageCode { get; set; }
+
+        public string MessageContent { get; set; }
+
+        public string MessageDesc { get; set; }
+
+        public string Recipient { get; set; }
+
+        public string OnlineRecipient { get; set; }
+
+        public bool Active { get; set; }
+
+        public override string GetSettingKey()
+        {
+            return "";
+        }
+
+        public override bool IsValid()
+        {
+            return true;
+        }
+    }
+}
