@@ -17,5 +17,9 @@ namespace FD.Lib.Service.Interface
     public interface INotificationService 
     {
         ICommandResult InsertUserMessage(ICriteria criteria);
+
+        ICommandResult InsertUserAction(ICriteria criteria);
+
+        IEnumerable<int> GetUsersOnline(ICriteria criteria);
     }
 }

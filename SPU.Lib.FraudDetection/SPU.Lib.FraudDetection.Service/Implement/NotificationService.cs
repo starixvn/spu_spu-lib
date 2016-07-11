@@ -13,5 +13,15 @@
         {
             return ExecuteNonQuery(criteria);
         }
+
+        public ICommandResult InsertUserAction(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public IEnumerable<int> GetUsersOnline(ICriteria criteria)
+        {
+            return GetData<int>(criteria);
+        }
     }
 }

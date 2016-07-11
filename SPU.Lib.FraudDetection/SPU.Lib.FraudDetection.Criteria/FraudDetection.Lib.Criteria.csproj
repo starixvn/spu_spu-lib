@@ -194,7 +194,9 @@
     <Compile Include="Case\CaseGetAllCriteria.cs" />
     <Compile Include="Case\CaseUpdateCriteria.cs" />
     <Compile Include="Case\CaseInsertCriteria.cs" />
-    <Compile Include="UserMesssage\UserMesssageInsertCriteria.cs" />
+    <Compile Include="Notification\NotificationGetUserOnlineCriteria.cs" />
+    <Compile Include="Notification\NotificationInsertUserActionCriteria.cs" />
+    <Compile Include="Notification\NotificationInsertUserMesssageCriteria.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
