@@ -6,8 +6,6 @@
     {
         public int CreatorId { get; set; }
 
-        public int MessageId { get; set; }
-
         public string MessageCode { get; set; }
 
         public string MessageDesc { get; set; }
@@ -27,7 +25,7 @@
 
         public override bool IsValid()
         {
-            return MessageId > 0;
+            return true;
         }
     }
 }
