@@ -112,6 +112,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageGenerator\MessageContentType.cs" />
+    <Compile Include="MessageGenerator\MessageContentTypeCaseName.cs" />
+    <Compile Include="MessageGenerator\MessageContentTypeEvent.cs" />
+    <Compile Include="MessageGenerator\MessageContentTypeMatchCode.cs" />
+    <Compile Include="MessageGenerator\MessageContentTypeMatchId.cs" />
+    <Compile Include="MessageGenerator\MessageGenerator.cs" />
     <Compile Include="QueryGenerator\ActivityType.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForComparingData.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingAbnormalMove.cs" />

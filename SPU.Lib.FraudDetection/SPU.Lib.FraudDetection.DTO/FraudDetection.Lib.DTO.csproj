@@ -95,6 +95,7 @@
     <Compile Include="LiveMatchMonitoring.cs" />
     <Compile Include="MatchMonitoring.cs" />
     <Compile Include="League.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MessageMaster.cs" />
     <Compile Include="MoveBetsBalanceUp.cs" />
     <Compile Include="Bettype.cs" />
