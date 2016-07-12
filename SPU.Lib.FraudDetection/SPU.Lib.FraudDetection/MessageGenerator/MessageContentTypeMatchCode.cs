@@ -1,5 +1,8 @@
 ﻿namespace FD.Lib.BusinessManager.MessageGenerator
 {
+    using FD.Lib.DTO;
+    using System.Collections.Generic;
+
     class MessageContentTypeMatchCode : MessageContentType
     {
         public MessageContentTypeMatchCode()
@@ -8,9 +11,17 @@
             ContentTypeName = "";
         }
 
-        protected override string FormatContentType(string messageContent)
+        public override List<Message> FormatContentType(List<Message> messages)
         {
-            throw new System.NotImplementedException();
+            foreach (var message in messages)
+            {
+                if (message.MessageContent.IndexOf(ContentTypeName) > 0)
+                {
+                    message.MessageContent = message.MessageContent.Replace(ContentTypeName, message.MatchCode);
+                }
+            }
+
+            return messages;
         }
     }
 }

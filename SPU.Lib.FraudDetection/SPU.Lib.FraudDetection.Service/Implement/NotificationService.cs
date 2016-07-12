@@ -23,5 +23,15 @@
         {
             return GetData<int>(criteria);
         }
+
+        public IEnumerable<Message> GetMessageByUserId(ICriteria criteria)
+        {
+            return GetData<Message>(criteria);
+        }
+
+        public ICommandResult UpdateAllMessageStatusByUserId(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

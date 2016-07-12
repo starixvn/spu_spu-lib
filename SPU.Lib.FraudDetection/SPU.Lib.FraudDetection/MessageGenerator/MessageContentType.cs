@@ -3,19 +3,14 @@
     using FD.Lib.DTO;
     using System.Collections.Generic;
 
-    public class MessageContentType
+    public abstract class MessageContentType
     {
         protected string ContentTypeName { get; set; }
-
-        protected List<Message> MessageList;
 
         public MessageContentType()
         {
         }
 
-        protected abstract string FormatContentType(string messageContent)
-        {
-            return messageContent;
-        }
+        public abstract List<Message> FormatContentType(List<Message> messages);
     }
 }

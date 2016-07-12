@@ -3,17 +3,17 @@
     using Fanex.Data.Repository;
 
     /// <summary>
-    ///     MessageByUserIdGetCriteria Class.
+    ///     NotificationMessageByUserIdUpdateCriteria Class.
     /// </summary>
-    public class MessageByUserIdGetCriteria : CriteriaBase
+    public class NotificationMessageByUserIdUpdateCriteria : CriteriaBase
     {
-        public int PageSize { get; set; }
+        public int UserId { get; set; }
 
-        public int PageIndex { get; set; }
+        public bool IsViewed { get; set; }
 
-        public int PageCount { get; set; }
+        public int ErrCode { get; set; }
 
-        public int RowCount { get; set; }
+        public string ErrMsg { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
@@ -21,7 +21,7 @@
         /// <returns>The key of store procedure.</returns>
         public override string GetSettingKey()
         {
-            return "FD_GroupGetAll";
+            return "FD_NotificationUpdateAllUserMessageStatus";
         }
 
         /// <summary>
