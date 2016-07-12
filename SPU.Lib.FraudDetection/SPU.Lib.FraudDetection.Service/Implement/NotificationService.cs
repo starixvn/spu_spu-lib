@@ -19,9 +19,9 @@
             return ExecuteNonQuery(criteria);
         }
 
-        public IEnumerable<int> GetUsersOnline(ICriteria criteria)
+        public IEnumerable<dynamic> GetUsersOnline(ICriteria criteria)
         {
-            return GetData<int>(criteria);
+            return GetData<dynamic>(criteria);
         }
 
         public IEnumerable<Message> GetMessageByUserId(ICriteria criteria)

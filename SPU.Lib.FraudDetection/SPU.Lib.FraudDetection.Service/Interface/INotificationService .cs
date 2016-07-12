@@ -20,7 +20,7 @@ namespace FD.Lib.Service.Interface
 
         ICommandResult InsertUserAction(ICriteria criteria);
 
-        IEnumerable<int> GetUsersOnline(ICriteria criteria);
+        IEnumerable<dynamic> GetUsersOnline(ICriteria criteria);
 
         IEnumerable<Message> GetMessageByUserId(ICriteria criteria);
 

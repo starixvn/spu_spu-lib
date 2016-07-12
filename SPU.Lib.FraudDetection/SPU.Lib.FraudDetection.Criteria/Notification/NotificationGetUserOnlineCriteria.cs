@@ -13,7 +13,7 @@ namespace FD.Lib.Criteria.UserMesssage
 
     public class NotificationGetUserOnlineCriteria : CriteriaBase
     {
-        public int ExpriredTime { get; set; }
+        public int ExpiredTime { get; set; }
 
         public string UserIdList { get; set; }
 
