@@ -14,7 +14,11 @@
 
         public string Recipient { get; set; }
 
+        public string UsernameRecipient { get; set; }
+
         public string OnlineRecipient { get; set; }
+
+        public string UsernameOnlineRecipient { get; set; }
 
         public bool IsActive { get; set; }
     }
