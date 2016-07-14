@@ -4,8 +4,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
-    class MessageGenerator
+    public class MessageGenerator
     {
         private List<MessageContentType> MessageContentTypes;
 
@@ -13,14 +14,7 @@
         {
             MessageContentTypes = new List<MessageContentType>();
 
-            var derivedTypes = AppDomain.CurrentDomain.GetAssemblies()
-                       .SelectMany(assembly => assembly.GetTypes())
-                       .Where(type => type.IsSubclassOf(typeof(MessageContentType))).ToList();
-
-            foreach(var derivedType in derivedTypes)
-            {
-                MessageContentTypes.Add((MessageContentType)Activator.CreateInstance(derivedType));
-            }
+            MessageContentTypes = Assembly.GetAssembly(typeof(MessageContentType)).GetTypes().Where(t => t.IsSubclassOf(typeof(MessageContentType))).Select(Activator.CreateInstance).Cast<MessageContentType>().ToList();
         }
 
         public IEnumerable<Message> GenerateMessages(List<Message> messages)

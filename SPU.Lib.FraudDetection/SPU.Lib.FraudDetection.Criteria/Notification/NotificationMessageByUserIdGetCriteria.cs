@@ -9,6 +9,8 @@
     {
         public int UserId { get; set; }
 
+        public int GetTop { get; set; }
+
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>

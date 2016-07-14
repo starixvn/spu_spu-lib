@@ -1,5 +1,9 @@
 ﻿namespace FD.Lib.DTO
 {
+    using System;
+    using RemotingRef;
+    using Fanex.BetList.Core.TicketHelper;
+
     public class Message
     {
         public int MessageId { get; set; }
@@ -19,5 +23,22 @@
         public int AwayId { get; set; }
 
         public string CaseName { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string PostedDate
+        {
+            get
+            {
+                return CreatedDate.ToString("MM/dd/yyyy HH:mm");
+            }
+        }
+
+        public string Event { 
+            get
+            {
+                return CacheRef.GetTeamName(HomeId) + " - vs - " + CacheRef.GetTeamName(AwayId);
+            }
+        }
     }
 }

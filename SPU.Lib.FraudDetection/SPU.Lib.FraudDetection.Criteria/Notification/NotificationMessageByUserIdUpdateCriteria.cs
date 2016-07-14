@@ -11,9 +11,9 @@
 
         public bool IsViewed { get; set; }
 
-        public int ErrCode { get; set; }
+        //public int ErrCode { get; set; }
 
-        public string ErrMsg { get; set; }
+        // string ErrMsg { get; set; }
 
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.

@@ -10,19 +10,14 @@
     {
         public MessageContentTypeEvent() : base()
         {
-            ContentTypeName = "";
+            ContentTypeName = "&lt;placeholder&gt;TeamAvsTeamB&lt;/placeholder&gt;";
         }
 
         public override List<Message> FormatContentType(List<Message> messages)
         {
             foreach (var message in messages)
             {
-                if (message.MessageContent.IndexOf(ContentTypeName) > 0)
-                {
-                    message.MessageContent = message.MessageContent.Replace(
-                        ContentTypeName,
-                        CacheRef.GetTeamName(message.HomeId) + " - vs - " + CacheRef.GetTeamName(message.AwayId));
-                }
+                message.MessageContent = message.MessageContent.Replace(ContentTypeName, message.Event);
             }
 
             return messages;

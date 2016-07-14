@@ -8,17 +8,14 @@
         public MessageContentTypeMatchCode()
             : base()
         {
-            ContentTypeName = "";
+            ContentTypeName = "&lt;placeholder&gt;MatchCode&lt;/placeholder&gt;";
         }
 
         public override List<Message> FormatContentType(List<Message> messages)
         {
             foreach (var message in messages)
             {
-                if (message.MessageContent.IndexOf(ContentTypeName) > 0)
-                {
-                    message.MessageContent = message.MessageContent.Replace(ContentTypeName, message.MatchCode);
-                }
+                message.MessageContent = message.MessageContent.Replace(ContentTypeName, message.MatchCode);
             }
 
             return messages;
