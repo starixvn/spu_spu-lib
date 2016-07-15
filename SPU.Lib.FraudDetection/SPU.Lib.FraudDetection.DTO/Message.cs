@@ -26,11 +26,13 @@
 
         public DateTime CreatedDate { get; set; }
 
+        public int UnreadMsgCount { get; set; }
+
         public string PostedDate
         {
             get
             {
-                return CreatedDate.ToString("MM/dd/yyyy HH:mm");
+                return CreatedDate.ToString("MM/dd/yyyy HH:mm:ss");
             }
         }
 
