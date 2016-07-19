@@ -8,6 +8,7 @@
         public int MessageId { get; set; }
 
         [Required(ErrorMessage = "Message Code Required.")]
+        [StringLength(50, ErrorMessage = "The max length of MessageCode is 50 characters.")]
         public string MessageCode { get; set; }
 
         [Required(ErrorMessage = "Message Content Required.")]
