@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FraudDetection.Lib.BusinessManager", "SPU.Lib.FraudDetection\FraudDetection.Lib.BusinessManager.csproj", "{1B2147AC-1A2B-462A-BB70-73786617AD6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FraudDetection.Lib.Criteria", "SPU.Lib.FraudDetection.Criteria\FraudDetection.Lib.Criteria.csproj", "{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}"
