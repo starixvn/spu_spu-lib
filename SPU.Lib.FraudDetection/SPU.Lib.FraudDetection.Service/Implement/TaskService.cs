@@ -285,9 +285,9 @@ namespace FD.Lib.Service.Implement
         public decimal CaptureData(string sqlQueryString)
         {
             var dt = ExecuteReaderQueryInline(sqlQueryString);
-            var result = decimal.Parse(dt.Rows[0]["DataCapture"].ToString(), CultureInfo.InvariantCulture);
+            decimal result;
 
-            return result;
+            return decimal.TryParse(dt.Rows[0]["DataCapture"].ToString(), out result) ? result : 0;
         }
 
         public List<DataCapture> ExecuteRuleForComparingData(string sqlQueryString)
