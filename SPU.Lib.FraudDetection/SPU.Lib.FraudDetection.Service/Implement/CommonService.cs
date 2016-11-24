@@ -38,5 +38,10 @@ namespace FD.Lib.Service.Implement
         {
             return GetData<CaseType>(criteria);
         }
+
+        public IEnumerable<EvidenceType> GetEvidenceTypes(ICriteria criteria)
+        {
+            return GetData<EvidenceType>(criteria);
+        }
     }
 }

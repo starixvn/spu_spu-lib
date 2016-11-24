@@ -161,12 +161,16 @@
       <Name>FraudDetection.Lib.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.Core\FraudDetection.Lib.Core.csproj">
-      <Project>{32899F43-DE3C-4F21-AFFB-B683E4D4CD59}</Project>
+      <Project>{32899f43-de3c-4f21-affb-b683e4d4cd59}</Project>
       <Name>FraudDetection.Lib.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.Criteria\FraudDetection.Lib.Criteria.csproj">
       <Project>{A7BFF64F-AA9B-48DF-94D5-A769D789EBF0}</Project>
       <Name>FraudDetection.Lib.Criteria</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPU.Lib.FraudDetection.DataAccess\FraudDetection.Lib.DataAccess.csproj">
+      <Project>{a2b5a1d1-5b63-42e3-ac7d-faa25e6a4c0b}</Project>
+      <Name>FraudDetection.Lib.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\SPU.Lib.FraudDetection.DTO\FraudDetection.Lib.DTO.csproj">
       <Project>{C9C9A21E-F6DC-49E7-8C6D-670FC2A7F610}</Project>

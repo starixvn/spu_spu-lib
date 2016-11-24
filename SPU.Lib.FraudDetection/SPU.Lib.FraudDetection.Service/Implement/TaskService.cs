@@ -56,7 +56,7 @@ namespace FD.Lib.Service.Implement
 
         public bool CheckAllTicketsSettled(int matchId, string bettypeIds)
         {
-            var criteria = new TaskCheckAllTicketsSettledCriteria 
+            var criteria = new TaskCheckAllTicketsSettledCriteria
             {
                 MatchId = matchId,
                 BettypeIds = bettypeIds
@@ -286,8 +286,18 @@ namespace FD.Lib.Service.Implement
         {
             var dt = ExecuteReaderQueryInline(sqlQueryString);
             decimal result;
+            var dataCapture = string.Empty;
 
-            return decimal.TryParse(dt.Rows[0]["DataCapture"].ToString(), out result) ? result : 0;
+            try
+            {
+                dataCapture = dt.Rows[0]["DataCapture"].ToString();
+            }
+            catch
+            {
+                dataCapture = "0";
+            }
+
+            return decimal.TryParse(dataCapture, out result) ? result : 0;
         }
 
         public List<DataCapture> ExecuteRuleForComparingData(string sqlQueryString)

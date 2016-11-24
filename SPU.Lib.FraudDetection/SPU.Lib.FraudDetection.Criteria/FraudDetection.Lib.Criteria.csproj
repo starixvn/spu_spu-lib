@@ -77,6 +77,7 @@
     <Compile Include="CaseGroup\CaseGroupDeleteCriteria.cs" />
     <Compile Include="Case\CaseGetByNameCriteria.cs" />
     <Compile Include="Case\CaseUpdateTestCriteria.cs" />
+    <Compile Include="Common\EvidenceTypesGetAllCriteria.cs" />
     <Compile Include="Common\CaseTypesGetAllCriteria.cs" />
     <Compile Include="Common\DataTypeCaptureGetAllCriteria.cs" />
     <Compile Include="Common\CurrencyGetAllCriteria.cs" />

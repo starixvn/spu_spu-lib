@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity.cs" />
+    <Compile Include="Evidence.cs" />
     <Compile Include="CaseType.cs" />
     <Compile Include="CustomerDetails\SuspiciousInfoDetails.cs" />
     <Compile Include="CustomerDetails\CustomerInfo.cs" />
