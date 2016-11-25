@@ -24,10 +24,11 @@ namespace FD.Lib.QueryGenerator
         {
             IsNoRule = string.IsNullOrEmpty(criteria.TaskPreconditionsOriginal);
 
-            if(!IsNoRule)
+            if (!IsNoRule)
             {
                 IsCountSuspiciousTime = criteria.ActivityId == CheckBettingHistory;
                 IsCheckNotScanned = criteria.IsCheckNotScanned;
+                IsCheckNotSuspicious = criteria.IsCheckNotSuspicious;
                 ChunkOfSelection = chunkOfSelection;
                 OriginalFormula = criteria.TaskPreconditions;
                 PreConditionRawFormula = criteria.TaskPreconditionsOriginal;
@@ -37,6 +38,8 @@ namespace FD.Lib.QueryGenerator
         }
 
         private bool IsCheckNotScanned { get; set; }
+
+        private bool IsCheckNotSuspicious { get; set; }
 
         private int ChunkOfSelection { get; set; }
 
@@ -85,9 +88,14 @@ namespace FD.Lib.QueryGenerator
             }
 
             var sqlWhereString = "tch.sporttype between 1 and 99 and " + OriginalFormula;
-            sqlWhereString = IsCheckNotScanned 
-                ? sqlWhereString.Replace("$MatchState$", "tch.matchid not in (" + sqlForNotScanned + ")") 
+
+            sqlWhereString = IsCheckNotScanned
+                ? sqlWhereString.Replace("$MatchState$", "tch.matchid not in (" + sqlForNotScanned + ")")
                 : sqlWhereString.Replace("$MatchState$", "1=1");
+
+            sqlWhereString = IsCheckNotSuspicious
+                ? sqlWhereString.Replace("$MatchState1$", "tch.matchid not in (select si.MatchId from dbo.SuspiciousInfo si with (nolock) where si.TaskId = $param1$ )")
+                : sqlWhereString.Replace("$MatchState1$", "tch.matchid in (select si.MatchId from dbo.SuspiciousInfo si with (nolock) where si.TaskId = $param1$ )");
 
             return RemoveAllRedundantSpaces(sqlWhereString.Replace("%", "'").Replace("#", " ").Replace("@", " "));
         }

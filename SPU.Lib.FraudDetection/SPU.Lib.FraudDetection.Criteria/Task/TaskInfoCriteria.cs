@@ -59,5 +59,8 @@ namespace FD.Lib.Criteria.Task
 
         [SpParam(Ignored = true)]
         public bool IsCheckNotScanned { get; set; }
+
+        [SpParam(Ignored = true)]
+        public bool IsCheckNotSuspicious { get; set; }
     }
 }
