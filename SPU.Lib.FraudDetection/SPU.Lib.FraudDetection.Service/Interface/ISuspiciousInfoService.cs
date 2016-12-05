@@ -19,5 +19,7 @@ namespace FD.Lib.Service.Interface
     public interface ISuspiciousInfoService
     {
         ICommandResult InsertSuspiciousInfo(SuspiciousInfoInsertCriteria criteria);
+
+        ICommandResult InsertSuspiciousBetCount(SuspiciousBetCountInsertCriteria criteria);
     }
 }

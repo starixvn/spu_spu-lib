@@ -22,5 +22,11 @@ namespace FD.Lib.DataAccess.Implement
         {
             return ExecuteNonQuery(criteria);
         }
+
+
+        public ICommandResult InsertSuspiciousBetCount(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

@@ -156,6 +156,7 @@
     <Compile Include="Reports\SuspiciousCustomers\SuspiciousCustomerReportGetAllCriteria.cs" />
     <Compile Include="Reports\SuspiciousCustomers\SuspiciousCustomerReportGetNotesCriteria.cs" />
     <Compile Include="SuspiciousInfo\NewSuspiciousCustomersGetCriteria.cs" />
+    <Compile Include="SuspiciousInfo\SuspiciousBetCountInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousGroupInfoInsertCriteria.cs" />
     <Compile Include="SuspiciousInfo\SuspiciousHistoryCriteria.cs" />
     <Compile Include="SuspiciousStatistic\CustomerWinlostSelectCriteria.cs" />

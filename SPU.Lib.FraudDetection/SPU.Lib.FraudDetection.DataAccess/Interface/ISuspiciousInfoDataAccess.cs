@@ -18,5 +18,7 @@ namespace FD.Lib.DataAccess.Interface
     public interface ISuspiciousInfoDataAccess
     {
         ICommandResult InsertSuspiciousInfo(ICriteria criteria);
+
+        ICommandResult InsertSuspiciousBetCount(ICriteria criteria);
     }
 }
