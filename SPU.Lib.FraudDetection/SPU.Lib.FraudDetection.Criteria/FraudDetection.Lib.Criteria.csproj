@@ -148,6 +148,7 @@
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportLogNoteCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportFraudCaseCriteria.cs" />
     <Compile Include="Reports\CustomerDetails\CustomerDetailsReportCriteria.cs" />
+    <Compile Include="Reports\LiveMatchMonitoring\LiveMatchMonitoringReportUpdateVerifiedCriteria.cs" />
     <Compile Include="Reports\MatchMonitoring\MatchMonitoringReportGetAllCriteria.cs" />
     <Compile Include="Reports\MatchMonitoring\MatchMonitoringReportGetAllDBArchiveCriteria.cs" />
     <Compile Include="Reports\MatchMonitoring\MatchMonitoringReportUpdateDelinquentCriteria.cs" />

@@ -30,6 +30,12 @@
 
         public string EventStatus { get; set; }
 
+        public bool? IsVerified { get; set; }
+
+        public string LastVerifiedBy { get; set; }
+
+        public DateTime? LastVerifiedDate { get; set; }
+
         public bool IsPlayingMatch 
         {
             get 

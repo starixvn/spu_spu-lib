@@ -32,9 +32,15 @@
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 var match = new LiveMatchMonitoring();
+                bool temp;
+                DateTime tempDate;
+
                 match.MatchId = int.Parse(dataRow["matchid"].ToString());
                 match.LeagueName = dataRow["leaguename"].ToString();
                 match.MatchCode = dataRow["matchcode"].ToString();
+                match.IsVerified = bool.TryParse(dataRow["IsVerified"].ToString(), out temp) ? temp : (bool?)null;
+                match.LastVerifiedBy = dataRow["LastVerifiedBy"].ToString();
+                match.LastVerifiedDate = DateTime.TryParse(dataRow["LastVerifiedDate"].ToString(), out tempDate) ? tempDate : (DateTime?)null;
                 match.HomeId = int.Parse(dataRow["homeid"].ToString());
                 match.AwayId = int.Parse(dataRow["awayid"].ToString());
                 match.KickOffTime = DateTime.Parse(dataRow["kickofftime"].ToString());
@@ -43,7 +49,7 @@
                 match.EventStatus = dataRow["eventstatus"].ToString();
 
                 var totalColumns = dataTable.Columns.Count;
-                for (var i = 9; i < totalColumns; i++)
+                for (var i = 12; i < totalColumns; i++)
                 {
                     match.SuspiciousCases.Add(
                         dataTable.Columns[i].ColumnName,

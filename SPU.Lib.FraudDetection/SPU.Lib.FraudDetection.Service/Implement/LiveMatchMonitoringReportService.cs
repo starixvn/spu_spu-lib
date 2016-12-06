@@ -1,6 +1,7 @@
 ﻿namespace FD.Lib.Service.Implement
 {
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
     using FD.Lib.Criteria.Common;
     using FD.Lib.Criteria.Reports.LiveMatchMonitoring;
     using FD.Lib.DataAccess.Implement;
@@ -36,6 +37,11 @@
         public List<LiveMatchMonitoring> GetMatchMonitoringReport(LiveMatchMonitoringReportGetAllCriteria criteria)
         {
             return matchMonitoringReportDataAccess.GetMatchMonitoringReport(criteria);
+        }
+
+        public ICommandResult UpdateVerification(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
         }
     }
 }
