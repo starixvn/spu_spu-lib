@@ -70,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\FlaggedAccountDeleteCriteria.cs" />
+    <Compile Include="Api\FlaggedAccountInsertCriteria.cs" />
     <Compile Include="Bettype\BettypeGetAllCriteria.cs" />
     <Compile Include="Bettype\SportGetAllCriteria.cs" />
     <Compile Include="CaseGroup\CaseGroupGetAllCriteria.cs" />

@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implement\Api\FlaggedAccountService.cs" />
     <Compile Include="Implement\BettypeService.cs" />
     <Compile Include="Implement\ConfigurationsService.cs" />
     <Compile Include="Implement\CommonService.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Implement\DataCaptureService.cs" />
     <Compile Include="Implement\CurrencyService.cs" />
     <Compile Include="Implement\CustomerBettingGroupDetailsService.cs" />
+    <Compile Include="Interface\Api\IFlaggedAccountService.cs" />
     <Compile Include="Interface\ILiveMatchMonitoringReportService.cs" />
     <Compile Include="Interface\IMessageMasterService.cs" />
     <Compile Include="Interface\IOfficeIPsReportService.cs" />
