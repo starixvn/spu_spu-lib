@@ -56,10 +56,16 @@
                         string.IsNullOrEmpty(dataRow[i].ToString()) ? -1 : int.Parse(dataRow[i].ToString()));
                 }
 
-                matches.Add(match);
+                foreach (var item in match.SuspiciousCases)
+                {
+                    if (item.Value > 0)
+                    {
+                        matches.Add(match);
+                        break;
+                    }
+                }
             }
 
-            var a = matches.GroupBy(x => x.KickOffTime < DateTime.Now);
             return matches;
         }
     }
