@@ -37,7 +37,8 @@ namespace FD.Lib.Service.Implement
         public CustomerDetailsModel GetCustomerDetailsModel(
             int custId,
             DateTime fromDate,
-            DateTime toDate)
+            DateTime toDate,
+            bool isTest)
         {
             //var customerDetailsModel = GetWinlossStatistic(new CustomerDetailsReportWinlossStatisticCriteria(custId, fromDate, toDate));
             var customerDetailsModel = new CustomerDetailsModel
@@ -47,7 +48,7 @@ namespace FD.Lib.Service.Implement
                     FraudCasesDetails =
                         GetFraudCasesDetails(new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate)),
                     LogsNotesDetails = GetLogsNotes(new CustomerDetailsReportLogNoteCriteria(custId)),
-                    ViolatedTickets = GetFraudTickets(custId, fromDate, toDate)
+                    ViolatedTickets = GetFraudTickets(custId, fromDate, toDate, isTest)
                 };
 
             return customerDetailsModel;
@@ -98,10 +99,12 @@ namespace FD.Lib.Service.Implement
             return GetData<WinlossStatisticTopBettypes>(criteria);
         }
 
-        public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate)
+        public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate, bool isTest)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-            var suspiciousDetails = GetSuspiciousInfoByCustId(new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate));
+            var criteria = new CustomerDetailsReportTransListCriteria(custId, fromDate, toDate);
+            criteria.IsTest = isTest;
+            var suspiciousDetails = GetSuspiciousInfoByCustId(criteria);
             var suspiciousTickets = new List<FraudTicketModel>();
 
             foreach (var suspiciousDetail in suspiciousDetails)

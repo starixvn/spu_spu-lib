@@ -32,6 +32,8 @@ namespace FD.Lib.Criteria.Reports
 
         public bool? IsHedge { get; set; }
 
+        public bool IsTest { get; set; }
+
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.
         /// </summary>

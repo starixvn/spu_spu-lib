@@ -16,6 +16,8 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportTransListCriteria : CustomerDetailsReportCriteria
     {
+        public bool IsTest { get; set; }
+
         public CustomerDetailsReportTransListCriteria(int custId, DateTime fromDate, DateTime toDate)
             : base(custId, fromDate, toDate)
         {

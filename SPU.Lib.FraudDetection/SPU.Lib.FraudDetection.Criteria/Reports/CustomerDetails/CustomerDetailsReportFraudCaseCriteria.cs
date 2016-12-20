@@ -16,6 +16,8 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportFraudCaseCriteria : CustomerDetailsReportCriteria
     {
+        public bool IsTest { get; set; }
+
         public CustomerDetailsReportFraudCaseCriteria(int custId, DateTime fromDate, DateTime toDate)
             : base(custId, fromDate, toDate)
         {

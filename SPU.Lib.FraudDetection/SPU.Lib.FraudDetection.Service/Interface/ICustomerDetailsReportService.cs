@@ -22,7 +22,7 @@ namespace FD.Lib.Service.Interface
     /// </summary>
     public interface ICustomerDetailsReportService
     {
-        CustomerDetailsModel GetCustomerDetailsModel(int custId, DateTime fromDate, DateTime toDate);
+        CustomerDetailsModel GetCustomerDetailsModel(int custId, DateTime fromDate, DateTime toDate, bool isTest);
 
         CustomerInfo GetCustomerInfo(ICriteria criteria);
 
@@ -42,7 +42,7 @@ namespace FD.Lib.Service.Interface
 
         IEnumerable<WinlossStatisticTopBettypes> GetTopBettypeByMargin(ICriteria criteria);
 
-        IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate);
+        IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate, bool isTest);
 
         ICommandResult InsertCustomerLog(ICriteria criteria);
 

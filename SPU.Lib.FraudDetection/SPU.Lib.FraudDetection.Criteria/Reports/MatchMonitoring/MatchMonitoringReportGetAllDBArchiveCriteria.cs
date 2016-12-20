@@ -30,6 +30,10 @@ namespace FD.Lib.Criteria.Reports
 
         public int SuspiciousStatus { get; set; }
 
+        public bool? IsMainMarket { get; set; }
+
+        public bool IsTest { get; set; }
+
         // Out put param
         public int NumberOfCases { get; set; }
 
@@ -40,6 +44,8 @@ namespace FD.Lib.Criteria.Reports
             MatchCode = criteria.MatchCode;
             MatchStatus = criteria.MatchStatus;
             SuspiciousStatus = criteria.SuspiciousStatus;
+            IsMainMarket = criteria.IsMainMarket;
+            IsTest = criteria.IsTest;
         }
 
         /// <summary>

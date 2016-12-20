@@ -34,6 +34,8 @@ namespace FD.Lib.Criteria.Reports
 
         public bool? IsMainMarket { get; set; }
 
+        public bool IsTest { get; set; }
+
         // Out put param
         public int NumberOfCases { get; set; }
 
