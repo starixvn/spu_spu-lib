@@ -8,6 +8,8 @@
         public LiveMatchMonitoring()
         {
             SuspiciousCases = new Dictionary<string, int>();
+
+            ScannedStatus = 0;
         }
 
         public int MatchId { get; set; }
@@ -36,9 +38,11 @@
 
         public DateTime? LastVerifiedDate { get; set; }
 
-        public bool IsPlayingMatch 
+        public int ScannedStatus { get; set; }
+
+        public bool IsPlayingMatch
         {
-            get 
+            get
             {
                 return KickOffTime < DateTime.Now;
             }

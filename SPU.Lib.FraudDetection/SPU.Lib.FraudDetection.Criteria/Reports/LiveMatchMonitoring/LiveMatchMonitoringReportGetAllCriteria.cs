@@ -16,6 +16,8 @@
 
         public bool? IsMainMarket { get; set; }
 
+        public bool? IsVerified { get; set; }
+
         public bool IsTest { get; set; }
 
         // Out put param

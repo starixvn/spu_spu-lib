@@ -60,13 +60,20 @@
                 {
                     if (item.Value > 0)
                     {
-                        matches.Add(match);
+                        match.ScannedStatus = 2;
+                        break;
+                    }
+                    else if (item.Value == 0)
+                    {
+                        match.ScannedStatus = 1;
                         break;
                     }
                 }
+
+                matches.Add(match);
             }
 
-            return matches;
+            return matches.OrderByDescending(t => t.ScannedStatus).ToList();
         }
     }
 }
