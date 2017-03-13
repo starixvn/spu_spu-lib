@@ -16,7 +16,7 @@ namespace FD.Lib.QueryGenerator
     /// <summary>
     /// General Rule Query Generator.
     /// </summary>
-    public class RuleQueryGenerator: QueryGenerator
+    public class RuleQueryGenerator : QueryGenerator
     {
         private bool _isNearTheGoal;
         private bool _isCalculatedByPercentMaxBet;
@@ -133,7 +133,8 @@ namespace FD.Lib.QueryGenerator
             var extraSelect = ",sum(ans.stake*ans.actualrate) OVER (PARTITION BY ans.custid, ans.matchid, ans.bettype, ans.liveawayscore,ans.livehomescore) AS TotalStake,";
             extraSelect += maxBet + " AS MaxBet ";
 
-            var groupBy = GenerateSelectSql() + (_isCalculatedByPercentMaxBet ? ",dds.maxbet,ans.bettype,ans.stake,ans.actualrate " : ",ans.bettype,ans.stake,ans.actualrate ");
+            var groupBy = GenerateSelectSql() +
+                (_isCalculatedByPercentMaxBet ? ",dds.maxbet,ans.bettype,ans.stake,ans.actualrate " : ",ans.bettype,ans.stake,ans.actualrate ");
             var fromQueryRuleString = "select distinct {0} from {1} where {2}";
 
             fromQueryRuleString = string.Format(

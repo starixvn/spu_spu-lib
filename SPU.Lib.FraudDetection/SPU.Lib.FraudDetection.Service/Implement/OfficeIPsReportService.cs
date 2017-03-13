@@ -9,10 +9,6 @@
 
 namespace FD.Lib.Service.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
     using Criteria.Reports.CustomerDetails;
     using Criteria.Reports.OfficeIPs;
     using Criteria.SuspiciousStatistic;
@@ -25,7 +21,10 @@ namespace FD.Lib.Service.Implement
     using Model.Reports.CustomerDetails;
     using Model.Reports.FraudCaseDetail;
     using RemotingRef;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
 
     public class OfficeIPsReportService : QueryService, IOfficeIPsReportService
     {
@@ -187,15 +186,17 @@ namespace FD.Lib.Service.Implement
         private string FDBuildChoice(ITicket ticket)
         {
             return ticket.BetTeam.ToUpper() == "H"
-                ? RefData.GetTeamName(ticket.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
-                : RefData.GetTeamName(ticket.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
+                ? RefData.GetTeamName(
+                ticket.HomeId.ToString(CultureInfo.InvariantCulture), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
+                : RefData.GetTeamName(
+                ticket.AwayId.ToString(CultureInfo.InvariantCulture), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
         }
 
-        private IEnumerable<SuspiciousInfoDetails> DistinctSuspiciousDetails(IEnumerable<SuspiciousInfoDetails>  suspiciousDetails)
+        private IEnumerable<SuspiciousInfoDetails> DistinctSuspiciousDetails(IEnumerable<SuspiciousInfoDetails> suspiciousDetails)
         {
             var result = new List<SuspiciousInfoDetails>();
             var matchIds = suspiciousDetails.Select(x => x.MatchId).Distinct();
-            
+
             foreach (var matchId in matchIds)
             {
                 var id = matchId;

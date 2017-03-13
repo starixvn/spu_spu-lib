@@ -15,7 +15,7 @@ namespace FD.Lib.DataAccess.Implement
     using DTO;
     using Fanex.Data;
     using Interface;
-    
+
     /// <summary>
     ///  Daily Data Monitoring Report Data Access Implement.
     /// </summary>
@@ -24,7 +24,7 @@ namespace FD.Lib.DataAccess.Implement
         public List<MatchMonitoring> GetDailyDataMonitoringReport(DailyDataMonitoringReportGetAllCriteria criteria)
         {
             var hash = criteria.GetSpParams();
-            
+
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 db.AssignParamValues(hash);
@@ -49,10 +49,10 @@ namespace FD.Lib.DataAccess.Implement
                 match.EventStatus = dataRow["eventstatus"].ToString();
 
                 var totalColumns = dataTable.Columns.Count;
-                for(var i = 6; i < totalColumns; i ++)
+                for (var i = 6; i < totalColumns; i++)
                 {
                     match.SuspiciousCases.Add(
-                        dataTable.Columns[i].ColumnName, 
+                        dataTable.Columns[i].ColumnName,
                         string.IsNullOrEmpty(dataRow[i].ToString()) ? -1 : int.Parse(dataRow[i].ToString()));
                 }
 

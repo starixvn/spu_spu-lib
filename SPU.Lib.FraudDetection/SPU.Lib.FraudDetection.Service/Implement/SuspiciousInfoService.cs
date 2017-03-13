@@ -33,7 +33,6 @@ namespace FD.Lib.Service.Implement
             return _suspiciousDataAccess.InsertSuspiciousInfo(criteria);
         }
 
-
         public ICommandResult InsertSuspiciousBetCount(SuspiciousBetCountInsertCriteria criteria)
         {
             return _suspiciousDataAccess.InsertSuspiciousBetCount(criteria);

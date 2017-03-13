@@ -7,7 +7,7 @@
     {
         public ICommandResult InsertAccounts(ICriteria criteria)
         {
-            return ExecuteNonQuery(criteria); ;
+            return ExecuteNonQuery(criteria);
         }
 
         public ICommandResult DeleteAccounts(ICriteria criteria)

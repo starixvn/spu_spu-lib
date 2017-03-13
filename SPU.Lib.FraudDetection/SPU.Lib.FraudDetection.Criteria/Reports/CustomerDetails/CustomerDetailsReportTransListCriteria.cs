@@ -16,12 +16,12 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportTransListCriteria : CustomerDetailsReportCriteria
     {
-        public bool IsTest { get; set; }
-
         public CustomerDetailsReportTransListCriteria(int custId, DateTime fromDate, DateTime toDate)
             : base(custId, fromDate, toDate)
         {
         }
+
+        public bool IsTest { get; set; }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

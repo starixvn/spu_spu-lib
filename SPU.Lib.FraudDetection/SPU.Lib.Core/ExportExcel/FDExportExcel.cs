@@ -20,6 +20,28 @@ namespace FD.Lib.Core.ExportExcel
     /// </summary>
     public abstract class FDExportExcel
     {
+        #region Constructor
+        protected FDExportExcel(
+            string filePath,
+            string sheetName,
+            IEnumerable<Legend> legends,
+            IEnumerable<string> headers)
+        {
+            FilePath = filePath;
+            RowIndex = 0;
+            SheetName = string.IsNullOrEmpty(sheetName) ? "Sheet1" : sheetName;
+            ReportInfo = legends;
+            Headers = headers;
+            Workbook = new HSSFWorkbook();
+            Sheet = Workbook.CreateSheet(SheetName);
+            DefaultFont = CreateDefaultFont();
+            DefaultBoldFont = CreateDefaultFont((short)FontBoldWeight.Bold);
+            DefaultCellStyleAlignLeft = CreateDefaultCellStyle();
+            DefaultCellStyleAlignCenter = CreateDefaultCellStyle(HorizontalAlignment.Center);
+            DefaultCellStyleAlignRight = CreateDefaultCellStyle(HorizontalAlignment.Right);
+        }
+        #endregion
+
         #region Attributes
         public string FilePath { get; set; }
 
@@ -46,28 +68,6 @@ namespace FD.Lib.Core.ExportExcel
         public ICellStyle DefaultCellStyleAlignRight { get; set; }
 
         public int RowIndex { get; set; }
-        #endregion
-
-        #region Constructor
-        protected FDExportExcel(
-            string filePath,
-            string sheetName, 
-            IEnumerable<Legend> legends, 
-            IEnumerable<string> headers)
-        {
-            FilePath = filePath;
-            RowIndex = 0;
-            SheetName = string.IsNullOrEmpty(sheetName) ? "Sheet1" : sheetName;
-            ReportInfo = legends;
-            Headers = headers;
-            Workbook = new HSSFWorkbook();
-            Sheet = Workbook.CreateSheet(SheetName);
-            DefaultFont = CreateDefaultFont();
-            DefaultBoldFont = CreateDefaultFont((short)FontBoldWeight.Bold);
-            DefaultCellStyleAlignLeft = CreateDefaultCellStyle();
-            DefaultCellStyleAlignCenter = CreateDefaultCellStyle(HorizontalAlignment.Center);
-            DefaultCellStyleAlignRight = CreateDefaultCellStyle(HorizontalAlignment.Right);
-        }
         #endregion
 
         #region Major functions
@@ -139,7 +139,7 @@ namespace FD.Lib.Core.ExportExcel
             SetColumnsWidth();
             AutoSizeColumnsWidth();
 
-            return SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls"; ;
+            return SheetName + "_" + DateTime.Today.ToString("dMMMyyyy") + ".xls";
         }
 
         #endregion
@@ -148,9 +148,9 @@ namespace FD.Lib.Core.ExportExcel
 
         protected void SetUpACell(
             IRow currentRow,
-            int cellIndex, 
-            string cellValue, 
-            IFont cellFont, 
+            int cellIndex,
+            string cellValue,
+            IFont cellFont,
             ICellStyle cellStyle)
         {
             var cell = currentRow.CreateCell(cellIndex);
@@ -262,7 +262,7 @@ namespace FD.Lib.Core.ExportExcel
                     cellStyle = DefaultCellStyleAlignRight;
                     break;
                 case HorizontalAlignment.Center:
-                    cellStyle =  DefaultCellStyleAlignCenter;
+                    cellStyle = DefaultCellStyleAlignCenter;
                     break;
                 default:
                     cellStyle = DefaultCellStyleAlignLeft;

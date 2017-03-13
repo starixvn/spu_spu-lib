@@ -14,6 +14,11 @@ namespace FD.Lib.DTO
 
     public class MatchMonitoring
     {
+        public MatchMonitoring()
+        {
+            SuspiciousCases = new Dictionary<string, int>();
+        }
+
         public int MatchId { get; set; }
 
         public string LeagueName { get; set; }
@@ -36,12 +41,7 @@ namespace FD.Lib.DTO
 
         public string EventStatus { get; set; }
 
-        public Dictionary<string, int> SuspiciousCases;
-
-        public MatchMonitoring()
-        {
-            SuspiciousCases = new Dictionary<string, int>();
-        }
+        public Dictionary<string, int> SuspiciousCases { get; set; }
 
         public string LastVerifiedDateString
         {

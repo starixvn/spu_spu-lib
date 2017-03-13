@@ -2,9 +2,6 @@ using System.Globalization;
 
 namespace FD.Lib.Service.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Criteria.Reports.CustomerDetails;
     using Criteria.SuspiciousStatistic;
     using DataAccess.Implement;
@@ -18,6 +15,10 @@ namespace FD.Lib.Service.Implement
     using Model.Reports.CustomerDetails;
     using Model.Reports.FraudCaseDetail;
     using RemotingRef;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// Customer Details Report Service.
@@ -40,16 +41,15 @@ namespace FD.Lib.Service.Implement
             DateTime toDate,
             bool isTest)
         {
-            //var customerDetailsModel = GetWinlossStatistic(new CustomerDetailsReportWinlossStatisticCriteria(custId, fromDate, toDate));
+            ////var customerDetailsModel = GetWinlossStatistic(new CustomerDetailsReportWinlossStatisticCriteria(custId, fromDate, toDate));
             var customerDetailsModel = new CustomerDetailsModel
-                {
-
-                    CustInfo = GetCustomerInfo(new CustomerDetailsReportCustInfoCriteria(custId)),
-                    FraudCasesDetails =
-                        GetFraudCasesDetails(new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate)),
-                    LogsNotesDetails = GetLogsNotes(new CustomerDetailsReportLogNoteCriteria(custId)),
-                    ViolatedTickets = GetFraudTickets(custId, fromDate, toDate, isTest)
-                };
+            {
+                CustInfo = GetCustomerInfo(new CustomerDetailsReportCustInfoCriteria(custId)),
+                FraudCasesDetails =
+                    GetFraudCasesDetails(new CustomerDetailsReportFraudCaseCriteria(custId, fromDate, toDate)),
+                LogsNotesDetails = GetLogsNotes(new CustomerDetailsReportLogNoteCriteria(custId)),
+                ViolatedTickets = GetFraudTickets(custId, fromDate, toDate, isTest)
+            };
 
             return customerDetailsModel;
         }
@@ -99,6 +99,7 @@ namespace FD.Lib.Service.Implement
             return GetData<WinlossStatisticTopBettypes>(criteria);
         }
 
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public IEnumerable<FraudCaseDetailItem> GetFraudTickets(int custId, DateTime fromDate, DateTime toDate, bool isTest)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
@@ -265,7 +266,7 @@ namespace FD.Lib.Service.Implement
 
             if (ticket.HalfTimeHomeScore == null || ticket.HalfTimeAwayScore == null)
             {
-                halfTimeScore = string.Format(halfTimeScore, "", "");
+                halfTimeScore = string.Format(halfTimeScore, string.Empty, string.Empty);
             }
             else
             {
@@ -274,7 +275,7 @@ namespace FD.Lib.Service.Implement
 
             if (ticket.FullTimeHomeScore == null || ticket.FullTimeAwayScore == null)
             {
-                fullTimeScore = string.Format(fullTimeScore, "", "");
+                fullTimeScore = string.Format(fullTimeScore, string.Empty, string.Empty);
             }
             else
             {

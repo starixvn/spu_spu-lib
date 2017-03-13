@@ -12,6 +12,8 @@
             ScannedStatus = 0;
         }
 
+        public Dictionary<string, int> SuspiciousCases { get; set; }
+
         public int MatchId { get; set; }
 
         public string LeagueName { get; set; }
@@ -47,7 +49,5 @@
                 return KickOffTime < DateTime.Now;
             }
         }
-
-        public Dictionary<string, int> SuspiciousCases;
     }
 }

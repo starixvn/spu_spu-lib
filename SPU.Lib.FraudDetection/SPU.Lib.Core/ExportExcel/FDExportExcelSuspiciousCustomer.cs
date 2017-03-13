@@ -21,7 +21,7 @@ namespace FD.Lib.Core.ExportExcel
     {
         #region Attributes
 
-        private IEnumerable<SuspiciousCustomerReportModel> Data { get; set; }
+        private IEnumerable<SuspiciousCustomerReportModel> _data;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace FD.Lib.Core.ExportExcel
             IEnumerable<SuspiciousCustomerReportModel> data)
             : base(filePath, sheetName, legends, headers)
         {
-            Data = data.ToList();
+            _data = data.ToList();
         }
         #endregion
 
@@ -45,16 +45,16 @@ namespace FD.Lib.Core.ExportExcel
 
         protected override void GenerateReportContent()
         {
-            if (!Data.Any())
+            if (!_data.Any())
             {
                 SetUpACell(Sheet.CreateRow(RowIndex), 0, "There is no data.", ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
                 Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(RowIndex, RowIndex, 0, Headers.Count() - 1));
                 return;
             }
 
-            for (var i = 1; i <= Data.Count(); i++ )
+            for (var i = 1; i <= _data.Count(); i++)
             {
-                var dataRow = Data.ElementAt(i - 1);
+                var dataRow = _data.ElementAt(i - 1);
                 var row = Sheet.CreateRow(RowIndex);
                 SetUpACell(row, 0, i.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, 1, dataRow.IsDelinquent ? "Yes" : "No", ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
@@ -64,8 +64,8 @@ namespace FD.Lib.Core.ExportExcel
                 SetUpACell(row, 5, dataRow.NewViolations.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
                 SetUpACell(row, 6, dataRow.ViolatedCases.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
                 SetUpACell(row, 7, dataRow.Assignees == null ? "-" : dataRow.Assignees.Length > 0 ? dataRow.Assignees : "-", ReportContentFont(), ReportContentCellStyle());
-                //SetUpACell(row, 2, dataRow.Group.GroupName, ReportContentFont(), ReportContentCellStyle());
-                //SetUpACell(row, 3, dataRow.SuspiciousTime.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
+                ////SetUpACell(row, 2, dataRow.Group.GroupName, ReportContentFont(), ReportContentCellStyle());
+                ////SetUpACell(row, 3, dataRow.SuspiciousTime.ToString(), ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Right));
 
                 RowIndex++;
             }

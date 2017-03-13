@@ -153,7 +153,6 @@ namespace FD.Lib.Service.Implement
             for (var i = 0; i < dt.Rows.Count; i++)
             {
                 listOfIDs.Add(dt.Rows[i][0].ToString());
-
             }
 
             return listOfIDs;

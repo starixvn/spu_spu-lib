@@ -19,6 +19,7 @@ namespace FD.Lib.QueryGenerator
             groupingCondition = OriginalFormula;
             foreignKeyName = "temptable.abnormalmove";
         }
+
         /*
         protected override void CreateAdditionalParams(string ruleConfigWithoutGroupingConfig)
         {

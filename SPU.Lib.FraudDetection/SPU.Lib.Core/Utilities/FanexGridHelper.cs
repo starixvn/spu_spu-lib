@@ -69,11 +69,7 @@ namespace FD.Lib.Core.Utilities
             return builder.ToString();
         }
 
-        /// <summary>
-        ///     Data for FANEX grid.
-        /// </summary>
-        /// <param name="col">The DataCollection.</param>
-        /// <returns>Object System.String.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public static string DataForFanexGrid(DataCollection col)
         {
             var flag = false;
@@ -138,11 +134,7 @@ namespace FD.Lib.Core.Utilities
             return builder.ToString();
         }
 
-        /// <summary>
-        ///     Data for FANEX grid_ prevent contain quote.
-        /// </summary>
-        /// <param name="col">The DataCollection.</param>
-        /// <returns>Object System.String.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         public static string DataForFanexGrid_PreventContainQuote(DataCollection col)
         {
             var flag = false;

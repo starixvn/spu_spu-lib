@@ -16,16 +16,13 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportLogNoteCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
-
         public CustomerDetailsReportLogNoteCriteria(int custId)
         {
             CustId = custId;
         }
-        /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
-        /// </summary>
-        /// <returns>The key of store procedure.</returns>
+
+        public int CustId { get; set; }
+
         public override string GetSettingKey()
         {
             return "FD_CustomerDetailsLogsNotesGet";

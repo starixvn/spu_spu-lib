@@ -48,7 +48,6 @@ namespace FD.Lib.Criteria.MailMaster
         [SpParam(Ignored = true)]
         public string BccTo { get; set; }
 
-
         public bool IsActive { get; set; }
 
         /// <summary>

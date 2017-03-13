@@ -1,8 +1,7 @@
 ﻿namespace FD.Lib.DTO
 {
-    using System;
-    using RemotingRef;
     using Fanex.BetList.Core.TicketHelper;
+    using System;
 
     public class Message
     {
@@ -48,7 +47,8 @@
             }
         }
 
-        public string Event { 
+        public string Event 
+        { 
             get
             {
                 return CacheRef.GetTeamName(HomeId) + " - vs - " + CacheRef.GetTeamName(AwayId);

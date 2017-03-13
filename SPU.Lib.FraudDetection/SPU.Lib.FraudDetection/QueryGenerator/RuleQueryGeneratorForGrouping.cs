@@ -1,27 +1,13 @@
 namespace FD.Lib.QueryGenerator
 {
+    using Criteria.Task;
+    using DTO;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Criteria.Task;
-    using DTO;
     
     public abstract class RuleQueryGeneratorForGrouping : RuleQueryGenerator
     {
-        protected Config groupingConfig;
-
-        protected Config sumWlByMatchConfig;
-
-        protected string groupingCondition;
-
-        protected string sumWlByMatchCondition;
-
-        protected string foreignKeyName;
-
-        public string groupingConfigName { get; set; }
-
-        protected IDictionary<string, string> additionalParams;
-
         private const string SumWlByMatchConfigName = "Sum WinLoss by Match";
 
         protected RuleQueryGeneratorForGrouping(int fraudCaseId, TaskInfoCriteria criteria)
@@ -29,6 +15,20 @@ namespace FD.Lib.QueryGenerator
         {
             additionalParams = new Dictionary<string, string>();
         }
+
+        protected Config groupingConfig { get; set; }
+
+        protected Config sumWlByMatchConfig { get; set; }
+
+        protected string groupingCondition { get; set; }
+
+        protected string sumWlByMatchCondition { get; set; }
+
+        protected string foreignKeyName { get; set; }
+
+        public string groupingConfigName { get; set; }
+
+        protected IDictionary<string, string> additionalParams { get; set; }
 
         public override string GenerateQuery()
         {

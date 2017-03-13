@@ -21,7 +21,7 @@ namespace FD.Lib.Core.ExportExcel
     {
         #region Attributes
 
-        private IEnumerable<DailyDataMonitoringModel> Data { get; set; }
+        private IEnumerable<DailyDataMonitoringModel> _data;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace FD.Lib.Core.ExportExcel
             IEnumerable<DailyDataMonitoringModel> data)
             : base(filePath, sheetName, legends, headers)
         {
-            Data = data.ToList();
+            _data = data.ToList();
         }
         #endregion
 
@@ -45,14 +45,14 @@ namespace FD.Lib.Core.ExportExcel
 
         protected override void GenerateReportContent()
         {
-            if (!Data.Any())
+            if (!_data.Any())
             {
                 SetUpACell(Sheet.CreateRow(RowIndex), 0, "There is no data.", ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
                 Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(RowIndex, RowIndex, 0, Headers.Count() - 1));
                 return;
             }
 
-            foreach (var dataRow in Data)
+            foreach (var dataRow in _data)
             {   
                 var rowCount = 0;
                 var row = Sheet.CreateRow(RowIndex);

@@ -5,11 +5,11 @@
 
     public abstract class MessageContentType
     {
-        protected string ContentTypeName { get; set; }
-
         public MessageContentType()
         {
         }
+
+        protected string ContentTypeName { get; set; }
 
         public abstract List<Message> FormatContentType(List<Message> messages);
     }

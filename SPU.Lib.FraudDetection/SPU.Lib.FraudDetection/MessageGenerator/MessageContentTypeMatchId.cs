@@ -3,7 +3,7 @@
     using FD.Lib.DTO;
     using System.Collections.Generic;
 
-    class MessageContentTypeMatchId : MessageContentType
+    public class MessageContentTypeMatchId : MessageContentType
     {
         public MessageContentTypeMatchId()
             : base()

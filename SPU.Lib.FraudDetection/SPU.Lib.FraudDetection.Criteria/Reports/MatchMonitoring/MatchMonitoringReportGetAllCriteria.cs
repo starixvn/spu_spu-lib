@@ -15,7 +15,7 @@ namespace FD.Lib.Criteria.Reports
     /// <summary>
     /// MatchMonitoringReportGetAllCriteria Class.
     /// </summary>
-    public class MatchMonitoringReportGetAllCriteria: CriteriaBase
+    public class MatchMonitoringReportGetAllCriteria : CriteriaBase
     {
         public DateTime EventDate { get; set; }
 

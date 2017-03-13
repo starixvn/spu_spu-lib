@@ -7,7 +7,6 @@
 //   <change who="Long.Luu" date="2015.10.13">Created</change>
 // </history>
 
-
 namespace FD.Lib.Core.ExportExcel
 {
     /// <summary>
@@ -15,14 +14,14 @@ namespace FD.Lib.Core.ExportExcel
     /// </summary>
     public class Legend
     {
-        public string Key { get; set; }
-
-        public string Value { get; set; }
-
         public Legend(string key, string value)
         {
             Key = key;
             Value = value;
         }
+
+        public string Key { get; set; }
+
+        public string Value { get; set; }
     }
 }

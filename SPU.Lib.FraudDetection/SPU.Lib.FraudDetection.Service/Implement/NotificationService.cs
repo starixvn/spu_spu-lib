@@ -1,11 +1,10 @@
 ﻿namespace FD.Lib.Service.Implement
 {
-    using System.Collections.Generic;
-    using Criteria.SuspiciousStatistic;
     using DTO;
-    using Interface;
-    using Fanex.NAP.Framework.Command;
     using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Command;
+    using Interface;
+    using System.Collections.Generic;
 
     public class NotificationService : QueryService, INotificationService
     {

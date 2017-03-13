@@ -3,7 +3,7 @@
     using FD.Lib.DTO;
     using System.Collections.Generic;
 
-    class MessageContentTypeCaseName : MessageContentType
+    public class MessageContentTypeCaseName : MessageContentType
     {
         public MessageContentTypeCaseName()
             : base()

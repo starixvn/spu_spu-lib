@@ -3,7 +3,7 @@
     using Fanex.Data.Repository;
     using Fanex.NAP.Framework.Command;
 
-    interface IMessageMasterDataAccess
+    public interface IMessageMasterDataAccess
     {
         ICommandResult Insert(ICriteria criteria);
 

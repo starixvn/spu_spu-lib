@@ -24,45 +24,45 @@ namespace FD.Lib.BusinessManager.QueryGenerator
                 return new RuleQueryGeneratorForComparingData(fraudCaseId, criteria);
             }
 
-            //if (originalFormula.IndexOf(GroupByCustomer, System.StringComparison.Ordinal) >= 0)
-            //{
-            //    return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)
-            //    {
-            //        groupingConfigName = GroupByCustomer
-            //    };
-            //}
+            ////if (originalFormula.IndexOf(GroupByCustomer, System.StringComparison.Ordinal) >= 0)
+            ////{
+            ////    return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)
+            ////    {
+            ////        groupingConfigName = GroupByCustomer
+            ////    };
+            ////}
 
-            //if (originalFormula.IndexOf(GroupByChoice, System.StringComparison.Ordinal) >= 0)
-            //{
-            //    return new RuleQueryGeneratorForGroupingChoice(fraudCaseId, criteria)
-            //    {
-            //        groupingConfigName = GroupByChoice
-            //    };
-            //}
+            ////if (originalFormula.IndexOf(GroupByChoice, System.StringComparison.Ordinal) >= 0)
+            ////{
+            ////    return new RuleQueryGeneratorForGroupingChoice(fraudCaseId, criteria)
+            ////    {
+            ////        groupingConfigName = GroupByChoice
+            ////    };
+            ////}
 
-            //if (originalFormula.IndexOf(GroupByIp, System.StringComparison.Ordinal) >= 0)
-            //{
-            //    return new RuleQueryGeneratorForGroupingIp(fraudCaseId, criteria)
-            //    {
-            //        groupingConfigName = GroupByIp
-            //    };
-            //}
+            ////if (originalFormula.IndexOf(GroupByIp, System.StringComparison.Ordinal) >= 0)
+            ////{
+            ////    return new RuleQueryGeneratorForGroupingIp(fraudCaseId, criteria)
+            ////    {
+            ////        groupingConfigName = GroupByIp
+            ////    };
+            ////}
             
-            //if (originalFormula.IndexOf(Arbitrage, System.StringComparison.Ordinal) >= 0)
-            //{
-            //    return new RuleQueryGeneratorForGroupingArbitrage(fraudCaseId, criteria)
-            //    {
-            //        groupingConfigName = Arbitrage
-            //    };
-            //}
+            ////if (originalFormula.IndexOf(Arbitrage, System.StringComparison.Ordinal) >= 0)
+            ////{
+            ////    return new RuleQueryGeneratorForGroupingArbitrage(fraudCaseId, criteria)
+            ////    {
+            ////        groupingConfigName = Arbitrage
+            ////    };
+            ////}
 
-            //if (originalFormula.IndexOf(AbnormalMove, System.StringComparison.Ordinal) >= 0)
-            //{
-            //    return new RuleQueryGeneratorForGroupingAbnormalMove(fraudCaseId, criteria)
-            //    {
-            //        groupingConfigName = AbnormalMove
-            //    };
-            //}
+            ////if (originalFormula.IndexOf(AbnormalMove, System.StringComparison.Ordinal) >= 0)
+            ////{
+            ////    return new RuleQueryGeneratorForGroupingAbnormalMove(fraudCaseId, criteria)
+            ////    {
+            ////        groupingConfigName = AbnormalMove
+            ////    };
+            ////}
 
             return new RuleQueryGenerator(fraudCaseId, criteria);
         }

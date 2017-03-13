@@ -9,13 +9,13 @@
 
 namespace FD.Lib.DataAccess.Implement
 {
-    using System.Collections.Generic;
-    using System.Data;
     using Criteria.Reports;
     using DTO;
     using Fanex.Data;
     using Interface;
     using System;
+    using System.Collections.Generic;
+    using System.Data;
 
     /// <summary>
     ///  Match Monitoring Report Data Access Implement.

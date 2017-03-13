@@ -96,7 +96,9 @@
     <Compile Include="DataTypeCapture.cs" />
     <Compile Include="DataCapture.cs" />
     <Compile Include="CustomerBettingGroupDetail.cs" />
-    <Compile Include="LiveMatchMonitoring.cs" />
+    <Compile Include="LiveMatchMonitoring.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="MatchMonitoring.cs" />
     <Compile Include="League.cs" />
     <Compile Include="Message.cs" />

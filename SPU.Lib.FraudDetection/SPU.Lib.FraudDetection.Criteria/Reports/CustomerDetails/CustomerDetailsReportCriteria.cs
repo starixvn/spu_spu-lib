@@ -17,18 +17,18 @@ namespace FD.Lib.Criteria.Reports.CustomerDetails
     /// </summary>
     public class CustomerDetailsReportCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
-
-        public DateTime FromDate { get; set; }
-
-        public DateTime ToDate { get; set; }
-
         public CustomerDetailsReportCriteria(int custId, DateTime fromDate, DateTime toDate)
         {
             CustId = custId;
             FromDate = fromDate;
             ToDate = toDate;
         }
+
+        public int CustId { get; set; }
+
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
 
         /// <summary>
         /// Check data's constrains.

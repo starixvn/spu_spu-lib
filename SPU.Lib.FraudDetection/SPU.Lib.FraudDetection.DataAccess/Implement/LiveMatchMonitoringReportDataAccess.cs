@@ -73,7 +73,7 @@
                 matches.Add(match);
             }
 
-            return matches.OrderByDescending(t => t.ScannedStatus).ToList();
+            return matches.OrderByDescending(t => t.ScannedStatus).ThenBy(t => t.KickOffTime).ThenBy(t => t.MatchId).ToList();
         }
     }
 }

@@ -9,9 +9,9 @@
 
 namespace FD.Lib.Service.Interface
 {
-    using System.Collections.Generic;
-    using DTO;
     using Criteria.Reports;
+    using DTO;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Daily Data Monitoring interface.

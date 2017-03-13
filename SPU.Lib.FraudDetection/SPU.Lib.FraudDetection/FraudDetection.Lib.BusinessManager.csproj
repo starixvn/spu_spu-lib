@@ -137,7 +137,9 @@
     <Compile Include="QueryGenerator\PreConditionQueryGenerator.cs" />
     <Compile Include="QueryGenerator\QueryGenerator.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorFactory.cs" />
-    <Compile Include="QueryGenerator\RuleQueryGeneratorForGrouping.cs" />
+    <Compile Include="QueryGenerator\RuleQueryGeneratorForGrouping.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingArbitrage.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingIp.cs" />
     <Compile Include="QueryGenerator\RuleQueryGeneratorForGroupingChoice.cs" />

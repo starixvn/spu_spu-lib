@@ -1,5 +1,4 @@
-﻿
-namespace FD.Lib.Criteria.MessageMaster
+﻿namespace FD.Lib.Criteria.MessageMaster
 {
     using Fanex.Data.Repository;
 

@@ -4,8 +4,8 @@
 
     public class NewSuspiciousCustomersGetCriteria : CriteriaBase
     {
-
         public string SuspiciousCustomers { get; set; }
+
         /// <summary>
         ///     Get the reference SP's Name which is specified in Config file.
         /// </summary>

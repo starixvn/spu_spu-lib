@@ -40,7 +40,7 @@ namespace FD.Lib.Service.Implement
 
             var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets, criteria.Bettype) : GetChoiceForSuspiciousTickets(suspiciousTickets);
 
-            FraudCaseDetailReportViewModel result = new FraudCaseDetailReportViewModel() 
+            FraudCaseDetailReportViewModel result = new FraudCaseDetailReportViewModel()
             {
                 Summary = summary,
                 Body = list
@@ -88,6 +88,7 @@ namespace FD.Lib.Service.Implement
                 };
                 result.Add(listDetail);
             }
+
             return result;
         }
 
@@ -98,10 +99,6 @@ namespace FD.Lib.Service.Implement
 
             foreach (var ticket in suspiciousTickets)
             {
-                if (ticket.BetTypeId == 3)
-                {
-                    var a = ticket;
-                }
                 var item = new FraudCaseDetailItem
                 {
                     HomeName = RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty),
@@ -148,7 +145,7 @@ namespace FD.Lib.Service.Implement
 
         private string FDBuildChoice(Ticket ticket)
         {
-            string result = "";
+            string result = string.Empty;
             switch (ticket.BetTypeId)
             {
                 case 2:
@@ -162,10 +159,12 @@ namespace FD.Lib.Service.Implement
                     result = ticket.BetTeam.ToUpper() == "H" ? "Over " + ticket.Handicap1.ToString("0.##") : "Under " + ticket.Handicap1.ToString("0.##");
                     break;
                 default:
-                    result = ticket.BetTeam.ToUpper() == "H" ? RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
+                    result = ticket.BetTeam.ToUpper() == "H" ?
+                        RefData.GetTeamName(ticket.HomeId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap2 - ticket.Handicap1)
                         : RefData.GetTeamName(ticket.AwayId.ToString(), "en", string.Empty) + " " + string.Format("{0:0.##}", ticket.Handicap1 - ticket.Handicap2);
                     break;
             }
+
             return result;
         }
 
@@ -193,7 +192,9 @@ namespace FD.Lib.Service.Implement
             };
         }
 
-        private IList<Ticket> GetSuspiciousTickets(FraudCaseDetailReportCriteria criteria, MoveBetsBalanceUp moveBetBalanceUp,
+        private IList<Ticket> GetSuspiciousTickets(
+            FraudCaseDetailReportCriteria criteria,
+            MoveBetsBalanceUp moveBetBalanceUp,
             FraudCaseDetailSummary summary)
         {
             if (criteria.EventDate > moveBetBalanceUp.BalanceUpDay)
@@ -210,7 +211,9 @@ namespace FD.Lib.Service.Implement
             }
         }
 
-        private IList<Ticket> GetSuspiciousTicketFromBodb02(FraudCaseDetailReportCriteria criteria, MoveBetsBalanceUp moveBetBalanceUp,
+        private IList<Ticket> GetSuspiciousTicketFromBodb02(
+            FraudCaseDetailReportCriteria criteria,
+            MoveBetsBalanceUp moveBetBalanceUp,
             FraudCaseDetailSummary summary)
         {
             var newCriteria = new BetTicketGetByTransListCriteria
@@ -220,7 +223,6 @@ namespace FD.Lib.Service.Implement
                 MoveBetsDay = moveBetBalanceUp.MoveBetsDay,
                 EventDate = criteria.EventDate
             };
-
 
             var body = GetDataOutput<Ticket>(newCriteria).ToList();
             summary.HomeId = newCriteria.HomeId;

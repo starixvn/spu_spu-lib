@@ -17,6 +17,17 @@ namespace FD.Lib.Criteria.Reports
     /// </summary>
     public class MatchMonitoringReportGetAllDBArchiveCriteria : CriteriaBase
     {
+        public MatchMonitoringReportGetAllDBArchiveCriteria(MatchMonitoringReportGetAllCriteria criteria)
+        {
+            EventDate = criteria.EventDate;
+            LeagueIds = criteria.LeagueIds;
+            MatchCode = criteria.MatchCode;
+            MatchStatus = criteria.MatchStatus;
+            SuspiciousStatus = criteria.SuspiciousStatus;
+            IsMainMarket = criteria.IsMainMarket;
+            IsTest = criteria.IsTest;
+        }
+
         public DateTime EventDate { get; set; }
 
         public string LeagueIds { get; set; }
@@ -36,17 +47,6 @@ namespace FD.Lib.Criteria.Reports
 
         // Out put param
         public int NumberOfCases { get; set; }
-
-        public MatchMonitoringReportGetAllDBArchiveCriteria(MatchMonitoringReportGetAllCriteria criteria)
-        {
-            EventDate = criteria.EventDate;
-            LeagueIds = criteria.LeagueIds;
-            MatchCode = criteria.MatchCode;
-            MatchStatus = criteria.MatchStatus;
-            SuspiciousStatus = criteria.SuspiciousStatus;
-            IsMainMarket = criteria.IsMainMarket;
-            IsTest = criteria.IsTest;
-        }
 
         /// <summary>
         /// Get the reference SP's Name which is specified in Config file.

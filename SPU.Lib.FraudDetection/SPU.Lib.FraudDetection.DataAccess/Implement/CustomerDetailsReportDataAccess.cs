@@ -23,7 +23,7 @@ namespace FD.Lib.DataAccess.Implement
     /// <summary>
     ///  Customer Details Report Data Access Implement.
     /// </summary>
-    public class CustomerDetailsReportDataAccess: BaseDataAccess, ICustomerDetailsReportDataAccess
+    public class CustomerDetailsReportDataAccess : BaseDataAccess, ICustomerDetailsReportDataAccess
     {
         public CustomerDetailsModel GetCustomerDetailWinlossStatistic(CustomerDetailsReportWinlossStatisticCriteria criteria)
         {
@@ -44,6 +44,7 @@ namespace FD.Lib.DataAccess.Implement
                 }
             }
         }
+
         private CustomerDetailsModel MapCustomerDetailsData(DataSet dataSet)
         {
             return new CustomerDetailsModel

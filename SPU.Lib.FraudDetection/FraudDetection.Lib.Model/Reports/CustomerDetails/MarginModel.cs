@@ -28,7 +28,7 @@ namespace FD.Lib.Model.Reports.CustomerDetails
         {
             get
             {
-                return (new DateTime(Year, Month, 1).ToString("MMM/yyyy"));
+                return new DateTime(Year, Month, 1).ToString("MMM/yyyy");
             }
         }
 

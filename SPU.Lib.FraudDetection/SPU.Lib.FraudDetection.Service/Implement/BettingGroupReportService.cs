@@ -30,8 +30,7 @@ namespace FD.Lib.Service.Implement
 
             foreach (var group in groups)
             {
-                var associationCustomers = string.Join(", ",
-                    group.Where(t => t.CustId != criteria.CustId).Select(t => t.CustName));
+                var associationCustomers = string.Join(", ", group.Where(t => t.CustId != criteria.CustId).Select(t => t.CustName));
                 associationCustomers = group.First(t => t.CustId == criteria.CustId).CustName + ", " + associationCustomers;
 
                 var associationTransactions = string.Join(",", group.Select(t => t.TransIds));

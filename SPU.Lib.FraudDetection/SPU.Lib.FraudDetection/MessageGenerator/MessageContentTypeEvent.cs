@@ -1,9 +1,6 @@
 ﻿namespace FD.Lib.BusinessManager.MessageGenerator
 {
     using FD.Lib.DTO;
-    using Fanex.BetList.Core.Builder;
-    using Fanex.BetList.Core.TicketHelper;
-    using RemotingRef;
     using System.Collections.Generic;
 
     public class MessageContentTypeEvent : MessageContentType

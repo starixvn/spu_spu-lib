@@ -11,10 +11,10 @@ using System.Globalization;
 
 namespace FD.Lib.Core.ExportExcel
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using DTO;
     using NPOI.SS.UserModel;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Fraud Detection Export Excel - Match Monitoring report.
@@ -28,13 +28,13 @@ namespace FD.Lib.Core.ExportExcel
 
         private const string ScannedHassuspicious = "Scanned-Has Suspiciou(s)";
 
-        private IEnumerable<MatchMonitoring> Data { get; set; }
+        private IEnumerable<MatchMonitoring> _data;
 
-        private ICellStyle CellStyleNotScanned { get; set; }
+        private ICellStyle _cellStyleNotScanned;
 
-        private ICellStyle CellStyleScannedNoSus { get; set; }
+        private ICellStyle _cellStyleScannedNoSus;
 
-        private ICellStyle CellStyleScannedHasSus { get; set; }
+        private ICellStyle _cellStyleScannedHasSus;
         #endregion
 
         #region Constructor
@@ -46,41 +46,43 @@ namespace FD.Lib.Core.ExportExcel
             IEnumerable<MatchMonitoring> data)
             : base(filePath, sheetName, legends, headers)
         {
-            Data = data.ToList();
+            _data = data.ToList();
             GenerateCellStyles();
         }
         #endregion
 
         private void GenerateCellStyles()
         {
-            CellStyleNotScanned = Workbook.CreateCellStyle();
-            CellStyleNotScanned.FillForegroundColor = IndexedColors.Grey25Percent.Index;
-            CellStyleNotScanned.FillPattern = FillPattern.SolidForeground;
+            _cellStyleNotScanned = Workbook.CreateCellStyle();
+            _cellStyleNotScanned.FillForegroundColor = IndexedColors.Grey25Percent.Index;
+            _cellStyleNotScanned.FillPattern = FillPattern.SolidForeground;
 
-            CellStyleScannedNoSus = Workbook.CreateCellStyle();
-            CellStyleScannedNoSus.FillForegroundColor = IndexedColors.LightGreen.Index;
-            CellStyleScannedNoSus.FillPattern = FillPattern.SolidForeground;
+            _cellStyleScannedNoSus = Workbook.CreateCellStyle();
+            _cellStyleScannedNoSus.FillForegroundColor = IndexedColors.LightGreen.Index;
+            _cellStyleScannedNoSus.FillPattern = FillPattern.SolidForeground;
 
-            CellStyleScannedHasSus = Workbook.CreateCellStyle();
-            CellStyleScannedHasSus.FillForegroundColor = IndexedColors.Red.Index;
-            CellStyleScannedHasSus.FillPattern = FillPattern.SolidForeground;
+            _cellStyleScannedHasSus = Workbook.CreateCellStyle();
+            _cellStyleScannedHasSus.FillForegroundColor = IndexedColors.Red.Index;
+            _cellStyleScannedHasSus.FillPattern = FillPattern.SolidForeground;
         }
 
         protected override void GenerateReportLegend()
         {
-            SetUpACell(Sheet.GetRow(1), 4, NotScanned, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(CellStyleNotScanned), HorizontalAlignment.Center));
+            SetUpACell(Sheet.GetRow(1), 4, NotScanned, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(_cellStyleNotScanned), HorizontalAlignment.Center));
             Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(1, 1, 4, 6));
 
-            SetUpACell(Sheet.GetRow(3), 4, ScannedNosuspicious, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(CellStyleScannedNoSus), HorizontalAlignment.Center));
+            SetUpACell(
+                Sheet.GetRow(3), 4, ScannedNosuspicious, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(_cellStyleScannedNoSus), HorizontalAlignment.Center));
             Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(3, 3, 4, 6));
 
-            SetUpACell(Sheet.GetRow(5), 4, ScannedHassuspicious, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(CellStyleScannedHasSus), HorizontalAlignment.Center));
+            SetUpACell(
+                Sheet.GetRow(5), 4, ScannedHassuspicious, ReportContentFont(), DecorateCellAlignment(DecorateCellBorder(_cellStyleScannedHasSus), HorizontalAlignment.Center));
             Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(5, 5, 4, 6));
         }
 
         protected override void GenerateReportContent()
         {
-            if (!Data.Any())
+            if (!_data.Any())
             {
                 SetUpACell(Sheet.CreateRow(RowIndex), 0, "There is no data.", ReportContentFont(), DecorateCellAlignment(ReportContentCellStyle(), HorizontalAlignment.Center));
                 Sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(RowIndex, RowIndex, 0, Headers.Count() - 1));
@@ -88,7 +90,7 @@ namespace FD.Lib.Core.ExportExcel
             }
 
             var rowCount = 0;
-            foreach (var dataRow in Data)
+            foreach (var dataRow in _data)
             {
                 var row = Sheet.CreateRow(RowIndex);
                 row.Height = 519;
@@ -98,8 +100,8 @@ namespace FD.Lib.Core.ExportExcel
                 SetUpACell(row, index++, dataRow.IsDelinquent != null ? (dataRow.IsDelinquent.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.IsVerified != null ? (dataRow.IsVerified.Value ? "Yes" : "No") : "No", ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.LastVerifiedBy.Length > 0 ? dataRow.LastVerifiedBy : "-", ReportContentFont(), ReportContentCellStyle());
-                //SetUpACell(row, index++, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
-                //SetUpACell(row, index++, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
+                ////SetUpACell(row, index++, dataRow.LeagueName, ReportContentFont(), ReportContentCellStyle());
+                ////SetUpACell(row, index++, dataRow.MatchCode, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
                 SetUpACell(row, index++, dataRow.Event, ReportContentFont(), ReportContentCellStyle());
                 SetUpACell(row, index++, dataRow.EventStatus, ReportContentFont(), ReportContentCellStyle(HorizontalAlignment.Center));
 
@@ -129,14 +131,14 @@ namespace FD.Lib.Core.ExportExcel
             Sheet.SetColumnWidth(index++, 13000);
             Sheet.SetColumnWidth(index++, 5000);
 
-            if (!Data.Any())
+            if (!_data.Any())
             {
                 return;
             }
 
             var setupCellIndex = index;
 
-            for (; index <= (Data.ElementAt(0).SuspiciousCases.Count + setupCellIndex - 1); index++)
+            for (; index <= (_data.ElementAt(0).SuspiciousCases.Count + setupCellIndex - 1); index++)
             {
                 Sheet.SetColumnWidth(index, 3000);
             }
@@ -156,8 +158,8 @@ namespace FD.Lib.Core.ExportExcel
         private ICellStyle GetCellStyleBySuspiciousStatus(int suspiciousStatus)
         {
             return suspiciousStatus == -1
-                ? DecorateCellBorder(CellStyleNotScanned)
-                : (suspiciousStatus > 0 ? DecorateCellBorder(CellStyleScannedHasSus) : DecorateCellBorder(CellStyleScannedNoSus));
+                ? DecorateCellBorder(_cellStyleNotScanned)
+                : (suspiciousStatus > 0 ? DecorateCellBorder(_cellStyleScannedHasSus) : DecorateCellBorder(_cellStyleScannedNoSus));
         }
     }
 }

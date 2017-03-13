@@ -16,12 +16,12 @@ namespace FD.Lib.Criteria.Config
     /// </summary>
     public class ConfigsGetByActivityCriteria : CriteriaBase
     {
+        public int? ActivityId { get; set; }
+
         public override string GetSettingKey()
         {
             return "FD_ConfigsGetByActivity";
         }
-
-        public int? ActivityId { get; set; }
 
         /// <summary>
         ///     Check data's constrains.

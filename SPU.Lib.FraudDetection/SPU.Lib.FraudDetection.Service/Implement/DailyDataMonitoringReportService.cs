@@ -36,7 +36,7 @@ namespace FD.Lib.Service.Implement
         public IEnumerable<DailyDataMonitoring> GetDailyDataMonitoringReport(
             DailyDataMonitoringReportGetAllCriteria criteria)
         {
-            //return _dailyDataMonitoringReportDataAccess.GetDailyDataMonitoringReport(criteria);
+            ////return _dailyDataMonitoringReportDataAccess.GetDailyDataMonitoringReport(criteria);
             return GetData<DailyDataMonitoring>(criteria);
         }
     }

@@ -8,18 +8,22 @@
 
     public class MessageGenerator
     {
-        private List<MessageContentType> MessageContentTypes;
+        private List<MessageContentType> _messageContentTypes;
 
         public MessageGenerator()
         {
-            MessageContentTypes = new List<MessageContentType>();
+            _messageContentTypes = new List<MessageContentType>();
 
-            MessageContentTypes = Assembly.GetAssembly(typeof(MessageContentType)).GetTypes().Where(t => t.IsSubclassOf(typeof(MessageContentType))).Select(Activator.CreateInstance).Cast<MessageContentType>().ToList();
+            _messageContentTypes = Assembly.GetAssembly(
+                typeof(MessageContentType)).GetTypes()
+                .Where(t => t.IsSubclassOf(typeof(MessageContentType)))
+                .Select(Activator.CreateInstance)
+                .Cast<MessageContentType>().ToList();
         }
 
         public IEnumerable<Message> GenerateMessages(List<Message> messages)
         {
-            foreach(MessageContentType contentType in MessageContentTypes)
+            foreach (MessageContentType contentType in _messageContentTypes)
             {
                 contentType.FormatContentType(messages);
             }
