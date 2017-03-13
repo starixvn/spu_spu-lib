@@ -18,6 +18,8 @@
 
         public bool? IsVerified { get; set; }
 
+        public string MatchStatus { get; set; }
+
         public bool IsTest { get; set; }
 
         // Out put param

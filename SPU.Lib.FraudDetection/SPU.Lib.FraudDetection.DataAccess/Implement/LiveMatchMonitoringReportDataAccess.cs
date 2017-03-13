@@ -7,6 +7,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     public class LiveMatchMonitoringReportDataAccess : BaseDataAccess, ILiveMatchMonitoringReportDataAccess
@@ -25,6 +26,7 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         private List<LiveMatchMonitoring> MapMatchMonitoringData(DataTable dataTable)
         {
             var matches = new List<LiveMatchMonitoring>();
@@ -70,7 +72,10 @@
                     }
                 }
 
-                matches.Add(match);
+                if (match.ScannedStatus > 0)
+                {
+                    matches.Add(match);
+                }
             }
 
             return matches.OrderByDescending(t => t.ScannedStatus).ThenBy(t => t.KickOffTime).ThenBy(t => t.MatchId).ToList();
