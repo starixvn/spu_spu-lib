@@ -1,7 +1,5 @@
 namespace FD.Lib.Service.Implement
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using Criteria.Reports;
     using Criteria.SuspiciousStatistic;
     using DTO;
@@ -11,10 +9,9 @@ namespace FD.Lib.Service.Implement
     using Interface;
     using Model.Reports.FraudCaseDetail;
     using RemotingRef;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    /// <summary>
-    /// Fraud Case Detail Report Service.
-    /// </summary>
     public class FraudCaseDetailReportService : QueryService, IFraudCaseDetailReportService
     {
         private readonly IMoveBetsBalanceUpService _balanceUpService;
@@ -24,27 +21,18 @@ namespace FD.Lib.Service.Implement
             _balanceUpService = new MoveBetsBalanceUpService();
         }
 
-        /// <summary>
-        /// Get Fraud Case Details.
-        /// </summary>
-        /// <param name="criteria">Criteria input.</param>
-        /// <param name="getDataForExcelFile">Check whether getting data for exporting to Excel file.</param>
-        /// <returns>Fraud Case Detail Report Model.</returns>
         public FraudCaseDetailReportViewModel GetFraudCaseDetails(FraudCaseDetailReportCriteria criteria, bool getDataForExcelFile = false)
         {
             var moveBetBalanceUp = _balanceUpService.GetBalanceUpDay(new BalanceUpDaySelectCriteria());
-
             var summary = GetFraudCaseDetailSummary(criteria);
-
             var suspiciousTickets = GetSuspiciousTickets(criteria, moveBetBalanceUp, summary);
-
             var list = getDataForExcelFile ? BuildTicketsForExportToExcel(suspiciousTickets, criteria.Bettype) : GetChoiceForSuspiciousTickets(suspiciousTickets);
-
-            FraudCaseDetailReportViewModel result = new FraudCaseDetailReportViewModel()
+            var result = new FraudCaseDetailReportViewModel()
             {
                 Summary = summary,
                 Body = list
             };
+
             return result;
         }
 
@@ -52,7 +40,6 @@ namespace FD.Lib.Service.Implement
         {
             var builder = new BetListHTMLBuilder();
             var ticketHelper = new TicketHelper();
-
             var list = new List<FraudCaseDetailItem>();
             var result = new List<FraudCaseDetailByBetTypeList>();
 
@@ -72,7 +59,8 @@ namespace FD.Lib.Service.Implement
                     Score = string.Format("{0} - {1}", ticket.LiveHomeScore, ticket.LiveAwayScore),
                     Status = ticket.Status,
                     TransDate = ticket.TransDate.ToString(),
-                    TransId = ticket.TransId
+                    TransId = ticket.TransId,
+                    IsLive = ticket.IsLive
                 };
 
                 list.Add(item);
@@ -81,11 +69,12 @@ namespace FD.Lib.Service.Implement
             var groupedList = list.GroupBy(x => x.BetType).ToList();
             foreach (var item in groupedList)
             {
-                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList()
+                var listDetail = new FraudCaseDetailByBetTypeList()
                 {
                     Bettype = item.Key,
-                    FraudCaseDetailList = item
+                    FraudCaseDetailList = item.OrderByDescending(t => t.IsLive).ToList()
                 };
+
                 result.Add(listDetail);
             }
 
@@ -112,7 +101,8 @@ namespace FD.Lib.Service.Implement
                     Score = string.Format("{0} - {1}", ticket.LiveHomeScore, ticket.LiveAwayScore),
                     Status = ticket.Status,
                     TransDate = ticket.TransDate.ToString(),
-                    TransId = ticket.TransId
+                    TransId = ticket.TransId,
+                    IsLive = ticket.IsLive
                 };
 
                 if (ticket.OddsType != string.Empty)
@@ -128,15 +118,15 @@ namespace FD.Lib.Service.Implement
                 list.Add(item);
             }
 
-            var groupedList = list.Where(x => x.BetType == bettype)
-                .GroupBy(y => y.BetType).ToList();
+            var groupedList = list.Where(x => x.BetType == bettype).GroupBy(y => y.BetType).ToList();
             foreach (var item in groupedList)
             {
-                FraudCaseDetailByBetTypeList listDetail = new FraudCaseDetailByBetTypeList()
+                var listDetail = new FraudCaseDetailByBetTypeList()
                 {
                     Bettype = item.Key,
-                    FraudCaseDetailList = item
+                    FraudCaseDetailList = item.OrderByDescending(t => t.IsLive).ToList()
                 };
+
                 result.Add(listDetail);
             }
 

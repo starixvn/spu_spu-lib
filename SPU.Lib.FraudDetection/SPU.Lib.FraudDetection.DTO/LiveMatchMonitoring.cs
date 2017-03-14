@@ -46,7 +46,7 @@
         {
             get
             {
-                return KickOffTime < DateTime.Now;
+                return KickOffTime < DateTime.Now && EventStatus.Equals("running");
             }
         }
     }

@@ -68,7 +68,6 @@
                     else if (item.Value == 0)
                     {
                         match.ScannedStatus = 1;
-                        break;
                     }
                 }
 
@@ -78,7 +77,10 @@
                 }
             }
 
-            return matches.OrderByDescending(t => t.ScannedStatus).ThenBy(t => t.KickOffTime).ThenBy(t => t.MatchId).ToList();
+            return matches.OrderByDescending(t => t.IsPlayingMatch)
+                .ThenByDescending(t => t.ScannedStatus)
+                .ThenBy(t => t.KickOffTime)
+                .ThenBy(t => t.MatchId).ToList();
         }
     }
 }

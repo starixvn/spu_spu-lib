@@ -34,6 +34,8 @@
 
         public string CaseName { get; set; }
 
+        public bool IsLive { get; set; }
+
         public string DisplayIP 
         { 
             get
