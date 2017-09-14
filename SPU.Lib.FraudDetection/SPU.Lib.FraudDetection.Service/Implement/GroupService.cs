@@ -68,5 +68,20 @@ namespace FD.Lib.Service.Implement
         {
             return GetData<Group>(criteria);
         }
+
+        public IEnumerable<GroupMember> GetMemberById(GroupGetMemberByIdCriteria criteria)
+        {
+            return GetData<GroupMember>(criteria);
+        }
+
+        public ICommandResult InsertGroupMember(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
+
+        public ICommandResult DeleteGroupMember(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

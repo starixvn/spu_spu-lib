@@ -34,5 +34,11 @@ namespace FD.Lib.Service.Interface
         ICommandResult UpdateGroup(ICriteria criteria);
 
         IEnumerable<Group> GetAvailableGroupsForCase(GroupGetAvailableGroupsForCaseCriteria criteria);
+
+        IEnumerable<GroupMember> GetMemberById(GroupGetMemberByIdCriteria criteria);
+
+        ICommandResult InsertGroupMember(ICriteria criteria);
+
+        ICommandResult DeleteGroupMember(ICriteria criteria);
     }
 }

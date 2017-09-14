@@ -112,7 +112,10 @@
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
     <Compile Include="Group\GroupGetAvailableGroupsForCaseCriteria.cs" />
+    <Compile Include="Group\GroupDeleteMemberCriteria.cs" />
+    <Compile Include="Group\GroupInsertMemberCriteria.cs" />
     <Compile Include="Group\GroupUpdateStatusCriteria.cs" />
+    <Compile Include="Group\GroupGetMemberByIdCriteria.cs" />
     <Compile Include="MailMaster\MailMasterUpdateStatusCriteria.cs" />
     <Compile Include="MessageMaster\MessageMasterDeleteCriteria.cs" />
     <Compile Include="MessageMaster\MessageMasterGetAllCriteria.cs" />
