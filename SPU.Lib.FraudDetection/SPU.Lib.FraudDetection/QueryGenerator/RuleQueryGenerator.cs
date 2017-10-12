@@ -55,9 +55,15 @@ namespace FD.Lib.QueryGenerator
                 GenerateFromSql(),
                 GenerateWhereSql(OriginalFormula));
 
-            return queryRuleString.ToLower().Contains("sum(ans.stake*ans.actualrate)")
+            queryRuleString = queryRuleString.ToLower().Contains("sum(ans.stake*ans.actualrate)")
                 ? ArrangeForSumStake(queryRuleString)
                 : queryRuleString;
+
+            queryRuleString = queryRuleString.ToLower().Contains("ans.totalaccount")
+                ? ArrangeForGroupByLicenseeOrHeadline(queryRuleString)
+                : queryRuleString;
+
+            return queryRuleString;
         }
 
         /// <summary>
@@ -145,6 +151,39 @@ namespace FD.Lib.QueryGenerator
 
             var newQueryRuleString = "select distinct {0} from ({1}) ans where {2}";
             var whereQueryRuleString = "ans.TotalStake " + operatorStake + " ans.Maxbet";
+
+            newQueryRuleString = string.Format(
+                newQueryRuleString,
+                GenerateSelectSql(),
+                fromQueryRuleString,
+                whereQueryRuleString);
+
+            return newQueryRuleString;
+        }
+
+        private string ArrangeForGroupByLicenseeOrHeadline(string originalStr)
+        {
+            var startIndex = originalStr.ToLower().IndexOf("ans.totalaccount", StringComparison.Ordinal);
+            var remainedString = originalStr.Substring(startIndex, originalStr.Length - startIndex).ToLower();
+            var endIndex = remainedString.IndexOf("and", StringComparison.Ordinal) > 0
+                ? remainedString.IndexOf("and", StringComparison.Ordinal)
+                : (remainedString.IndexOf("or", StringComparison.Ordinal) > 0
+                    ? remainedString.IndexOf("or", StringComparison.Ordinal)
+                    : remainedString.Length - 1);
+            var groupConstraint = originalStr.Substring(startIndex, endIndex);
+
+            var extraSelect = ",dense_rank() OVER (PARTITION BY hed.Headline,tch.matchid,ans.liveawayscore,ans.livehomescore ORDER BY ans.custid ASC)+dense_rank() OVER (PARTITION BY hed.Headline,tch.matchid,ans.liveawayscore,ans.livehomescore ORDER BY ans.custid DESC)-1  AS totalaccount";
+
+            var fromQueryRuleString = "select distinct {0} from {1} where {2}";
+
+            fromQueryRuleString = string.Format(
+                fromQueryRuleString,
+                GenerateSelectSql() + extraSelect,
+                GenerateFromSql(),
+                GenerateWhereSql(OriginalFormula).Replace(groupConstraint, "1=1 "));
+
+            var newQueryRuleString = "select distinct {0} from ({1}) ans where {2}";
+            var whereQueryRuleString = groupConstraint;
 
             newQueryRuleString = string.Format(
                 newQueryRuleString,

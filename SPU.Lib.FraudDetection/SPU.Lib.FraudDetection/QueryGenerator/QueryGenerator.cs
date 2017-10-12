@@ -54,6 +54,15 @@ namespace FD.Lib.QueryGenerator
             Configs = configurationService.GetFormattedConfigs(new ConfigGetAllCriteria(), caseId);
         }
 
+        protected void GetConfigsInfo(int caseId, int activityId)
+        {
+            var taskService = new TaskService();
+            TablesForeignKey = taskService.GetTablesForeignKey(new TablesForeignKeyGetAllCriteria()).ToList();
+
+            var configurationService = new ConfigurationsService();
+            Configs = configurationService.GetFormattedConfigs(new ConfigsGetByActivityCriteria { ActivityId = activityId }, caseId);
+        }
+
         /// <summary>
         /// Generate the SELECT statement.
         /// </summary>

@@ -24,6 +24,11 @@ namespace FD.Lib.BusinessManager.QueryGenerator
                 return new RuleQueryGeneratorForComparingData(fraudCaseId, criteria);
             }
 
+            if (criteria.ActivityId == (int)ActivityType.ScanCustomerSyncData)
+            {
+                return new RuleQueryGeneratorForSyncDataWithFPS(fraudCaseId, criteria);
+            }
+
             ////if (originalFormula.IndexOf(GroupByCustomer, System.StringComparison.Ordinal) >= 0)
             ////{
             ////    return new RuleQueryGeneratorForGroupingCustomer(fraudCaseId, criteria)

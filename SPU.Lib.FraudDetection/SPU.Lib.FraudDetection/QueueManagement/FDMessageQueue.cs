@@ -19,7 +19,7 @@ namespace FD.Lib.QueueManagement
     /// </summary>
     public abstract class FDMessageQueue
     {
-        protected readonly MessageQueue MessageQueue;
+        protected readonly MessageQueue _messageQueue;
 
         protected FDMessageQueue()
         {
@@ -27,7 +27,7 @@ namespace FD.Lib.QueueManagement
 
             try
             {
-                MessageQueue = new MessageQueue(queuePath) { Formatter = new XmlMessageFormatter(new[] { typeof(int) }) };
+                _messageQueue = new MessageQueue(queuePath) { Formatter = new XmlMessageFormatter(new[] { typeof(int) }) };
             }
             catch (InvalidOperationException ex)
             {

@@ -22,17 +22,17 @@ namespace FD.Lib.QueueManagement
     {
         public void Clear()
         {
-            MessageQueue.Purge();
+            _messageQueue.Purge();
         }
 
         public void Send(object task)
         {
-            MessageQueue.Send(task);
+            _messageQueue.Send(task);
         }
 
         public void Send(object task, string label)
         {
-            MessageQueue.Send(task, label);
+            _messageQueue.Send(task, label);
         }
     }
 }

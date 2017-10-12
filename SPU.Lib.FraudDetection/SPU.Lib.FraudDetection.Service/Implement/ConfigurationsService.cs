@@ -48,9 +48,13 @@ namespace FD.Lib.Service.Implement
         public List<Config> GetFormattedConfigs(ICriteria criteria, int caseId)
         {
             var configs = GetData<Config>(criteria).ToList();
-            var counterTableSQLString = configs.SingleOrDefault(l => l.ConfigName == "Suspicious Time").ConfigSQLTable;
-            configs.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId.ToString());
-            
+            var suspiciousTime = configs.SingleOrDefault(l => l.ConfigName == "Suspicious Time");
+            if (suspiciousTime != null)
+            {
+                var counterTableSQLString = suspiciousTime.ConfigSQLTable;
+                configs.Where(l => l.ConfigName == "Suspicious Time").First().ConfigSQLTable = counterTableSQLString.Replace("$param1$", caseId.ToString());
+            }
+
             return configs;
         }
 

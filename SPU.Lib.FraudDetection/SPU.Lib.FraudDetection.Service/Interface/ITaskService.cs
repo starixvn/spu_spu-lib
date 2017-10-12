@@ -78,5 +78,7 @@ namespace FD.Lib.Service.Interface
         List<DataCapture> ExecuteRuleForComparingData(string sqlQueryString);
 
         decimal CaptureData(string sqlQueryString);
+
+        IEnumerable<Customer> ExecutePreconditionForSyncDataWithFPS(string sqlQueryString);
     }
 }

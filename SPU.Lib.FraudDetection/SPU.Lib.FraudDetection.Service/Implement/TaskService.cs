@@ -320,5 +320,23 @@ namespace FD.Lib.Service.Implement
 
             return dataCaptureList;
         }
+
+        public IEnumerable<Customer> ExecutePreconditionForSyncDataWithFPS(string sqlQueryString)
+        {
+            var result = new List<Customer>();
+
+            var dt = ExecuteReaderQueryInline(sqlQueryString);
+
+            for (var i = 0; i < dt.Rows.Count; i++)
+            {
+                result.Add(new Customer 
+                {
+                    CustId = int.Parse(dt.Rows[i]["custid"].ToString()),
+                    CustName = dt.Rows[i]["username"].ToString()
+                });
+            }
+
+            return result;
+        }
     }
 }

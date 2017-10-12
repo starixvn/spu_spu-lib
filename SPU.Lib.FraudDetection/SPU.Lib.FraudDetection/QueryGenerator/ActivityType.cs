@@ -27,9 +27,6 @@ namespace FD.Lib.QueryGenerator
         /// </summary>
         ScanMatchCompareData = 4,
 
-        /// <summary>
-        /// Scan Match - Find Betting Groups.
-        /// </summary>
-        ScanMatchFindBettingGroups = 5
+        ScanCustomerSyncData = 5
     }
 }
