@@ -28,5 +28,10 @@ namespace FD.Lib.Service.Implement
         {
             return _groupDataAccess.AssignCustToGroup(criteria);
         }
+
+        public ICommandResult InsertAssociatedAccount(ICriteria criteria)
+        {
+            return ExecuteNonQuery(criteria);
+        }
     }
 }

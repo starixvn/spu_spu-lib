@@ -15,5 +15,7 @@ namespace FD.Lib.Service.Interface
     public interface ICustomerGroupService
     {
         ICommandResult InsertCustomerGroup(ICriteria criteria);
+
+        ICommandResult InsertAssociatedAccount(ICriteria criteria);
     }
 }

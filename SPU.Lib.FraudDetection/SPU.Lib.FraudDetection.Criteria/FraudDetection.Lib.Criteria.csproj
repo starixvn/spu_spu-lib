@@ -110,6 +110,7 @@
     <Compile Include="DataCapture\DataCaptureListInsertCriteria.cs" />
     <Compile Include="Event\EventGetAllCriteria.cs" />
     <Compile Include="Config\ConfigUpdateCriteria.cs" />
+    <Compile Include="Group\CustomerGroupInsertCriteria.cs" />
     <Compile Include="Group\GroupGetByIdCriteria.cs" />
     <Compile Include="Group\GroupGetAvailableGroupsForCaseCriteria.cs" />
     <Compile Include="Group\GroupDeleteMemberCriteria.cs" />
@@ -171,7 +172,7 @@
     <Compile Include="Parameter\ParameterGetAllCriteria.cs" />
     <Compile Include="Group\GroupGetAllCriteria.cs" />
     <Compile Include="Group\GroupUpdateCriteria.cs" />
-    <Compile Include="Group\CustomerGroupInsertCriteria.cs" />
+    <Compile Include="Group\AssociatedAccountInsertCriteria.cs" />
     <Compile Include="Group\GroupInsertCriteria.cs" />
     <Compile Include="MailMaster\MailMasterGetByNameCriteria.cs" />
     <Compile Include="MailMaster\MailMasterGetByIdCriteria.cs" />
